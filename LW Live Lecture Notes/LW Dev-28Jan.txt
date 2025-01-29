@@ -1,0 +1,49 @@
+Today's Learning topics
+--------------------------------------
+ 
+Docker Architecture :
+
+ ^    M Countainers    ^
+ ^    Docker engin     ^
+ ^   Redhat Os Linux   ^
+------------------------------------------
+
+
+Docker Hub - It's a platform from where we get docker image 
+Docker image required to install any os 
+from Dockerfile we can create Docker image
+
+---------------------------------------------------
+
+Docker Commands:
+- Docker Pull <image_name:Version> 	 # to Pull Docker image from Docker hub
+- Docker run -it --name Ubuntu <image_name:Version>
+- Docker stop name/ID  			 # to start Container/Image 
+- Docker ps -a  			 # To list All Stop/run Container/Image 
+- Docker start name/Id 			 # to start Container/Image
+- Docker rm name/ID 			 # to remove Container/Image
+- history
+
+----------------------------------------------------
+
+To Run Application
+- OS.	
+- Networking
+- Hardware 
+- Storage 
+
+-----------------------------------------------------
+
+
+Task:
+- LinkedIn Post : why Docker is helpful to companies.
+
+----------------------------------------------------
+
+Linux Command - Redhat 
+- ping IP 
+- yum install python36			 # install Python 
+- pip3 install flask			 # install flask
+- mkdir 				 # to create a Folder
+- vim <file_name>			 # To create File open a vi editor 
+
