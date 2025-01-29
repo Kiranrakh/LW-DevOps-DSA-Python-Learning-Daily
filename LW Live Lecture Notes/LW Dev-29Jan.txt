@@ -1,0 +1,69 @@
+" Your Approach is game changer for you in any carrier "
+
+---------------------------------------------------
+
+***************************
+* DevOps Tools  -  Docker *
+***************************
+
+--------------------------------------------------- 
+
+Bullet Points:
+- Container always run through docker image
+- Container only contain this are present in docker file
+- Configurations Management (Automation)
+	->1 Manual way
+	->2 to automate
+		-to ways - imperative
+			    what to do
+			    HOW TO DO (Shell Scripting)
+		
+        		 - declarative
+		 	     what to do (Ansible)
+	->3 pre-backed way if you don't have time
+- 1 OS = 1 Application 
+---------------------------------------------------
+
+How to create custom image ?
+	1- commit command (look's like Manual way)
+	2- docker image (Automate way)
+
+Write Dockerfile:
+
+
+FROM redhat/ubi8 	   	# pull docker image from docker hub
+
+RUN yum install python36 -y 	# install  
+
+				# install python
+RUN pip3 install flask  	# run at build time
+
+
+				#mkdir /code
+				#cd /code
+WORKDIR /code
+
+COPY app.py app.py		# copy files to container
+
+CMD ["python3", "app.py" ]      # run at run time
+
+ENTRYPOINT []
+
+---------------------------------------------------
+
+Docker Commands:
+>>docker commit <image1> <image2:v1>
+>>docker images
+>>docker run -it <image2:v1>
+>>docker run -itd <image2:v1>
+>>exit
+>>docker inspect
+>>docker build -t <image-name> .
+
+---------------------------------------------------
+
+Linux Commands:
+>>pip3 list
+>>pwd
+>>ipconfig
+>>yum install net-tools

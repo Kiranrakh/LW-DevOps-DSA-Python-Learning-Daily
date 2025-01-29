@@ -1,0 +1,77 @@
+" Your Approach is game changer for you in any carrier "
+
+-----------------------------------------------
+
+We should know how to analyze Algorithm !!
+Notation is big (O)
+
+Bullet Points:
+
+- Asymptotic analysis
+- time complexity 
+- linear time/line
+- What is Space Complexity ?
+	- O(n) Vs  O(1)
+	   ^        ^  
+	   A1       A2 
+	       ^^ 
+  	     Problem 
+
+-----------------------------------------------
+            ( Need Input )
+ Problem >>     Steps      >>  Functions
+            (  Algorithm )
+
+-----------------------------------------------
+
+Pattern	>
+	loops :
+	  - iteration: 
+	            - for Loop  
+		    - While loops 
+	  - Recursion:  
+-----------------------------------------------
+Problem statement:
+*************
+How to think:
+*************
+
+" sum of n natural number "
+if eg:
+n=10
+natural number : 0+1+2+3+4+5+6+7+8+9+10= ?
+
+
+nature number: 0, 1, 2, 3, 4, 5,....,n
+
+
+------------------------------------------------
+Example 1:
+>>def hello():
+>>     for i in range (5):
+>>         print(i, "Kiran hello !!")
+# time complexity -> O(5) -> Constant -> O(1) -> O(Constant)
+>>O(5)
+>>hello()
+ Output: 
+	0 Kiran hello !!
+	1 Kiran hello !!
+	2 Kiran hello !!
+	3 Kiran hello !!
+	4 Kiran hello !!
+-----------------------------------------------
+
+Example 2:
+>>	def amazoncart(n):
+#		print("Total coustomer today :", n)
+>>		for i in range(n):
+>>			print(i, "sell...!!"
+# time complexity -> O(5) -> Constant -> O(1) -> O(Constant)
+>>	amazoncart(5)
+Output: 
+	Total coustomer today : 5
+	0 sell...!!
+	1 sell...!!
+	2 sell...!!
+	3 sell...!!
+	4 sell...!!
