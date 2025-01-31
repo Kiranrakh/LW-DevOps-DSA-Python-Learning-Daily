@@ -1,0 +1,101 @@
+******************************************
+
+how Recursion work ?
+when to use recursion and itersion ?
+what is recursive relationships in mathematics ?
+what is tree treasing concepts ?
+
+
+******************************************
+
+Example:
+
+def play():
+	print("i m play")
+>> play()
+
+def playlist():
+	print("i m playlist")
+>> playlist()
+
+def nextSong():
+	print("i m next song")
+>> nextSong()
+
+--------------------------------------
+def play():
+	print("i m play")
+	print("i m playlist")
+	print("next song")
+	nextSong()
+def nextSong0():
+	print(" i m preparing next song")
+	playlist()
+	print("i m next song")
+
+play()
+--------------------------------------------------
+
+>> Play()
+         >>    nextSong()
+               >> playlist()
+
+-------------------------------------------------
+recurtion type
+- direct recursion : colling a same function in same function is call direct recursion function
+- indirect recursion 
+---------------------------------------------------
+
+def a():
+	print("im kiran")
+	# recersive call
+	a()                #direct recursion function
+-------------------------------------------------
+
+def lwnum(n):
+	# base / stop condition
+	if n<0:
+ 	   return
+	print(n)
+	m=n-1
+lwnum(m)
+Output:
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+0
+
+
+--------------------------------------
+i= 0
+while i >= 0:
+print(i)
+i=i-1
+------------problem statements:------------------
+ problem statements:
+"sum of natural number"
+if eg:
+N=5
+0+1+2+3+4+5
+1st no : 0
+last no: 5
+natural number:0+1+2+3+4+5=15
+-----------------Solution--------------------------
+def f(n):
+	print(n)
+	if n==0:
+	return 0
+	return n + f(n-1)
+>>f(n)
+
+-------------------------------------
+
+
+
