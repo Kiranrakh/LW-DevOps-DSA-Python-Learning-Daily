@@ -1,0 +1,59 @@
+****************  DSA ****************
+Problem: 
+ " how you think "
+" your approach is important to solve any problem "
+--------------------------------------------------
+Jupiter magic command
+
+>> %timeit gameSum(5)
+
+--------------------------------------------------
+problem statement:
+------------------------------------------------
+Python Example:
+#time Complicity 
+------------------------1------------------------
+
+def sunOfNum(n):
+	return n * ( n + 1 ) / 2
+>>sumOfNum(10)	
+	
+------------------------2-------------------------
+
+def gameSum(n):
+	firstScore = 0
+	finalLevel = n
+	currentLevel = 1
+	while  curentLevel <= finalLevel :
+		finalLevel = firstScore + currentlevel
+	cureentLevel = currentLevel + 1
+	return finalScore
+
+gameSum(10) >>
+
+
+---------------------------------------- 
+sum of n natural number
+
+N=5
+0+1+2+3+4+5
+1st no : 0
+last no: 5
+natural number:0+1+2+3+4+5=15
+
+------------------------------------
+if eg:
+n=10
+0+1+2+3+4+5+6+7+8+9+10= ?
+natural number=0+1+2+3+4+5+6+7+8+9+10= ?
+------------------------------------
+problem scenario:
+*****************
+game 
+team A score = 0 + 1 + 2 + 3 + 4 + 5 =?
+level 
+A=1
+B=2
+C=3
+D=4
+E=5

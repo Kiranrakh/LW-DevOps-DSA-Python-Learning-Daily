@@ -1,0 +1,32 @@
+" POWER of Docker is Container "
+-----------------------------------------------------------------------
+To build docker image 2 ways:
+	- commit command
+	- Dockerfile
+-----------------------------------------------------------------------
+
+Docker file keywords:
+- FROM
+- RUN
+- COPY
+- WORKDIR
+- CMD			# we can make changes while biliding container(override is possible)
+- ENTRYPOINT            # (can't override command)
+- EXPOSE
+- 
+------------------------------------------------------------------------
+Docker command:
+>> docker attach
+>> docker exec -it <container_ID> bash
+>> docker ps -a
+>> docker build -t -name <image-name> .
+>> docker history 
+>> docker run -it <image_name>
+
+-------------------------------------------------------------------------
+Linux:
+>> cal         # calendar of current month 
+>> cal 2026    # calendar of all months
+>> date        # date will display 
+>> pip install flask 
+
