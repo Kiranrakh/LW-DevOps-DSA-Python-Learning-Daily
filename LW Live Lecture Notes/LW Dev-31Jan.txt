@@ -1,0 +1,48 @@
+***********************
+* DevOps =: Save Time *
+***********************
+
+
+********************************************************
+" Company can't loss DATA it's very important to them "
+********************************************************
+
+way to give inputs
+>>using   - keyboard
+	  - commando line parameters input
+	  - environment variable 
+
+---------------------------------------------------------
+To have a backup of data we can do :
+************************************
+
+Type of Storage:
+	- temporary storage(empherable storage)
+	- persistence or permanent storage
+
+
+---------------------------------------------------------
+Docker Command:
+>> docker info
+>> docker ps -a
+>> docker pull mysql
+>> docker rmi <image_name>
+>> docker history <image-name>
+>> docker run -itd --name db1 <image-name>
+>> docker attach <containter-name>
+>> docker run -itd --name db1 -e MY_ROOT_PASSWORD=MYSQL  <image-name>
+>> docker exec -it <Container-name> bash
+>> docker stop <container-name>
+--------------------------------------------------------
+mysql commands:
+
+>> SHOW DATABASED;
+>> USE <DB-NAME>
+>> create table student (id int(5) , name char(10) , city char(10));
+>> select * from students;
+>> insert into students values(1, "kiran", "pune");
+>> exit 
+
+ 
+
+

@@ -1,0 +1,39 @@
+Python Bootcamp Session 
+topics :
+>> def 		#is use to create a function
+>> built in function 
+>> return function USE CASE
+>> print function
+>> program file
+>> import module
+>> text to Speech (TTS)
+>> multi threading
+>> stack frame (activation report)
+
+-----------------------------------------------
+>> def lw():
+	print("Hello")
+lw()
+
+
+commands:
+>> pip list
+>> pip3 install flask
+>> pip install pyttsx3
+>> import pyttsx3 
+>> say()
+>> help ( pyttsx3.<function-name>() )
+>> myspeaker = pyttsx3.__init__()
+>> myspeaker.say("Hello i'm Kiran")
+>> myspeaker.runAndWait()
+>> import os 
+>> dir ( lw )
+>> os.cpu_count()
+>> os.system("chrome")
+>> lw.__name__
+
+task:
+
+- python to send whatapp msg
+- send email using python
+- sms to mobile number using python
