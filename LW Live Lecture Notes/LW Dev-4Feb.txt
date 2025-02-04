@@ -1,0 +1,66 @@
+Docker Network Types:
+	>> bridge (default)
+	>> host 
+	>> none
+Docker Volume Type:
+	>> Permanent (mount volume with external directory )
+	>> Temporary 
+------------------------------------
+************************Task 1 Project WordPress*************************
+WordPress application muilti tire 
+Dockerfile
+>> FROM 
+>> COPY
+>> RUN
+>> WORKDIR
+>> EXPOSE
+>> CMD
+>> ENTRYPOINT
+
+------------------------------------
+>> docker pull MySQL
+>> docker pull wrodpress
+>> docker run -dit --name DB -e MYSQL_ROOT_PASSWORD=REDHAT -e MYSQL_ROOT_PASSWORD=REDHAT -e MYSQL_ROOT_PASSWORD=REDHAT -v /dbdir:/var/lib/mysql MySQL
+>> docker run -dit -p 8080:80 -v /wpdir:var/lib/html  --name WP wordpress
+>> docker images 
+>> docker rmi -f <image-name>
+>> docker ps
+>> docker system prune
+>> docker rm -f $(docker ps -a -q) 
+>> docker rm -f db 
+docker inspect db
+>> mkdir /dbdir
+>> mkdir /wpdir
+>> gedit Dockerfile
+>> systemctl stop firewall 
+
+>> docker exec -it wp bash
+>> cat wp-config.php
+
+********************
+wordpress set up   *
+dtatbase host : IP *  # docker inspect db
+use screen short   *
+********************
+
+
+-------------------------------------
+DevOps Commands:
+
+>> docker run -it -name <container-name> --net <name> image 
+>> docker run -it -name <container-name> image 
+>> docker network ls
+>> docker network inspect bridge 
+>> docker ps
+>> docker inspect <container-name>
+>> docker build -t name .
+>> docker run -itd -p 1234:5000 --name <container-name> image:v1
+>> netstat -tnlp    # to checking which port are available or not 
+
+-------------------------------------
+docker host 
+PAT Vs NAT
+port
+how expose the container ?
+docker networking ?( next class )
+

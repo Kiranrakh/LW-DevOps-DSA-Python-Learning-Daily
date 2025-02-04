@@ -1,0 +1,30 @@
+Recursion >> bottom up approach 
+
+problem statement =/= not =/= coding 
+       ^
+algo thinker =/= not =/= coding
+       ^
+DSA =/= not =/= coding
+>> stake frame = activation spac
+
+
+
+Example:
+
+def lw(n):
+	if n == 0:
+		return
+	lw(n-1)
+	print("Learning in : ", n)
+lw()	
+
+>> stake frame = activation space
+
+
+
+
+
+
+
+
+
