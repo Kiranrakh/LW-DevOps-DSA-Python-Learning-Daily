@@ -1,0 +1,112 @@
+Project: Dockerized Web Scraper with MySQL!     with @Dilip Jarwal   @git -@dilip8700
+https://github.com/dilip8700/web_scraper_python
+************************************
+- python web scraper libraries
+
+ec2 docker-web-scraper
+
+>> dnf install docker -y  # install docker
+>>systemctl start docker 
+systemctl status docker
+docker ps
+docker pull MySQL
+docker images
+docker pull amazonlinux
+docker run -it amazonlunix
+ifconfig
+yum install net-tools
+docker run -it amazonlinux
+ping
+
+docker rm -f <id>
+
+docker run -d --name mysql-container -e MYSQL_ROOT_PASSWORD=REDHAT -E MYSQL_DATABASE=SCRAPER_DB -P 3306:3306 MySQL
+
+docker exec -it <container> bash
+
+SHOW DATABASE
+USE SCRAPER_DB
+
+SHOW TABLE
+SELECT * FROM TABLE-NAME
+DOCKER PS
+
+mkdir web-scraper
+cd web-scraper
+app.py >>copy past code
+ change only db 
+docker inspect <container-id>
+host :"IP-add"
+password: "redhat"
+
+copy requirements file
+
+yum install python36
+pip3 install flask
+pip3 install -r requirements.txt
+
+
+python3 app.py
+
+docker ps
+
+docker exec -it <container-id> MySQL -u root -predhat
+show databases;
+use database-name;
+select * from <table-name>;
+-------------------------------------------
+create Dockerfile.txt
+
+FROM python:3.9
+WORKDIR /app
+COPY . .
+RUN pip install -r requirement.txt
+CMD ["python", "app.py"]
+
+requirements.txt
+requests
+beautifulsoup4
+mysql-connector-python
+
+--------------------------------------------
+docker build -t web-scraper .
+docker images
+docker run -it web-scraper 
+docker exec -it <container-id> MySQL -u root -predhat
+
+show database;
+use database-name;
+select * from <table-name>;
+
+
+docker images
+docker rm -f <id>
+
+
+     :                **************************
+       			      crontab
+                     **************************
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

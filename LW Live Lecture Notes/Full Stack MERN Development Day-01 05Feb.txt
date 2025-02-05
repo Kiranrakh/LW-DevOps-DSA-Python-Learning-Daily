@@ -1,0 +1,35 @@
+Full Stack MERN 
+Development Training (Day-1)
+-------------------------------------- 
+language use:
+*************
+
+>> client ( Frontend)
+	HTML     lib/framework - tailwind and Bootstrap, React 
+	CSS
+	Javascript 
+
+>> Server (Backend)
+ 	Python
+	Javascript (Programming Language) 
+	     ^ --Run Time Compiler -Nodejs
+	     ^ -- Express - for API
+>> Databases
+	MySQL
+	MongoDB
+
+--------------------------------------
+
+***********************
+MERN stand for
+M-MongoDB
+E-Express
+R-React
+N-Nodejs
+
+also learn
+
+Python flash frameworks 
+
+***********************
+ 
