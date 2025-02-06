@@ -1,0 +1,114 @@
+**************************************
+* DSA (Essential for DevOps Success) *
+**************************************
+TCO :  		Tail 		call	 Optimization
+                 ^               ^
+	      recursion	       function
+# intelligent program concerts is call TCO TO convert recursion code into iterations code 
+
+
+recursion:
+problem statement>>
+idea : 4 friends going to watching a movie in theater they select 4 seats continues find the combination they can try !!
+>>	find out factorial of some no.... , n=5
+prov>>---soln---> approach ---> algo
+factorial = 5! = 5*4*3*2*1 = ? 120 but how ?
+use : permutation and combinations 
+
+algo = approach = recursion = iterations  = loop (different for / while if/else)  
+------------------------------------
+using recursion
+0! = 1 always in terms of computer. 
+5!= 5*4*3*2*1
+n! =n *(n-1)!
+5!=n*(n-1)!
+fun(n)!=n*fun(n-1)!
+------------------------------------
+for Python:differnt ways
+
+def fact(n):
+	return n * fact(n-1)
+print( fact(5) )
+
+---------*********---------*******
+
+def fact(n):
+	if n==0:
+	      return 1
+	return n * fact(n-1)
+print( fact(6) )
+
+-----------**************----------
+# time complexity 
+def fact(n):
+	if n == 0:
+		return 1
+	z= n * fact(n-1)
+	return z
+print ( fact(7) )
+-------------***********-------------
+example for iteration:
+>>	find out factorial of some no.... , n=5
+first = 5
+next = first- 1           # run in loop 
+final = first * next  # run in loop
+
+first = next = 5
+stop = 1
+next = next - 1
+result = first * next
+print (result)
+
+next = next -1
+result = result * next
+
+print(result)
+------------------------------------
+#O(n)
+import sys
+sys.set_int_max_str_digits(10000)
+def fact(n):
+	first=next=result=5
+	stop=1
+	while next != stop:
+		next=next-1
+		result=result*next
+	return(result)
+print(fact(1000))
+
+
+---------***********---------------
+>> challenge with recursion
+	it work in loops
+	it create stack frame
+	tail recursion or non-tail recursion
+	bottom up approach = non-tail recursion
+	stack depth 
+	stack depth by default: 1000
+     >> when we take big value recursion will not work stack overflow 
+     >> iteration support stack overflow we never face problem of stack overflow
+	we love to write algo in terms recursion 
+	but we can't do 
+	we never use recursion we use itertion
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

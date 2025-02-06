@@ -1,4 +1,4 @@
-Project: Dockerized Web Scraper with MySQL!     with @Dilip Jarwal   @git -@dilip8700
+dockProject: Dockerized Web Scraper with MySQL!     with @Dilip Jarwal   @git -@dilip8700
 https://github.com/dilip8700/web_scraper_python
 ************************************
 - python web scraper libraries

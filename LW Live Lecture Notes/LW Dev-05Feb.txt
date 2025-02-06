@@ -1,0 +1,17 @@
+***********************
+* Docker Optimization *
+***********************
+
+
+                       Docker
+		          - build-tool/ older version v2
+			  - buildkit version v3 
+
+Buildkit tool : BuildKit is used to convert source code into build artifacts, like container images 
+
+Docker command:
+docker
+DOCKER_BUILDKIT=1     # variable 
+DOCKER_BUILDKIT=0       # 0 for older version
+export DOCKER_BUILDKIT=0
+docker build -t <image:v1> .
