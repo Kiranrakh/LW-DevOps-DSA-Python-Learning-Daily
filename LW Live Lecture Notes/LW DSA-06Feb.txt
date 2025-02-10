@@ -76,7 +76,7 @@ def fact(n):
 	return(result)
 print(fact(1000))
 
-
+a
 ---------***********---------------
 >> challenge with recursion
 	it work in loops

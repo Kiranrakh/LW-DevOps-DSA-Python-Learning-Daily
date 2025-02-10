@@ -1,0 +1,107 @@
+Kubernetes Foundation:
+**********************
+
+- Kubernetes is Software
+- it supports auto scaling and Scheduling, container orchestration.
+
+>> Kubernetes is a container orchestration tool that manage resources for dynamic web scaling 
+
+>> Kubernetes is an open-source system that automates the deployment, scaling, and management of containerized applications. 
+
+-----------------------------------------
+With docker :
+*************
+
+while working with docker we need to  Monitor application container continuation manually and if the container is not running run the container manually 
+
+Docker Commands : 
+*****************
+
+>> docker ps 	# to check running OS/Container
+>> docker vimal13/apache-webserver-php 	# for pull the image from hub.docker.com
+>> docker run -dit --name OS1 vimal13/apache-webserver-php 	# run my image which is pull from hub.docker.com
+>> docker inspect <container-name> 	# for more information about container
+>> docker images 	# to check images you have
+>> docker rm -f <container-name> 	# delete container forcefully 
+>> free -m 	# to check free RAM
+-----------------------------------------
+** Alternative way is go for  Kubernetes and do Automation!! **
+
+All about K8's :
+****************
+
+	>> K8's is run on master/manager node also called as controller node also known as control plan.
+
+	>> Worker/slave nodes are controlled by master/manager node. 
+
+	>> All this nodes are work together.
+
+	>> K8's is a container orchestration tool.
+
+	>> It is open source so we no need any licence for using K8's.
+
+	>> Horizontal scaling  = scale up increasing nodes.
+
+	>> In Kubernetes container is call as POD.
+
+	>> Single Node Cluster ( Where Master Node and Worker Node are running together )
+
+	>> Multi Node Cluster ( Where Master Node and Worker Node are running on different Cluster )
+
+ 
+-----------------------------------------
+
+          >> On-prem(private) cloud - OpenShift (Redhat) MINIKUBE
+K8's >>          ^
+          >> Cloud (public) services (AWS-EKS/GCP-GKE/AZURE-AKS)
+
+----------------------------------------	
+   	Install k8's
+For Minikube:
+
+
+                Minikube Software
+                Master Slave(kube/OS)
+		   ^^
+		VirtualBox
+		   ^^
+		Base Os
+
+Install it properly and run command in terminal
+command:
+>> minikube start
+>> minikube ip
+
+------------------------------------------------------------------------------------
+
+K8's Commands:
+**************
+<<#user>>      <<#verb>>     <<#resource>>
+     ^             ^              ^
+  kubectl      get/create      deployment
+
+************************************************************************************
+
+
+>> kubectl get nodes # Check nodes
+>> kubectl get pods # Check pods
+>> kubectl get deployment/depoly # To check pods/deployments
+>> kubectl create deployment <name-deployment>  --image=vimal13/apache-webserver-php # it will create a deployment and pods 
+>> kubectl delete <pods-name>
+>> kubectl get pods (kubectl get po)
+>> kubectl describe pods <pods-name>
+>> kubectl delete deployment <name-deployment>
+>> kubectl describe deployment <name-deployment>
+>> kubectl scale deployment <name-deployment> --replicas=3 # To increase pods horizontally by creation new pods
+>> kubectl autoscale 
+>> kubectl get pods -o wide # To check pods IP()
+>> kubectl get service # internal load balancer(kubectl get svc )
+>> kubectl get svc 
+>> kubectl expose deploy <name-deploy> --type=NodePort  --port=80 # to create a service with load balancer as reverse proxy for  your on application minikube of your Kubernetes
+
+**************************************************
+  check application by minikube ip :service port
+                 10.0.0.5:32167
+**************************************************
+>> kubectl get deployment <name-deployment> -o yaml  # to get yaml file of deployment 
+
