@@ -1,0 +1,27 @@
+
+
+
+
+   How we can Share Our image !!!!
+*************************************
+
+Docker Commands:
+
+# To convert image into tar file image
+>> docker save <image-name> -o <image-name>.tar
+
+# To use that image 
+>> docker load -i <image-name>.tar
+
+# To read all the details of image
+>> tar -xf <file-name>.tar
+
+
+
+# To upload image to Docker hub
+>> docker login
+>> docker login -u <user-name>
+>> docker push username/<image-name>:v1
+>> docker tag <iamge-name> username/<image-name>:v1
+
+

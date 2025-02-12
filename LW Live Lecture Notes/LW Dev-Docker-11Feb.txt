@@ -1,0 +1,88 @@
+C Language :
+#include <stdio.h>
+int main ()
+{
+print("Hello I'm  kiran");
+return 0;
+}
+
+------------------------------------
+Dockerfile: size:862 MB
+
+FROM gcc:6
+WORKDIR /app
+COPY lw.c lw.c
+RUN gcc lw.c -o lw
+CMD ["./lw"]
+ 
+******OR  Multistage Build *********
+                         size:892 MB
+
+FROM gcc:6 as mybuild
+WORKDIR /app
+COPY lw.c lw.c
+RUN gcc lw.c -o lw
+FROM gcc:6 as finalapp
+COPY --from=mybuild /app/lw /lw
+CMD ["./lw"]
+
+********** OR    Size:892 MB *******
+# use image that have c compiler
+
+FROM gcc:6 as mybuild
+WORKDIR /app
+COPY lw.c lw.c
+RUN gcc lw.c -o lw
+FROM ubuntu:14.04:6 as finalapp
+COPY --from=mybuild /app/lw /lw
+CMD ["./lw"]
+
+
+****** Pull image from GCR *********
+#use base image for c run time 
+                       size:23.4 MB
+
+FROM gcc:6 as mybuild
+WORKDIR /app
+COPY lw.c lw.c
+RUN gcc lw.c -o lw
+FROM gcr.io/distroless/cc:6 as finalapp
+COPY --from=mybuild /app/lw /lw
+CMD ["./lw"]
+
+****** Pull alpine image from docker hub *********
+#use base image for c run time 
+                       size:7.4 MB
+
+FROM gcc:6 as mybuild
+WORKDIR /app
+COPY lw.c lw.c
+RUN gcc lw.c -o lw
+FROM alpilne:6 as finalapp
+COPY --from=mybuild /app/lw /lw
+CMD ["./lw"]
+
+****** Pull scratch image from docker hub *********
+#use base image for c run time 
+                       size:7.4 kb
+
+FROM gcc:6 as mybuild
+WORKDIR /app
+COPY lw.c lw.c
+RUN gcc lw.c -o lw
+FROM scratch as finalapp
+COPY --from=mybuild /app/lw /lw
+CMD ["./lw"]
+
+------------------------------------
+
+Docker Commands:
+
+>> docker ps -a $(docker ps -a -q) # delete all container
+>> docker pull gcc:6
+>> docker run -it --name <OS-name> gcc:6 bash
+>> docker attach <OS-name>
+gcc lw.c -o lw.c
+
+# download inmage from GCR
+docker pull gcr.io/distroless/cc
