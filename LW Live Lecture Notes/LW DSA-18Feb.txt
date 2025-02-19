@@ -1,0 +1,42 @@
+Problem :  solve fabonacci series find value at n place ?
+
+
+fabonacci == Natural number series
+
+def lwFabo(n)
+#n = 6
+
+1st_num = 0
+2nd_num = 1
+
+next = 1st_num + 2nd_num
+
+count = 1
+#while  count < n:
+
+ 	next_value = 1st_num + 2nd_num
+	1st_num = 2nd_num
+	2nd_num = next_value
+
+ 	
+ 	count = count + 1 
+return(nextvalue)
+
+print(lwfabo())
+
+
+---Recursive way--------------------
+
+def func(n):
+	if n == 0:
+		return 0
+	elsif n == 1:
+		return 1
+	else:
+		return func(n-1) + func (n-2)
+
+print ( func(10) )
+
+
+**********************************
+Task convert this code in TCO 

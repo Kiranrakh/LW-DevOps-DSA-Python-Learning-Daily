@@ -1,0 +1,9 @@
+>> HEALTHCHECK --interval=10s --retrives=4 CMD curl https://172.0.0.1:5000/ || exit 1
+
+
+>> watch docker ps
+
+>> ONBUILD RUN echo " i'm Kiran child .. but instructed from Parent "
+
+
+

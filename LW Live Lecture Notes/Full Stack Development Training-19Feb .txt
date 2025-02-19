@@ -1,0 +1,33 @@
+  Full Stack Development Training Session
+*******************************************
+
+------------------- Student.py-------------
+from flask import Flask 
+
+app = Flask (_name__) 
+
+@app.route("/info") 
+def lwinfo(): 
+return "Linux World India... Info"
+ 
+@app.route("/student/abhi") 
+def lwstudentinfol(): 
+return "this is abhi student 1.." 
+
+@app.route("/student/tom") 
+def lwstudentinfo2(): 
+return "this is tom student 2.." 
+
+@app.route("/student/<n>") 
+def lwstudentinfo3(n): 
+return f"this is {n} student 3.." 
+
+@app.route("/student/<name>/<city>") 
+def lwstudentinfo4(name , city): 
+return f"this is {name} student from city <city> .." 
+
+
+
+app.run() 
+
+-------------------------------------------

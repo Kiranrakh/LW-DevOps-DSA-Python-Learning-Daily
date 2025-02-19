@@ -1,0 +1,52 @@
+>> Docker Inside Docker ( DIND )
+
+>> Container Inside Container ( CINC )
+
+
+Commands:
+
+>> yum install Docker
+
+>> rpm -q Docker-ce
+
+>> systemctl status docker 
+
+>> systemctl docker start 
+
+>> docker run -dit <image:v.1> 
+
+>> docker ps
+
+>> docker rm -f <container-ID/name>
+
+>> docker exec -it <container-nmae> bash 
+
+>> df -h
+
+>> docker system prune
+
+>> docker run -it -v /var/run/docker.sock:/var/run/docker.sock < Image-name>
+
+>> docker run -dit --privileged <image:v.1> 
+
+>> hostname <new-name>
+
+>> whoami
+
+>> 
+-----------------------------------------
+
+Task:
+*****
+
+>> how to setup apache web server inside docker container ?
+
+>> how to setup VLC player inside container ?
+
+>> hoe to setup install any GUI tool inside container, like - firefox
+
+>> how to launch DIND with personal Socket 
+
+
+
+ 
