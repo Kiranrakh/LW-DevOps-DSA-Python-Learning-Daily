@@ -1,0 +1,38 @@
+K8's Commands:
+
+
+>> minikube start -n 3 -p <name>
+
+>> kubectl cluster-info
+
+>> kubectl describe nodes lwcluster111
+
+>> kubectl describe nodes lwcluster111-m02
+
+>> kubectl create deployment myweb --image=vimal13/apache-webserver-php
+
+>> kubectl get pods -o wide
+
+>> kubectl scale deployment myweb --replicas=3
+
+>> cls
+
+>> kubectl get pods
+
+>> kubectl get deployment
+
+>> kubectl get nodes
+
+>> kubectl scale deployment myweb --replicas=4
+
+>> kubectl get pods -o wide
+
+>> kubectl get pods
+
+>> kubectl describe pods myweb-76d8ffbf65-95pl6
+
+>> cls
+
+>> doskey/history
+
+
