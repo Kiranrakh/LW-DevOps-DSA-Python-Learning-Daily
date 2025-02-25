@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kiran Rakh - AWS Cloud & DevOps Engineer Portfolio">
+    <title>Kiran Rakh | AWS Cloud & DevOps Engineer</title>
+    <link rel="icon" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        .header h1 {
+            font-size: 3rem;
+            animation: fadeInDown 1s ease-in-out;
+        }
+        .header p {
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+
+        /* Sections */
+        section {
+            padding: 50px 0;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease-in-out;
+        }
+        .visible {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+        h2 {
+            font-size: 2rem;
+            border-bottom: 3px solid #00d4ff;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        /* Cards */
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 15px 0;
+            backdrop-filter: blur(15px);
+            box-shadow: 0px 4px 15px rgba(0, 123, 255, 0.2);
+            transition: transform 0.3s ease-in-out;
+        }
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 6px 20px rgba(0, 123, 255, 0.5);
+        }
+
+        /* Buttons */
+        .contact-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(90deg, #ff416c, #ff4b2b);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0px 4px 15px rgba(255, 65, 108, 0.5);
+        }
+        .contact-btn:hover {
+            background: linear-gradient(90deg, #ff4b2b, #ff416c);
+            transform: translateY(-3px);
+            box-shadow: 0px 6px 20px rgba(255, 65, 108, 0.7);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #111;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            margin-top: 20px;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            .header p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <h1>Kiran Rakh</h1>
+        <p>AWS Cloud & DevOps Engineer</p>
+    </header>
+
+    <div class="container">
+
+        <!-- About Me -->
+        <section class="fade-in">
+            <h2>About Me</h2>
+            <div class="card">
+                <p>I am a passionate AWS Cloud & DevOps Engineer, specializing in automating deployments, optimizing cloud architectures, and implementing CI/CD pipelines. Proficient in Docker, Kubernetes, Jenkins, and Terraform, I thrive in cloud-based environments and continuously enhance my expertise in DevOps methodologies.</p>
+            </div>
+        </section>
+
+        <!-- Skills -->
+        <section class="fade-in">
+            <h2>Skills</h2>
+            <div class="card">
+                <ul>
+                    <li><strong>Cloud:</strong> AWS (EC2, S3, VPC, Route 53, IAM)</li>
+                    <li><strong>DevOps Tools:</strong> Docker, Kubernetes, Terraform, Jenkins</li>
+                    <li><strong>Programming:</strong> Python, Java, C++</li>
+                    <li><strong>OS:</strong> Linux, Windows</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <section class="fade-in">
+            <h2>Projects</h2>
+            <div class="card">
+                <ul>
+                    <li><strong>🚀 Three-Tier AWS Web App:</strong> Designed a highly available 3-tier web app using VPC, ALB, EC2 & RDS.</li>
+                    <li><strong>🐳 Dockerized FastAPI App:</strong> Developed and containerized a scalable FastAPI-based application.</li>
+                    <li><strong>🔄 CI/CD Pipeline:</strong> Built automated pipelines with Jenkins and Git for AWS deployment.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Education -->
+        <section class="fade-in">
+            <h2>Education</h2>
+            <div class="card">
+                <p><strong>Bachelor of Engineering (B.E) in Electronics and Telecommunication</strong></p>
+                <p>JSPM’s Imperial College of Engineering and Research, Pune (2020-2024)</p>
+                <p><strong>CGPA:</strong> 7.33/10</p>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section class="fade-in" style="text-align: center;">
+            <h2>Get In Touch</h2>
+            <p>Looking for a dedicated AWS Cloud Engineer? Let's connect!</p>
+            <a class="contact-btn" href="mailto:kiranrakh155@gmail.com">Contact Me</a>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2024 Kiran Rakh | <a href="https://www.linkedin.com/in/kiran-rakh-b644b6248" style="color: #00d4ff;">LinkedIn</a></p>
+    </footer>
+
+    <!-- JavaScript for Fade-in Effect -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll(".fade-in").forEach(section => {
+                section.classList.add("visible");
+            });
+        });
+    </script>
+
+</body>
+</html>

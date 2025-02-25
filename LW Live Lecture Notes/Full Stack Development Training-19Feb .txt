@@ -1,7 +1,7 @@
   Full Stack Development Training Session
 *******************************************
 
-------------------- Student.py-------------
+------------------- Student.py*-------------
 from flask import Flask 
 
 app = Flask (_name__) 
@@ -27,7 +27,28 @@ def lwstudentinfo4(name , city):
 return f"this is {name} student from city <city> .." 
 
 
-
 app.run() 
 
--------------------------------------------
+-----------------------------------------
+
+>> save all html pages under templates Folder 
+
+<< eg: ---------*Student.html*----------
+
+<b> Welcome I'm Pune </br>
+<br />
+I'm  <br> {{ x }}</br>
+<br />
+From <br>{{ c }} </br>
+
+----------------------------------------
+
+@app.route("/student/<name>/<city>") 
+def lwstudentinfo4(name , city):  
+return render_template ("Student.html",x=name, c=city) 
+
+-------------**-----------------
+
+
+
+
