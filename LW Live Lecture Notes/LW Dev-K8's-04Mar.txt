@@ -1,0 +1,58 @@
+>> minikube start -n 4 -p <name> # 4 cluster 
+
+
+# way to create with kubctl 
+#Cli* #Code* #Api*
+
+
+>> YAML is use in Kubernetes 
+
+>> kubectl get pod 
+
+>> kubectl get node 
+
+>> kubectl create deployment <name> --image=<image-name-docker-hub>
+
+>> kubectl run <name> --image=<image-name-docker-hub>
+
+>> kubectl -h
+
+>> kubectl describe pod 
+---------------------------------------------------
+
+
+
+>> kubectl cluster-info
+
+>> kubectl api-version
+
+>> kubectl api-resources
+
+>> kubectl explain 
+
+
+
+---------------------------------------------------
+
+
+launch a container 
+
+--> image 
+
+
+----------------example.yaml file------------------
+
+apiVersion: v1
+kind: pod
+metadata:
+  name: mypod
+spec:
+  containers:
+     - image: <"image-name-docker-hub">
+       name: "c1"
+
+>> kubectl create -f example.ymal
+
+
+
+
