@@ -1,0 +1,30 @@
+-----------------------------myapp.py----------------------------
+
+
+from flask import Flask, request
+
+@app.route("/")
+def lw():
+       return render_template("index.html")
+
+app = Flask(__name__)
+@app.route("/home", methods=['GET']) 
+def lwhome():
+         print( " i m server.. i m print ... " )
+         return "welcome to LW ..with GET \n"
+
+@app.route("/home", methods=['POST']) 
+def lwhome():
+         print( " i m server.. i m print ... " )
+         return "welcome to LW  root client with POST.. \n"
+
+
+app.run()
+------------------------------------------------------------
+
+methods=['GET',"POST","PUT"]
+
+
+
+
+
