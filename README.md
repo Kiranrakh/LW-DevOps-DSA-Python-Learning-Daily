@@ -54,10 +54,7 @@ Clone this repository to begin exploring:
 ```bash
  git clone [(https://github.com/Kiranrakh/LW-DevOps-DSA-Python-Learning-Daily.git)]
 ```
-Navigate to the repository:
-```bash
-cd devops-learning
-```
+
 
 ---
 
