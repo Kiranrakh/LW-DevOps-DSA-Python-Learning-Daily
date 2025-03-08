@@ -1,0 +1,125 @@
+asciii char Project
+
+
+git Hub: https://github.com/dilip8700/ascii_image_convert_webapp
+
+
+
+RGB
+Red-Gray-Black colure 
+
+
+# gray scale colure
+
+convert image into gray scale colure
+for dark area -@
+for lighter more-#
+for lighter more-$
+for lighter more-? also use Space
+
+default height is 0.55 for ascii char
+
+
+mkdir ascci_image_project
+code.
+------------------app.py---------------
+import os
+import numpy as np
+from flask import Flask, request, render_template
+from PIL import Image, ImageEnhance
+
+app = Flask(__name__)
+
+UPLOAD_FOLDER = "static"
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+ASCII_CHARS = "@#$%?&*():;,.+ "
+
+def image_to_ascii(image_path, width=100, contrast_factor=1.5):
+    img = Image.open(image_path)
+
+    aspect_ratio = img.height / img.width
+    new_height = int(width * aspect_ratio * 0.55)  # Correct distortion
+
+    img = img.resize((width, new_height))
+    img = img.convert("L")  # Convert image to grayscale
+
+    enhancer = ImageEnhance.Contrast(img)
+    img = enhancer.enhance(contrast_factor)
+
+    pixels = np.array(img)
+    normalized_pixels = (pixels / 255) * (len(ASCII_CHARS) - 1)
+
+    ascii_str = "\n".join(
+        "".join(ASCII_CHARS[int(pixel)] for pixel in row)
+        for row in normalized_pixels
+    )
+
+    return ascii_str
+
+@app.route("/", methods=["GET", "POST"])
+def home():
+    if request.method == "POST":
+        if "image" not in request.files:
+            return "No file part", 400 
+
+        file = request.files["image"]
+        if file.filename == "":
+            return "No selected file", 400
+
+        if file:
+            file_path = os.path.join(UPLOAD_FOLDER, "uploaded_image.png")
+            file.save(file_path)
+            print(f"File saved: {file_path}")
+
+            ascii_str = image_to_ascii(file_path)
+            print(f"Generated ASCII Preview: \n{ascii_str[:300]}")
+
+            return render_template("index.html", ascii_str=ascii_str)
+
+    return render_template("index.html", ascii_str=None)
+
+if __name__ == "__main__":
+    app.run(debug=True, port=5000)
+
+
+
+
+
+----------index.html----------------
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+</head>
+
+<body>
+
+<h1>Upload an image to convert to ascii</h1>
+
+<form action="/" method="post" enctype="multipart/form-data">
+
+<input type="file" name="image" required>
+
+<button type="submit"> Upload </button>
+
+</form>
+
+{% if ascii_art %}
+
+<h2>Generated ascii art</h2>
+
+<pre>{{ ascii_art }}</pre>
+
+{% endif %}
+
+</body>
+
+</html>
+
+
+---------------------------------------------------------------------------------------------
+
+pip install numpy pillow flask
