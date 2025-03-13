@@ -1,0 +1,44 @@
+Postman download
+
+
+-----------------new_file.py
+
+from flask import Flask, render_template, request
+app = Flask(__name__)
+
+@app.route("/",methods = ["GET"])
+def home():
+request.args.get("x")
+return render_template "file.html"
+
+@app.route("/lw",methods = ["GET"])
+def lw():
+   return f" welcome {data} to LW - DevOps Engineer Profile Page-GET method "
+
+@app.route("/lw2",methods = ["POST"])
+def lw():
+   return f" welcome {data} to LW - DevOps Engineer Profile Page-POST method "
+
+@app.route("/lw3",methods = ["PATCH"])
+def lw():
+   return " welcome to LW - DevOps Engineer Profile Page-PATCH method "
+
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
+
+# Get methods: dynamic url or queryString
+
+# https://localhost:5000/lw
+-----------------------------------------
+
+<from action="/lw" method='GET'>
+Name <input name='x'/>
+<input name='submit'/>
+
+</from>
+
+
+
