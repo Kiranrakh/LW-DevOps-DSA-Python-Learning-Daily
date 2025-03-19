@@ -1,0 +1,205 @@
+🚀 Quick VIVA Meeting with Jibbran Sir : Here are the answers interview questions 19-03-2025 🚀
+  
+---
+
+### **1. What is a Dockerfile and Docker Multistage Builds?**  
+#### **Dockerfile:**  
+A **Dockerfile** is a script containing a series of instructions to automate the creation of a Docker image. It defines the base image, dependencies, environment variables, commands, and configurations needed for an application to run inside a container.  
+
+Example Dockerfile:  
+```dockerfile
+FROM python:3.9  
+WORKDIR /app  
+COPY . .  
+RUN pip install -r requirements.txt  
+CMD ["python", "app.py"]  
+```
+
+#### **Docker Multistage Builds:**  
+**Multistage builds** help reduce the final image size by using multiple `FROM` instructions in a single Dockerfile. The first stage installs dependencies and builds the application, while the final stage only contains the necessary files.  
+
+Example of a **multistage Dockerfile**:  
+```dockerfile
+# First stage - Build stage
+FROM node:16 as builder  
+WORKDIR /app  
+COPY package.json .  
+RUN npm install  
+COPY . .  
+RUN npm run build  
+
+# Second stage - Production image  
+FROM nginx:alpine  
+COPY --from=builder /app/dist /usr/share/nginx/html  
+CMD ["nginx", "-g", "daemon off;"]  
+```
+This ensures the final image is small and optimized.  
+
+---
+
+### **2. Explain Docker Keywords**  
+- **FROM** – Defines the base image for the container  
+- **WORKDIR** – Sets the working directory inside the container  
+- **COPY** – Copies files from the local system to the container  
+- **ADD** – Similar to COPY but supports URL downloads  
+- **RUN** – Executes commands inside the container  
+- **CMD** – Defines the default command to run when the container starts  
+- **ENTRYPOINT** – Similar to CMD but used for scripts or executables  
+- **ENV** – Sets environment variables  
+- **EXPOSE** – Specifies the port the container listens on  
+- **VOLUME** – Creates a mount point for persistent storage  
+
+---
+
+### **3. Difference Between Virtualization and Containerization**  
+| Feature | Virtual Machines | Containers |
+|---------|----------------|------------|
+| **Abstraction Level** | Virtualizes hardware | Virtualizes OS processes |
+| **Size** | Large (GBs) | Lightweight (MBs) |
+| **Startup Time** | Slow (minutes) | Fast (seconds) |
+| **Isolation** | Strong (full OS per VM) | Weaker (shares kernel) |
+| **Resource Usage** | Requires more RAM & CPU | Efficient, shares host OS |
+| **Performance** | Overhead due to hypervisor | Near-native performance |
+
+---
+
+### **4. How to Launch a Container in a Specific Network?**  
+1. **Create a Docker network:**  
+   ```sh
+   docker network create my_custom_network
+   ```
+2. **Run a container in that network:**  
+   ```sh
+   docker run -d --name my_container --network my_custom_network nginx
+   ```
+
+---
+
+### **5. Important Docker Commands**  
+- **`docker run -d -p 8080:80 nginx`** → Run a container in detached mode  
+- **`docker ps`** → List running containers  
+- **`docker ps -a`** → List all containers  
+- **`docker stop <container_id>`** → Stop a running container  
+- **`docker rm <container_id>`** → Remove a container  
+- **`docker images`** → List available images  
+- **`docker rmi <image_id>`** → Remove an image  
+- **`docker build -t my_app .`** → Build an image from a Dockerfile  
+- **`docker logs <container_id>`** → View logs of a container  
+- **`docker exec -it <container_id> bash`** → Access a running container  
+
+---
+
+### **6. What is Docker Compose?**  
+Docker Compose is a tool that allows you to define and run multi-container Docker applications using a YAML file (`docker-compose.yml`). It simplifies application deployment.  
+
+Example **docker-compose.yml** file:  
+```yaml
+version: '3'
+services:
+  web:
+    image: nginx
+    ports:
+      - "8080:80"
+  db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+```
+
+---
+
+### **7. What is `docker-compose up`?**  
+The command `docker-compose up` starts all the services defined in `docker-compose.yml`.  
+```sh
+docker-compose up -d  # Runs in detached mode
+docker-compose down   # Stops and removes containers
+```
+
+---
+
+### **8. Difference Between Container and Virtual Machine**  
+| Feature | Container | Virtual Machine |
+|---------|----------|----------------|
+| **OS Dependency** | Shares host OS | Has its own OS |
+| **Size** | Lightweight (MBs) | Heavy (GBs) |
+| **Startup Time** | Fast (seconds) | Slow (minutes) |
+| **Performance** | High | Lower due to virtualization overhead |
+
+---
+
+### **9. Docker Volumes - How to Create a Persistent Volume?**  
+Volumes help store data persistently outside containers.  
+
+1. **Create a volume:**  
+   ```sh
+   docker volume create my_volume
+   ```
+2. **Run a container with volume:**  
+   ```sh
+   docker run -d --name my_container -v my_volume:/app/data nginx
+   ```
+
+---
+
+### **10. What is Docker Swarm?**  
+Docker Swarm is Docker's native orchestration tool for managing containerized applications across multiple nodes. It allows scaling, load balancing, and high availability.  
+
+---
+
+### **11. What is ReplicaSet and Replica Controller?**  
+- **ReplicaSet** ensures a specified number of pod replicas are running at all times.  
+- **ReplicationController** is an older version of ReplicaSet.  
+Example of **ReplicaSet** in Kubernetes:  
+```yaml
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: my-replicaset
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+        - name: my-container
+          image: nginx
+```
+
+---
+
+### **12. What Happens if I Delete All Pods in a ReplicaSet?**  
+Kubernetes will automatically create new pods to match the desired replicas count.
+
+---
+
+### **13. Docker Command to Initialize a Docker Swarm Cluster?**  
+```sh
+docker swarm init --advertise-addr <manager-ip>
+```
+This initializes the Swarm and returns a join command for worker nodes.
+
+---
+
+### **14. 10 Basic Linux Commands with Use Cases**  
+
+| Command | Use Case |
+|---------|----------|
+| `ls` | List files and directories |
+| `cd` | Change directory |
+| `pwd` | Show current working directory |
+| `mkdir new_folder` | Create a new directory |
+| `rm -rf my_folder` | Remove files or directories |
+| `cp file1.txt file2.txt` | Copy files |
+| `mv old.txt new.txt` | Rename or move a file |
+| `cat file.txt` | View file contents |
+| `grep "error" logs.txt` | Search for specific text in a file |
+| `chmod 755 script.sh` | Change file permissions |
+
+---
+
+🚀
