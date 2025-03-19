@@ -1,0 +1,94 @@
+---------app.py-------------
+
+from flask import Flask,request
+
+app = Flask(__name__)
+
+# In-memory database
+studentDB = [
+    {"user": {
+        "id": 1,
+        "name": "Kiran Rakh",
+        "location": "Pune, India",
+        "role": "DevOps Engineer",
+        "experience": "Fresher"
+    }},
+    {"user": {
+        "id": 2,
+        "name": "Tom",
+        "location": "Beed, India",
+        "role": "Data Engineer",
+        "experience": "Fresher"
+    }},
+    {"user": {
+        "id": 3,
+        "name": "Jerry",
+        "location": "Mumbai, India",
+        "role": "AI Engineer",
+        "experience": "Fresher"
+    }}
+]
+
+@app.route("/", methods=["GET"])
+def lwhome():
+    return "Wellcome to DB....!!!"
+
+@app.route("/students", methods=["GET"])
+def lwstudentinfo():
+    return "Wellcome to student profile....!!!"
+
+@app.route("/students/<index>", methods=["GET"])
+def lwstudentinfo_index(index):
+    index = int(index)  # Convert index to an integer
+    if int(index) <= 0:
+        return "DB Not Exists"
+    elif len(studentDB) >= index:
+        return studentDB[index - 1]
+    else:
+        return "DB Not Exists"
+
+@app.route("/students/create", methods=["POST"])
+def lwstudentcreate():
+         # print(" method :" , request.method)
+         # print(" data : " , request.json)
+         studentDB.append(request.json)
+         return " DB for New Student Created "
+
+@app.route("/students/delete/<index>", methods=["DELETE"])
+def lwstudentdelete(index):
+         studentDB.remove(studentDB[int(index) - 1 ] )
+         return " DB for Student Removed/Deleted "
+
+
+app.run(debug=True)
+
+-----------------------------------------------
+Data Operations (CRUD)
+Data operations refer to the actions performed on data, commonly known as CRUD:
+
+1️⃣ Create (C) – Add new data
+
+SQL: INSERT INTO students VALUES (1, 'Kiran', 'Pune');
+Flask API: POST /student
+
+
+2️⃣ Read (R) – Retrieve data
+
+SQL: SELECT * FROM students;
+Flask API: GET /students
+
+
+3️⃣ Update (U) – Modify existing data
+
+SQL: UPDATE students SET location='Mumbai' WHERE id=1;
+Flask API: PUT /student/1
+
+
+4️⃣ Delete (D) – Remove data
+
+SQL: DELETE FROM students WHERE id=1;
+Flask API: DELETE /student/1
+
+
+
+
