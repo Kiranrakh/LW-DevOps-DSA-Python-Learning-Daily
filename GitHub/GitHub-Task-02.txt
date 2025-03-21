@@ -1,0 +1,60 @@
+# Creating and Merging a New Branch into Main Branch
+
+## Step 1: Check the Current Branch
+Before creating a new branch, check the existing branches and the current branch.
+```sh
+git branch
+```
+The active branch will be highlighted with an asterisk (*).
+
+## Step 2: Create a New Branch
+To create a new branch, use the following command:
+```sh
+git branch new-feature
+```
+This creates a branch named `new-feature`.
+
+## Step 3: Switch to the New Branch
+Move to the new branch:
+```sh
+git checkout new-feature
+```
+Alternatively, you can use:
+```sh
+git switch new-feature
+```
+
+## Step 4: Make Changes and Commit
+1. Modify or create a new file.
+2. Add the changes to Git:
+   ```sh
+   git add .
+   ```
+3. Commit the changes:
+   ```sh
+   git commit -m "Added a new feature"
+   ```
+
+## Step 5: Merge the New Branch into the Main Branch
+1. Switch back to the main branch:
+   ```sh
+   git checkout main
+   ```
+2. Merge the `new-feature` branch into `main`:
+   ```sh
+   git merge new-feature
+   ```
+   If there are conflicts, Git will prompt you to resolve them before proceeding.
+
+## Step 6: Push the Changes to GitHub
+1. Push the updated main branch to GitHub:
+   ```sh
+   git push origin main
+   ```
+2. Delete the merged branch (optional):
+   ```sh
+   git branch -d new-feature
+   ```
+
+### 🎉 Congratulations! You have successfully created and merged a new branch into the main branch.
+

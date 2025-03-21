@@ -1,0 +1,47 @@
+# Initializing a Git Repository, Adding a File, and Pushing to GitHub
+
+## Step 1: Initialize a Git Repository
+1. Open a terminal or command prompt.
+2. Navigate to the folder where you want to create the Git repository.
+   ```sh
+   cd path/to/your/folder
+   ```
+3. Initialize Git in the directory:
+   ```sh
+   git init
+   ```
+   This creates a `.git` directory, marking it as a Git repository.
+
+## Step 2: Create a File and Add It to Git
+1. Create a new file:
+   ```sh
+   echo "# My First Git Project" > README.md
+   ```
+2. Add the file to the Git staging area:
+   ```sh
+   git add README.md
+   ```
+3. Commit the file:
+   ```sh
+   git commit -m "Initial commit"
+   ```
+
+## Step 3: Create a GitHub Repository
+1. Go to [GitHub](https://github.com/).
+2. Click on `New Repository`.
+3. Enter a repository name, keep it public or private, and click `Create repository`.
+4. Copy the repository URL.
+
+## Step 4: Push the Code to GitHub
+1. Link the local repository to GitHub:
+   ```sh
+   git remote add origin https://github.com/yourusername/your-repository.git
+   ```
+2. Push the changes:
+   ```sh
+   git push -u origin main
+   ```
+3. Go to GitHub and refresh the page; your file should be visible in the repository.
+
+### Congratulations! 🎉 You have successfully set up a Git repository, added a file, and pushed it to GitHub.
+

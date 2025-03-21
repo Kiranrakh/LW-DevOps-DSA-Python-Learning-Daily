@@ -1,0 +1,44 @@
+You can change the icon of a Linux program by following these steps:  
+
+### **Method 1: Change the App Shortcut Icon**  
+1️⃣ Open the terminal and go to the applications folder:  
+
+   cd /usr/share/applications/
+ 
+2️⃣ Find the `.desktop` file of the app (e.g., Firefox → `firefox.desktop`).  
+3️⃣ Open the file for editing:  
+
+   sudo nano firefox.desktop
+  
+4️⃣ Look for the `Icon=` line and change it to the path of your new icon:  
+   Icon=/home/user/Pictures/new_icon.png
+
+5️⃣ Save and exit (`Ctrl + X`, then `Y`, then `Enter`).  
+
+### **Method 2: Replace the Default Icon**  
+1️⃣ Go to the system icon folder:  
+
+   cd /usr/share/icons/hicolor/scalable/apps/
+
+2️⃣ Find and replace the app’s icon file:  
+
+   sudo cp /home/user/new_icon.svg firefox.svg
+   
+3️⃣ Restart the desktop environment:  
+ 
+   killall -3 gnome-shell  # For GNOME  
+   xfce4-panel --restart   # For XFCE  
+
+
+----------------------------------------------
+
+Here’s a super simple way to change the icon of a Linux program:  
+
+### **Steps to Change an App Icon in Linux**  
+
+1️⃣ **Right-click the app icon** (on the desktop or in the menu).  
+2️⃣ Select **"Properties"** or **"Edit Application"** (depends on your Linux distro).  
+3️⃣ Click on the **current icon** (a small image).  
+4️⃣ Select a **new icon** from your files.  
+5️⃣ Click **"Save"** or **"OK"** – Done! 🎉  
+

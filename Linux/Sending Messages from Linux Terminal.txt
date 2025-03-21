@@ -1,0 +1,75 @@
+Sending Messages from Linux Terminal
+
+1. Sending an Email
+
+Installing Mail Utilities
+
+To send an email from the Linux terminal, install mailutils:
+
+sudo apt install mailutils
+
+Sending an Email
+
+echo "Hello, this is a test email from Linux Terminal!" | mail -s "Test Email" recipient@example.com
+
+Replace recipient@example.com with the actual email address.
+
+2. Sending a WhatsApp Message
+
+Using yowsup
+
+yowsup is a Python library to send WhatsApp messages from the terminal.
+
+Installing yowsup
+
+pip install yowsup2
+
+Sending a Message
+
+yowsup-cli demos --send 1234567890 "Hello from Linux Terminal!"
+
+Replace 1234567890 with the recipient’s phone number (including country code).
+
+3. Sending a Tweet
+
+Using t (Twitter Command-Line Client)
+
+Install t to tweet from the Linux terminal.
+
+Installing t
+
+sudo gem install t
+
+Authenticating Twitter Account
+
+t authorize
+
+Follow the instructions to connect your Twitter account.
+
+Sending a Tweet
+
+t update "Hello, world! This tweet was sent from my Linux terminal. 🚀"
+
+4. Sending an SMS
+
+Using Twilio API
+
+Sign up on Twilio to get an Account SID and Auth Token.
+
+Install curl (if not installed):
+
+sudo apt install curl
+
+Send an SMS using Twilio API:
+
+curl -X POST https://api.twilio.com/2010-04-01/Accounts/YOUR_SID/Messages.json \
+--data-urlencode "To=+1234567890" \
+--data-urlencode "From=+YOUR_TWILIO_NUMBER" \
+--data-urlencode "Body=Hello from Linux Terminal!" \
+-u YOUR_SID:YOUR_AUTH_TOKEN
+
+Replace YOUR_SID, YOUR_AUTH_TOKEN, +1234567890, and +YOUR_TWILIO_NUMBER with actual details.
+
+Conclusion
+
+With these simple commands, you can send emails, WhatsApp messages, tweets, and SMS directly from your Linux terminal, making communication faster and more efficient!

@@ -1,0 +1,48 @@
+# Forking a Repository, Making Changes, and Creating a Pull Request
+
+## Step 1: Fork the Repository
+1. Go to the repository you want to fork on GitHub.
+2. Click the `Fork` button at the top right.
+3. This creates a copy of the repository in your GitHub account.
+
+## Step 2: Clone the Forked Repository
+1. Copy the forked repository’s URL from GitHub.
+2. Open a terminal and run:
+   ```sh
+   git clone https://github.com/yourusername/forked-repository.git
+   ```
+3. Navigate into the cloned directory:
+   ```sh
+   cd forked-repository
+   ```
+
+## Step 3: Create a New Branch for Changes
+1. Create and switch to a new branch:
+   ```sh
+   git checkout -b feature-branch
+   ```
+2. Make the necessary changes in the repository.
+3. Stage and commit the changes:
+   ```sh
+   git add .
+   git commit -m "Added a new feature"
+   ```
+
+## Step 4: Push the Changes to Your Fork
+1. Push the branch to your GitHub fork:
+   ```sh
+   git push origin feature-branch
+   ```
+
+## Step 5: Create a Pull Request
+1. Go to your forked repository on GitHub.
+2. Click on `Compare & pull request`.
+3. Add a title and description explaining your changes.
+4. Click `Create pull request`.
+
+## Step 6: Wait for Review and Merge
+1. The repository owner will review your request.
+2. If approved, your changes will be merged into the original repository.
+
+### 🎉 Congratulations! You have successfully forked a repository, made changes, and created a pull request.
+

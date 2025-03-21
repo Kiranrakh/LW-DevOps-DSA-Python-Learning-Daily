@@ -1,0 +1,86 @@
+Understanding Ctrl+C and Ctrl+Z Signals in Linux
+
+Linux provides powerful process management through keyboard shortcuts like Ctrl+C and Ctrl+Z, which send specific signals to running processes. Understanding these signals can help in controlling processes efficiently.
+
+1️⃣ Ctrl+C (SIGINT - Interrupt Signal)
+
+What It Does:
+
+Pressing Ctrl+C sends the SIGINT (Signal Interrupt) to the foreground process.
+
+This signal requests the process to terminate immediately.
+
+Command Behind Ctrl+C:
+
+kill -SIGINT <process_id>
+
+Or simply:
+
+kill -2 <process_id>
+
+(Since SIGINT is signal number 2)
+
+Example:
+
+To stop a process with ID 1234, run:
+
+kill -SIGINT 1234
+
+2️⃣ Ctrl+Z (SIGTSTP - Stop Signal)
+
+What It Does:
+
+Pressing Ctrl+Z sends the SIGTSTP (Signal Terminal Stop) to the foreground process.
+
+This suspends the process instead of terminating it.
+
+Command Behind Ctrl+Z:
+
+kill -SIGTSTP <process_id>
+
+Or simply:
+
+kill -20 <process_id>
+
+(Since SIGTSTP is signal number 20)
+
+Example:
+
+To suspend a process with ID 1234, run:
+
+kill -SIGTSTP 1234
+
+3️⃣ Resuming a Suspended Process
+
+Once a process is suspended using Ctrl+Z, you can resume it in different ways:
+
+Resume in Foreground:
+
+fg
+
+(Brings the most recently suspended process back to the foreground)
+
+Resume in Background:
+
+bg
+
+(Continues the process in the background)
+
+Manually Resume Using SIGCONT:
+
+kill -SIGCONT <process_id>
+
+Or:
+
+kill -18 <process_id>
+
+(Since SIGCONT is signal number 18)
+
+🎯 Conclusion
+
+✅ Ctrl+C sends SIGINT to terminate a process.
+✅ Ctrl+Z sends SIGTSTP to suspend a process.
+✅ You can manually send these signals using the kill command.
+✅ Suspended processes can be resumed using fg, bg, or kill -SIGCONT.
+
+Understanding these signals helps in better process management in Linux environments! 🚀

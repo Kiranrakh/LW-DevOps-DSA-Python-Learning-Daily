@@ -1,0 +1,9 @@
+five GUI programs in Linux and their equivalent terminal commands:
+
+1️⃣ File Manager (Nautilus) → nautilus .
+2️⃣ Web Browser (Firefox) → firefox
+3️⃣ Text Editor (Gedit) → gedit filename.txt
+4️⃣ Media Player (VLC) → vlc filename.mp4
+5️⃣ Screenshot Tool (Flameshot) → flameshot gui
+
+These commands open the respective GUI programs from the terminal. 🚀
