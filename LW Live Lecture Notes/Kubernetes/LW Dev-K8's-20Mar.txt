@@ -1,8 +1,9 @@
 What is Deployment in Kubernetes?
+
 A Deployment in Kubernetes is a resource that manages the rollout and scaling of a set of Pods. It ensures that your application runs reliably by handling updates, rollbacks, and scaling.
 
 
-Key Features of a Deployment:
+Features of a Deployment:
 - Ensures Desired State – Ensures the correct number of running pods with the specified container image.
 - Rolling Updates – Updates pods gradually to avoid downtime.
 - Rollback Capability – If an update fails, Kubernetes can revert to the previous version.
