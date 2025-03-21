@@ -1,0 +1,151 @@
+What is Deployment in Kubernetes?
+A Deployment in Kubernetes is a resource that manages the rollout and scaling of a set of Pods. It ensures that your application runs reliably by handling updates, rollbacks, and scaling.
+
+
+Key Features of a Deployment:
+- Ensures Desired State – Ensures the correct number of running pods with the specified container image.
+- Rolling Updates – Updates pods gradually to avoid downtime.
+- Rollback Capability – If an update fails, Kubernetes can revert to the previous version.
+- Scaling – Supports scaling up/down the number of pods.
+- Self-Healing – If a pod crashes, Kubernetes will restart it automatically.
+
+1️⃣ Recreate Strategy
+
+Deletes all old pods first, then creates new ones.
+Causes downtime because no pods run during the update.
+Useful when old and new versions can’t run together (e.g., database migrations).
+
+strategy:
+  type: Recreate
+
+
+Recreate ➝ For major updates with downtime.
+
+2️⃣ Rolling Update Strategy (Default)
+
+Replaces old pods gradually with new ones.
+No downtime, ensuring continuous availability.
+Best for production applications.
+
+strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxUnavailable: 1  # Only 1 pod can be down at a time
+    maxSurge: 1        # Allows 1 extra pod during update
+
+
+Rolling Update ➝ For smooth, zero-downtime updates.
+
+
+************** Dockerfile ************************
+
+# Use an official Python image as a base
+FROM python:3.9  
+
+# Set the working directory
+WORKDIR /app  
+
+# Copy all files to the container
+COPY . .  
+
+# Install dependencies
+RUN pip install -r requirements.txt  
+
+# Expose a port (e.g., Flask runs on 5000)
+EXPOSE 5000  
+
+# Run the application
+CMD ["python", "app.py"]
+
+
+>> docker build -t my-app:v1 .
+
+
+------------Example: deployment.yaml-------
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app-deployment
+spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1  # Maximum number of unavailable pods during the update
+      maxSurge: 1        # Number of extra pods that can be created during the update
+  replicas: 3
+  selector:
+    matchLabels:
+      team: prod
+      app: my-app
+  template:
+    metadata:
+      labels:
+        team: prod
+        app: my-app
+    spec:
+      containers:
+      - name: my-app-container
+        image: my-dockerhub-username/my-app:v1  
+      # image: my-dockerhub-username/my-app:v2
+        ports:
+        - containerPort: 5000
+
+
+
+>> kubectl apply -f deployment.yaml
+
+>> kubectl get rs 
+
+>> kubectl get pods
+
+>> kubectl get deploy
+
+>> kubectl describe <deploy>
+
+>> kubectl expose deployment mydeployment --type=NodePort --port=80
+
+>> minikube ip
+
+>> kubectl rollout history deployment mydeployment
+
+>> kubectl rollout status deployment mydeployment
+
+>> kubectl get pods -w
+
+#  kubectl get svc
+>> curl -s IP:Port  
+
+>> kubectl set image deployment my-app-deployment my-app-container-name=my-dockerhub-username/my-app:v2
+
+>> kubectl rollout undo deployment my-app-deployment 
+
+
+--------------------------------
+Kubernetes Commands:
+
+# Apply the deployment configuration defined in deployment.yaml
+kubectl apply -f deployment.yaml
+
+# List all deployments in the cluster to check their status
+kubectl get deployments
+
+# List all running pods to verify that the deployment created the expected number of pods
+kubectl get pods
+
+# Update the deployment to use a new container image version (v2)
+kubectl set image deployment/my-app-deployment my-app-container=my-dockerhub-username/my-app:v2
+
+# Scale the deployment to run 5 instances (replicas) of the application
+kubectl scale deployment my-app-deployment --replicas=5
+
+# Roll back the deployment to the previous version in case of issues with the new update
+kubectl rollout undo deployment my-app-deployment
+
+# Delete the deployment, removing all associated pods and resources
+kubectl delete deployment my-app-deployment
+
+# Expose the deployment 'mydeployment' as a service of type NodePort
+# This makes it accessible externally on a static port in the range 30000-32767
+>> kubectl expose deployment mydeployment --type=NodePort --port=80
+
