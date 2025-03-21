@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app-deployment
+spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1  # Maximum number of unavailable pods during the update
+      maxSurge: 1        # Number of extra pods that can be created during the update
+  replicas: 3
+  selector:
+    matchLabels:
+      team: prod
+      app: my-app
+  template:
+    metadata:
+      labels:
+        team: prod
+        app: my-app
+    spec:
+      containers:
+      - name: my-app-container
+        image: kiranrakh/my-app:v1  
+      # image: kiranrakh/my-app:v2
+        ports:
+        - containerPort: 5000
