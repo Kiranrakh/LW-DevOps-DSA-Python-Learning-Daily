@@ -1,0 +1,101 @@
+# **Kubernetes Multi-Tier Application Deployment Guide**
+
+This documentation covers two methods to deploy a **MySQL + WordPress** multi-tier application using Kubernetes:
+
+1. **Using Separate Deployment & Service Files**  
+2. **Using a Single Deployment File**
+
+Each method has its advantages and is suitable for different use cases.
+
+---
+
+## **1️⃣ Method 1: Using Separate Deployment & Service Files**
+This approach keeps the deployment and service definitions in separate YAML files.
+
+### **When to Use This Approach?**
+✅ When you want better modularity and easier management of each component.  
+✅ If you plan to scale or modify deployments separately.  
+✅ Best suited for **large-scale projects** where multiple microservices need independent scaling.
+
+### **Steps to Deploy**
+#### **Step 1: Create a Secret for MySQL Credentials**
+```sh
+kubectl create secret generic mysql-secret \
+  --from-literal=MYSQL_ROOT_PASSWORD=rootkiran \
+  --from-literal=MYSQL_REPLICATION_USER=Rkiran \
+  --from-literal=MYSQL_REPLICATION_PASSWORD=Rkiran@123
+```
+#### **Step 2: Verify Secret**
+```sh
+kubectl get secrets
+kubectl describe secret mysql-secret
+```
+#### **Step 3: Deploy MySQL**
+```sh
+kubectl apply -f mysql-deployment.yml
+```
+#### **Step 4: Check Deployment Status**
+```sh
+kubectl get pods
+kubectl get deployments
+```
+#### **Step 5: Expose MySQL as a ClusterIP Service**
+```sh
+kubectl apply -f mysql-service.yml
+```
+#### **Step 6: Deploy WordPress**
+```sh
+kubectl apply -f wp-deployment.yml
+```
+#### **Step 7: Expose WordPress as a NodePort Service**
+```sh
+kubectl apply -f wp-service.yml
+```
+#### **Step 8: Get Minikube IP & Access WordPress**
+```sh
+minikube ip
+kubectl get svc wp-service
+http://<Minikube-IP>:<NodePort>
+```
+
+---
+
+## **2️⃣ Method 2: Using a Single Deployment File**
+This approach combines both deployment and service definitions into a single `deployment.yml` file.
+
+### **When to Use This Approach?**
+✅ If you want a **simpler and quicker** deployment process.  
+✅ Best for **small projects or testing** where separation of components is not necessary.  
+✅ Easier for beginners who want to deploy everything in one step.
+
+### **Steps to Deploy**
+#### **Step 1: Create MySQL Secret**
+```sh
+kubectl create secret generic mysql-secret \
+  --from-literal=MYSQL_ROOT_PASSWORD=rootkiran \
+  --from-literal=MYSQL_REPLICATION_USER=Rkiran \
+  --from-literal=MYSQL_REPLICATION_PASSWORD=Rkiran@123
+```
+#### **Step 2: Deploy MySQL and WordPress in One File**
+```sh
+kubectl apply -f deployment.yml
+```
+The `deployment.yml` file should include both **MySQL and WordPress deployments** as well as their corresponding services.
+
+#### **Step 3: If You Don’t Have a Deployment File, Generate One**
+```sh
+kubectl expose deployment mysqldb --type ClusterIP --port 3306 --dry-run -o yaml >> mysql_deployment.yml
+kubectl expose deployment wpapp --type NodePort --port=80 --dry-run -o yaml >> wp_deployment.yml
+```
+
+---
+
+## **Conclusion**
+Both methods are effective, and the choice depends on your project requirements:
+- **Method 1 (Separate Files)** 🏗: Best for **scalability** and **large projects**.
+- **Method 2 (Single File)** 🚀: Best for **quick deployment** and **small projects**.
+
+Choose the method that suits your needs and deploy your multi-tier application efficiently!
+
+Let me know if you need further clarifications. Happy coding! 🎉
+
