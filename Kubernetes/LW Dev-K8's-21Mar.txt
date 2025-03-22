@@ -1,0 +1,80 @@
+Kubernetes Secrets allow you to securely store sensitive data like passwords, API keys, tokens, and database credentials instead of hardcoding them in ConfigMaps or YAML files.
+
+
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-primary
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+      role: primary
+  template:
+    metadata:
+      labels:
+        app: mysql
+        role: primary
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:5.7
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_ROOT_PASSWORD
+        - name: MYSQL_REPLICATION_USER
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_REPLICATION_USER
+        - name: MYSQL_REPLICATION_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_REPLICATION_PASSWORD
+
+>> kubectl apply -f mysql_deployment.yaml
+
+--------------------------------------------
+
+1️⃣ Create a Kubernetes Secret for MySQL Credentials
+
+kubectl create secret generic mysql-secret 
+  --from-literal=MYSQL_ROOT_PASSWORD=rootpassword 
+  --from-literal=MYSQL_REPLICATION_USER=replica 
+  --from-literal=MYSQL_REPLICATION_PASSWORD=replicapassword
+
+--------------------------------------------
+
+Alternatively, define the Secret YAML file (mysql-secret.yaml):
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysql-secret
+type: Opaque
+data:
+  MYSQL_ROOT_PASSWORD: cGFzc3dvcmQ=  # Base64 encoded "password"
+  MYSQL_REPLICATION_USER: cmVwbGljYQ==  # Base64 encoded "replica"
+  MYSQL_REPLICATION_PASSWORD: cmVwbGljYXBhc3M=  # Base64 encoded "replicapassword"
+
+
+>> echo -n "yourpassword" | base64
+
+>> kubectl apply -f mysql-secret.yaml
+
+
+
+💡 Why Use Secrets?
+✔ Better Security – Passwords are not exposed in YAML files.
+✔ Easy Management – Update secrets without modifying deployments.
+✔ Base64 Encoded – Though not encrypted, it adds a layer of protection.
+
+Now, your MySQL passwords are safely stored in Kubernetes Secrets instead of being hardcoded! 🚀
+
+    

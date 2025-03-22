@@ -1,0 +1,229 @@
+=====================================
+DEPLOYING A MULTI-TIER APP WITH KUBERNETES
+=====================================
+
+## 📌 Prerequisites
+Before you begin, ensure you have the following installed:
+- **Minikube**: For running Kubernetes locally.
+- **Kubectl**: Kubernetes command-line tool.
+- **Docker**: Container runtime.
+
+Start Minikube:
+```
+minikube start
+```
+Verify Minikube is running:
+```
+kubectl cluster-info
+kubectl get nodes
+```
+
+---------------------------
+## 🛠 Step 1: Create a Kubernetes Secret
+---------------------------
+Create a secret for storing MySQL credentials:
+```
+kubectl create secret generic mysql-secret \
+  --from-literal=MYSQL_ROOT_PASSWORD=rootpassword \
+  --from-literal=MYSQL_REPLICATION_USER=replica \
+  --from-literal=MYSQL_REPLICATION_PASSWORD=replicapassword
+```
+Verify the secret:
+```
+kubectl get secrets
+kubectl describe secret mysql-secret
+```
+
+---------------------------
+## 📦 Step 2: Deploy MySQL in Kubernetes
+---------------------------
+Create a **mysql-deployment.yml** file:
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-primary
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+      role: primary
+  template:
+    metadata:
+      labels:
+        app: mysql
+        role: primary
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:5.7
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_ROOT_PASSWORD
+        - name: MYSQL_REPLICATION_USER
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_REPLICATION_USER
+        - name: MYSQL_REPLICATION_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_REPLICATION_PASSWORD
+        ports:
+        - containerPort: 3306
+```
+Apply the deployment:
+```
+kubectl apply -f mysql-deployment.yml
+```
+Verify the deployment:
+```
+kubectl get pods
+kubectl get deployments
+```
+
+---------------------------
+## 🌐 Step 3: Expose MySQL as a Service
+---------------------------
+Create **mysql-service.yml**:
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-service
+spec:
+  selector:
+    app: mysql
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306
+  type: ClusterIP
+```
+Apply the service:
+```
+kubectl apply -f mysql-service.yml
+```
+Verify:
+```
+kubectl get svc
+```
+
+---------------------------
+## 🖥 Step 4: Deploy WordPress
+---------------------------
+Create **wp-deployment.yml**:
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wpapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wordpress
+  template:
+    metadata:
+      labels:
+        app: wordpress
+    spec:
+      containers:
+      - name: wordpress
+        image: wordpress:latest
+        env:
+        - name: WORDPRESS_DB_HOST
+          value: "mysql-service"
+        - name: WORDPRESS_DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_REPLICATION_USER
+        - name: WORDPRESS_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_REPLICATION_PASSWORD
+        ports:
+        - containerPort: 80
+```
+Apply the deployment:
+```
+kubectl apply -f wp-deployment.yml
+```
+Verify:
+```
+kubectl get pods
+```
+
+---------------------------
+## 🔗 Step 5: Expose WordPress as a Service
+---------------------------
+Create **wp-service.yml**:
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: wp-service
+spec:
+  selector:
+    app: wordpress
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: NodePort
+```
+Apply:
+```
+kubectl apply -f wp-service.yml
+```
+Get Minikube IP:
+```
+minikube ip
+```
+Get the NodePort:
+```
+kubectl get svc wp-service
+```
+Example output:
+```
+NAME         TYPE       CLUSTER-IP      EXTERNAL-IP  PORT(S)        AGE
+wp-service   NodePort   10.102.120.123  <none>       80:32222/TCP   2m
+```
+Access WordPress at:
+```
+http://<Minikube-IP>:<NodePort>
+```
+Example:
+```
+http://192.168.49.2:32222
+```
+
+---------------------------
+## ✅ Step 6: Verify & Manage Deployments
+---------------------------
+Check all resources:
+```
+kubectl get all
+```
+Scale WordPress deployment:
+```
+kubectl scale deployment wpapp --replicas=3
+```
+Delete all resources:
+```
+kubectl delete deployment mysql-primary wpapp
+kubectl delete service mysql-service wp-service
+kubectl delete secret mysql-secret
+```
+
+
+
+Happy Kubernetes Deployment! 🎉
+
