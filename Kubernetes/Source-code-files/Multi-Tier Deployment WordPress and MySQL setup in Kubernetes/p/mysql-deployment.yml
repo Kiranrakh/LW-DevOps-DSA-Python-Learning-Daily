@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysqldb
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      team: prod
+  template:
+    metadata:
+      labels:
+        team: prod
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:latest
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysecretbox
+              key: MYSQL_ROOT_PASSWORD
+        - name: MYSQL_DATABASE
+          value: lwdb
+        - name: MYSQL_USER
+          valueFrom:
+            secretKeyRef:
+              name: mysecretbox
+              key: MYSQL_USER
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysecretbox
+              key: MYSQL_PASSWORD
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  name: mysqldb
+spec:
+  ports:
+  - port: 3306
+    protocol: TCP
+    targetPort: 3306
+  selector:
+    team: prod
+  type: ClusterIP
+
