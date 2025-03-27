@@ -1,0 +1,206 @@
+# User Management Documentation
+
+## 1. Create a User Named `tom` with UID 777 and a No-Login Shell
+### Command:
+```bash
+sudo useradd -u 777 -s /sbin/nologin tom
+```
+### Explanation:
+- `-u 777` → Assigns User ID (UID) of `777`.
+- `-s /sbin/nologin` → Prevents interactive login.
+
+### Verification:
+```bash
+id tom
+grep tom /etc/passwd
+```
+
+---
+
+## 2. Create Five Users with Home Directories
+### Commands:
+```bash
+sudo useradd -m student
+sudo useradd -m jerry
+sudo useradd -m laura
+sudo useradd -m mary
+sudo useradd -m scott
+```
+### Explanation:
+- `-m` → Automatically creates a home directory in `/home/<username>`.
+
+### Verification:
+```bash
+ls -ld /home/student /home/jerry /home/laura /home/mary /home/scott
+```
+
+---
+
+## 3. Set Passwords for All Users
+### Commands:
+```bash
+echo "RHCSA123$" | sudo passwd --stdin student
+echo "RHCSA123$" | sudo passwd --stdin jerry
+echo "RHCSA123$" | sudo passwd --stdin laura
+echo "RHCSA123$" | sudo passwd --stdin mary
+echo "RHCSA123$" | sudo passwd --stdin scott
+```
+**Alternative (if `--stdin` is unavailable):**
+```bash
+echo "student:RHCSA123$" | sudo chpasswd
+```
+
+### Verification:
+```bash
+sudo cat /etc/shadow | grep -E 'student|jerry|laura|mary|scott'
+```
+
+---
+
+## 4. Set Account Expiration for `mary` and `scott`
+### Commands:
+```bash
+sudo chage -E 2030-12-31 mary
+sudo chage -E 2030-12-31 scott
+```
+### Explanation:
+- `chage -E <date>` → Sets the expiration date.
+
+### Verification:
+```bash
+sudo chage -l mary
+sudo chage -l scott
+```
+
+---
+
+## 5. Create the `database` Group
+### Command:
+```bash
+sudo groupadd database
+```
+### Explanation:
+- Creates the **database** group if it does not already exist.
+
+### Verification:
+```bash
+getent group database
+```
+
+---
+
+## 6. Add `jerry` and `laura` to the `database` Group
+### Commands:
+```bash
+sudo usermod -aG database jerry
+sudo usermod -aG database laura
+```
+### Explanation:
+- `-aG` → Adds the user to the specified secondary group without removing existing group memberships.
+
+### Verification:
+```bash
+id jerry
+id laura
+```
+
+---
+
+## 7. Create the `developers` Group and Change Ownership of `/mnt/mobile`
+### Commands:
+```bash
+sudo groupadd developers
+sudo chown :developers /mnt/mobile
+```
+### Explanation:
+- `groupadd developers` → Creates a new group called **developers**.
+- `chown :developers /mnt/mobile` → Changes the group ownership of `/mnt/mobile` to `developers`.
+
+### Verification:
+```bash
+ls -ld /mnt/mobile
+```
+
+---
+
+## 8. Set Permissions on `/mnt/mobile`
+### Command:
+```bash
+sudo chmod 770 /mnt/mobile
+```
+### Explanation:
+- `chmod 770` → Grants **read/write/execute** permissions to the **owner** and **group**, while denying access to others.
+
+### Verification:
+```bash
+ls -ld /mnt/mobile
+```
+
+---
+
+## 9. Create a Directory `dir2` for `laura` and Set ACL for `mary`
+### Commands:
+```bash
+sudo -u laura mkdir /home/laura/dir2
+sudo setfacl -m u:mary:rw /home/laura/dir2
+```
+### Explanation:
+- `mkdir /home/laura/dir2` → Creates a directory named **dir2** in Laura's home directory.
+- `setfacl -m u:mary:rw /home/laura/dir2` → Grants **read and write** access to `mary` on `dir2`.
+
+### Verification:
+```bash
+getfacl /home/laura/dir2
+```
+
+---
+
+## 10. Modify Boot Loader Configuration to Set Autoboot Timer to 2 Seconds
+### Command:
+```bash
+sudo sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=2/' /etc/default/grub
+sudo grub2-mkconfig -o /boot/grub2/grub.cfg
+```
+### Explanation:
+- Modifies the **GRUB** configuration to change the autoboot timer to **2 seconds**.
+- `grub2-mkconfig -o /boot/grub2/grub.cfg` → Applies the changes.
+
+### Verification:
+```bash
+grep GRUB_TIMEOUT /etc/default/grub
+```
+
+---
+
+## 11. Configure Firewall to Accept FTP Traffic
+### Commands:
+```bash
+sudo firewall-cmd --permanent --add-service=ftp
+sudo firewall-cmd --reload
+```
+### Explanation:
+- `firewall-cmd --permanent --add-service=ftp` → Opens the FTP service in the firewall.
+- `firewall-cmd --reload` → Applies the new firewall settings.
+
+### Verification:
+```bash
+sudo firewall-cmd --list-all
+```
+
+---
+
+## Summary
+✅ **`tom`** → UID `777`, **nologin shell**  
+✅ **`student, jerry, laura, mary, scott`** → Home directories created in `/home/`  
+✅ **Passwords** → Set to `RHCSA123$`  
+✅ **`mary` & `scott`** → Expiration set to `31-Dec-2030`  
+✅ **`database` group** → Created  
+✅ **`jerry` & `laura`** → Added to `database` as a **secondary group**  
+✅ **`developers` group** → Created and assigned to `/mnt/mobile`  
+✅ **Permissions on `/mnt/mobile`** → Set to `770`  
+✅ **Directory `dir2`** → Created in Laura’s home with ACLs for `mary`  
+✅ **GRUB Autoboot Timer** → Set to **2 seconds**  
+✅ **Firewall** → Configured to accept FTP traffic  
+
+Your setup is now complete! 🚀
+
