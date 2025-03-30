@@ -1,0 +1,181 @@
+## Creating a Script File and Building a Command
+A script file is a text file that contains a series of commands executed by the shell. These scripts are used to automate tasks and execute multiple commands sequentially.
+
+### Steps to Create a Script File
+1. Open a terminal.
+2. Create a new file using a text editor such as nano, vim, or touch:
+   ```sh
+   nano myscript.sh
+   ```
+
+>> nano myscript.sh
+date
+cal
+
+
+>> bash myscript.sh   # to run file
+
+
+3. Write your script inside the file.
+4. Save the file and exit the editor.
+5. Make the script executable by running:
+   ```sh
+   chmod +x myscript.sh
+   ```
+6. Execute the script:
+   ```sh
+   ./myscript.sh
+   ```
+
+## Variables & User-Defined Variables
+### System Variables
+System variables are predefined by the shell and written in uppercase.
+#### Example:
+```sh
+echo $HOME  # Displays home directory
+echo $USER  # Displays the current username
+```
+
+### User-Defined Variables
+Users can define custom variables for use in scripts.
+#### Example:
+```sh
+myvar="Hello, World!"
+echo $myvar
+```
+
+## Status Code
+Every command executed in a shell script returns an exit status code. A status code of `0` means success, while any non-zero value indicates an error.
+#### Example:
+```sh
+ls /home
+echo $?  # Displays the exit status of the last command
+```
+
+## Executable Program
+A script file must have execute permissions to run as an executable program.
+- To verify execute permission:
+  ```sh
+  ls -l myscript.sh
+  ```
+- If not executable, use:
+  ```sh
+  chmod +x myscript.sh
+  ```
+
+## PATH
+The `$PATH` variable defines directories where the shell looks for executable files.
+- To check the current PATH:
+  ```sh
+  echo $PATH
+  ```
+- To add a directory to PATH:
+  ```sh
+  export PATH=$PATH:/home/user/scripts
+  ```
+
+## Hashbang or Shebang
+A **hashbang (#!)** or **shebang** is the first line of a script that specifies which interpreter should execute the script.
+#### Example:
+```sh
+#!/bin/bash
+echo "This is a Bash script."
+```
+
+## Script File
+A script file is a simple text file containing shell commands, usually saved with a `.sh` extension.
+#### Example script:
+```sh
+#!/bin/bash
+echo "Hello, this is my script!"
+```
+
+## Bashrc File
+The `.bashrc` file is a configuration file executed whenever a new terminal session starts. It contains user-defined aliases, functions, and environment variables.
+- To edit `.bashrc`:
+  ```sh
+  nano ~/.bashrc
+  ```
+- Add custom aliases:
+  ```sh
+  alias ll='ls -la'
+  ```
+- Apply changes:
+  ```sh
+  source ~/.bashrc
+  ```
+
+## Arguments
+Script arguments allow passing values to a script during execution.
+#### Example:
+```sh
+./myscript.sh arg1 arg2
+```
+- Inside the script, access arguments using:
+  ```sh
+  echo "First argument: $1"
+  echo "Second argument: $2"
+  ```
+
+By mastering these concepts, you can create and execute scripts efficiently, making system administration and automation much easier.
+
+
+------------------------------------------------------------------------
+x=5  # Assigning value 5 to variable x
+echo $x  # Printing value of x
+
+unset x  # Unsetting the variable x
+echo $x  # Printing x after unsetting (will be empty)
+--------------------------------------------------------------
+
+echo "i m kiran hi x you r u"  # Printing string with no variable expansion
+echo "i m kiran hi x you r u"  # Same as above
+
+x=how  # Assigning 'how' to variable x
+echo "i m kiran hi $x you r u"  # Using x inside string
+
+x=5  # Assigning 5 to x
+echo "i m kiran hi ${x}th you r u"  # Using x inside string with suffix
+------------------------------------------------------------------------
+x=${date}
+
+
+x=$(date)  # Assigning current date to variable x
+echo "i m kiran hi $x you r u"  # Printing x (current date) in a sentence
+
+---------Assigning Commands to Variables-----------
+
+z='date'  # Storing the string 'date' in variable z
+echo $z  # Printing the value of z (will print 'date' instead of actual date)
+
+--------------Reading User Input----------
+
+read p  # Taking user input and storing it in variable p
+kiran  # Example input
+echo $p  # Printing the value of p
+
+
+---------------Prompting User Input-----------------
+
+read -p "Enter ur name : " n  # Prompting user to enter a name
+kiran  # Example input
+echo $n  # Printing the entered name
+
+-------Creating and Executing a Script File Dynamically--------
+
+namo my.sh
+read -p "Enter your file name: " myfile  # Asking user for a file name
+touch $myfile  # Creating an empty file with the given name
+bash my.sh  # Running the script file my.sh
+kiran.txt
+
+
+
+
+
+
+
+
+
+
+

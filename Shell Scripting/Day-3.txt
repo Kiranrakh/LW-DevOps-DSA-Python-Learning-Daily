@@ -1,0 +1,239 @@
+# **Iteration in Shell Scripting**
+
+## **1. Introduction**
+Iteration (or looping) in shell scripting allows executing a set of commands repeatedly based on a condition. It is widely used for automating repetitive tasks, processing files, and managing users.
+
+---
+
+## **2. User Management Commands**
+
+### **2.1 `useradd` Command**
+The `useradd` command is used to create a new user account in Linux.
+
+#### **Syntax:**
+```sh
+useradd [options] username
+```
+
+#### **Example:**
+```sh
+useradd kiran
+```
+This command creates a new user named `kiran`.
+
+#### **Common Options:**
+- `-m` → Creates the user’s home directory.
+- `-d /path/to/home` → Specifies home directory.
+- `-s /bin/bash` → Sets login shell.
+- `-g groupname` → Assigns a primary group.
+
+---
+
+### **2.2 `id` Command**
+The `id` command retrieves the user ID (UID) and group ID (GID) of a user.
+
+#### **Syntax:**
+```sh
+id [username]
+```
+
+#### **Example:**
+```sh
+id kiran
+```
+**Output:**
+```
+uid=1001(kiran) gid=1001(kiran) groups=1001(kiran)
+```
+
+---
+
+## **3. Iteration in Shell Scripting**
+Iteration (looping) allows executing a block of code multiple times.
+
+### **3.1 Types of Loops**
+1. **For Loop**
+2. **While Loop**
+3. **Until Loop**
+
+---
+
+## **4. For Loop in Shell Scripting**
+The `for` loop iterates over a sequence of values.
+
+#### **Syntax:**
+```sh
+for variable in list
+do
+    commands
+done
+```
+
+#### **Example 1: Iterating Over a List**
+```sh
+for user in kiran john alice
+do
+    echo "Creating user: $user"
+    useradd $user
+done
+```
+This script creates users **kiran, john, and alice**.
+
+#### **Example 2: Iterating Over Numbers**
+```sh
+for i in {1..5}
+do
+    echo "Number: $i"
+done
+```
+**Output:**
+```
+Number: 1
+Number: 2
+Number: 3
+Number: 4
+Number: 5
+```
+
+---
+
+## **5. The `/etc/passwd` File**
+The `/etc/passwd` file stores user account information.
+
+#### **Structure:**
+```
+username:x:UID:GID:Full Name:/home/username:/bin/bash
+```
+
+#### **Example Entry:**
+```
+kiran:x:1001:1001:Kiran:/home/kiran:/bin/bash
+```
+
+#### **Example: Displaying All Usernames from `/etc/passwd`**
+```sh
+cut -d':' -f1 /etc/passwd
+```
+
+#### **Example: Creating Users from `/etc/passwd` File**
+```sh
+for user in $(cut -d':' -f1 /etc/passwd)
+do
+    echo "User: $user"
+done
+```
+
+---
+
+## **6. Conclusion**
+- `useradd` creates user accounts.
+- `id` retrieves user details.
+- Iteration (loops) automates repetitive tasks.
+- `/etc/passwd` contains user account information.
+- The `for` loop helps process multiple items efficiently.
+
+This documentation provides a structured understanding of iteration and user management in shell scripting. 🚀
+
+------------------------------With Hand on -----------------------------
+
+# Using `;` to execute multiple commands sequentially
+# Executes `date`, then `cal`, then `ls`
+date; cal; ls
+
+# Using `&&` to execute second command only if first succeeds
+date && cal  # If `date` runs successfully, `cal` runs
+yum install httpd -y && systemctl start httpd  # If Apache installs successfully, it starts the service
+test $? -eq 0 && echo " Done OK "  # If previous command was successful, print "Done OK"
+
+# Using `||` (OR) to run the second command only if the first fails
+date || cal  # If `date` fails, `cal` runs
+test $? -eq 0 && echo "Done Ok" || echo " Error "  # Checks last command status and prints appropriate message
+
+date1  # This is likely an invalid command
+test $? -eq 0 && echo "Done Ok" || echo " Error "  # Prints "Error" since `date1` fails
+
+# Alternative syntax using `[ $? -eq 0 ]`
+date || cal  # If `date` fails, `cal` runs
+[ $? -eq 0 ] && echo "Done Ok" || echo " Error "  # Checks exit status
+date1  # Invalid command
+[ $? -eq 0 ] && echo "Done Ok" || echo " Error "  # Prints "Error" since `date1` fails
+
+# Script: kiran.sh
+# Checks if a file exists, creates it if not
+read -p "enter ur file name : " myfile  # Prompt user for filename
+test -e $myfile && echo " file already exists" || touch $myfile  # If file exists, print message; else create it
+
+# Run script and provide filenames interactively
+bash kiran.sh  # Executes the script
+hi.txt  # User enters "hi.txt"
+h1.txt  # User enters "h1.txt"
+
+# Checking read permission on /etc/shadow (requires root privileges)
+test -r /etc/shadow && echo " Go ahead " || echo " Not Allowed"
+
+# Check if a file exists
+test -e kiran.sh  # Checks if `kiran.sh` exists
+echo $?  # Prints exit status (0 if exists, 1 if not)
+
+# Script: ki.sh
+# Reads user input and assigns default values
+echo -n "Enter ur Name : "  # Prompt user for name
+read myname
+#unset myname  # Uncommenting this would unset `myname`
+x=${myname:-kiran}  # If `myname` is empty, assign "kiran" as default
+#x=${myname:=kiran}  # Assign "kiran" to `myname` only if empty
+#x=${myname:+kiran}  # If `myname` is set, use "kiran"
+#x=${myname+kiran}  # If `myname` is set, always use "kiran"
+echo "Ur Name is : ${x^} "  # Capitalize first letter
+
+# Run the script and input name
+bash ki.sh
+kiran  # User enters "kiran"
+
+# String manipulations
+x="linux userrr"
+echo $x  # Print original string
+echo ${x^}  # Capitalize first letter
+echo ${x^^}  # Convert to uppercase
+echo ${x%r}  # Remove last occurrence of `r`
+echo ${x%rr}ss  # Remove `rr` from end and add "ss"
+
+# More string manipulations
+y="KIRAN"
+echo ${y}  # Print original string
+echo ${y,}  # Convert first letter to lowercase
+echo ${y,,}  # Convert entire string to lowercase
+
+# File path manipulations
+x="/one/two/three/hello.txt kiran.txt "
+echo $x  # Print original string
+echo ${x%.txt}  # Remove `.txt` from the last filename
+echo ${x%.*}  # Remove last extension
+echo ${x%.*}.html  # Change last extension to `.html`
+echo ${x%/*}  # Remove last directory/file, keep path
+
+# URL manipulations
+y="http://www.google.com:443/data/hello.html"
+echo $y  # Print original URL
+echo ${y%/*/*}  # Remove last two directory levels
+echo ${y%:*/*/*}  # Remove protocol and first part of path
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

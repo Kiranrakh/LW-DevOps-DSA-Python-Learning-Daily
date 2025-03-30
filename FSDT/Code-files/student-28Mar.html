@@ -1,0 +1,39 @@
+record starts from here : <br /> <br />
+
+<table border='5' width='80%' align='center'>
+<tr>
+    <th>Record ID</th>
+    <th>Student Name</th>
+    <th>Student Mobile</th>
+    <th>Student Courses</th>
+    <th>Star Students</th>
+</tr>
+
+{% for id, record in db.items() %}
+
+    <tr>
+        <td>record {{ id }}</td>
+        <td>{{ record.name }}</td>
+        <td>{{ record.mob }}</td>
+        <td>
+            <ul>
+                {% for i in record.courses %}
+                    <li>{{ i }}</li>
+                {% endfor %}
+            </ul>
+        </td>
+        <td>
+            {% if record.courses | length >= 2 %}
+                Star Student
+            {% else %}
+                Will be Star
+            {% endif %}
+        </td>
+    </tr>
+
+{% endfor %}
+
+</table>
+
+<br /><br />
+finish 

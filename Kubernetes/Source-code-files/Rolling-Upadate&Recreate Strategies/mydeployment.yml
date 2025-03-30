@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-web
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate  
+    rollingUpdate:
+  selector:
+    matchLabels:
+      app: my-web
+  template:
+    metadata:
+      labels:
+        app: my-web
+    spec:
+      containers:
+      - name: my-container
+        image: kiran22222/kiran-web-page:v3

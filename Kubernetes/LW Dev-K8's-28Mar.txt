@@ -1,0 +1,62 @@
+kubectl apply -k . 
+
+kustomization.yml >>  <<
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: kustomization
+secretGenerator: 
+- name: secretbox
+  literals:
+  - p=mypassword
+  - u=kiran
+resources:
+- mydeployment.yml
+- wp-deployment.yml  
+
+   >>
+
+wp-deployment.yml >> <<
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: wpapp
+  name: wpapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wpapp
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: wpapp
+    spec:
+      containers:
+      - image: wordpress:latest
+        name: wordpress
+        env:
+        - name: WORDPRESS_DB_HOST
+          value: "mysql-service"  # Replace with your MySQL service name
+        - name: WORDPRESS_DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: secretbox
+              key: kiran
+        - name: WORDPRESS_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: secretbox   # Kubernetes Secret containing the password
+              key: db-password
+        - name: WORDPRESS_DB_NAME
+          value: "wordpress"
+           >> 
+
+🔹 What is Helm?
+Helm is a package manager for Kubernetes, like apt for Ubuntu or yum for CentOS. It helps automate the deployment, management, and upgrade of Kubernetes applications.
+
+
