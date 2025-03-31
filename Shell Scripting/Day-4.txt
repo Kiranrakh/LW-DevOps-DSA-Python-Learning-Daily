@@ -1,0 +1,327 @@
+#################################################
+#            BASH SCRIPTING GUIDE DAY-4         #
+#################################################
+
+## 1. IF/ELSE CONDITIONS
+Conditional statements allow executing different blocks of code based on conditions.
+
+### Example:
+```bash
+#!/bin/bash
+read -p "Enter a number: " num
+if [ $num -gt 10 ]; then
+    echo "Number is greater than 10"
+else
+    echo "Number is 10 or less"
+fi
+```
+
+## 2. FOR LOOP
+Loops help execute commands multiple times.
+
+### Example:
+```bash
+#!/bin/bash
+for i in {1..5}
+do
+    echo "Iteration $i"
+done
+```
+
+## 3. TEST COMMAND
+Used for evaluating conditions in scripts.
+
+### Example:
+```bash
+#!/bin/bash
+if test -f "/etc/passwd"; then
+    echo "File exists"
+else
+    echo "File does not exist"
+fi
+```
+
+## 4. CONDITIONAL OPERATORS
+- `-eq` (equal)
+- `-ne` (not equal)
+- `-gt` (greater than)
+- `-lt` (less than)
+- `-ge` (greater or equal)
+- `-le` (less or equal)
+
+### Example:
+```bash
+#!/bin/bash
+a=5
+b=10
+if [ $a -lt $b ]; then
+    echo "$a is less than $b"
+fi
+```
+
+## 5. I/O REDIRECTION
+Redirects input/output to files.
+
+### Example:
+```bash
+echo "Hello, world!" > output.txt  # Overwrites file
+echo "Appending text" >> output.txt # Appends to file
+```
+
+## 6. NESTED CONDITIONS
+Using multiple `if` statements inside one another.
+
+### Example:
+```bash
+#!/bin/bash
+read -p "Enter a number: " num
+if [ $num -gt 0 ]; then
+    if [ $num -lt 10 ]; then
+        echo "Single-digit positive number"
+    else
+        echo "Number is 10 or more"
+    fi
+else
+    echo "Number is negative or zero"
+fi
+```
+
+## 7. USERADD COMMAND
+Used to create new users in Linux.
+
+### Example:
+```bash
+sudo useradd -m -s /bin/bash newuser
+sudo passwd newuser  # Set password for the user
+```
+
+## 8. READ KEYWORD
+Used to take user input.
+
+### Example:
+```bash
+#!/bin/bash
+read -p "Enter your name: " name
+echo "Hello, $name!"
+```
+
+## 9. WHILE LOOP
+Repeats a block of code while a condition is true.
+
+### Example:
+```bash
+#!/bin/bash
+count=1
+while [ $count -le 5 ]
+do
+    echo "Count: $count"
+    ((count++))
+done
+```
+
+## 10. USER LOCK
+Locks a user account to prevent login.
+
+### Example:
+```bash
+sudo usermod -L username
+```
+To unlock:
+```bash
+sudo usermod -U username
+```
+
+## 11. PASSWD FILE
+Stores user account details.
+
+### View the file:
+```bash
+cat /etc/passwd
+```
+
+## 12. REGEX (Regular Expressions)
+Used for pattern matching in files.
+
+### Example: Validate an email
+```bash
+#!/bin/bash
+read -p "Enter email: " email
+if [[ $email =~ ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$ ]]; then
+    echo "Valid email"
+else
+    echo "Invalid email"
+fi
+```
+
+## 13. GREP & CUT COMMAND
+- `grep`: Searches for patterns.
+- `cut`: Extracts specific columns from text.
+
+### Example: Find users with `/bin/bash` shell
+```bash
+grep "/bin/bash" /etc/passwd | cut -d: -f1
+```
+
+## 14. HOME DIRECTORY
+Each user has a home directory (`/home/username`).
+
+### Check a user’s home directory:
+```bash
+echo $HOME
+```
+
+## 15. BACKUP – TAR COMMAND
+Creates and extracts backups.
+
+### Example: Backup `/home/user`
+```bash
+tar -cvzf backup.tar.gz /home/user
+```
+
+### Extract the backup:
+```bash
+tar -xvzf backup.tar.gz
+```
+------------------------------------------------------------------------
+
+##############################################
+#          Hand-on with Vimal Sir            #
+##############################################
+ 
+
+# Display all shell variables and functions
+set 
+
+# Display all shell variables and functions, but allow scrolling
+set | less 
+
+# Print 1
+echo 1
+
+# Incorrect syntax; should be `echo {1..5}`
+echo{1..5}  
+
+# Print numbers from 1 to 10
+echo {1..10}
+
+# Create files named ki1.txt, ki2.txt, ..., ki7.txt
+touch ki{1..7}.txt
+
+# List the created files
+ls ki{1..7}.txt
+
+# Remove the created files forcefully
+rm -f ki{1..7}.txt
+
+# Print numbers from 10 to 1
+echo {10..1}
+
+# Print even numbers from 10 to 0 (step size of 2)
+echo {10..0..2}
+
+# Declare a string variable
+s="Linux User"
+
+# Print the length of the string
+echo ${#s}
+
+# Print the value of the string
+echo ${s}
+
+# Print the first 5 characters of the string
+echo ${s:0:5}
+
+# Declare a readonly variable
+y=6
+readonly y=9  # Error: Cannot modify a readonly variable
+
+# Print the value of y
+echo $y
+
+# Declare and set a readonly variable
+readonly z=10
+
+# Print the value of z
+echo $z
+
+# Attempt to modify z (this will cause an error)
+z=2  
+
+# List all readonly variables
+readonly 
+
+# Create a nested directory structure
+mkdir -p /k/i/r/a/n
+
+# Navigate to the directory
+cd /k/i/r/a/n
+
+# Print the current directory
+pwd 
+
+# Create a file named kiran.html
+touch kiran.html
+
+# Store the current directory path in variable p
+p=$(pwd)
+
+# Append the filename to the path
+p=$(pwd)/kiran.html
+
+# Print the full file path
+echo $p
+
+# Print the file path without the extension
+echo ${p%.*}
+
+# Remove the first occurrence of "/k" from the path
+echo ${p#/k*}
+
+# Remove "/k/i" from the path
+echo ${p#/k/i}
+
+# Remove everything up to and including the last "/r" occurrence
+echo ${p##/*/r*}
+
+# Print the full path again
+echo ${p}
+
+# Incorrect array declaration (spaces matter)
+a=(Kiran Yuvraj Rahul Gaurav Ashwin) 
+
+# Print the entire array
+echo ${a[@]}
+
+# Print the first element (index 0)
+echo ${a[0]}
+
+# Print the third element (index 2)
+echo ${a[2]}
+
+# Print the fifth element (index 4)
+echo ${a[4]}
+
+# Print the total number of elements in the array
+echo ${#a[@]}
+
+# Create a script using nano
+nano script1.sh  
+
+
+------------------------------------------------------------------------
+
+**********----------------script1.sh -------------------**************
+
+
+# Prompt the user to pass three arguments
+name=${1:?"Error : plz pass name"}
+age=${2:?"Error : plz pass age"}
+remarks=${3:?"Error : plz pass remark"}
+
+# Check if the number of arguments is less than 3
+test $# -lt 3 && echo "not supported u passed $# arguments  i need 3 args " || echo "your name is ${name^} with age "${age}" ur remark is ${remarks^^}"
+
+# Run the script
+bash script1.sh kiranRakh 20 vgood
+
+

@@ -1,0 +1,298 @@
+# Network Execution, Log Analysis, and AWS Operations Documentation
+
+## 1. Executing a Script Over a Network
+To execute a script on a remote server using SSH:
+```
+ssh -i private-key.pem user@remote-server 'bash -s' < script.sh
+```
+For executing scripts across multiple servers, use Ansible or similar automation tools.
+
+## 2. Log Analysis
+### Common Log Locations:
+- Apache/Nginx logs: `/var/log/httpd/access_log`, `/var/log/httpd/error_log`
+- System logs: `/var/log/syslog`, `/var/log/messages`, `/var/log/auth.log`
+
+### Useful Log Analysis Commands:
+- Live log monitoring:
+  ```
+  tail -f /var/log/syslog
+  ```
+- Count unique IPs in access logs:
+  ```
+  awk '{print $1}' access_log | sort | uniq -c | sort -nr
+  ```
+- Count error occurrences:
+  ```
+  grep "ERROR" error_log | wc -l
+  ```
+
+## 3. Launching AWS EC2 Instance
+### Using AWS CLI:
+```
+aws ec2 run-instances --image-id ami-12345678 --count 1 --instance-type t2.micro --key-name MyKey --security-groups MySecurityGroup
+```
+
+### Using Terraform:
+```
+resource "aws_instance" "web" {
+  ami           = "ami-12345678"
+  instance_type = "t2.micro"
+  key_name      = "MyKey"
+}
+```
+
+## 4. WinSCP Tool
+WinSCP is a GUI tool for transferring files via SFTP/SCP between Windows and Linux. It requires SSH authentication.
+
+## 5. HTTPD (Apache Web Server)
+### Installation:
+```
+sudo yum install httpd -y   # RHEL-based
+sudo apt install apache2 -y # Debian-based
+```
+
+### Start and Enable Service:
+```
+sudo systemctl start httpd
+sudo systemctl enable httpd
+```
+
+## 6. Configuring a Web Server
+### Firewall Configuration:
+```
+sudo firewall-cmd --add-service=http --permanent
+sudo firewall-cmd --reload
+```
+### Check Service Status:
+```
+systemctl status httpd
+```
+
+## 7. Access Logs / Error Logs
+- Access logs: `/var/log/httpd/access_log`
+- Error logs: `/var/log/httpd/error_log`
+- Live log monitoring:
+  ```
+  tail -f /var/log/httpd/access_log
+  ```
+
+## 8. Linux Commands for Log Analysis
+- Count lines in a file:
+  ```
+  wc -l filename
+  ```
+- Change file permissions:
+  ```
+  chmod 755 filename
+  ```
+- Run commands as root:
+  ```
+  sudo command
+  ```
+- Process and analyze text:
+  ```
+  awk '{print $1}' filename
+  ```
+- Sort lines:
+  ```
+  sort filename
+  ```
+- Count unique occurrences:
+  ```
+  uniq -c filename
+  ```
+- Monitor logs live:
+  ```
+  tail -f filename
+  ```
+- Securely copy files over SSH:
+  ```
+  scp file user@server:/path/
+  ```
+
+## 9. SSH + Private Key Authentication
+### Connecting to a Remote Server:
+```
+ssh -i MyKey.pem ec2-user@public-ip
+```
+### Copying Files Securely:
+```
+scp -i MyKey.pem file.txt ec2-user@server-ip:/home/ec2-user/
+```
+
+## 10. Operations on Log Files
+### Extract Specific Fields from Logs:
+```
+awk '{print $1, $7, $9}' /var/log/httpd/access_log
+```
+### Find Most Requested Pages:
+```
+awk '{print $7}' /var/log/httpd/access_log | sort | uniq -c | sort -nr
+```
+
+## 11. Query String Extraction
+Extract GET request parameters from logs:
+```
+awk -F'?' '{print $2}' access_log | sort | uniq -c | sort -nr
+```
+
+## 12. Functions in Shell Scripting
+### Function to Filter Errors from System Logs:
+```
+filter_errors() {
+  grep "ERROR" /var/log/syslog | tail -n 10
+}
+
+filter_errors
+```
+
+## Conclusion
+This documentation covers network-based script execution, log analysis, AWS EC2 instance management, and various Linux commands for system operations. Modify these commands as per your project requirements.
+
+-------------------------------------------------------------------------
+
+
+
+# Display the current shell
+echo $SHELL  
+
+# Convert lowercase to uppercase using 'tr'
+tr a-z A-Z  
+kiran rakh  # This won't work as expected. You need to use echo with a pipe:  
+echo "kiran rakh" | tr a-z A-Z  
+
+# Difference between STDIN and STDOUT  
+echo hello | date  # Incorrect usage: 'date' doesn't take input from stdin  
+echo hello | tr a-z A-Z  # Correct usage of a pipeline  
+
+# Word count commands  
+wc  # This waits for input from stdin  
+echo "kiran Rakh" | tr a-z A-Z | wc -w  # Correcting 'tar' to 'tr'  
+
+# Loop example  
+for x in kiran Rahul Yuvraj Ashwin Gaurav  
+do  
+    echo $x  
+    echo "hello see u"  
+done  
+
+# Loop with character count  
+for i in kiran Rahul Yuvraj om  
+do  
+    echo -n "$i : "  
+    echo -n $i | wc -c  
+done  
+
+# Using 'expr' for arithmetic operations  
+expr 5 - 1  # Output: 4  
+expr 10 / 5  # Output: 2  
+
+# Understanding quotes  
+echo date  # Prints "date" (not the command output)  
+echo 'date'  # Also prints "date"  
+echo 'expr 10 / 5'  # Prints the string 'expr 10 / 5'  
+
+# Loop with string length calculation  
+for i in kiran abc xyz tom jerryy om  
+do  
+    echo -n "$i : "  
+    len=$(echo -n $i | wc -c)  
+    expr $len - 1  # Correcting quotes issue  
+done  
+
+# Add user 'kiran' (requires root)  
+useradd kiran  
+cat /etc/passwd  
+
+# 'cut' command examples  
+echo "kiran:rakh:jspm:pune" | cut -d: -f1  # Output: kiran  
+echo "kiran:rakh:jspm:pune" | cut -d: -f2,f4  # Output: rakh:pune  
+echo "kiran:rakh:jspm:pune" | cut -d: -f3  # Output: jspm  
+echo "kiran:rakh:jspm:pune" | cut -d: -f4  # Output: pune  
+
+# Manual page for 'cut'  
+man cut  
+
+# Incorrect 'usseradd' (typo)  
+useradd kiran  
+id kiran  
+
+# Extract usernames from /etc/passwd  
+cat /etc/passwd | cut -d: -f1  
+
+# Looping through /etc/passwd (fixing typo in /etc)  
+for x in $(cat /etc/passwd)  
+do  
+    echo $x  
+done  
+
+# 'kiran.txt' redirection  
+cat > kiran.txt <<EOF  
+kiran cdcknlsddf swsdfd  
+fdskj sds kiran fndssk  
+fdsf  
+ddfdsf dsfd kiran  
+EOF  
+
+# Using 'grep'  
+grep -c kiran kiran.txt  # Count occurrences  
+grep -n kiran kiran.txt  # Show line numbers  
+grep -v kiran kiran.txt  # Show lines without 'kiran'  
+man grep  # Manual page for grep  
+
+# Extract users with bash shell  
+cat /etc/passwd | grep bash | cut -d: -f1  
+cat /etc/passwd | grep bash$ | cut -d: -f1  # Ensuring only users with /bash  
+
+# Creating a shell script file (fixing syntax)  
+cat > new.sh <<EOF  
+fun() {  
+    date  
+    cal  
+    ls  
+}  
+fun  
+echo "hi echo pop"  
+fun  
+EOF  
+
+# Running the script  
+bash new.sh  
+
+# Defining and using functions  
+fun1() { echo "I'm Kiran"; }  
+fun1  
+
+myuser() { cat /etc/passwd | grep bash$ | cut -d: -f1; }  
+myuser  
+
+# Function with argument handling  
+nfun() {  
+    name=$1  
+    echo "I'm $name"  
+}  
+nfun "Kiran"  
+nfun $(cat /etc/passwd | grep bash$ | cut -d: -f1)  
+
+# Network test function  
+mynettest() {  
+    ping -c 1 www.google.com &> /dev/null  
+    [ $? -eq 0 ] && echo "Net connected..!" || echo "Issue in net .."  
+}  
+mynettest  
+
+# Redirecting output  
+date > k.txt  # Overwrite file  
+cat k.txt  
+date >> k.txt  # Append to file  
+date 1>> k.txt  # Redirect standard output  
+date &>> k.txt  # Redirect both stdout and stderr  
+ping -c 1 www.google.com >> 2.txt  # Redirect output  
+ping -c 1 www.google.com >> /dev/null  # Discard output  
+
+
+
+
+
+
+
