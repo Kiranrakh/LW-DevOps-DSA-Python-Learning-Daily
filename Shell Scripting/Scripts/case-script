@@ -16,4 +16,4 @@ a) date;;
 b) ls;;
 c) who;;
 d) uptime;;
-*) echo Invalid choice - Bye.
+*) echo " Invalid choice - Bye. "
