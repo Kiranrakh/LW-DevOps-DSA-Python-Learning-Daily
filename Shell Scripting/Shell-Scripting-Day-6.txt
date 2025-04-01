@@ -1,0 +1,122 @@
+===========================================
+BASH SCRIPTING & LINUX COMMANDS DOCUMENTATION
+===========================================
+
+1. **REGEX (Regular Expressions)**
+   - Used for pattern matching in `grep`, `awk`, and `sed`.
+   - Example:
+     ```bash
+     grep -E "error|failed" /var/log/syslog
+     ```
+
+2. **FOR LOOP**
+   - Used to iterate over a list or range.
+   - Example:
+     ```bash
+     for i in {1..5}; do
+         echo "Iteration $i"
+     done
+     ```
+
+3. **AWK & GREP COMMAND**
+   - `grep`: Search for patterns in a file.
+     ```bash
+     grep "root" /etc/passwd
+     ```
+   - `awk`: Text processing and field extraction.
+     ```bash
+     awk -F: '{print $1, $3}' /etc/passwd
+     ```
+
+4. **PASSWD FILE**
+   - Stores user account details (`/etc/passwd`).
+   - Example to list all users:
+     ```bash
+     cut -d: -f1 /etc/passwd
+     ```
+
+5. **BASH SHELL / SH SHELL**
+   - `bash`: Advanced shell with scripting capabilities.
+   - `sh`: A simpler POSIX-compliant shell.
+
+6. **PASSWD COMMAND / --STDIN KEYWORD**
+   - Change user password from a script:
+     ```bash
+     echo "newpassword" | passwd --stdin username
+     ```
+
+7. **SED COMMAND**
+   - Used for text manipulation.
+   - Example:
+     ```bash
+     sed -i 's/old/new/g' file.txt
+     ```
+
+8. **IF / ELIF / ELSE CONDITION**
+   - Example:
+     ```bash
+     if [ -f /etc/passwd ]; then
+         echo "File exists"
+     elif [ -d /etc/passwd ]; then
+         echo "It's a directory"
+     else
+         echo "File does not exist"
+     fi
+     ```
+
+9. **CREATING OPTIONS IN A SCRIPT**
+   - Example:
+     ```bash
+     echo "Choose an option:"
+     echo "1. List files"
+     echo "2. Show date"
+     read choice
+     case $choice in
+         1) ls -l ;;
+         2) date ;;
+         *) echo "Invalid option" ;;
+     esac
+     ```
+
+10. **USAGE KEYWORD**
+    - Typically used to display script usage.
+    - Example:
+      ```bash
+      usage() {
+          echo "Usage: $0 [-h] [-f filename]"
+      }
+      ```
+
+11. **GETOPTS, SET COMMAND**
+    - `getopts`: Parses command-line options.
+      ```bash
+      while getopts "f:h" opt; do
+          case $opt in
+              f) file="$OPTARG" ;;
+              h) echo "Usage: $0 [-f filename]" ;;
+          esac
+      done
+      ```
+    - `set`: Modify shell behavior.
+      ```bash
+      set -x  # Enable debugging
+      set +x  # Disable debugging
+      ```
+
+12. **PRE-CREATED VARIABLE & FUNCTION**
+    - Predefined variables: `$0, $1, $?, $$`
+    - Example function:
+      ```bash
+      my_function() {
+          echo "This is a function"
+      }
+      my_function
+      ```
+
+===========================================
+         Hand-on With Vimal Sir
+===========================================
+
+
+
+

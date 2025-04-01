@@ -1,0 +1,74 @@
+#########################################################
+#                                                       #
+#                   if-then Scripts                     #
+#                                                       #
+#########################################################
+
+
+
+-----------------------Script:1-------------------------
+
+nano if-then-script <<
+#!/bin/bash
+
+#count=100
+count=20
+if [ $count -eq 100 ]
+then  
+	echo Count is 100
+else
+	echo Count is not 100
+fi
+
+
+>>
+chmod a+x if-then-script
+./if-then-script
+
+
+-----------------------Script:2-------------------------
+
+nano if-then-script <<
+#!/bin/bash
+
+clear
+if [ -e /home/kiran/error.txt ]
+	then  
+	echo "File exist"
+	else
+	echo "File does not exist"
+fi
+
+
+>>
+chmod a+x if-then-script
+./if-then-script
+
+
+-----------------------Script:3-------------------------
+
+
+nano if-then-script <<
+#!/bin/bash
+
+a='date' | awk '{print $1}''
+if [ "$a" == Mon ]
+	then
+	echo Today is $a
+	else
+	echo Today is Noy Monday
+fi
+
+>>
+chmod a+x if-then-script
+./if-then-script
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,139 @@
+mkdir myscripts 
+cd myscripts
+----------------------------script:1--------------------------------------
+nano output-screen <<
+#!/bin/bash
+
+echo " Welcometo Shell Scripting Journey"
+
+
+>>
+chmod a+x output-screen
+./output-screen
+
+/home/kiran/myscrepts/output-screen
+
+----------------------------script:2--------------------------------------
+nano run-commands <<
+
+#!/bin/bash
+# Define small tasks
+# this script is written by Kiran Rakh
+
+whoami
+echo
+pwd
+echo
+hostname
+echo 
+ls -ltr
+echo
+date
+
+>>
+chmod a+x run-commanmds
+./run-commands
+
+----------------------------script:3--------------------------------------
+
+nano defining-variable <<
+#!/bin/bash
+# Define small tasks
+# this script is written by Kiran Rakh
+# for defining variables
+
+a=kiran
+b=rakh
+c='DevOps engineer' 
+
+echo "My First name is $a"
+echo "My Last name is $b"
+echo "I'm a is $c"
+
+>>
+chmod a+x define-variable
+./define-variable
+
+----------------------------script:4--------------------------------------
+
+nano input-output <<
+#!/bin/bash
+# Define small tasks
+# this script is written by Kiran Rakh
+# for input-output
+
+echo hello, I'm kiran
+echo
+echo What is your name ?
+read n
+echo
+echo hello $n
+echo
+
+>>
+chmod a+x input-output
+./input-output
+
+----------------------------script:5--------------------------------------
+
+nano input-output <<
+#!/bin/bash
+# Define small tasks
+# this script is written by Kiran Rakh
+# by input-output
+# by defining variables
+a='hostname'
+#a=hostname
+echo hello, my sername is #a
+echo
+echo What is your name ?
+read b
+echo
+echo hello $b
+echo
+
+>>
+chmod a+x input-output
+./input-output
+
+----------------------------------script:6--------------------------------------
+
+nano input-output <<
+#!/bin/bash
+# Define small tasks
+# this script is written by Kiran Rakh
+# by input-output
+# by defining variables
+a='hostname'
+#a=hostname
+echo hello, my sername is #a
+echo
+echo What is your name ?
+read b
+echo
+echo what i your profession?
+read c
+echo who is your best friend?
+read d
+echo hello $b
+echo your profession $c is awesome.
+echo $d is your best friend that's great.
+echo 
+
+>>
+chmod a+x input-output
+./input-output
+
+----------------------------------END--------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
