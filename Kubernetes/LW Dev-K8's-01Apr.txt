@@ -1,0 +1,46 @@
+>> Ephemeral Storage (Temporary)
+	  These storage types exist only as long as the pod is running. When the pod is deleted, the data is lost.
+
+>> Persistent Storage (Long-term)
+	  Persistent storage is required when data needs to survive beyond a pod’s lifecycle.
+
+	>> Persistent Volume (PV) & Persistent Volume Claim (PVC)
+		- Persistent Volume (PV): Represents a piece of storage in the cluster (e.g., AWS 	  	  EBS, GCP Persistent Disk, NFS).
+
+		- Persistent Volume Claim (PVC): Request for storage by a pod.
+
+
+--------------------Define a Persistent Volume Claim (PVC)----------------------
+
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: my-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---------------------------------------------------------------------------------------
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: my-pv
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  hostPath:
+    path: "/mnt/data"
+
+
+
+
+
+
+
