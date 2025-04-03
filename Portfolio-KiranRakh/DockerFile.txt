@@ -1,0 +1,16 @@
+# Use official Nginx image
+FROM nginx  
+
+# Remove default index.html file
+RUN rm -rf /usr/share/nginx/html/*  
+
+# Copy website files to the Nginx web directory
+COPY index.html /usr/share/nginx/html/
+COPY styles.css /usr/share/nginx/html/
+COPY script.js /usr/share/nginx/html/
+
+# Expose port 80 for web access
+EXPOSE 80  
+
+# Start Nginx server
+CMD ["nginx", "-g", "daemon off;"]

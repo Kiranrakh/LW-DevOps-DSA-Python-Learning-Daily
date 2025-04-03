@@ -1,0 +1,197 @@
+/* General styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-image: url('https://images.unsplash.com/photo-1514996937319-344454492b37?crop=entropy&fit=crop&w=2048&q=80'); /* Cloud background */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: #333; /* Text color for better contrast */
+  line-height: 1.6;
+}
+
+/* Container */
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header */
+header {
+  background-color: rgba(0, 123, 255, 0.85); /* Semi-transparent header */
+  color: white;
+  text-align: center;
+  padding: 50px 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  margin-bottom: 30px;
+}
+
+header h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+header p {
+  font-size: 1.4rem;
+}
+
+.logo {
+  width: 100px;
+  margin-bottom: 15px;
+}
+
+/* Navigation */
+nav {
+  background-color: rgba(0, 123, 255, 0.9);
+  padding: 10px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+nav ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+}
+
+nav ul li {
+  margin: 0 15px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+  transition: color 0.3s, transform 0.3s;
+}
+
+nav ul li a:hover {
+  color: #00c8ff;
+  transform: scale(1.1);
+}
+
+/* Sections */
+section {
+  background-color: rgba(255, 255, 255, 0.95); /* Light background for sections */
+  padding: 50px 0;
+  margin-bottom: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #007BFF; /* Heading color */
+}
+
+/* Experience Section */
+.job {
+  background-color: #f9f9f9; /* Light grey background for job cards */
+  border-radius: 8px;
+  padding: 20px;
+  margin: 15px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s;
+}
+
+.job:hover {
+  transform: translateY(-5px); /* Lift effect on hover */
+}
+
+.job h3 {
+  color: #007BFF; /* Job title color */
+  font-size: 1.8rem;
+}
+
+.job p {
+  font-weight: bold; /* Emphasizes job dates */
+}
+
+/* Skills Section */
+.skills-list {
+  display: flex;
+  justify-content: center; /* Center skills horizontally */
+  align-items: center; /* Align skills vertically */
+  gap: 50px; /* Adds even spacing between items */
+  flex-wrap: wrap; /* Prevents items from overflowing */
+}
+
+
+.skills-list .skill {
+  text-align: center;
+}
+
+.skills-list img {
+  width: 60px;
+  margin-bottom: 10px;
+}
+
+/* Projects Section */
+.project {
+  background-color: #f9f9f9; /* Light grey background for project cards */
+  border-radius: 8px;
+  padding: 20px;
+  margin: 15px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s;
+}
+
+.project:hover {
+  transform: translateY(-5px); /* Lift effect on hover */
+}
+
+.project h3 {
+  color: #007BFF; /* Project title color */
+  font-size: 1.8rem;
+}
+
+/* Contact */
+#contact a {
+  color: #007BFF;
+  text-decoration: none;
+}
+
+#contact a:hover {
+  color: #0056b3;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  background-color: rgba(0, 123, 255, 0.9);
+  padding: 20px;
+  color: white;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+/* Skills Section */
+.skills-category {
+  background-color: #f9f9f9; /* Light grey background for categories */
+  border-radius: 8px;
+  padding: 20px;
+  margin: 15px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.skills-category h3 {
+  color: #007BFF; /* Heading color */
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.skills-category ul {
+  list-style-type: none; /* Removes default bullet points */
+}
+
+.skills-category li {
+  margin: 5px 0; /* Spacing between list items */
+  font-size: 1.1rem; /* Slightly larger font size for readability */
+}

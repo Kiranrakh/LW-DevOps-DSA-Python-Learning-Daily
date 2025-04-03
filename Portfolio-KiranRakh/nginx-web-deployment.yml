@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-kiran
+  labels:
+    app: nginx-kiran
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx-kiran
+  template:
+    metadata:
+      labels:
+        app: nginx-kiran
+    spec:
+      containers:
+      - name: nginx-kiran
+        image: kiran22222/nginx-kiran:v1
+        ports:
+        - containerPort: 80
