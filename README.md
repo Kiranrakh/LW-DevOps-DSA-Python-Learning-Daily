@@ -1,6 +1,6 @@
 
 
-<h1 align="center">🚀 LW-DevOps-Learning-Journey</h1>
+<h1 align="center">🚀 DevOps-Journey-With-LinuxWorld</h1>
 
 <p align="center">
   <strong>LinuxWorld DevOps Internship</strong> | Guided by <strong>Vimal Daga Sir</strong>
