@@ -1,6 +1,4 @@
-<p align="center">
-  <img src="https://i.ibb.co/VLMsnmR/devops-banner.png" alt="DevOps Banner" width="100%" />
-</p>
+
 
 <h1 align="center">🚀 LW-DevOps-Learning-Daily</h1>
 
@@ -79,7 +77,6 @@ I'm Kiran Rakh, currently working as a DevOps Intern at LinuxWorld Informatics P
 
 📡 Connect With Me
 <p align="center"> <a href="https://www.linkedin.com/in/kiran-rakh-b644b6248/"> <img src="https://img.shields.io/badge/LinkedIn-Kiran%20Rakh-blue?style=for-the-badge&logo=linkedin" /> </a> <a href="https://github.com/Kiranrakh"> <img src="https://img.shields.io/badge/GitHub-Kiranrakh-black?style=for-the-badge&logo=github" /> </a> </p>
-
 
 🙏 Special Thanks
 🧠 Vimal Daga Sir — for your unmatched mentorship and vision
