@@ -1,0 +1,123 @@
+-------------------------------------------------------------
+                 🚀 Argo CD Reference Guide
+-------------------------------------------------------------
+
+✅ BASIC ARGO CD CLI COMMANDS
+
+>> argocd login --core
+   # Login using core mode (no auth)
+
+>> argocd app list
+   # Lists all Argo CD applications
+
+>> kubectl config set-context --current --namespace=argocd
+   # Set current kubectl namespace to argocd
+
+>> kubectl get cm
+   # View ConfigMaps in the current namespace
+
+>> kubectl get svc -n default
+   # List all services in default namespace
+
+>> argocd app create <app-name> \
+   --repo "<git-repo-url>" \
+   --path <directory-name> \
+   --dest-server https://kubernetes.default.svc \
+   --dest-namespace default
+   # Create an app pointing to Git repo and path
+
+>> kubectl get applications.argoproj.io -n default
+   # List Application CRs in default namespace
+
+>> argocd app get <app-name>
+   # Get application details
+
+>> argocd app sync <app-name>
+   # Sync application with Git state
+
+>> argocd app diff <app-name>
+   # Show difference between Git and cluster
+
+>> argocd app history <app-name>
+   # View revision history
+
+>> argocd app rollback <app-name> <revision-id>
+   # Rollback to previous revision
+
+>> argocd app logs <app-name>
+   # View app logs (if enabled)
+
+-------------------------------------------------------------
+               🔧 Managing Kubernetes YAMLs
+-------------------------------------------------------------
+
+Argo CD supports 3 source types:
+- Directory       # Raw manifests in a folder
+- Kustomize       # With kustomization.yaml
+- Helm            # Helm charts
+
+-------------------------------------------------------------
+            📄 Example Application Manifests
+-------------------------------------------------------------
+
+>> nano application-argocd.yml
+-------------------------------------------------------------
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: my-app
+  namespace: argocd
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  source:
+    repoURL: <git-repo-url>
+    path: <directory-name>
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+-------------------------------------------------------------
+
+>> nano app-argocd-2.yml (Directory mode)
+-------------------------------------------------------------
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: my-app-dir
+  namespace: argocd
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  source:
+    repoURL: <git-repo-url>
+    path: <directory-name>
+    targetRevision: main
+    directory:
+      recurse: true
+#     include: 'deploy.yml'
+#     exclude: '{[deploy.yml,service.yml]}'
+-------------------------------------------------------------
+
+>> Apply the app:
+kubectl apply -f application-argocd.yml
+
+>> Delete the app:
+kubectl delete -f application-argocd.yml
+
+-------------------------------------------------------------
+                  🛠️ Troubleshooting Tips
+-------------------------------------------------------------
+
+- Ensure repo access (public or with credentials)
+- Port forward UI:
+  kubectl port-forward svc/argocd-server -n argocd 8080:443
+- Check logs:
+  kubectl logs -n argocd -l app.kubernetes.io/name=argocd-server
+
+-------------------------------------------------------------

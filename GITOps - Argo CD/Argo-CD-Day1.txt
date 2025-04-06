@@ -1,126 +1,104 @@
-# Argo CD Documentation
+# -------------------------------------------------------------
+#                     🚀 Argo CD Documentation
+# -------------------------------------------------------------
 
-## What is Argo CD?
-[Argo CD](https://argo-cd.readthedocs.io/en/stable/) is a declarative GitOps continuous delivery (CD) tool for Kubernetes. It enables you to manage application deployments through Git repositories as the source of truth. Argo CD runs as a Kubernetes-native agent and monitors applications, ensuring the deployed state matches the desired state defined in Git.
+📘 WHAT IS ARGO CD?
+# -------------------------------------------------------------
+Argo CD (https://argo-cd.readthedocs.io/en/stable/) is a declarative 
+GitOps continuous delivery (CD) tool for Kubernetes.
 
-## VCS vs SCM
-- **VCS (Version Control System):** Tracks and manages changes to source code over time. Example: [Git](https://git-scm.com/).
-- **SCM (Source Code Management):** Encompasses VCS and includes broader practices such as collaboration, branching, merging, and access control.
+- It syncs Kubernetes resources from Git repos.
+- Kubernetes-native and keeps cluster state in sync with Git.
+- Git is the single source of truth.
 
-## What is CI/CD?
-CI/CD is a software development practice that automates the process of integration and deployment:
-- **CI (Continuous Integration):**
-  - Step-by-step: Version Control System (VCS) >> Build >> Test >> Package/Artifacts
-  - Tools: [Jenkins](https://www.jenkins.io/), [GitHub Actions](https://github.com/features/actions), [GitLab CI](https://docs.gitlab.com/ee/ci/)
-- **CD (Continuous Delivery/Deployment):**
-  - Step-by-step: Package/Artifacts >> Deliver >> Deployment
+# -------------------------------------------------------------
+📚 VCS vs SCM
+# -------------------------------------------------------------
+- VCS (Version Control System):
+  Tracks code changes over time. Example: Git (https://git-scm.com/)
+- SCM (Source Code Management):
+  Broader term including collaboration, branching, access control.
+
+# -------------------------------------------------------------
+🔁 CI/CD OVERVIEW
+# -------------------------------------------------------------
+CI/CD automates integration and deployment steps.
+
+CI (Continuous Integration):
+  - VCS >> Build >> Test >> Package
+  - Tools: Jenkins, GitHub Actions, GitLab CI
+
+CD (Continuous Delivery/Deployment):
+  - Package >> Deliver >> Deploy
   - Tools: Jenkins, Argo CD
 
-### CD Challenges with Jenkins
-While Jenkins supports CD, it can be complex and error-prone. Argo CD simplifies deployment by using Git as the single source of truth.
+Jenkins CD Challenges:
+  - Complex, script-heavy
+  - Argo CD simplifies CD using Git as source of truth
 
-### Deployment with Kubernetes
-[Kubernetes](https://kubernetes.io/) orchestrates and manages containerized applications. It is the standard platform for deploying modern apps.
+# -------------------------------------------------------------
+🚢 KUBERNETES DEPLOYMENT REQUIREMENTS
+# -------------------------------------------------------------
+- Kubernetes (via Minikube or EKS)
+- GitHub ID for repo access
+- kubeconfig to interact with cluster
+- Argo CD runs inside Kubernetes
 
-### Argo CD Requirements
-- GitHub ID is required to manage application definitions.
-- `kubeconfig` is needed for initial setup.
-- Once deployed, Argo CD runs inside Kubernetes and does not require external Kubernetes credentials.
+# -------------------------------------------------------------
+🛠️ SETUP (Windows / AWS EKS)
+# -------------------------------------------------------------
 
----
+1. Install AWS CLI
+2. Install eksctl
+3. Install kubectl
+4. Configure AWS access keys
 
-## Setting Up Kubernetes (Minikube or EKS)
-
-### Tools and Installations (Windows)
-1. Install [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-windows.html)
-2. Install [eksctl](https://eksctl.io/introduction/#installation)
-3. Set environment variables
-4. Install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/) to interact with Kubernetes clusters
-
-### AWS Account Setup
-- Go to **[Security and Credentials](https://console.aws.amazon.com/iam/home#/security_credentials)** in AWS console
-- Create **Access Key** and **Secret Access Key**
-- Required for EKS setup and authentication
-
----
-
-## Bash Terminal Commands
-
-### Create EKS Cluster
+# EKS Cluster Creation:
 ```bash
-eksctl create cluster --name <clustername>  # Create a Kubernetes cluster on AWS using eksctl
+eksctl create cluster --name <cluster-name>  # Create a new Kubernetes cluster
 ```
 
-### Deploy Application to Kubernetes
+# 📦 DEPLOYMENT TO KUBERNETES
+# Basic Commands:
 ```bash
-kubectl get pods  # View all pods
-
-kubectl create deployment mydeploy --image=kiran22222/nginx-kiran:v1  # Create a deployment using a Docker image
-
-kubectl get pod  # View all pods again to confirm deployment
-
-kubectl get deployment  # View all deployments
+kubectl get pods  # List all pods
+kubectl create deployment mydeploy --image=kiran22222/nginx-kiran:v1  # Create deployment
+kubectl get deployment  # Check the created deployment
 ```
 
-### Create Deployment YAML
+# Generate Deployment YAML:
 ```bash
-mkdir Argo-Cd-training  # Create a new directory for your project
-
-kubectl create deployment mydeploy --image=kiran22222/nginx-kiran:v1 --dry-run=client -o yaml > mydeployment.yml  # Generate deployment YAML file without applying it
-
-kubectl apply -f mydeployment.yml  # Apply the deployment YAML to Kubernetes
-
-kubectl create namespace argocd  # Create a namespace for Argo CD
+mkdir Argo-Cd-training  # Create project directory
+kubectl create deployment mydeploy --image=kiran22222/nginx-kiran:v1 \ 
+  --dry-run=client -o yaml > mydeployment.yml  # Create deployment YAML without applying
+kubectl apply -f mydeployment.yml  # Apply the deployment YAML
+kubectl create namespace argocd  # Create namespace for Argo CD
 ```
 
----
-
-## Install Argo CD
+# 🚀 INSTALLING ARGO CD
 ```bash
-kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml  # Install Argo CD into the argocd namespace
-
-kubectl get all -n argocd  # Check all resources in the argocd namespace
-
-kubectl get svc -n argocd  # Get all services in the argocd namespace
-
-kubectl port-forward svc/argocd-server -n argocd 8080:443  # Port forward Argo CD UI to localhost:8080
-
-kubectl get secret argocd-initial-admin-secret -n argocd -o yaml  # Retrieve the initial admin password from the secret
-
-echo <password> | base64 -d  # Decode the base64 encoded password (on Linux/macOS)
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml  # Install Argo CD
+kubectl get all -n argocd  # View all Argo CD components
+kubectl get svc -n argocd  # Get Argo CD services
+kubectl port-forward svc/argocd-server -n argocd 8080:443  # Forward Argo CD UI to localhost
+kubectl get secret argocd-initial-admin-secret -n argocd -o yaml  # Get Argo CD admin password
+echo <password> | base64 -d  # Decode the base64 password (Linux/macOS)
 ```
 
-### View Applications and Services
+# 🌐 USING THE ARGO CD UI
+- Open: http://localhost:8080
+- Login as admin using decoded password
+- Create app from Git repo
+- Click SYNC >> OK to deploy
+
+# Optional:
+- Enable sync policy for auto-deploy
+- Set Git polling intervals
+
+# Git Commands:
 ```bash
-kubectl get application -n argocd  # List all Argo CD applications
-
-kubectl get svc  # List all services in current namespace
-
-kubectl describe svc <service-name>  # Describe a specific Kubernetes service
-
-kubectl expose deployment <deploy-name> --port 80 --type LoadBalancer --dry-run=client -o yaml > service.yml  # Generate a LoadBalancer service YAML for your deployment without applying it
-
-kubectl apply -f service.yml  # Apply the generated service YAML
-```
-
----
-
-## Using the Argo CD Dashboard
-1. Access the Argo CD UI via port-forward (http://localhost:8080)
-2. Log in using admin credentials
-3. Create a new application using the UI
-4. Click on **SYNC** >> **OK** to deploy
-
-### Optional Settings:
-- Enable **Sync Policy** for automatic synchronization
-- Adjust polling frequency for Git changes detection
-
-### Git Commands for Managing Versions
-```bash
-git diff v1 v2  # Show differences between two versions
-
-git reset --hard v1  # Reset your branch to a specific version
-
-git push --force  # Force push your local changes to remote
+git diff v1 v2  # Compare version v1 and v2
+git reset --hard v1  # Roll back to version v1
+git push --force  # Force push changes to remote repo
 ```
 
