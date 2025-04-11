@@ -1,0 +1,233 @@
+📘 Session 6: Multi-Cluster Setup with Minikube & Centralized ArgoCD
+
+This session focuses on managing multiple Kubernetes clusters (Minikube) using a centralized ArgoCD setup in a Hub-Spoke architecture. It explains how to configure access securely using service accounts, tokens, and role bindings to deploy applications across clusters from a central place.
+
+===============================================================
+1. What is a Multi-Cluster Setup?
+===============================================================
+🧠 **Explanation:**
+A multi-cluster setup refers to the practice of running and managing more than one Kubernetes cluster. Each cluster is independent, but tools like ArgoCD allow centralized control. It's useful in:
+- Large-scale environments
+- Multi-team or multi-region deployments
+- High-availability systems
+
+In our session, we use two Minikube clusters: one acts as the **Hub** and the other as the **Spoke**.
+
+===============================================================
+2. Creating Multiple Minikube Clusters
+===============================================================
+🧠 **Explanation:**
+We use Minikube to simulate multiple Kubernetes clusters locally.
+
+✅ **Commands:**
+```bash
+minikube start -p hub
+minikube start -p spoke
+kubectl config get-contexts
+```
+
+Here, `-p` is the profile name used to separate clusters.
+
+===============================================================
+3. Hub-Spoke Architecture
+===============================================================
+🧠 **Explanation:**
+- **Hub:** The central control plane where ArgoCD is installed.
+- **Spoke:** One or more secondary clusters managed by the hub.
+This pattern allows centralized app deployment and monitoring.
+
+===============================================================
+4. Install ArgoCD on Hub
+===============================================================
+🧠 **Explanation:**
+ArgoCD is a GitOps tool that automates Kubernetes app deployment using Git as the source of truth.
+
+✅ **Commands:**
+```bash
+kubectl config use-context hub
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+kubectl port-forward svc/argocd-server -n argocd 8080:443
+```
+
+🎯 ArgoCD UI is now available at:
+[https://localhost:8080](https://localhost:8080)
+
+===============================================================
+5. Create ServiceAccount on Spoke Cluster
+===============================================================
+🧠 **Explanation:**
+ArgoCD uses a service account to connect to other clusters. We create one on the spoke cluster so the hub (ArgoCD) can authenticate.
+
+✅ **Switch Context:**
+```bash
+kubectl config use-context spoke
+```
+
+✅ **YAML (argocd-serviceaccount.yaml):**
+```yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: argocd-manager
+  namespace: kube-system
+```
+
+✅ **Apply:**
+```bash
+kubectl apply -f argocd-serviceaccount.yaml
+```
+
+===============================================================
+6. Bind Role to ServiceAccount
+===============================================================
+🧠 **Explanation:**
+This gives the service account admin permissions so ArgoCD can manage the entire cluster.
+
+✅ **YAML (argocd-rolebinding.yaml):**
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: argocd-manager-rolebinding
+subjects:
+- kind: ServiceAccount
+  name: argocd-manager
+  namespace: kube-system
+roleRef:
+  kind: ClusterRole
+  name: cluster-admin
+  apiGroup: rbac.authorization.k8s.io
+```
+
+✅ **Apply:**
+```bash
+kubectl apply -f argocd-rolebinding.yaml
+```
+
+===============================================================
+7. Get Token for ServiceAccount
+===============================================================
+🧠 **Explanation:**
+ArgoCD requires the service account token to authenticate with the spoke cluster.
+
+✅ **Command:**
+```bash
+kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep argocd-manager | awk '{print $1}')
+```
+
+🔐 Save the `token:` value to use in ArgoCD CLI.
+
+===============================================================
+8. Get Spoke Cluster API Server
+===============================================================
+🧠 **Explanation:**
+We need the API server URL of the spoke cluster to add it to ArgoCD.
+
+✅ **Command:**
+```bash
+kubectl cluster-info --context=spoke
+```
+
+Copy the `Kubernetes control plane` URL (e.g., https://192.168.xx.xx:8443)
+
+===============================================================
+9. Add Cluster to ArgoCD (via CLI)
+===============================================================
+🧠 **Explanation:**
+Now that we have the token and API URL, we can add the spoke cluster to ArgoCD.
+
+✅ **Steps:**
+```bash
+kubectl config use-context hub
+argocd login localhost:8080 --username admin --password <admin-password> --insecure
+argocd cluster add spoke --name spoke --insecure --auth-token <copied-token>
+```
+
+This command adds spoke to ArgoCD’s list of managed clusters.
+
+===============================================================
+10. Add Cluster via YAML (Alternative)
+===============================================================
+🧠 **Explanation:**
+You can also manually add a spoke cluster using Kubernetes Secrets. This is an advanced option not commonly used for beginners.
+
+===============================================================
+11. Deploy an App to Spoke Cluster
+===============================================================
+🧠 **Explanation:**
+Create an ArgoCD `Application` that defines:
+- Git repo
+- Path in the repo
+- Destination cluster and namespace
+
+✅ **YAML (nginx-app.yaml):**
+```yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-on-spoke
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/kiranrakh/nginx-demo
+    targetRevision: HEAD
+    path: .
+  destination:
+    server: https://<spoke-api-url>
+    namespace: default
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+```
+
+✅ **Apply:**
+```bash
+kubectl config use-context hub
+kubectl apply -f nginx-app.yaml
+```
+
+🎯 Sync the app from ArgoCD UI to deploy it.
+
+===============================================================
+12. Token Security Best Practices
+===============================================================
+🧠 **Explanation:**
+Security is critical in multi-cluster access.
+
+✔️ Tips:
+- Avoid `cluster-admin` in production.
+- Use namespace-scoped RBAC for limited access.
+- Rotate tokens regularly. 
+- Use audit logs to track access.
+
+===============================================================
+13. Final Commands Recap
+===============================================================
+```bash
+kubectl config use-context hub
+kubectl config use-context spoke
+kubectl config get-contexts
+kubectl port-forward svc/argocd-server -n argocd 8080:443
+```
+
+===============================================================
+💡 Bonus: Use `kubectx` and `kubens`
+===============================================================
+🧠 **Explanation:**
+These are handy CLI tools to switch between clusters (contexts) and namespaces.
+
+✅ Install:
+```bash
+brew install kubectx
+```
+
+✅ Usage:
+```bash
+kubectx    # switch between clusters
+kubens     # switch between namespaces
+```
+```
+

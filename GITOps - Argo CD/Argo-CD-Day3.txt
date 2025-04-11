@@ -1,0 +1,178 @@
+# Session 3 - Helm Chart Integration with Argo CD | Multi-tier Application
+
+## 📁 Directory Structure
+Organized structure for Helm and Argo CD deployment:
+
+```
+multi-tier-app/
+├── charts/
+│   ├── frontend/
+│   ├── backend/
+│   └── database/
+├── values/
+│   ├── frontend-values.yaml
+│   ├── backend-values.yaml
+│   └── db-values.yaml
+├── helmfile.yaml (optional)
+└── argo-apps/
+    ├── frontend-app.yaml
+    ├── backend-app.yaml
+    └── db-app.yaml
+```
+
+---
+-------------------------------------------------------
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: lwebapphelm1
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  source:
+    helm:
+      releaseName: lwapphelm
+      parameters:
+        - name: "replicaCount"
+          value: "3"  # You can change this value as needed
+    repoURL: https://github.com/vimal11inuxworld13/argocd_training_2024_code.git
+    path: myHelmCharts/lwchart
+    targetRevision: master
+--------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+----------------------------------------------------------------------------------
+
+## ⚙️ Install Helm
+```bash
+curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+helm version
+```
+
+---
+
+## 🛠️ Create Helm Charts
+```bash
+helm create frontend
+helm create backend
+helm create database
+```
+- Modify `templates/` and `values.yaml` to define Kubernetes resources and configurations like:
+  - `replicaCount`
+  - `image.repository`
+  - `service.port`
+
+---
+
+## 🔗 Integrate Helm Charts with Argo CD
+Create Argo CD Application YAML for each microservice:
+
+```yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: frontend-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/youruser/multi-tier-app.git
+    targetRevision: HEAD
+    path: charts/frontend
+    helm:
+      valueFiles:
+        - ../../values/frontend-values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: dev
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+```
+
+---
+
+## 🔁 Auto Sync
+Automatically syncs your application when changes are detected:
+
+```yaml
+syncPolicy:
+  automated:
+    prune: true
+    selfHeal: true
+```
+
+---
+
+## 🧹 Prune Resources
+Removes obsolete Kubernetes resources not defined in Git:
+```yaml
+prune: true
+```
+
+---
+
+## 🔢 Replicas Count
+Defined in `values.yaml` for each chart:
+```yaml
+replicaCount: 3
+```
+
+---
+
+## 🔄 Deployment Strategy
+Defined in `deployment.yaml`:
+```yaml
+strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxSurge: 1
+    maxUnavailable: 1
+```
+
+---
+
+## ↩️ Rollback
+Rollback to a previous revision:
+```bash
+argocd app history frontend-app
+argocd app rollback frontend-app <revision>
+```
+
+---
+
+## 🧩 Parameters (Helm Values Override)
+Override Helm values with `--set` or through Argo CD YAML:
+
+### CLI:
+```bash
+helm upgrade --install frontend ./frontend --set image.tag=1.2.3
+```
+
+### Argo CD YAML:
+```yaml
+helm:
+  parameters:
+    - name: image.tag
+      value: "1.2.3"
+```
+
+---
+
+> ✅ This session covers deploying a complete multi-tier application using Helm and Argo CD, ensuring automated GitOps practices with rollback, scaling, and configuration strategies.
+

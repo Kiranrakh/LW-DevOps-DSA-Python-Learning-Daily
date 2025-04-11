@@ -1,0 +1,124 @@
+Session 4 - Argo CD Overview (Duration: 2 Hours 42 Minutes)
+
+Objective:
+To understand Argo CD, GitOps principles, and how to automate deployment and management of Kubernetes applications.
+
+--------------------------------------------------------------------------------
+1. What is Argo CD?
+--------------------------------------------------------------------------------
+Argo CD (Argo Continuous Delivery) is a declarative GitOps tool for Kubernetes. It automates the deployment and management of applications, ensuring that the live state of Kubernetes matches the desired state defined in a Git repository.
+
+--------------------------------------------------------------------------------
+2. GitOps Workflow
+--------------------------------------------------------------------------------
+GitOps is a modern workflow where Git is the single source of truth for infrastructure and application deployment. In Argo CD:
+- All manifests (YAML/Helm/Kustomize) are stored in Git.
+- Any change in Git is automatically or manually applied to the cluster.
+- Git provides versioning, rollback capabilities, and audit trails.
+
+--------------------------------------------------------------------------------
+3. Application Sync (App Sync)
+--------------------------------------------------------------------------------
+App Sync is the process by which Argo CD aligns the cluster's actual state with the desired state from Git.
+- Manual Sync: Initiated by the user.
+- Auto Sync: Automatically deploys changes pushed to Git.
+- Prune: Removes Kubernetes resources that are no longer defined in Git.
+- Self-Heal: Reverts any unauthorized changes made directly in the cluster.
+
+--------------------------------------------------------------------------------
+4. Deployment Management
+--------------------------------------------------------------------------------
+Argo CD supports managing deployments declaratively using:
+- YAML manifests
+- Helm charts
+- Kustomize overlays
+
+It provides:
+- Historical tracking of deployments.
+- Automatic synchronization and rollback mechanisms.
+- Pre/Post deployment sync hooks.
+
+--------------------------------------------------------------------------------
+5. Declarative Configurations
+--------------------------------------------------------------------------------
+Using declarative configs means defining your infrastructure and applications using version-controlled files (YAML/Helm/Kustomize) which Argo CD applies to the Kubernetes cluster.
+
+--------------------------------------------------------------------------------
+6. Auto Rollbacks
+--------------------------------------------------------------------------------
+Argo CD can automatically detect when a deployment fails (e.g., pods crash or don't become ready) and revert to the last known healthy state, minimizing downtime.
+
+--------------------------------------------------------------------------------
+7. Health Monitoring
+--------------------------------------------------------------------------------
+Argo CD continuously monitors:
+- Application health status (Healthy, Degraded, etc.)
+- Sync status (Synced, OutOfSync)
+- Resource-specific health like Deployments, Services, Ingresses, etc.
+
+--------------------------------------------------------------------------------
+8. Sync Policies
+--------------------------------------------------------------------------------
+Sync policies define how and when Argo CD should sync resources:
+- Manual: User must trigger a sync.
+- Automated: Sync is triggered on Git changes.
+- Self-healing: Automatically reverts changes made outside Git.
+
+--------------------------------------------------------------------------------
+9. Multi-Cluster Setup
+--------------------------------------------------------------------------------
+Argo CD can manage applications deployed across multiple Kubernetes clusters. This is useful for managing different environments (dev, staging, prod) from a single Argo CD instance.
+
+--------------------------------------------------------------------------------
+10. RBAC in Argo CD
+--------------------------------------------------------------------------------
+Role-Based Access Control (RBAC) helps define who can access and perform actions in Argo CD. Permissions can be fine-tuned based on roles (admin, read-only, developer) and integrated with SSO providers (GitHub, LDAP, etc.).
+
+--------------------------------------------------------------------------------
+11. Troubleshooting
+--------------------------------------------------------------------------------
+Argo CD provides logs, UI insights, and status checks for debugging. Common issues include:
+- Incorrect Git paths
+- Misconfigured Helm values
+- Insufficient permissions
+
+--------------------------------------------------------------------------------
+12. Manifest Files
+--------------------------------------------------------------------------------
+Manifest files are the core of Argo CD's GitOps functionality. They can be:
+- Plain YAML files
+- Helm charts
+- Kustomize overlays
+These files define the desired Kubernetes resources and live in Git.
+
+--------------------------------------------------------------------------------
+13. Customizing Argo CD Settings
+--------------------------------------------------------------------------------
+You can customize Argo CD settings to:
+- Change UI themes
+- Adjust sync behavior
+- Configure notifications and webhooks
+
+--------------------------------------------------------------------------------
+14. CI/CD Integration
+--------------------------------------------------------------------------------
+While Argo CD focuses on CD, it can integrate with CI tools like Jenkins, GitHub Actions, and GitLab CI using Git webhooks or pipelines to trigger deployments.
+
+--------------------------------------------------------------------------------
+Summary Table:
+
+Feature                  | Description
+------------------------ | --------------------------------------------------
+GitOps Workflow          | Git as single source of truth
+App Sync                 | Sync live state with Git
+Deployment Management    | Declarative & automated deployment
+Declarative Configs      | Git-tracked manifests
+Auto Rollbacks           | Revert on failure
+Health Monitoring        | Track application and resource status
+Sync Policies            | Manual, Auto, and Self-healing
+Multi-Cluster Setup      | Manage multiple clusters
+RBAC                     | Secure role-based access
+Troubleshooting          | Debug using logs/UI
+Manifest Files           | YAML, Helm, or Kustomize configurations
+Customizing Settings     | Tune Argo CD behavior and UI
+CI/CD Integration        | Work with CI tools for GitOps

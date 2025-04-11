@@ -1,0 +1,225 @@
+# Session 5 - Concept of Secrets (Kubernetes & DevOps)
+
+ Understand how to manage and secure sensitive data like passwords, tokens, and keys in Kubernetes and other DevOps tools using secrets and encryption mechanisms.
+
+================================================================================
+
+1. What Are Secrets?
+----------------------
+Secrets are Kubernetes objects used to store sensitive information such as:
+- Passwords
+- OAuth tokens
+- SSH keys
+- API Keys
+
+Why Use Secrets?
+- Avoid hardcoding sensitive information in source code or configuration files.
+- Keep secret values secure and manageable.
+- Allow secure injection into applications via environment variables.
+
+================================================================================
+
+2. Passing Environment Variables into Containers
+------------------------------------------------
+Secrets can be passed to containers as environment variables in Kubernetes deployments.
+
+Example Deployment YAML:
+
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: myapp-container
+        image: nginx
+        env:
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: my-secret
+                key: password
+```
+
+================================================================================
+
+3. Creating Kubernetes Secrets
+------------------------------
+A. Using kubectl:
+```
+kubectl create secret generic my-secret --from-literal=password=admin123
+```
+
+B. Declarative YAML Method:
+```
+apiVersion: v1
+kind: Secret
+metadata:
+  name: my-secret
+  namespace: dev
+type: Opaque
+data:
+  password: YWRtaW4xMjM=  # base64 encoded value of 'admin123'
+```
+
+Decode Base64:
+```
+echo 'YWRtaW4xMjM=' | base64 --decode
+```
+
+Steps to Apply:
+```
+kubectl apply -f secret.yaml
+```
+
+================================================================================
+
+4. Public & Private Key Encryption
+----------------------------------
+- Public Key: Used to encrypt data. Can be shared openly.
+- Private Key: Used to decrypt data. Must be kept secure.
+
+Used in tools like Kubeseal to enable secure GitOps workflows.
+
+================================================================================
+
+5. Vault by HashiCorp
+---------------------
+Vault is a secrets management tool used to securely store and access credentials and other secrets.
+
+Vault Agent:
+- Deployed as a sidecar.
+- Automatically injects secrets into running applications.
+
+Vault Plugins:
+- Extend Vault's capabilities (e.g., for cloud providers, databases, etc.)
+
+================================================================================
+
+6. Sealed Secrets
+------------------
+A solution from Bitnami that allows storing secrets safely in version control.
+
+Workflow:
+1. Create a standard Kubernetes secret.
+2. Use `kubeseal` to encrypt it into a SealedSecret.
+3. Apply the SealedSecret to the cluster.
+
+Kubeseal Command:
+```
+kubectl create secret generic mysecret --from-literal=password=admin123 \
+  | kubeseal --cert mycert.pem -o yaml > mysealedsecret.yaml
+```
+
+SealedSecret YAML:
+```
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: mysealedsecret
+  namespace: dev
+spec:
+  encryptedData:
+    password: Agb234df....
+  template:
+    metadata:
+      name: mysealedsecret
+      namespace: dev
+    type: Opaque
+```
+
+Steps to Apply:
+```
+kubectl apply -f mysealedsecret.yaml
+```
+
+================================================================================
+
+7. Kubeseal CLI
+----------------
+`kubeseal` encrypts secrets using the public certificate of the sealed-secrets controller.
+
+Steps to Use:
+1. Get the public certificate:
+```
+kubeseal --fetch-cert --controller-name=sealed-secrets --controller-namespace=kube-system > pub-cert.pem
+```
+
+2. Seal a secret:
+```
+kubectl create secret generic dbsecret --from-literal=dbpass=secret123 \
+  | kubeseal --cert pub-cert.pem -o yaml > sealedsecret.yaml
+```
+
+3. Apply sealed secret:
+```
+kubectl apply -f sealedsecret.yaml
+```
+
+================================================================================
+
+8. Auto-create Namespace
+-------------------------
+If your manifests reference a namespace that doesn't exist, it must be created.
+
+Namespace YAML:
+```
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dev
+```
+
+Apply Namespace:
+```
+kubectl apply -f namespace.yaml
+```
+
+GitOps tools like Argo CD or Flux may also handle namespace creation automatically.
+
+================================================================================
+
+9. Custom Resource Definitions (CRDs)
+-------------------------------------
+CRDs allow Kubernetes to support new object types such as `SealedSecret`.
+
+SealedSecret CRD Example:
+```
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: my-sealedsecret
+spec:
+  encryptedData:
+    password: Agb234df....
+```
+
+CRDs are managed by controllers that interpret and act upon the new resource types.
+
+================================================================================
+
+Summary Table:
+--------------
+| Concept                   | Purpose                                        |
+|---------------------------|------------------------------------------------|
+| Secrets                   | Securely store sensitive data                  |
+| Environment Variables     | Inject config or secrets into containers       |
+| Vault Agent               | Inject secrets securely at runtime             |
+| Sealed Secrets / Kubeseal | Encrypt secrets for GitOps and version control |
+| Auto-create Namespace     | Prevent resource apply errors                  |
+| CRDs                      | Extend Kubernetes with new resource types      |
+
+================================================================================
+
+END OF DOCUMENTATION
+

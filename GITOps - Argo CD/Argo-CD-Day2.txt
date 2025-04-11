@@ -57,7 +57,7 @@ Argo CD supports 3 source types:
 - Helm            # Helm charts
 
 -------------------------------------------------------------
-            📄 Example Application Manifests
+             Example Application Manifests
 -------------------------------------------------------------
 
 >> nano application-argocd.yml

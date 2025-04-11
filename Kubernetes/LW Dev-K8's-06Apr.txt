@@ -1,0 +1,161 @@
+****************************mysql-deployment.yml****************
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysqlpvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysqldb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      team: prod
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        team: prod
+    spec:
+      volumes:
+        - name: mysql-pvc1
+          persistentVolumeClaim:
+            claimName: mysqlpvc
+      containers:
+        - name: c1
+          image: mysql:latest
+          volumeMounts:
+            - mountPath: "/var/lib/mysql"
+              name: mysql-pvc1
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysecretbox
+                  key: p
+            - name: MYSQL_DATABASE
+              value: lwdb
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mysecretbox
+                  key: u
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysecretbox
+                  key: p
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysqldb
+spec:
+  type: ClusterIP
+  clusterIP: 10.98.153.68
+  ports:
+    - port: 3306
+      targetPort: 3306
+      protocol: TCP
+  selector:
+    team: prod
+--------------------------------------------------------------------
+
+*****************************kustomization.yaml********************
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+secretGenerator:
+  - name: mysecretbox
+    literals:
+      - p=mypassword
+      - u=vimal
+
+resources:
+  - mysql_deployment.yml
+  - wp_deployment.yml
+
+---------------------------------------------------------------------
+>> kubectl apply -k
+
+-------------------------------------------------------------------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wpapp
+  labels:
+    app: wpapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wpapp
+  template:
+    metadata:
+      labels:
+        app: wpapp
+    spec:
+      containers:
+        - name: wordpress
+          image: wordpress:latest
+          env:
+            - name: WORDPRESS_DB_HOST
+              value: 10.98.153.68
+            - name: WORDPRESS_DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mysecretbox
+                  key: u
+            - name: WORDPRESS_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysecretbox
+                  key: p
+            - name: WORDPRESS_DB_NAME
+              value: lwdb
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: wpapp
+  labels:
+    app: wpapp
+spec:
+  selector:
+    app: wpapp
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+  type: NodePort
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
