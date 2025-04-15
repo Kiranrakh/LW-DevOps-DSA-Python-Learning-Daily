@@ -1,0 +1,321 @@
+Session 7 - Argo ApplicationSet and Clusters (In-depth Guide)
+
+================================================================
+
+Topics Covered:
+1. Introduction to Argo CD ApplicationSet
+2. Multi-Cluster Kubernetes Management
+3. Multi-Environment Strategy
+4. Service Account Token and RBAC
+5. Adding Clusters to Argo CD
+6. Deploying Applications using Argo CD
+7. Using Argo CD Web UI and CLI
+8. Best Practices and GitOps Workflow
+9. Hands-on Cluster Context, Token and Setup Guide
+
+------------------------------------------------------------
+
+1. **Argo CD ApplicationSet and Use Case**
+------------------------------------------------------------
+- Argo CD's ApplicationSet controller automates the creation of Argo CD Applications.
+- Useful for deploying the same application to multiple clusters or environments (e.g., dev, staging, prod).
+- Reduces duplication of Argo CD Application manifests.
+
+**Example ApplicationSet YAML using `clusters` generator:**
+```yaml
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: clustergeneratorappset1w
+  namespace: argocd
+spec:
+  generators:
+    - clusters: {}
+  template:
+    metadata:
+      name: '{{name}}-application'
+    spec:
+      project: default
+      destination:
+        server: '{{server}}'
+        namespace: default
+      source:
+        repoURL: https://github.com/vimallinuxworld13/argocd_training_2024_code.git
+        path: multienv/prod-cluster
+        targetRevision: master
+```
+
+**What is happening and why:**
+- `clusters: {}` tells the generator to iterate over all clusters registered with Argo CD.
+- It substitutes `{{name}}` and `{{server}}` with the actual cluster name and API server URL.
+- Automatically creates an Application per cluster defined.
+
+**Apply:**
+```bash
+kubectl apply -f clustergeneratorappset1w.yaml -n argocd
+```
+
+------------------------------------------------------------
+
+2. **Kubernetes Cluster Management and Setup**
+------------------------------------------------------------
+Start multiple clusters using Minikube:
+```bash
+minikube start -p argocd-cluster
+minikube start -p production-cluster
+minikube start -p devops-cluster
+```
+
+List all contexts:
+```bash
+kubectl config get-contexts
+```
+
+Use a context:
+```bash
+kubectl config use-context argocd-cluster
+kubectl config current-context
+```
+
+Install Argo CD in the argocd-cluster and set the namespace:
+```bash
+kubectl create namespace argocd
+kubectl config set-context --current --namespace=argocd
+# Apply Argo CD install YAML
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+```
+
+Access Argo CD:
+```bash
+argocd login --core
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+kubectl port-forward svc/argocd-server -n argocd 8080:443
+```
+
+------------------------------------------------------------
+
+3. **Add DevOps Cluster to Argo CD**
+------------------------------------------------------------
+Switch to devops cluster:
+```bash
+kubectl config use-context devops-cluster
+```
+
+Create service account and bind it:
+```bash
+kubectl create sa devops-cluster-sa
+kubectl create clusterrolebinding devops-cluster-sa-rolebn \
+  --clusterrole=cluster-admin \
+  --serviceaccount=default:devops-cluster-sa
+```
+
+Generate token:
+```bash
+kubectl create token devops-cluster-sa
+```
+
+Create secret in Argo CD:
+```yaml
+# argo-cluster-add.yml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: external-devops-cluster
+  labels:
+    argocd.argoproj.io/secret-type: cluster
+    environment: devops
+  namespace: argocd
+stringData:
+  name: devops-cluster
+  server: https://<Cluster-IP>:8443
+  config: |
+    {
+      "bearerToken": "<TOKEN_HERE>",
+      "tlsClientConfig": {
+        "insecure": true
+      }
+    }
+```
+
+Apply it:
+```bash
+kubectl apply -f argo-cluster-add.yml -n argocd
+```
+
+Verify:
+```bash
+argocd cluster list
+```
+
+------------------------------------------------------------
+
+4. **Add Production Cluster to Argo CD**
+------------------------------------------------------------
+Switch context:
+```bash
+kubectl config use-context production-cluster
+```
+
+Create service account and bind:
+```bash
+kubectl create sa production-cluster-sa
+kubectl create clusterrolebinding production-cluster-sa-rolebn \
+  --clusterrole=cluster-admin \
+  --serviceaccount=default:production-cluster-sa
+```
+
+Generate token:
+```bash
+kubectl create token production-cluster-sa
+```
+
+------------------------------------------------------------
+
+5. **Organizing Multi-Environment Repositories**
+------------------------------------------------------------
+```bash
+mkdir multi-env
+cd multi-env
+```
+Directory structure example:
+```bash
+multi-env/
+├── dev/
+│   └── deployment.yaml
+├── staging/
+│   └── deployment.yaml
+└── prod/
+    └── deployment.yaml
+```
+
+------------------------------------------------------------
+
+6. **Best Practices and GitOps Workflow**
+------------------------------------------------------------
+- Store all Kubernetes manifests and Argo CD configs in Git.
+- Use Kustomize for overlays (dev, staging, prod).
+- Automate Argo CD sync, but audit changes before enabling auto-prune.
+- Use ApplicationSet for scaling across clusters.
+
+-----------------------------------------------------------
+************************************ Hand-On with Vimal Sir **************************************
+
+# ------------------------------------------
+# 🚀 Start Minikube Clusters
+# ------------------------------------------
+
+minikube start -p argocd-cluster            # Argo CD main cluster
+minikube start -p production-cluster        # Production cluster
+minikube start -p devops-cluster            # DevOps cluster
+
+# ------------------------------------------
+# 🔁 Set Argo CD Context and Install Argo CD
+# ------------------------------------------
+
+kubectl config use-context argocd-cluster   # Set context to Argo CD cluster
+kubectl config current-context              # Confirm current context
+
+# (Assuming Argo CD is installed via YAML or Helm separately)
+
+kubectl config set-context --current --namespace=argocd  # Use argocd namespace
+argocd login --core                                      # Login inside cluster
+argocd admin initial-password -n argocd                  # Get Argo CD admin password
+kubectl port-forward svc/argocd-server -n argocd 8080:443  # Access UI on localhost:8080
+
+# ------------------------------------------
+# 🛠️ Register DevOps Cluster in Argo CD
+# ------------------------------------------
+
+kubectl config use-context devops-cluster                 # Switch to devops cluster
+
+kubectl create sa devops-cluster-sa                      # Create service account
+kubectl create clusterrolebinding devops-cluster-sa-rolebn \
+  --clusterrole=cluster-admin \
+  --serviceaccount=default:devops-cluster-sa             # Grant admin access
+
+kubectl create token devops-cluster-sa                   # Copy this token for below YAML
+
+# ------------------------------------------
+# 📄 DevOps Cluster Registration YAML (Save this as argo-cluster-add-devops.yml)
+# ------------------------------------------
+
+cat <<EOF > argo-cluster-add-devops.yml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: external-devops-cluster
+  labels:
+    argocd.argoproj.io/secret-type: cluster
+    environment: devops
+type: Opaque
+stringData:
+  name: devops-cluster
+  server: https://<DevOps-Cluster-IP>:8443
+  config: |
+    {
+      "bearerToken": "<Paste-DevOps-SA-Token-Here>"
+    }
+EOF
+
+kubectl apply -f argo-cluster-add-devops.yml            # Register DevOps cluster
+argocd cluster list                                      # Check if it's listed
+
+# ------------------------------------------
+# 🛠️ Register Production Cluster in Argo CD
+# ------------------------------------------
+
+kubectl config use-context production-cluster            # Switch to production cluster
+
+kubectl create sa production-cluster-sa                 # Create service account
+kubectl create clusterrolebinding production-cluster-sa-rolebn \
+  --clusterrole=cluster-admin \
+  --serviceaccount=default:production-cluster-sa        # Bind admin role
+
+kubectl create token production-cluster-sa              # Copy this token for next step
+
+# ------------------------------------------
+# 📄 Production Cluster Registration YAML (Save as argo-cluster-add-production.yml)
+# ------------------------------------------
+
+cat <<EOF > argo-cluster-add-production.yml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: external-production-cluster
+  labels:
+    argocd.argoproj.io/secret-type: cluster
+    environment: production
+type: Opaque
+stringData:
+  name: production-cluster
+  server: https://<Production-Cluster-IP>:8443
+  config: |
+    {
+      "bearerToken": "<Paste-Production-SA-Token-Here>"
+    }
+EOF
+
+kubectl apply -f argo-cluster-add-production.yml         # Register production cluster
+argocd cluster list                                       # Verify both clusters are added
+
+# ------------------------------------------
+# ✅ DONE
+# ------------------------------------------
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+

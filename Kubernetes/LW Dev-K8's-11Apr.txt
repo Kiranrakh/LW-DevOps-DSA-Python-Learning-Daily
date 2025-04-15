@@ -1,0 +1,208 @@
+-------------------------------mysql-deployment.yml--------------------
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysqlpvc-master
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysecretbox
+type: Opaque
+data:
+  p: bXlzcWxfcGFzc3dvcmQ=           # base64("mysql_password")
+  user: bXlzcWx1c2Vy                # base64("mysqluser")
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-master-deploy
+  labels:
+    team: prod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      team: prod
+  template:
+    metadata:
+      labels:
+        team: prod
+    spec:
+      volumes:
+      - name: mysql-pvc1
+        persistentVolumeClaim:
+          claimName: mysqlpvc-master
+      - name: mysql-config-volume-master
+        configMap:
+          name: mysql-config-master         # This should match the name in your ConfigMap
+      containers:
+      - name: c1
+        image: mysql:latest
+        ports:
+        - containerPort: 3306
+        volumeMounts:
+        - mountPath: "/var/lib/mysql"
+          name: mysql-pvc1
+        - mountPath: "/etc/mysql/conf.d"    # <-- Mount config here
+          name: mysql-config-volume-master
+          readOnly: true
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysecretbox
+              key: p
+        - name: MYSQL_DATABASE
+          value: lwdb
+        - name: MYSQL_USER
+          valueFrom:
+            secretKeyRef:
+              name: mysecretbox
+              key: user
+
+
+
+
+
+>> kubectl create secret generic mysecretbox \
+  --from-literal=p='mysql_password' \
+  --from-literal=user='mysqluser'
+
+
+>> kubectl apply -f mymaster-deployment.yml
+
+>> kubectl exec -it mysql-master-deploy-6497769b4d-hrkbl -- bash
+mysql -u root -p
+cd /etc/MySQL/conf.d/
+ls
+
+
+>> 
+
+---------------------------mysql-config-master.yaml---------------------
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-config-master
+data:
+  my.cnf: |
+    [mysqld]
+    gtid_mode=ON
+    enforce-gtid-consistency=ON
+    log-bin=mysql-bin
+    log-slave-updates=ON
+    binlog_format=ROW
+    server-id=1
+    # Do not hardcode server-id here
+
+
+>> kubectl apply -f mysql-config-master.yaml
+
+>> 
+--------------------------------------------------------------------
+
+----------------------------mysql-config-slave.yaml---------------------
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-config-slave
+data:
+  my.cnf: |
+    [mysqld]
+    relay-log=relay-log
+    server-id=1
+    # Do not hardcode server-id here
+
+
+>> kubectl apply -f mysql-config-slave.yaml
+
+
+
+>> 
+
+
+>>
+
+-----------------------------------------------------------------
+
+
+-------------------mysql-deployment-slave.yml--------------------
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysqlpvc-slave
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysecretbox
+type: Opaque
+data:
+  p: bXlzcWxfcGFzc3dvcmQ=           # base64("mysql_password")
+  user: bXlzcWx1c2Vy                # base64("mysqluser")
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-slave-deploy
+  labels:
+    team: prod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      team: prod
+  template:
+    metadata:
+      labels:
+        app: mysql-slave
+    spec:
+      volumes:
+      - name: mysql-pvc1
+        persistentVolumeClaim:
+          claimName: mysqlpvc-master
+      - name: mysql-config-volume-slave
+        configMap:
+          name: mysql-config-slave         # This should match the name in your ConfigMap
+      containers:
+      - name: c1
+        image: mysql:latest
+        ports:
+        - containerPort: 3306
+        volumeMounts:
+        - mountPath: "/var/lib/mysql"
+          name: mysql-pvc1
+        - mountPath: "/etc/mysql/conf.d"    # <-- Mount config here
+          name: mysql-config-volume-slave
+          readOnly: true
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysecretbox
+              key: p
+        - name: MYSQL_DATABASE
+          value: lwdb
+        - name: MYSQL_USER
+          valueFrom:
+            secretKeyRef:
+              name: mysecretbox
+              key: user
+
