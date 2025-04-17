@@ -305,17 +305,3 @@ argocd cluster list                                       # Verify both clusters
 
 
 
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
