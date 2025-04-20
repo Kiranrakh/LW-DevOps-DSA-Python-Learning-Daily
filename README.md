@@ -12,7 +12,7 @@
 
 ---
 
-## 📘 About This Repository
+## 📘 <p align="center"><strong>About This Repository</strong></p>
 
 <p align="center">
   Welcome to my **Daily DevOps Learning Journey** under the mentorship of **Vimal Daga Sir** at **LinuxWorld Informatics Pvt Ltd, Jaipur**.
@@ -35,65 +35,85 @@
 
 ---
 
-## 🧭 Modules Covered
+## 🧭 <p align="center"><strong>Modules Covered</strong></p>
 
 ### <p align="center">🏁 **Getting Started with DevOps**</p>
-- 🔹 Deep dive into the DevOps mindset, culture, and philosophy
-- 🔹 Understanding SDLC stages and DevOps integration
-- 🔹 Agile, Scrum methodology and role of DevOps in iterative delivery
+<p align="center">
+  - 🔹 Deep dive into the DevOps mindset, culture, and philosophy <br />
+  - 🔹 Understanding SDLC stages and DevOps integration <br />
+  - 🔹 Agile, Scrum methodology and role of DevOps in iterative delivery
+</p>
 
 ### <p align="center">🔗 **Git & GitHub**</p>
-- ✅ Git basics: versioning, branching strategies, merging, rebasing
-- ✅ Collaborating using GitHub: PRs, forks, reviews, and GitHub Actions
-- ✅ Webhooks and GitHub integrations for automation
-- ✅ Building a powerful GitHub profile to showcase DevOps journey
+<p align="center">
+  - ✅ Git basics: versioning, branching strategies, merging, rebasing <br />
+  - ✅ Collaborating using GitHub: PRs, forks, reviews, and GitHub Actions <br />
+  - ✅ Webhooks and GitHub integrations for automation <br />
+  - ✅ Building a powerful GitHub profile to showcase DevOps journey
+</p>
 
 ### <p align="center">🐳 **Docker & ☸️ Kubernetes**</p>
-- 🐳 Dockerizing applications with best practices for layered images
-- 🐳 Working with Docker Compose for multi-container apps
-- ☸️ Core Kubernetes concepts: Pods, Deployments, ReplicaSets, Services
-- ☸️ Hands-on with ConfigMaps, Secrets, Namespaces, and RBAC
-- 🎯 Helm: templating Kubernetes manifests, chart repos, values.yaml
+<p align="center">
+  - 🐳 Dockerizing applications with best practices for layered images <br />
+  - 🐳 Working with Docker Compose for multi-container apps <br />
+  - ☸️ Core Kubernetes concepts: Pods, Deployments, ReplicaSets, Services <br />
+  - ☸️ Hands-on with ConfigMaps, Secrets, Namespaces, and RBAC <br />
+  - 🎯 Helm: templating Kubernetes manifests, chart repos, values.yaml
+</p>
 
 ### <p align="center">⚙️ **Jenkins - CI/CD Pipelines**</p>
-- 🔄 End-to-end automation with Jenkins Pipelines (declarative + scripted)
-- 🧩 Jenkins integration with GitHub, DockerHub, and Kubernetes
-- 🚀 Creating multibranch pipelines and managing credentials securely
+<p align="center">
+  - 🔄 End-to-end automation with Jenkins Pipelines (declarative + scripted) <br />
+  - 🧩 Jenkins integration with GitHub, DockerHub, and Kubernetes <br />
+  - 🚀 Creating multibranch pipelines and managing credentials securely
+</p>
 
 ### <p align="center">📊 **Monitoring & Logging**</p>
-- 🔍 Prometheus for time-series metrics and service health monitoring
-- 📈 Grafana dashboards for real-time observability and insights
-- 📜 Integrating Node Exporter, Blackbox Exporter, and Kubernetes metrics
+<p align="center">
+  - 🔍 Prometheus for time-series metrics and service health monitoring <br />
+  - 📈 Grafana dashboards for real-time observability and insights <br />
+  - 📜 Integrating Node Exporter, Blackbox Exporter, and Kubernetes metrics
+</p>
 
 ### <p align="center">🧱 **Infrastructure as Code (IaC)**</p>
-- ⚙️ Ansible for remote configuration and automation using playbooks and roles
-- 🌍 Terraform to provision complete AWS infrastructure: VPC, EC2, EKS, IAM
-- 🧩 Modular approach to IaC, separating networking, compute, and security
+<p align="center">
+  - ⚙️ Ansible for remote configuration and automation using playbooks and roles <br />
+  - 🌍 Terraform to provision complete AWS infrastructure: VPC, EC2, EKS, IAM <br />
+  - 🧩 Modular approach to IaC, separating networking, compute, and security
+</p>
 
 ### <p align="center">☁️ **Cloud Providers**</p>
-- 🌩️ AWS: compute (EC2, Lambda), storage (S3, EBS), networking (VPC, ELB)
-- 🌩️ Managing IAM roles, policies, CloudWatch monitoring, Route 53 DNS
-- 🌀 Introduction to Azure & GCP: core services and comparison with AWS
+<p align="center">
+  - 🌩️ AWS: compute (EC2, Lambda), storage (S3, EBS), networking (VPC, ELB) <br />
+  - 🌩️ Managing IAM roles, policies, CloudWatch monitoring, Route 53 DNS <br />
+  - 🌀 Introduction to Azure & GCP: core services and comparison with AWS
+</p>
 
 ### <p align="center">🐧 **Linux & Bash Scripting**</p>
-- 🧰 Linux CLI: file manipulation, permissions, systemd, package managers
-- 📜 Automating tasks via bash scripts and cron jobs for DevOps workflows
+<p align="center">
+  - 🧰 Linux CLI: file manipulation, permissions, systemd, package managers <br />
+  - 📜 Automating tasks via bash scripts and cron jobs for DevOps workflows
+</p>
 
 ### <p align="center">🔁 **GitOps with Argo CD**</p>
-- 🚀 Git repositories as the source of truth for K8s manifests
-- 🔄 Argo CD syncs Git → Kubernetes cluster automatically
-- 🔐 Secure deployments with declarative YAML + RBAC integration
-- 💡 Combining Jenkins + Helm + Argo CD for GitOps-based deployment flow
+<p align="center">
+  - 🚀 Git repositories as the source of truth for K8s manifests <br />
+  - 🔄 Argo CD syncs Git → Kubernetes cluster automatically <br />
+  - 🔐 Secure deployments with declarative YAML + RBAC integration <br />
+  - 💡 Combining Jenkins + Helm + Argo CD for GitOps-based deployment flow
+</p>
 
 ### <p align="center">🔐 **DevSecOps & Security Best Practices**</p>
-- 🔎 Secrets and credentials management via K8s Secrets and tools like Vault
-- 🛡️ Security scanning: integrating Trivy, SonarQube in CI/CD pipelines
-- 🧪 Conducting SAST and DAST for application security
-- ✅ Implementing RBAC policies and AWS IAM controls for least privilege
+<p align="center">
+  - 🔎 Secrets and credentials management via K8s Secrets and tools like Vault <br />
+  - 🛡️ Security scanning: integrating Trivy, SonarQube in CI/CD pipelines <br />
+  - 🧪 Conducting SAST and DAST for application security <br />
+  - ✅ Implementing RBAC policies and AWS IAM controls for least privilege
+</p>
 
 ---
 
-## 🏆 **Capstone Projects**
+## 🏆 <p align="center"><strong>Capstone Projects</strong></p>
 
 <p align="center">
   - 🔹 **CI/CD pipeline for Dockerized frontend deployed on Kubernetes**<br />
@@ -104,7 +124,7 @@
 
 ---
 
-## 🚀 **Highlight Projects**
+## 🚀 <p align="center"><strong>Highlight Projects</strong></p>
 
 <p align="center">
   - 🔸 **Deploying-a-Static-HTML-Website-on-Kubernetes-using-Docker-Nginx**  
@@ -123,7 +143,7 @@
 
 ---
 
-## 🙋‍♂️ **About Me**  
+## 🙋‍♂️ <p align="center"><strong>About Me</strong></p>  
 <p align="center">
   I'm **Kiran Rakh**, currently working as a **DevOps Intern** at **LinuxWorld Informatics Pvt Ltd**, under the exceptional guidance of **Vimal Daga Sir**.
 </p>
@@ -134,7 +154,7 @@
 
 ---
 
-## 📡 **Connect With Me**  
+## 📡 <p align="center"><strong>Connect With Me</strong></p>  
 
 <p align="center">  
   <a href="https://www.linkedin.com/in/kiran-rakh-b644b6248/"> 
@@ -147,7 +167,7 @@
 
 ---
 
-## 🙏 **Special Thanks**
+## 🙏 <p align="center"><strong>Special Thanks</strong></p>
 
 <p align="center">
   🧠 **Vimal Daga Sir** — for your unmatched mentorship and vision<br />
