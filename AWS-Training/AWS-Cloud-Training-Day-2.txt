@@ -1,0 +1,143 @@
+**AWS EC2 Instance Setup and Web Page Deployment - Step-by-Step Guide**  
+**By Kiran Rakh**
+
+---
+
+### 1. Launching an EC2 Instance
+
+- Go to AWS EC2 Console: https://console.aws.amazon.com/ec2/  
+- Click on **Launch Instance**  
+- Enter a name (e.g., `MyWebServer`)  
+- **Choose AMI**: Select Amazon Linux 2 (free tier eligible)  
+- **Instance Type**: t2.micro (free tier eligible)  
+- **Key Pair**: Create new or choose existing (.pem file will be used for SSH)  
+- **Network Settings**:
+  - Allow **SSH (port 22)** from your IP  
+  - Add **HTTP (port 80)** for web access  
+- **Storage**: Default 8GB is fine  
+- Click **Launch Instance**  
+
+---
+
+### 2. Amazon Machine Images (AMIs)
+
+- AMIs are pre-configured OS images used to launch EC2 instances.  
+- Examples: Amazon Linux 2, Ubuntu, Red Hat, etc.  
+- You can create your own AMI from a running instance to reuse its config.  
+
+---
+
+### 3. SSH Connection using GitBash
+
+1. Open **GitBash**  
+2. Navigate to folder with `.pem` file:  
+   ```bash
+   cd path/to/your/pem/file
+   ```  
+3. Set permissions:  
+   ```bash
+   chmod 400 mykey.pem
+   ```  
+4. Connect to EC2:  
+   ```bash
+   ssh -i "mykey.pem" ec2-user@<Public_IP>
+   ```  
+   Example:  
+   ```bash
+   ssh -i "mykey.pem" ec2-user@18.221.12.34
+   ```
+
+---
+
+### 4. Terminal Interface
+
+- After SSH, you are inside the EC2 machine using **Linux terminal**.  
+- Use standard Linux commands like `ls`, `cd`, `sudo`, etc.  
+
+---
+
+### 5. Find IP Address
+
+- Public IP is shown in EC2 dashboard.  
+- Or use:  
+   ```bash
+   curl http://checkip.amazonaws.com
+   ```
+
+---
+
+### 6. Permissions
+
+- Ensure `.pem` file has correct permission:  
+   ```bash
+   chmod 400 mykey.pem
+   ```  
+- Use `sudo` to install packages and edit files in EC2.  
+
+---
+
+### 7. Install Python
+
+```bash
+sudo yum update -y  
+sudo yum install python3 -y  
+python3 --version
+
+python -m http.server
+```
+
+---
+
+### 8. Create a Simple Web Page
+
+```bash
+sudo yum install httpd -y         # Install Apache server  
+sudo systemctl start httpd  
+sudo systemctl enable httpd  
+sudo systemctl status httpd
+```  
+
+Create HTML file:  
+```bash
+sudo nano /var/www/html/index.html
+```  
+
+Paste this:
+```html
+<!DOCTYPE html>
+<html>
+<head><title>Welcome</title></head>
+<body>
+<h1>Hello from Kiran's EC2 Web Server!</h1>
+</body>
+</html>
+```
+
+Save and exit with: `CTRL + X`, then `Y`, then `Enter`  
+
+Now open browser:  
+```
+http://<Public_IP>
+```
+
+---
+
+### 9. AWS Security Group Rules
+
+Ensure your **Security Group** has:
+
+| Type  | Protocol | Port Range | Source     |
+|-------|----------|------------|------------|
+| SSH   | TCP      | 22         | My IP      |
+| HTTP  | TCP      | 80         | 0.0.0.0/0  |
+| HTTPS | TCP      | 443        | 0.0.0.0/0 (optional) |
+
+---
+
+### Tips
+
+- Stop EC2 instance when not in use to avoid charges.  
+- Never share your `.pem` file publicly.  
+- Add custom scripts in `index.html` to practice.  
+
+---
