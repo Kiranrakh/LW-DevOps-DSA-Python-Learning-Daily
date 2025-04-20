@@ -12,8 +12,6 @@
 
 ---
 
-## 📘 <p align="center"><strong>About This Repository</strong></p>
-
 <p align="center">
   Welcome to my **Daily DevOps Learning Journey** under the mentorship of **Vimal Daga Sir** at **LinuxWorld Informatics Pvt Ltd, Jaipur**.  
   📌 This repo documents my hands-on exploration of real-world DevOps practices using:
