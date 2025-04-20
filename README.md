@@ -12,6 +12,8 @@
 
 ---
 
+## 📘 <p align="center"><strong>About This Repository</strong></p>
+
 <p align="center">
   Welcome to my **Daily DevOps Learning Journey** under the mentorship of **Vimal Daga Sir** at **LinuxWorld Informatics Pvt Ltd, Jaipur**.  
   📌 This repo documents my hands-on exploration of real-world DevOps practices using:
@@ -120,17 +122,17 @@
 ## 🚀 <p align="center"><strong>Highlight Projects</strong></p>
 
 <p align="center">
-  - 🔸 **Deploying-a-Static-HTML-Website-on-Kubernetes-using-Docker-Nginx**  
+  <strong>🔸 Deploying-a-Static-HTML-Website-on-Kubernetes-using-Docker-Nginx</strong><br />
   A step-by-step deployment of a static HTML website inside a Docker container using Nginx, hosted on a Kubernetes cluster. Demonstrates containerization, service exposure, and deployment automation.
 </p>
 
 <p align="center">
-  - 🔸 **full-static-nginx-website**  
+  <strong>🔸 full-static-nginx-website</strong><br />
   A fully functional multi-page static website hosted using Nginx and Docker. This project showcases how to deploy a complete frontend (HTML, CSS, JS) site on an Nginx server in a Docker container.
 </p>
 
 <p align="center">
-  - 🔸 **Dockerized-Web-Scraper-with-MySQL**  
+  <strong>🔸 Dockerized-Web-Scraper-with-MySQL</strong><br />
   Developed a Python-based web scraper containerized with Docker, storing data in a MySQL database. Demonstrates container networking, persistent storage, and microservice design.
 </p>
 
