@@ -1,5 +1,3 @@
-
-
 <h1 align="center">🚀 DevOps-Journey-With-LinuxWorld</h1>
 
 <p align="center">
@@ -19,6 +17,7 @@
 Welcome to my **Daily DevOps Learning Journey** under the mentorship of **Vimal Daga Sir** at **LinuxWorld Informatics Pvt Ltd, Jaipur**.
 
 📌 This repo documents my hands-on exploration of real-world DevOps practices using:
+
 - 🔧 Jenkins, Docker, Kubernetes
 - ☁️ AWS Cloud, Terraform, Ansible
 - 📈 Prometheus & Grafana
@@ -30,55 +29,55 @@ Welcome to my **Daily DevOps Learning Journey** under the mentorship of **Vimal 
 
 ## 🧭 Modules Covered
 
-### 🏁 Getting Started with DevOps
+### 🏁 **Getting Started with DevOps**
 - 🔹 Deep dive into the DevOps mindset, culture, and philosophy
 - 🔹 Understanding SDLC stages and DevOps integration
 - 🔹 Agile, Scrum methodology and role of DevOps in iterative delivery
 
-### 🔗 Git & GitHub
+### 🔗 **Git & GitHub**
 - ✅ Git basics: versioning, branching strategies, merging, rebasing
 - ✅ Collaborating using GitHub: PRs, forks, reviews, and GitHub Actions
 - ✅ Webhooks and GitHub integrations for automation
 - ✅ Building a powerful GitHub profile to showcase DevOps journey
 
-### 🐳 Docker & ☸️ Kubernetes
+### 🐳 **Docker & ☸️ Kubernetes**
 - 🐳 Dockerizing applications with best practices for layered images
 - 🐳 Working with Docker Compose for multi-container apps
 - ☸️ Core Kubernetes concepts: Pods, Deployments, ReplicaSets, Services
 - ☸️ Hands-on with ConfigMaps, Secrets, Namespaces, and RBAC
 - 🎯 Helm: templating Kubernetes manifests, chart repos, values.yaml
 
-### ⚙️ Jenkins - CI/CD Pipelines
+### ⚙️ **Jenkins - CI/CD Pipelines**
 - 🔄 End-to-end automation with Jenkins Pipelines (declarative + scripted)
 - 🧩 Jenkins integration with GitHub, DockerHub, and Kubernetes
 - 🚀 Creating multibranch pipelines and managing credentials securely
 
-### 📊 Monitoring & Logging
+### 📊 **Monitoring & Logging**
 - 🔍 Prometheus for time-series metrics and service health monitoring
 - 📈 Grafana dashboards for real-time observability and insights
 - 📜 Integrating Node Exporter, Blackbox Exporter, and Kubernetes metrics
 
-### 🧱 Infrastructure as Code (IaC)
+### 🧱 **Infrastructure as Code (IaC)**
 - ⚙️ Ansible for remote configuration and automation using playbooks and roles
 - 🌍 Terraform to provision complete AWS infrastructure: VPC, EC2, EKS, IAM
 - 🧩 Modular approach to IaC, separating networking, compute, and security
 
-### ☁️ Cloud Providers
+### ☁️ **Cloud Providers**
 - 🌩️ AWS: compute (EC2, Lambda), storage (S3, EBS), networking (VPC, ELB)
 - 🌩️ Managing IAM roles, policies, CloudWatch monitoring, Route 53 DNS
 - 🌀 Introduction to Azure & GCP: core services and comparison with AWS
 
-### 🐧 Linux & Bash Scripting
+### 🐧 **Linux & Bash Scripting**
 - 🧰 Linux CLI: file manipulation, permissions, systemd, package managers
 - 📜 Automating tasks via bash scripts and cron jobs for DevOps workflows
 
-### 🔁 GitOps with Argo CD
+### 🔁 **GitOps with Argo CD**
 - 🚀 Git repositories as the source of truth for K8s manifests
 - 🔄 Argo CD syncs Git → Kubernetes cluster automatically
 - 🔐 Secure deployments with declarative YAML + RBAC integration
 - 💡 Combining Jenkins + Helm + Argo CD for GitOps-based deployment flow
 
-### 🔐 DevSecOps & Security Best Practices
+### 🔐 **DevSecOps & Security Best Practices**
 - 🔎 Secrets and credentials management via K8s Secrets and tools like Vault
 - 🛡️ Security scanning: integrating Trivy, SonarQube in CI/CD pipelines
 - 🧪 Conducting SAST and DAST for application security
@@ -86,7 +85,7 @@ Welcome to my **Daily DevOps Learning Journey** under the mentorship of **Vimal 
 
 ---
 
-## 🏆 Capstone Projects
+## 🏆 **Capstone Projects**
 
 - 🔹 **CI/CD pipeline for Dockerized frontend deployed on Kubernetes**
 - 🔹 **GitOps pipeline using Argo CD, Helm, and GitHub for declarative sync**
@@ -95,7 +94,7 @@ Welcome to my **Daily DevOps Learning Journey** under the mentorship of **Vimal 
 
 ---
 
-## 🚀 Highlight Projects
+## 🚀 **Highlight Projects**
 
 - 🔸 **Deploying-a-Static-HTML-Website-on-Kubernetes-using-Docker-Nginx**  
   A step-by-step deployment of a static HTML website inside a Docker container using Nginx, hosted on a Kubernetes cluster. Demonstrates containerization, service exposure, and deployment automation.
@@ -108,17 +107,22 @@ Welcome to my **Daily DevOps Learning Journey** under the mentorship of **Vimal 
 
 ---
 
-## 🙋‍♂️ About Me
+## 🙋‍♂️ **About Me**  
 I'm **Kiran Rakh**, currently working as a **DevOps Intern** at **LinuxWorld Informatics Pvt Ltd**, under the exceptional guidance of **Vimal Daga Sir**.
 
 📌 Passionate about automation, cloud computing, and solving real-world tech problems using DevOps.
----
-## 📡 Connect With Me  
-<p align="center"> <a href="https://www.linkedin.com/in/kiran-rakh-b644b6248/"> <img src="https://img.shields.io/badge/LinkedIn-Kiran%20Rakh-blue?style=for-the-badge&logo=linkedin" /> </a> <a href="https://github.com/Kiranrakh"> <img src="https://img.shields.io/badge/GitHub-Kiranrakh-black?style=for-the-badge&logo=github" /> </a> </p>
 
 ---
 
-## 🙏 Special Thanks
+## 📡 **Connect With Me**  
+<p align="center">  
+  <a href="https://www.linkedin.com/in/kiran-rakh-b644b6248/"> <img src="https://img.shields.io/badge/LinkedIn-Kiran%20Rakh-blue?style=for-the-badge&logo=linkedin" /> </a>  
+  <a href="https://github.com/Kiranrakh"> <img src="https://img.shields.io/badge/GitHub-Kiranrakh-black?style=for-the-badge&logo=github" /> </a>  
+</p>
+
+---
+
+## 🙏 **Special Thanks**
 🧠 **Vimal Daga Sir** — for your unmatched mentorship and vision  
 🏢 **LinuxWorld** — for providing a powerful learning ecosystem  
 
