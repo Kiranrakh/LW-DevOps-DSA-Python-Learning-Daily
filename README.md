@@ -28,119 +28,46 @@ Welcome to my **Daily DevOps Learning Journey** under the mentorship of **Vimal 
 
 ---
 
-🧭 Modules Covered
+## 🧭 Modules Covered
 
-🏁 Getting Started with DevOps
+### 🏁 Getting Started with DevOps
+- 🔹 DevOps mindset & lifecycle
+- 🔹 Agile, Scrum, CI/CD overview
 
-🔹 Deep dive into the DevOps mindset, culture, and philosophy
+### 🔗 Git & GitHub
+- ✅ Git basics, branching, rebasing
+- ✅ GitHub PRs, forks, issues, hooks
+- ✅ Portfolio-driven GitHub profile
 
-🔹 Understanding SDLC stages and DevOps integration
+### 🐳 Docker & ☸️ Kubernetes
+- 🐳 Containerization, Dockerfiles, volumes, networks
+- ☸️ Deployments, Services, Scaling, ConfigMaps, Helm
 
-🔹 Agile, Scrum methodology and role of DevOps in iterative delivery
+### ⚙️ Jenkins - CI/CD Pipelines
+- 🔄 Automating builds & tests
+- 🧩 Jenkinsfile, GitHub & Docker integration
+- ☁️ Deployments to Kubernetes
 
-🔗 Git & GitHub
+### 📊 Monitoring & Logging
+- 🔍 Prometheus setup & metrics scraping
+- 📈 Grafana dashboards & alerts
 
-✅ Git basics: versioning, branching strategies, merging, rebasing
+### 🧱 Infrastructure as Code
+- ⚙️ Ansible for config mgmt
+- 🌍 Terraform for AWS infra provisioning
 
-✅ Collaborating using GitHub: PRs, forks, reviews, and GitHub Actions
+### ☁️ Cloud Providers
+- 🌩️ AWS (EC2, S3, IAM, VPC, EKS)
+- ☁️ Azure and GCP basics
 
-✅ Webhooks and GitHub integrations for automation
+### 🐧 Linux & Bash Scripting
+- 🧰 Linux fundamentals
+- 📜 Writing bash scripts for automation
 
-✅ Building a powerful GitHub profile to showcase DevOps journey
+### 🏆 Capstone Projects
+- 🔹 Real-world CI/CD project deployments
+- 🔹 Production-ready, scalable architecture
 
-🐳 Docker & ☸️ Kubernetes
-
-🐳 Dockerizing applications with best practices for layered images
-
-🐳 Working with Docker Compose for multi-container apps
-
-☸️ Core Kubernetes concepts: Pods, Deployments, ReplicaSets, Services
-
-☸️ Hands-on with ConfigMaps, Secrets, Namespaces, and RBAC
-
-🎯 Helm: templating Kubernetes manifests, chart repos, values.yaml
-
-⚙️ Jenkins - CI/CD Pipelines
-
-🔄 End-to-end automation with Jenkins Pipelines (declarative + scripted)
-
-🧩 Jenkins integration with GitHub, DockerHub, and Kubernetes
-
-🚀 Creating multibranch pipelines and managing credentials securely
-
-📊 Monitoring & Logging
-
-🔍 Prometheus for time-series metrics and service health monitoring
-
-📈 Grafana dashboards for real-time observability and insights
-
-📜 Integrating Node Exporter, Blackbox Exporter, and Kubernetes metrics
-
-🧱 Infrastructure as Code (IaC)
-
-⚙️ Ansible for remote configuration and automation using playbooks and roles
-
-🌍 Terraform to provision complete AWS infrastructure: VPC, EC2, EKS, IAM
-
-🧩 Modular approach to IaC, separating networking, compute, and security
-
-☁️ Cloud Providers
-
-🌩️ AWS: compute (EC2, Lambda), storage (S3, EBS), networking (VPC, ELB)
-
-🌩️ Managing IAM roles, policies, CloudWatch monitoring, Route 53 DNS
-
-🌀 Introduction to Azure & GCP: core services and comparison with AWS
-
-🐧 Linux & Bash Scripting
-
-🧰 Linux CLI: file manipulation, permissions, systemd, package managers
-
-📜 Automating tasks via bash scripts and cron jobs for DevOps workflows
-
-🔁 GitOps with Argo CD
-
-🚀 Git repositories as the source of truth for K8s manifests
-
-🔄 Argo CD syncs Git → Kubernetes cluster automatically
-
-🔐 Secure deployments with declarative YAML + RBAC integration
-
-💡 Combining Jenkins + Helm + Argo CD for GitOps-based deployment flow
-
-🔐 DevSecOps & Security Best Practices
-
-🔎 Secrets and credentials management via K8s Secrets and tools like Vault
-
-🛡️ Security scanning: integrating Trivy, SonarQube in CI/CD pipelines
-
-🧪 Conducting SAST and DAST for application security
-
-✅ Implementing RBAC policies and AWS IAM controls for least privilege
-
-🏆 Capstone Projects
-
-🔹 CI/CD pipeline for Dockerized frontend deployed on Kubernetes
-
-🔹 GitOps pipeline using Argo CD, Helm, and GitHub for declarative sync
-
-🔹 Monitoring stack using Prometheus + Grafana for real-time alerts
-
-🔹 Secure infrastructure deployment using Terraform and Ansible
-
-🚀 Highlight Projects
-
-🔸 Deploying-a-Static-HTML-Website-on-Kubernetes-using-Docker-Nginx
-
-A step-by-step deployment of a static HTML website inside a Docker container using Nginx, hosted on a Kubernetes cluster. Demonstrates containerization, service exposure, and deployment automation.
-
-🔸 full-static-nginx-website
-
-A fully functional multi-page static website hosted using Nginx and Docker. This project showcases how to deploy a complete frontend (HTML, CSS, JS) site on an Nginx server in a Docker container.
-
-🔸 Dockerized-Web-Scraper-with-MySQL
-
-Developed a Python-based web scraper containerized with Docker, storing data in a MySQL database. Demonstrates container networking, persistent storage, and microservice design.
 ---
 
 
@@ -156,4 +83,4 @@ I'm Kiran Rakh, currently working as a DevOps Intern at LinuxWorld Informatics P
 
 🏢 LinuxWorld — for providing a powerful learning ecosystem
 
-💡 This repo will continue to grow as I learn and apply new tools, projects, and best practices.
+💡 This repo will continue to grow as I learn and apply new tools, projects, and best practices. edit the module contain add new  with proper expaination
