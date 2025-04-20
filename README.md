@@ -112,8 +112,8 @@ Welcome to my **Daily DevOps Learning Journey** under the mentorship of **Vimal 
 I'm **Kiran Rakh**, currently working as a **DevOps Intern** at **LinuxWorld Informatics Pvt Ltd**, under the exceptional guidance of **Vimal Daga Sir**.
 
 📌 Passionate about automation, cloud computing, and solving real-world tech problems using DevOps.
-
-📡 Connect With Me  
+---
+## 📡 Connect With Me  
 <p align="center"> <a href="https://www.linkedin.com/in/kiran-rakh-b644b6248/"> <img src="https://img.shields.io/badge/LinkedIn-Kiran%20Rakh-blue?style=for-the-badge&logo=linkedin" /> </a> <a href="https://github.com/Kiranrakh"> <img src="https://img.shields.io/badge/GitHub-Kiranrakh-black?style=for-the-badge&logo=github" /> </a> </p>
 
 ---
