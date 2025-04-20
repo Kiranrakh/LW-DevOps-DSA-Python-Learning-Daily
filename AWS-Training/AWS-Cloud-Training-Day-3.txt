@@ -1,0 +1,178 @@
+===========================================================
+CLOUD INFRASTRUCTURE & SERVERLESS COMPUTING EXPLAINED 
+===========================================================
+
+This document provides an overview of important cloud and 
+serverless computing concepts like infrastructure, scaling, 
+microservices, AWS Lambda, and more.
+
+-----------------------------------------------------------
+1. INFRASTRUCTURE
+-----------------------------------------------------------
+Infrastructure in cloud computing refers to the basic 
+hardware and software resources needed to run applications.
+
+Types of infrastructure:
+- Physical: Servers, storage, networking devices
+- Virtual: Cloud-based instances (e.g., EC2), containers
+- Managed: Services offered by providers like AWS, GCP, Azure
+
+In the cloud, you don’t need to own the hardware. You can 
+rent infrastructure as needed (IaaS - Infrastructure as a 
+Service).
+
+-----------------------------------------------------------
+2. SCALES RESOURCES
+-----------------------------------------------------------
+Scaling means increasing or decreasing resources based 
+on demand.
+
+TYPES:
+- **Vertical Scaling**: Increase the size of a single server 
+  (e.g., more CPU/RAM).
+- **Horizontal Scaling**: Add more servers (instances) to 
+  distribute the load.
+
+Example:
+If your app gets more users, AWS can automatically add more 
+instances using an Auto Scaling Group (ASG).
+
+-----------------------------------------------------------
+3. MICROSERVICES
+-----------------------------------------------------------
+Microservices is an architectural design where the app is 
+divided into small, independent services.
+
+Each service:
+- Handles a specific business function
+- Can be built, deployed, and scaled independently
+- Communicates with other services using APIs
+
+BENEFITS:
+- Easier to maintain and deploy
+- Better fault tolerance
+- Supports continuous delivery
+
+Example:
+E-commerce site with separate microservices for:
+- User Authentication
+- Product Listing
+- Payment Gateway
+- Order Management
+
+-----------------------------------------------------------
+4. FLEXIBILITY
+-----------------------------------------------------------
+Flexibility in cloud means you can:
+- Start or stop resources anytime
+- Change configurations easily
+- Choose different operating systems and runtimes
+- Use multiple regions worldwide
+
+You’re not locked into one fixed infrastructure.
+
+-----------------------------------------------------------
+5. SCALABILITY
+-----------------------------------------------------------
+Scalability is the ability of your application to handle 
+increasing traffic smoothly.
+
+In AWS:
+- Use Auto Scaling for EC2
+- Use Elastic Load Balancers to distribute incoming traffic
+- Use DynamoDB or RDS with read replicas for database scaling
+
+Your app grows automatically with traffic—no manual work.
+
+-----------------------------------------------------------
+6. LAMBDA SERVICE (AWS Lambda)
+-----------------------------------------------------------
+AWS Lambda is a **serverless computing service**.
+
+Key idea: Upload your code, and AWS runs it *only* when needed.
+No need to provision or manage servers.
+
+You can use Lambda to:
+- Process image uploads
+- Handle API requests
+- Run scheduled tasks (like a cron job)
+- Respond to database or file changes
+
+You pay only for the execution time, not idle time.
+
+-----------------------------------------------------------
+7. HOW TO CREATE A LAMBDA FUNCTION
+-----------------------------------------------------------
+Steps:
+1. Go to AWS Management Console → Lambda
+2. Click on “Create Function”
+3. Choose “Author from scratch”
+4. Name your function (e.g., `ProcessImageUpload`)
+5. Select a runtime (Python, Node.js, Java, etc.)
+6. Assign an IAM role (permission to access other AWS services)
+7. Click “Create Function”
+
+Now, you can write your function code in the inline editor or 
+upload a ZIP file with dependencies.
+
+-----------------------------------------------------------
+8. ENVIRONMENT VARIABLES (IN LAMBDA)
+-----------------------------------------------------------
+Environment variables store sensitive or configurable data 
+outside the code.
+
+Example:
+```
+DB_HOST = mydatabase.example.com
+API_KEY = abcd1234apikey
+```
+
+You can add these in the Lambda function configuration, and 
+access them using code:
+```python
+import os
+db_host = os.environ['DB_HOST']
+```
+
+-----------------------------------------------------------
+9. FUNCTION LOGS
+-----------------------------------------------------------
+AWS Lambda automatically sends logs to **CloudWatch Logs**.
+
+To view logs:
+1. Go to CloudWatch → Log Groups
+2. Find the log group for your Lambda function
+3. Click on the latest Log Stream to see output, errors, etc.
+
+Use these logs for:
+- Debugging your function
+- Checking performance
+- Monitoring usage
+
+-----------------------------------------------------------
+10. SERVERLESS COMPUTING
+-----------------------------------------------------------
+Serverless means *you write the code*, and the cloud provider 
+runs it without you managing any servers.
+
+Key features:
+- No infrastructure management
+- Event-driven execution (run on triggers like S3 upload, API request, etc.)
+- Automatic scaling
+- Pay-as-you-go billing model
+
+Popular serverless services:
+- **AWS Lambda** (Run backend code)
+- **Amazon API Gateway** (Create REST APIs)
+- **Amazon DynamoDB** (NoSQL DB that scales automatically)
+- **AWS Step Functions** (Workflow orchestration)
+
+-----------------------------------------------------------
+SUMMARY
+-----------------------------------------------------------
+Serverless and microservices help build scalable, flexible, 
+and cost-effective cloud applications.
+
+By using AWS Lambda and related services, you can focus on 
+your code and business logic—without worrying about servers.
+
