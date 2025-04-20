@@ -15,100 +15,95 @@
 ## 📘 <p align="center"><strong>About This Repository</strong></p>
 
 <p align="center">
-  Welcome to my **Daily DevOps Learning Journey** under the mentorship of **Vimal Daga Sir** at **LinuxWorld Informatics Pvt Ltd, Jaipur**.
-</p>
-
-<p align="center">
+  Welcome to my **Daily DevOps Learning Journey** under the mentorship of **Vimal Daga Sir** at **LinuxWorld Informatics Pvt Ltd, Jaipur**.  
   📌 This repo documents my hands-on exploration of real-world DevOps practices using:
+  <br />
+  - 🔧 Jenkins, Docker, Kubernetes  
+  - ☁️ AWS Cloud, Terraform, Ansible  
+  - 📈 Prometheus & Grafana  
+  - 🐧 Linux, GitHub, and CI/CD pipelines  
 </p>
 
 <p align="center">
-  - 🔧 Jenkins, Docker, Kubernetes <br />
-  - ☁️ AWS Cloud, Terraform, Ansible <br />
-  - 📈 Prometheus & Grafana <br />
-  - 🐧 Linux, GitHub, and CI/CD pipelines
-</p>
-
-<p align="center">
-  > 🚀 *Follow along as I grow into a future-ready DevOps Engineer!*
+  🚀 *Follow along as I grow into a future-ready DevOps Engineer!*
 </p>
 
 ---
 
 ## 🧭 <p align="center"><strong>Modules Covered</strong></p>
 
-### <p align="center">🏁 **Getting Started with DevOps**</p>
 <p align="center">
-  - 🔹 Deep dive into the DevOps mindset, culture, and philosophy <br />
-  - 🔹 Understanding SDLC stages and DevOps integration <br />
-  - 🔹 Agile, Scrum methodology and role of DevOps in iterative delivery
+  <strong>🏁 Getting Started with DevOps</strong><br />
+  🔹 Deep dive into the DevOps mindset, culture, and philosophy <br />
+  🔹 Understanding SDLC stages and DevOps integration <br />
+  🔹 Agile, Scrum methodology and role of DevOps in iterative delivery
 </p>
 
-### <p align="center">🔗 **Git & GitHub**</p>
 <p align="center">
-  - ✅ Git basics: versioning, branching strategies, merging, rebasing <br />
-  - ✅ Collaborating using GitHub: PRs, forks, reviews, and GitHub Actions <br />
-  - ✅ Webhooks and GitHub integrations for automation <br />
-  - ✅ Building a powerful GitHub profile to showcase DevOps journey
+  <strong>🔗 Git & GitHub</strong><br />
+  ✅ Git basics: versioning, branching strategies, merging, rebasing <br />
+  ✅ Collaborating using GitHub: PRs, forks, reviews, and GitHub Actions <br />
+  ✅ Webhooks and GitHub integrations for automation <br />
+  ✅ Building a powerful GitHub profile to showcase DevOps journey
 </p>
 
-### <p align="center">🐳 **Docker & ☸️ Kubernetes**</p>
 <p align="center">
-  - 🐳 Dockerizing applications with best practices for layered images <br />
-  - 🐳 Working with Docker Compose for multi-container apps <br />
-  - ☸️ Core Kubernetes concepts: Pods, Deployments, ReplicaSets, Services <br />
-  - ☸️ Hands-on with ConfigMaps, Secrets, Namespaces, and RBAC <br />
-  - 🎯 Helm: templating Kubernetes manifests, chart repos, values.yaml
+  <strong>🐳 Docker & ☸️ Kubernetes</strong><br />
+  🐳 Dockerizing applications with best practices for layered images <br />
+  🐳 Working with Docker Compose for multi-container apps <br />
+  ☸️ Core Kubernetes concepts: Pods, Deployments, ReplicaSets, Services <br />
+  ☸️ Hands-on with ConfigMaps, Secrets, Namespaces, and RBAC <br />
+  🎯 Helm: templating Kubernetes manifests, chart repos, values.yaml
 </p>
 
-### <p align="center">⚙️ **Jenkins - CI/CD Pipelines**</p>
 <p align="center">
-  - 🔄 End-to-end automation with Jenkins Pipelines (declarative + scripted) <br />
-  - 🧩 Jenkins integration with GitHub, DockerHub, and Kubernetes <br />
-  - 🚀 Creating multibranch pipelines and managing credentials securely
+  <strong>⚙️ Jenkins - CI/CD Pipelines</strong><br />
+  🔄 End-to-end automation with Jenkins Pipelines (declarative + scripted) <br />
+  🧩 Jenkins integration with GitHub, DockerHub, and Kubernetes <br />
+  🚀 Creating multibranch pipelines and managing credentials securely
 </p>
 
-### <p align="center">📊 **Monitoring & Logging**</p>
 <p align="center">
-  - 🔍 Prometheus for time-series metrics and service health monitoring <br />
-  - 📈 Grafana dashboards for real-time observability and insights <br />
-  - 📜 Integrating Node Exporter, Blackbox Exporter, and Kubernetes metrics
+  <strong>📊 Monitoring & Logging</strong><br />
+  🔍 Prometheus for time-series metrics and service health monitoring <br />
+  📈 Grafana dashboards for real-time observability and insights <br />
+  📜 Integrating Node Exporter, Blackbox Exporter, and Kubernetes metrics
 </p>
 
-### <p align="center">🧱 **Infrastructure as Code (IaC)**</p>
 <p align="center">
-  - ⚙️ Ansible for remote configuration and automation using playbooks and roles <br />
-  - 🌍 Terraform to provision complete AWS infrastructure: VPC, EC2, EKS, IAM <br />
-  - 🧩 Modular approach to IaC, separating networking, compute, and security
+  <strong>🧱 Infrastructure as Code (IaC)</strong><br />
+  ⚙️ Ansible for remote configuration and automation using playbooks and roles <br />
+  🌍 Terraform to provision complete AWS infrastructure: VPC, EC2, EKS, IAM <br />
+  🧩 Modular approach to IaC, separating networking, compute, and security
 </p>
 
-### <p align="center">☁️ **Cloud Providers**</p>
 <p align="center">
-  - 🌩️ AWS: compute (EC2, Lambda), storage (S3, EBS), networking (VPC, ELB) <br />
-  - 🌩️ Managing IAM roles, policies, CloudWatch monitoring, Route 53 DNS <br />
-  - 🌀 Introduction to Azure & GCP: core services and comparison with AWS
+  <strong>☁️ Cloud Providers</strong><br />
+  🌩️ AWS: compute (EC2, Lambda), storage (S3, EBS), networking (VPC, ELB) <br />
+  🌩️ Managing IAM roles, policies, CloudWatch monitoring, Route 53 DNS <br />
+  🌀 Introduction to Azure & GCP: core services and comparison with AWS
 </p>
 
-### <p align="center">🐧 **Linux & Bash Scripting**</p>
 <p align="center">
-  - 🧰 Linux CLI: file manipulation, permissions, systemd, package managers <br />
-  - 📜 Automating tasks via bash scripts and cron jobs for DevOps workflows
+  <strong>🐧 Linux & Bash Scripting</strong><br />
+  🧰 Linux CLI: file manipulation, permissions, systemd, package managers <br />
+  📜 Automating tasks via bash scripts and cron jobs for DevOps workflows
 </p>
 
-### <p align="center">🔁 **GitOps with Argo CD**</p>
 <p align="center">
-  - 🚀 Git repositories as the source of truth for K8s manifests <br />
-  - 🔄 Argo CD syncs Git → Kubernetes cluster automatically <br />
-  - 🔐 Secure deployments with declarative YAML + RBAC integration <br />
-  - 💡 Combining Jenkins + Helm + Argo CD for GitOps-based deployment flow
+  <strong>🔁 GitOps with Argo CD</strong><br />
+  🚀 Git repositories as the source of truth for K8s manifests <br />
+  🔄 Argo CD syncs Git → Kubernetes cluster automatically <br />
+  🔐 Secure deployments with declarative YAML + RBAC integration <br />
+  💡 Combining Jenkins + Helm + Argo CD for GitOps-based deployment flow
 </p>
 
-### <p align="center">🔐 **DevSecOps & Security Best Practices**</p>
 <p align="center">
-  - 🔎 Secrets and credentials management via K8s Secrets and tools like Vault <br />
-  - 🛡️ Security scanning: integrating Trivy, SonarQube in CI/CD pipelines <br />
-  - 🧪 Conducting SAST and DAST for application security <br />
-  - ✅ Implementing RBAC policies and AWS IAM controls for least privilege
+  <strong>🔐 DevSecOps & Security Best Practices</strong><br />
+  🔎 Secrets and credentials management via K8s Secrets and tools like Vault <br />
+  🛡️ Security scanning: integrating Trivy, SonarQube in CI/CD pipelines <br />
+  🧪 Conducting SAST and DAST for application security <br />
+  ✅ Implementing RBAC policies and AWS IAM controls for least privilege
 </p>
 
 ---
@@ -144,6 +139,7 @@
 ---
 
 ## 🙋‍♂️ <p align="center"><strong>About Me</strong></p>  
+
 <p align="center">
   I'm **Kiran Rakh**, currently working as a **DevOps Intern** at **LinuxWorld Informatics Pvt Ltd**, under the exceptional guidance of **Vimal Daga Sir**.
 </p>
