@@ -1,0 +1,100 @@
+===========================================
+Amazon API Gateway & AWS Lambda - Overview
+===========================================
+
+What is API Gateway?
+--------------------
+Amazon API Gateway is a fully managed service that helps developers create, publish, maintain, monitor, and secure APIs. 
+It serves as a front door for applications to access data, business logic, or functionality from your backend services 
+such as AWS Lambda, EC2, or other web services.
+
+What is an API (Application Programming Interface)?
+---------------------------------------------------
+An API is a set of rules and protocols that allow different software applications to communicate. It defines how to
+interact with data and operations.
+
+RESTful API - Uses HTTP methods like GET, POST, PUT, DELETE.
+SOAP API    - Uses XML for message formatting.
+
+Features of API Gateway:
+-------------------------
+1. Connects to AWS Lambda for serverless backend logic
+2. Supports microservices with multiple functions
+3. URL routing system for RESTful APIs
+4. Supports logging and monitoring with CloudWatch
+5. Can be secured using IAM, Cognito, and API keys
+6. Scalable and highly available
+
+Microservices and Routing:
+---------------------------
+- API Gateway can route traffic to different Lambda functions or services.
+- URL example: https://your-api.com/users
+  Methods supported: GET, POST, PUT, DELETE
+
+Example Setup:
+--------------
+Step 1: Create a Lambda Function
+- Runtime: Node.js, Python, etc.
+- Function: GetUsersLambda
+
+Step 2: Create an API in API Gateway
+- Resource: /users
+- Method: GET
+- Integration: Lambda function (GetUsersLambda)
+
+Step 3: Enable CORS and Logging
+- Enable CORS if accessed from frontend apps
+- Enable CloudWatch Logs for monitoring
+
+Step 4: Deploy the API
+- Stage: prod
+- Invoke URL: https://xyz123.execute-api.region.amazonaws.com/prod/users
+
+Sample Request and Response:
+-----------------------------
+Request:
+GET https://xyz123.execute-api.region.amazonaws.com/prod/users
+
+Response:
+200 OK
+{
+  "users": [
+    {"id": 1, "name": "Alice"},
+    {"id": 2, "name": "Bob"}
+  ]
+}
+
+Error:
+400 Bad Request
+{
+  "error": "Invalid Request"
+}
+
+Advanced Use Cases:
+--------------------
+- Search Function: Use API Gateway + Lambda to query search indexes (e.g., Elasticsearch)
+- Email Notification: Use Lambda to trigger Amazon SES for sending emails
+
+Monitoring and Logging:
+------------------------
+- CloudWatch Logs: View logs from Lambda and API Gateway
+- Metrics: Monitor request count, latency, and error rate
+
+Security:
+---------
+- Use IAM roles for access control
+- Enable API keys for client apps
+- Use Cognito User Pools for user authentication
+
+🧪 Hands-on Practice:
+📌 Created and tested two Lambda functions via AWS Console:
+🔹 Search → Returns “Hello from Lambda! to KIRAN RAKH”
+🔹 Gmail → Returns “I am a Mail Function App!”
+
+🛠️ Connected these functions with API Gateway endpoints — turning my code into real-time APIs that can be accessed via URLs. This shows how powerful and flexible serverless architecture can be!
+
+Conclusion:
+-----------
+API Gateway + Lambda = Scalable, Serverless Microservices Architecture.
+Useful for building modern applications with minimal backend maintenance.
+
