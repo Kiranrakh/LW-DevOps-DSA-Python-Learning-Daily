@@ -1,0 +1,106 @@
+============================================
+Cloud Storage Services & AWS Storage Types
+============================================
+
+1. ☁️ Storage as a Service (STaaS)
+----------------------------------
+- STaaS is a cloud computing model where you can **store, manage, and access data** over the internet.
+- Eliminates the need for physical storage infrastructure.
+- You pay only for the storage you use (pay-as-you-go).
+- Common in **cloud platforms** like AWS, Azure, and GCP.
+
+Benefits:
+  • Scalable
+  • Secure
+  • Managed by cloud provider
+  • Easy backup and disaster recovery
+
+---
+
+2. 📦 Types of Cloud Storage
+----------------------------
+
+A. Block Storage
+----------------
+- Data is divided into **blocks** and stored in volumes.
+- Each block acts as an individual hard drive.
+- Ideal for databases, OS storage, and high-performance apps.
+
+Example in AWS: 
+🔹 **Amazon EBS (Elastic Block Store)**
+
+Use Cases:
+  • EC2 instances
+  • High-performance workloads
+  • Databases (MySQL, PostgreSQL, etc.)
+
+---
+
+B. File Storage
+---------------
+- Stores data in a **hierarchical folder and file format**.
+- Accessible through file paths like a local filesystem.
+- Shared access to multiple machines.
+
+Example in AWS:
+🔹 **Amazon EFS (Elastic File System)**
+
+Use Cases:
+  • Content management
+  • Shared files for applications
+  • Home directories
+
+---
+
+C. Object Storage
+------------------
+- Stores data as **objects** with metadata and unique identifiers.
+- Best suited for storing large amounts of unstructured data.
+- Highly durable and scalable.
+
+Example in AWS:
+🔹 **Amazon S3 (Simple Storage Service)**
+
+Use Cases:
+  • Backups and archives
+  • Media storage (images, videos)
+  • Hosting static websites
+  • Big data analytics
+
+---
+
+3. 📦 Amazon EBS – Block Storage in AWS
+---------------------------------------
+- Attach EBS volumes to EC2 instances for **persistent block storage**.
+- Types:
+  • gp3 (General Purpose SSD)
+  • io2 (Provisioned IOPS SSD)
+  • sc1 (Cold HDD)
+- Automatically replicated within an Availability Zone.
+
+---
+
+4. 🪣 Amazon S3 – Object Storage in AWS
+---------------------------------------
+- Store unlimited data with 11 9's durability (99.999999999%).
+- Offers features like:
+  • Lifecycle policies
+  • Versioning
+  • Encryption (SSE)
+  • S3 Glacier for cold storage
+
+Bucket: Top-level container for storing data.
+Object: File + metadata stored inside the bucket.
+
+---
+
+✅ Summary:
+-----------
+| Type     | Service | Best For                       |
+|----------|---------|--------------------------------|
+| Block    | EBS     | Databases, OS Disks, EC2 Vols  |
+| File     | EFS     | Shared file systems, NFS       |
+| Object   | S3      | Media, backups, web hosting    |
+
+STaaS + AWS = Easy, Scalable, Durable, and Cost-Efficient Storage Management
+
