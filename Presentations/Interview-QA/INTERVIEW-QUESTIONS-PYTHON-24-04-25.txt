@@ -1,0 +1,48 @@
+============================================================
+           INTERVIEW QUESTIONS: PYTHON & AUTOMATION
+============================================================
+
+1. Understanding Python Variables and Memory Management
+--------------------------------------------------------
+QUESTION:
+"Can you explain how Python handles memory allocation for variables, and what role the assignment operator (`=`) plays in this process?"
+
+WHY THIS IS ASKED:
+This question tests your understanding of Python's internal workings, especially how it stores and manages variables in memory.
+
+WHAT TO INCLUDE IN YOUR ANSWER:
+- Python variables point to objects in memory.
+- The assignment operator (`=`) binds a variable name to an object.
+- Python uses dynamic typing and automatic garbage collection.
+
+REFERENCE:
+Python Data Model Documentation:
+https://docs.python.org/3/reference/datamodel.html
+
+============================================================
+
+2. Automating WhatsApp Messages Using Python
+--------------------------------------------
+QUESTION:
+"Describe how you would use Python to automate sending a WhatsApp message, and explain how you’d install and use any external modules required."
+
+WHY THIS IS ASKED:
+This checks practical knowledge of using Python for automation, including importing modules and using pip for installations.
+
+WHAT TO INCLUDE IN YOUR ANSWER:
+- Use `pywhatkit` module.
+- Install via pip: `pip install pywhatkit`
+- Use: `import pywhatkit`
+- Send message: `pywhatkit.sendwhatmsg()`
+- Requires browser login to WhatsApp Web.
+
+REFERENCES:
+GeeksforGeeks Tutorial:
+https://www.geeksforgeeks.org/automate-whatsapp-messages-with-python-using-pywhatkit-module/
+
+Stack Overflow Discussion:
+https://stackoverflow.com/questions/68149977/how-to-send-message-in-whatapp-by-pywhatkit
+
+============================================================
+TIP:
+Prepare example code snippets and discuss how you would handle errors or edge cases during automation
