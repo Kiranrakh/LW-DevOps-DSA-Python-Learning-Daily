@@ -30,8 +30,6 @@
      - 🔗 Reference: https://www.datacamp.com/blog/top-python-interview-questions-and-answers 
      - ✅ Answer: 
 
-What is the difference between merge, join, and concatenate?
-
 Merge
 Merge two DataFrames named series objects using the unique column identifier. 
 
