@@ -1,0 +1,115 @@
+==================================================
+Session 8 - AWS Tools and Concepts Reference
+==================================================
+
+1. WebUI, API, and CLI
+--------------------------------------------------
+- WebUI (AWS Management Console):
+  A browser-based GUI for interacting with AWS services.
+  Ideal for beginners and visual management of AWS resources.
+
+- API (Application Programming Interface):
+  Allows programmatic access to AWS services via HTTPS requests.
+  Used by developers to integrate AWS features in applications.
+
+- CLI (Command Line Interface):
+  A powerful command-line tool to interact with AWS services.
+  Example: aws s3 ls
+
+2. Boto3 Library
+--------------------------------------------------
+- Boto3 is the Amazon Web Services (AWS) SDK for Python.
+- It allows developers to write Python code that interacts with AWS services like EC2, S3, DynamoDB, etc.
+
+  Example:
+  import boto3  
+  s3 = boto3.resource('s3')  
+  for bucket in s3.buckets.all():  
+      print(bucket.name)
+
+3. Anaconda
+--------------------------------------------------
+- Anaconda is a distribution of Python and R for scientific computing.
+- It includes package management (conda), Jupyter Notebooks, and data science libraries.
+- Often used for ML/AI projects that may interact with AWS services (like SageMaker).
+
+4. AMI IDs (Amazon Machine Images)
+--------------------------------------------------
+- AMI stands for Amazon Machine Image.
+- It provides the information required to launch an EC2 instance.
+- AMIs are region-specific. Example:
+  - Amazon Linux 2 AMI ID in us-east-1: ami-0c02fb55956c7d316
+
+- To find AMI IDs:
+  AWS CLI: aws ec2 describe-images --owners amazon
+
+5. AWS Resources
+--------------------------------------------------
+- Compute: EC2, Lambda, ECS, EKS
+- Storage: S3, EBS, EFS
+- Databases: RDS, DynamoDB, Aurora
+- Networking: VPC, Subnets, Route Tables
+- Security: IAM, KMS, Security Groups, NACLs
+
+6. Functions and Methods (in Boto3)
+--------------------------------------------------
+- Boto3 functions and methods help in automating resource management.
+
+  Example (EC2):
+  import boto3  
+  ec2 = boto3.client('ec2')  
+  response = ec2.describe_instances()
+
+  Example (S3 upload):
+  import boto3  
+  s3 = boto3.client('s3')  
+  s3.upload_file('file.txt', 'my-bucket', 'file.txt')
+
+
+
+***********************************************************************
+-----------------Hand-On Practical with Vimal Sir----------------------
+***********************************************************************
+
+
+# In terminal: Install the boto3 library to interact with AWS services using Python
+>> pip install boto3
+
+# In Jupyter Notebook or any Python environment
+>> import boto3  # Importing the boto3 SDK to access AWS services
+
+# Creating a resource object for EC2 service
+>> myec2 = boto3.resource("ec2")
+
+# Launching a new EC2 instance
+>> response = myec2.create_instances(
+    ImageId='ami-0c02fb55956c7d316',  # AMI ID for Amazon Linux 2 (region-specific)
+    InstanceType='t2.micro',          # Instance type (free tier eligible)
+    MaxCount=1,                       # Maximum number of instances to launch
+    MinCount=1                        # Minimum number of instances to launch
+)
+
+# Getting the created instance object
+
+>> response[0]                          # Accessing the first (and only) instance object from the list
+
+
+
+# Getting the ID of the created instance
+
+>> response[0].id                       # Prints the unique instance ID
+
+
+
+# Getting the AMI ID of the instance
+
+>> response[0].image_id                 # Prints the AMI ID used for the instance
+
+
+
+# Getting the public IP address of the instance (note: it may take time to be assigned)
+
+>> response[0].public_ip_address        # Prints the public IP of the instance
+
+
+

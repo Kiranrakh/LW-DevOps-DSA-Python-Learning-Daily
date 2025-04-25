@@ -1,0 +1,162 @@
+==================================================
+AWS S3, Serverless, and SNS Concepts
+==================================================
+
+1. S3 Bucket
+--------------------------------------------------
+- Amazon S3 (Simple Storage Service) is object storage used for storing and retrieving any amount of data.
+- Buckets are containers for storing objects (files).
+- Each bucket has a globally unique name.
+
+2. Serverless
+--------------------------------------------------
+- Serverless computing allows running code without provisioning or managing servers.
+- AWS services like Lambda, API Gateway, DynamoDB, and S3 are part of serverless architecture.
+- Benefits include automatic scaling, built-in high availability, and pay-as-you-go pricing.
+
+3. Object Ownership (in S3)
+--------------------------------------------------
+- Defines who owns the objects uploaded to a bucket.
+- Two settings:
+  1. Bucket owner preferred
+  2. Object writer (default for cross-account uploads)
+
+- For simplifying permissions, "Bucket owner preferred" is often used with S3 Access Points or AWS Organizations.
+
+4. ACLs (Access Control Lists)
+--------------------------------------------------
+- ACLs are one way to manage access to S3 buckets and objects.
+- You can assign read/write permissions to specific AWS accounts.
+- Recommended to use IAM policies or bucket policies instead of ACLs when possible.
+
+5. Index Document (Static Website Hosting)
+--------------------------------------------------
+- S3 can host static websites.
+- "Index Document" is the default page shown when a user accesses the root of your website.
+  Example: index.html
+
+- You can also configure an "Error Document" for 404 pages.
+
+6. SNS Service (Simple Notification Service)
+--------------------------------------------------
+- AWS SNS is a fully managed messaging service used to send notifications.
+- Supports application-to-person (A2P) communication through email, SMS, and mobile push.
+
+7. Subscriptions (in SNS)
+--------------------------------------------------
+- Subscriptions define where messages published to an SNS topic are delivered.
+- Each subscription corresponds to a supported protocol:
+  - Email
+  - SMS
+  - HTTP/HTTPS
+  - AWS Lambda
+  - SQS (Simple Queue Service)
+
+8. Topics (in SNS)
+--------------------------------------------------
+- Topics are communication channels for delivering messages to multiple subscribers.
+- Publishers send messages to topics, and SNS pushes them to all subscribers.
+
+
+*******************************************************************************
+---------------------Hand-On Practices With Vimal Daga sir --------------------
+*******************************************************************************
+
+	        ==================================================
+	           AWS S3 Bucket – Creating and Uploading Files
+	        ==================================================
+
+1. AWS Resource: S3
+--------------------------------------------------
+- Amazon S3 (Simple Storage Service) is used to store and retrieve any amount of data at any time.
+- It provides object storage with high durability, availability, and scalability.
+
+2. Steps to Create an S3 Bucket
+--------------------------------------------------
+Step 1: Go to the AWS Management Console  
+Step 2: Navigate to **S3** under the Services menu  
+Step 3: Click **"Create bucket"**  
+
+  - **Bucket name**: Provide a globally unique name  
+    Example: `my-kiran-devops-bucket`
+
+  - **Region**: Select the AWS Region (e.g., `Asia Pacific (Mumbai) ap-south-1`)
+
+Step 4: Leave other settings default or customize as needed  
+Step 5: Click **"Create bucket"**
+
+3. Uploading a File from Local System
+--------------------------------------------------
+Step 1: Open the newly created bucket  
+Step 2: Click **"Upload"**  
+Step 3: Add files from your local system  
+Step 4: Click **"Upload"** to start the upload process  
+
+4. Accessing the File Publicly
+--------------------------------------------------
+- After uploading the file:
+  - Go to the **Properties** tab
+  - Scroll to the **Object URL**
+  - Copy the URL — this can be shared with others (only if public access is allowed)
+
+  Example:  
+  `https://my-kiran-devops-bucket.s3.amazonaws.com/myfile.txt`
+
+⚠️ Note:  
+To allow public access:
+- You may need to **edit the bucket policy**
+- OR enable public access settings while uploading the object
+
+5. Accessing the File Publicly
+--------------------------------------------------
+- After uploading the file:
+  - Go to the **Properties** tab
+  - Scroll to the **Object URL**
+  - Copy the URL — this can be shared with others (only if public access is allowed)
+
+  Example:  
+  https://my-kiran-devops-bucket.s3.amazonaws.com/myfile.txt
+
+⚠️ Note: To Allow Public Access to the File
+--------------------------------------------------
+You must configure permissions properly so the file can be accessed by anyone:
+
+Option 1: **Edit the Bucket Policy**
+- Go to your bucket
+- Click the **Permissions** tab
+- Click **Bucket Policy**
+- Paste a policy like the following (replace `my-kiran-devops-bucket` with your actual bucket name):
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "PublicReadGetObject",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::my-kiran-devops-bucket/*"
+    }
+  ]
+}
+
+Option 2: Enable Public Access Settings While Uploading
+
+During file upload:
+
+Expand "Permissions"
+
+Uncheck "Block all public access"
+
+Under "Access Control List (ACL)", select "Grant public read access to this object(s)"
+
+-----------------------------------------------------------------------------------------
+⚠️ Use with Caution:
+
+Public access means anyone on the internet can view or download your file.
+Do not share sensitive or private data publicly.
+
+
+
+

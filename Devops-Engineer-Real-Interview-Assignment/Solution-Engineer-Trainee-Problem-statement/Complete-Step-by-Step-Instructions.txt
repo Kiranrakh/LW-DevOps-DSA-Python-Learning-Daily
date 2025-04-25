@@ -1,0 +1,140 @@
+These are the **complete step-by-step instructions** to perform your **DVWA on Kubernetes practical**, including deployment, attacks, and demonstration.
+
+---
+
+# 💻 Practical: Deploy DVWA on Local Kubernetes (Minikube) and Demonstrate 3 Attacks
+
+---
+
+## 🔧 Step 1: Start Minikube (Kubernetes Local Cluster)
+
+```bash
+minikube start --driver=docker
+```
+
+> If you're using VirtualBox or Hyper-V, change `--driver=docker` to your system's driver.
+
+---
+
+## 📁 Step 2: Create DVWA Deployment YAML
+
+Create a file: `dvwa-deployment.yaml`
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dvwa
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dvwa
+  template:
+    metadata:
+      labels:
+        app: dvwa
+    spec:
+      containers:
+        - name: dvwa
+          image: vulnerables/web-dvwa
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dvwa-service
+spec:
+  selector:
+    app: dvwa
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: NodePort
+```
+
+---
+
+## 🚀 Step 3: Deploy DVWA to Kubernetes
+
+```bash
+kubectl apply -f dvwa-deployment.yaml
+```
+
+Check if it’s running:
+
+```bash
+kubectl get pods
+kubectl get svc
+```
+
+---
+
+## 🌐 Step 4: Access DVWA in Browser
+
+Open service in browser:
+
+```bash
+minikube service dvwa-service
+```
+
+This will open DVWA at something like: `http://192.168.x.x:xxxxx`
+
+> ⚠️ Make sure DVWA is fully loaded. It might ask you to reset the database first time.
+
+---
+
+## 🔐 Step 5: Set DVWA to “Low” Security
+
+- Go to: **DVWA → Security → Set to Low**
+- Click "Submit"
+
+---
+
+## 🎯 Step 6: Perform 3 Security Attacks
+
+---
+
+### ✅ 1. **Command Injection**
+- Navigate to: **DVWA → Command Injection**
+- Input: `127.0.0.1; ls`
+- Submit
+
+🎓 **Goal**: Prove remote code execution is possible.
+
+---
+
+### ✅ 2. **SQL Injection**
+- Navigate to: **DVWA → SQL Injection**
+- Input: `1' OR '1'='1` and click “Submit”
+
+🎓 **Goal**: Show how attackers bypass authentication or view data.
+
+---
+
+### ✅ 3. **Stored XSS**
+- Navigate to: **DVWA → Stored XSS**
+- Input in Message box: `<script>alert('Hacked!')</script>`
+- Click “Sign Guestbook”
+- Refresh the page to see the alert pop-up
+
+🎓 **Goal**: Demonstrate persistent cross-site scripting.
+
+---
+
+## ✅ Step 7: Cleanup (Optional)
+
+```bash
+kubectl delete -f dvwa-deployment.yaml
+minikube stop
+```
+
+---
+
+## 🧠 Pro Tip: During Practical/Demo
+
+> “I deployed DVWA on Minikube to simulate and demonstrate 3 critical attack surfaces — Command Injection, SQL Injection, and Stored XSS. This exercise helped me understand how insecure code behaves and how Kubernetes handles vulnerable applications. I plan to explore defenses using tools like Falco or KubeArmor as a next step.”
+
+---
