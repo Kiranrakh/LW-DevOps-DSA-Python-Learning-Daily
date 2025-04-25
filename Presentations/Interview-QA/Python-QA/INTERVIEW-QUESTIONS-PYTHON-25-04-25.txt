@@ -1,0 +1,71 @@
+===================================================================================================
+                                   ✅ Python Interview Question ✅
+===================================================================================================
+
+📅 Date: 25-04-2024
+
+👥 Team Members & Questions:
+
+1. **Kiran Rakh**
+   - Q1: What is the time complexity for inserting and deleting elements in a list?
+     - 🏢 Asked in: LTI
+     - 🔗 Reference: https://wiki.python.org/moin/TimeComplexity
+     - ✅ Answer:
+	- Insertion at the end: O(1)
+	- Insertion at beginning or middle: O(n)
+	- Deletion: O(n)
+
+   - Q2: What happens when a function doesn’t have a return statement? Is this valid?
+     - 🏢 Asked in: Capgemini company
+     - 🔗 Reference: https://www.credosystemz.com/capgemini-python-interview-questions/
+     - ✅ Answer: A function without an explicit return statement returns None . In the case of no arguments and no return value, the definition is very simple. Calling the function is performed by using the call operator () after the name of the function.
+
+
+2. **Sachin Singh Patel**
+   - Q1: 
+     - 🏢 Asked in: 
+     - 🔗 Reference: 
+     - ✅ Answer: 
+
+   - Q2: 
+     - 🏢 Asked in: 
+     - 🔗 Reference: 
+     - ✅ Answer: 
+
+3. **Bhushan Yadav**
+   - Q1: 
+     - 🏢 Asked in: 
+     - 🔗 Reference: 
+     - ✅ Answer: 
+
+   - Q2: 
+     - 🏢 Asked in: 
+     - 🔗 Reference: 
+     - ✅ Answer: 
+
+4. **Gaurav Patil**
+   - Q1: 
+     - 🏢 Asked in: 
+     - 🔗 Reference: 
+     - ✅ Answer: 
+
+   - Q2: 
+     - 🏢 Asked in: 
+     - 🔗 Reference: 
+     - ✅ Answer: 
+
+5. **Manasi Patil**
+   - Q1: 
+     - 🏢 Asked in: 
+     - 🔗 Reference: 
+     - ✅ Answer: 
+
+   - Q2: 
+     - 🏢 Asked in: 
+     - 🔗 Reference: 
+     - ✅ Answer: 
+
+
+📝 Presented By: Bhushan Yadav
+
+

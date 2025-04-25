@@ -1,0 +1,68 @@
+===================================================================================================
+                                   ✅ Python Interview Question ✅
+===================================================================================================
+
+📅 Date: _______________________
+
+👥 Team Members & Questions:
+
+1. **Kiran Rakh**
+   - Q1: 
+     - 🏢 Asked in: 
+     - 🔗 Reference: 
+     - ✅ Answer: 
+
+   - Q2: 
+     - 🏢 Asked in: 
+     - 🔗 Reference: 
+     - ✅ Answer: 
+
+2. **Sachin Singh Patel**
+   - Q1: 
+     - 🏢 Asked in: 
+     - 🔗 Reference: 
+     - ✅ Answer: 
+
+   - Q2: 
+     - 🏢 Asked in: 
+     - 🔗 Reference: 
+     - ✅ Answer: 
+
+3. **Bhushan Yadav**
+   - Q1: 
+     - 🏢 Asked in: 
+     - 🔗 Reference: 
+     - ✅ Answer: 
+
+   - Q2: 
+     - 🏢 Asked in: 
+     - 🔗 Reference: 
+     - ✅ Answer: 
+
+4. **Gaurav Patil**
+   - Q1: 
+     - 🏢 Asked in: 
+     - 🔗 Reference: 
+     - ✅ Answer: 
+
+   - Q2: 
+     - 🏢 Asked in: 
+     - 🔗 Reference: 
+     - ✅ Answer: 
+
+5. **Manasi Patil**
+   - Q1: 
+     - 🏢 Asked in: 
+     - 🔗 Reference: 
+     - ✅ Answer: 
+
+   - Q2: 
+     - 🏢 Asked in: 
+     - 🔗 Reference: 
+     - ✅ Answer: 
+
+
+📝 Presented By: _______________________
+
+
+
