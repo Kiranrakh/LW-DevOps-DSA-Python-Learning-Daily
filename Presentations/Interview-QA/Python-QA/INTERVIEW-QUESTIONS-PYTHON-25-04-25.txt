@@ -39,17 +39,14 @@ It requires two DataFrame, a common column in both DataFrame, and “how” you 
 
 
 Example:- pd.merge(df1, df2, how='outer', on='Id')
-
  
 Join
 Join the DataFrames using the unique index. It requires an optional on argument that can be a column or multiple column names. By default, the join function performs a left join. 
-
 
 Example:- df1.join(df2)
 
 Concatenate
 Concatenate joins two or multiple DataFrames along a particular axis (rows or columns). It doesn't require an on argument. 
-
 
 Example:- pd.concat(df1,df2)
 
@@ -133,16 +130,17 @@ result = find_magic_index(arr)
 print(f"Magic Index: {result}" if result != -1 else "No Magic Index found") 
 
 5. **Manasi Patil**
-   - Q1: what is an array's size?
-     - 🏢 Asked in: tcs
-     - 🔗 Reference: 
-     - ✅ Answer:https://docs.google.com/document/d/1QGt0_fTUds0SLQFxAVkA3ka03pQwy-p_/edit?tab=t.0
-		- The number of elements in the array.The size is dynamic, meaning it can grow or shrink as you add or remove elements
+   - Q1: what is an array?
+     - 🏢 Asked in: TCS
+     - 🔗 Reference: https://docs.google.com/document/d/1QGt0_fTUds0SLQFxAVkA3ka03pQwy-p_/edit?tab=t.0 
+     - ✅ Answer:
+		- An array is a data structure that stores a fixed-size sequence of elements of the same type. These elements are stored contiguously (side by side) in memory, meaning each element is placed next to the other in a linear fashion.  
 
-   - Q2: What is the difference between a mutable data type and an immutable data type?
-     - 🏢 Asked in: DXC
-     - 🔗 Reference: 
+   - Q2: what is an array's size? 
+     - 🏢 Asked in: TCS
+     - 🔗 Reference: https://docs.google.com/document/d/1QGt0_fTUds0SLQFxAVkA3ka03pQwy-p_/edit?tab=t.0 
      - ✅ Answer: 
+		- The number of elements in the array.The size is dynamic, meaning it can grow or shrink as you add or remove elements    
 
 
 
