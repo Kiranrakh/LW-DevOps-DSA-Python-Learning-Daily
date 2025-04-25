@@ -3,69 +3,146 @@
 ===================================================================================================
 
 📅 Date: 25-04-2024
+📝 Presented By: Bhushan Yadav
 
 👥 Team Members & Questions:
+
 
 1. **Kiran Rakh**
    - Q1: What is the time complexity for inserting and deleting elements in a list?
      - 🏢 Asked in: LTI
      - 🔗 Reference: https://wiki.python.org/moin/TimeComplexity
      - ✅ Answer:
-	- Insertion at the end: O(1)
-	- Insertion at beginning or middle: O(n)
-	- Deletion: O(n)
+		- Insertion at the end: O(1)
+		- Insertion at beginning or middle: O(n)
+		- Deletion: O(n)
 
    - Q2: What happens when a function doesn’t have a return statement? Is this valid?
      - 🏢 Asked in: Capgemini company
      - 🔗 Reference: https://www.credosystemz.com/capgemini-python-interview-questions/
-     - ✅ Answer: A function without an explicit return statement returns None . In the case of no arguments and no return value, the definition is very simple. Calling the function is performed by using the call operator () after the name of the function.
+     - ✅ Answer: 
+		- A function without an explicit return statement returns None . In the case of no arguments and no return value, the definition is very simple. Calling the function is performed by using the call operator () after the name of the function.
 
 
 2. **Sachin Singh Patel**
-   - Q1: 
+   - Q1: What is the difference between merge, join, and concatenate?
      - 🏢 Asked in: 
-     - 🔗 Reference: 
+     - 🔗 Reference: https://www.datacamp.com/blog/top-python-interview-questions-and-answers 
      - ✅ Answer: 
 
-   - Q2: 
+What is the difference between merge, join, and concatenate?
+
+Merge
+Merge two DataFrames named series objects using the unique column identifier. 
+
+It requires two DataFrame, a common column in both DataFrame, and “how” you want to join them together. You can left, right, outer, inner, and cross join two data DataFrames. By default, it is an inner join. 
+
+
+Example:- pd.merge(df1, df2, how='outer', on='Id')
+
+ 
+Join
+Join the DataFrames using the unique index. It requires an optional on argument that can be a column or multiple column names. By default, the join function performs a left join. 
+
+
+Example:- df1.join(df2)
+
+Concatenate
+Concatenate joins two or multiple DataFrames along a particular axis (rows or columns). It doesn't require an on argument. 
+
+
+Example:- pd.concat(df1,df2)
+
+ 
+join(): combines two DataFrames by index.
+merge(): combines two DataFrames by the column or columns you specify.
+concat(): combines two or more DataFrames vertically or horizontally.
+
+   - Q2: What is _init_() in Python?
+
      - 🏢 Asked in: 
-     - 🔗 Reference: 
+     - 🔗 Reference: https://www.datacamp.com/blog/top-python-interview-questions-and-answers 
      - ✅ Answer: 
+		- The _init_() method is known as a constructor in object-oriented programming (OOP) terminology. It is used to initialize an object's state when it is created. This method is automatically called when a new instance of a class is instantiated.
+
+		- Purpose:
+
+		Assign values to object properties.
+		Perform any initialization operations.
 
 3. **Bhushan Yadav**
-   - Q1: 
-     - 🏢 Asked in: 
+   - Q1: How do you remove duplicates from a list? 
+     - 🏢 Asked in: Deloitte
      - 🔗 Reference: 
      - ✅ Answer: 
+	        - Using set() (Fast, but order is not preserved)
 
-   - Q2: 
-     - 🏢 Asked in: 
+		  my_list = [1, 2, 2, 3, 4, 4, 5]
+		  unique_list = list(set(my_list))
+		  print(unique_list)
+
+		  set(my_list) removes duplicates because sets can't have duplicate values.
+
+		  But sets are unordered, so the original order of elements might change.
+
+		  list(...) turns the set back into a list.
+
+		  Example output:
+
+		  [1, 2, 3, 4, 5]  # order might vary
+
+   - Q2: How can we find that How many elements are there in a list?
+     - 🏢 Asked in: Tech Mahindra
      - 🔗 Reference: 
-     - ✅ Answer: 
+     - ✅ Answer: with the help of len() function
 
 4. **Gaurav Patil**
-   - Q1: 
-     - 🏢 Asked in: 
-     - 🔗 Reference: 
-     - ✅ Answer: 
+   - Q1: What are the advantages of using arrays over linked lists?
 
-   - Q2: 
      - 🏢 Asked in: 
-     - 🔗 Reference: 
+     - 🔗 Reference: https://www.naukri.com/code360/library/programming-interview-questions 
      - ✅ Answer: 
+		- Explanation: Arrays provide constant-time access to elements but have fixed sizes, while linked lists allow dynamic sizing but have linear-time access.
+
+
+   - Q2: Problem: In a sorted array of distinct integers
+     - 🏢 Asked in: 
+     - 🔗 Reference: https://www.naukri.com/code360/problems/magic-index_1199229  
+     - ✅ Answer:
+
+Problem: In a sorted array of distinct integers, find an index such that A[i] == i.
+def find_magic_index(arr):
+    def binary_search(start, end):
+        if start > end:
+            return -1  # No magic index found
+
+        mid = (start + end) // 2
+
+        if arr[mid] == mid:
+            return mid
+        elif arr[mid] > mid:
+            return binary_search(start, mid - 1)
+        else:
+            return binary_search(mid + 1, end)
+
+    return binary_search(0, len(arr) - 1)
+
+# Example usage:
+arr = [-10, -5, 0, 3, 7, 9, 12]
+result = find_magic_index(arr)
+print(f"Magic Index: {result}" if result != -1 else "No Magic Index found") 
 
 5. **Manasi Patil**
-   - Q1: 
-     - 🏢 Asked in: 
+   - Q1: what is an array?
+     - 🏢 Asked in: tcs
      - 🔗 Reference: 
      - ✅ Answer: 
 
-   - Q2: 
-     - 🏢 Asked in: 
+   - Q2: What is the difference between a mutable data type and an immutable data type?
+     - 🏢 Asked in: DXC
      - 🔗 Reference: 
      - ✅ Answer: 
 
 
-📝 Presented By: Bhushan Yadav
 
 
