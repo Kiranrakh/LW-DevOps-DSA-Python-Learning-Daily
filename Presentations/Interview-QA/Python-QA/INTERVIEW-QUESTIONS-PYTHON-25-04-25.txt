@@ -133,10 +133,11 @@ result = find_magic_index(arr)
 print(f"Magic Index: {result}" if result != -1 else "No Magic Index found") 
 
 5. **Manasi Patil**
-   - Q1: what is an array?
+   - Q1: what is an array's size?
      - 🏢 Asked in: tcs
      - 🔗 Reference: 
-     - ✅ Answer: 
+     - ✅ Answer:https://docs.google.com/document/d/1QGt0_fTUds0SLQFxAVkA3ka03pQwy-p_/edit?tab=t.0
+		- The number of elements in the array.The size is dynamic, meaning it can grow or shrink as you add or remove elements
 
    - Q2: What is the difference between a mutable data type and an immutable data type?
      - 🏢 Asked in: DXC
