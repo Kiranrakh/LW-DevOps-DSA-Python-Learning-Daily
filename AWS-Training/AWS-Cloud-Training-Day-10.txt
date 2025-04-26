@@ -1,0 +1,145 @@
+AWS EVENT-DRIVEN ARCHITECTURE PROJECT  
+Integration of S3, SNS & Lambda | File Upload Notification System   
+
+=========================================  
+🔍 OBJECTIVE  
+=========================================  
+Build a serverless, event-driven architecture using AWS services:  
+- Uploading a file to S3 →  
+- Triggers a Lambda function →  
+- Sends a notification using SNS →  
+- Delivers email alert to the subscriber.
+
+=========================================  
+🧰 AWS SERVICES USED  
+=========================================  
+- Amazon S3 (Simple Storage Service)  
+- Amazon SNS (Simple Notification Service)  
+- AWS Lambda (Python Runtime)  
+- AWS CloudWatch (for logs)  
+- IAM (Identity and Access Management)
+
+=========================================  
+🚀 STEP-BY-STEP IMPLEMENTATION  
+=========================================  
+
+1️⃣ S3: CREATE BUCKET  
+-----------------------------------------  
+- Go to AWS Console → Services → S3  
+- Click “Create bucket”  
+- Enter a unique name (e.g., `event-driven-kiran-bucket`)  
+- Leave other settings as default  
+- Click “Create bucket”  
+
+2️⃣ SNS: CREATE TOPIC & SUBSCRIPTION  
+-----------------------------------------  
+- Go to Services → SNS  
+- Click “Create topic”  
+- Type: Standard  
+- Name: `S3UploadTopic`  
+- Click “Create topic”  
+
+Create Subscription:  
+- Go to your created topic → Click “Create subscription”  
+- Protocol: `Email`  
+- Endpoint: `kiranrakh155@gmail.com`  
+- Click “Create subscription`  
+✅ Approve the subscription from your email inbox  
+
+3️⃣ LAMBDA: CREATE NEW FUNCTION  
+-----------------------------------------  
+- Go to Services → Lambda  
+- Click “Create function” → Author from scratch  
+- Name: `S3ToSNSNotification`  
+- Runtime: Python 3.x  
+- Click “Create function”  
+
+✏️ Edit the code with the following Python script:
+
+```python
+import boto3
+
+mysns = boto3.client("sns")
+
+def lambda_handler(event, context):
+    mysns.publish(
+        TopicArn='arn:aws:sns:<your-region>:<your-account-id>:S3UploadTopic',
+        Message='A new file has been uploaded to the S3 bucket.',
+        Subject='New S3 File Alert'
+    )
+    print("Kiran this side from AWS team ... calling SNS ...!!!")
+
+--------------------------------------------------------------------
+🛠️ After editing:
+
+Click “Deploy”
+
+Optionally: Change handler name in "Configuration" → "General Configuration"
+
+4️⃣ IAM: PERMISSION SETUP FOR LAMBDA
+Go to Lambda → Select your function
+
+Click “Configuration” → “Permissions”
+
+Click the role name under “Execution Role”
+
+Click “Add permissions” → “Attach policies”
+
+Search: AmazonSNSFullAccess
+
+Select and attach this policy
+
+5️⃣ LINK S3 TO LAMBDA (EVENT NOTIFICATION)
+Go to S3 → Your bucket → “Properties”
+
+Scroll to “Event notifications” → “Create event notification”
+
+Name: TriggerLambdaOnUpload
+
+Event Type: “PUT” (Object Created)
+
+Destination: Lambda Function
+
+Choose: S3ToSNSNotification
+
+Click “Save”
+
+6️⃣ TEST IT
+Go to S3 → Your bucket
+
+Click “Upload” → Upload any file (e.g., test3.txt)
+
+✅ Lambda gets triggered automatically
+
+7️⃣ VERIFY IN CLOUDWATCH
+Go to Services → CloudWatch
+
+Click “Log groups”
+
+Find and open log group for S3ToSNSNotification
+
+Check logs for print statements and SNS execution
+
+=========================================
+📩 FINAL USE CASE
+✔️ This architecture enables automatic email notifications whenever a new file is uploaded to S3.
+✔️ Useful in automation pipelines, audit alerts, or real-time monitoring.
+✔️ No servers involved – fully managed serverless stack using AWS-native services.
+
+=========================================
+📝 EXTRAS / CUSTOMIZATION TIPS
+You can rename your function, bucket, topic, and handler anytime
+
+Edit handler in Lambda settings if function name is changed
+
+Modify message content inside Lambda as per business needs
+
+Make sure all AWS resources are in the same region
+
+=========================================
+🔐 IAM ROLES & KEYS
+Make sure Lambda role has AmazonSNSFullAccess
+
+S3 needs permission to trigger Lambda (done during event notification setup)
+
+No access keys needed as Lambda uses IAM role permissions
