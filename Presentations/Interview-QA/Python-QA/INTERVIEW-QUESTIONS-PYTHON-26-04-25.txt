@@ -1,0 +1,106 @@
+===================================================================================================
+                                   ✅ Python Interview Question ✅
+===================================================================================================
+
+📅 Date: 26-04-25
+📝 Presented By: Gaurav Patil
+
+👥 Team Members & Questions:
+
+
+
+1. **Kiran Rakh**
+   - Q1: What are the advantages of NumPy arrays over Python lists?
+     - 🏢 Asked in: Capgemini
+     - 🔗 Reference: https://www.ambitionbox.com/interviews/capgemini-question/what-are-the-advantages-of-numpy-arrays-over-python-lists-jpH0EHXb
+     - ✅ Answer:
+ 
+Homogeneity: NumPy arrays can only contain elements of the same data type, whereas Python lists can store elements of different types.
+
+Performance: NumPy arrays support vectorized operations, making them faster for numerical computations.
+
+Memory Efficiency: NumPy arrays consume less memory due to their contiguous memory allocation.
+     -----------------------------------------------------------------------------------------------------------
+   - Q2: What is the default color format used by OpenCV when reading an image?
+     - 🏢 Asked in: Adaface
+     - 🔗 Reference: https://www.adaface.com/blog/open-cv-interview-questions/
+     - ✅ Answer: 
+
+
+OpenCV uses the BGR (Blue, Green, Red) color format by default when reading an image. This is different from the more commonly used RGB (Red, Green, Blue) format.
+     ------------------------------------------------------------------------------------------------------------
+2. **Sachin Singh Patel**
+   - Q1: 
+     - 🏢 Asked in: 
+     - 🔗 Reference: 
+     - ✅ Answer: 
+
+   - Q2: 
+     - 🏢 Asked in: 
+     - 🔗 Reference: 
+     - ✅ Answer: 
+
+3. **Bhushan Yadav**
+   - Q1: What is an Interpreted language?
+     - 🏢 Asked in: Wipro
+     - 🔗 Reference: 
+     - ✅ Answer: 
+
+ An Interpreted language executes its statements line by line. Languages such as Python, Javascript, R, PHP, and Ruby are prime examples of Interpreted languages
+     -------------------------------------------------------------------------------------
+
+   - Q2: What is a dynamically typed language?
+     - 🏢 Asked in:  TCS
+     - 🔗 Reference: 
+     - ✅ Answer: 
+
+An language in which we do not need to define the type of data. such as Python
+Type-checking can be done at two stages -
+
+Static - Data Types are checked before execution.
+Dynamic - Data Types are checked during execution.
+     ------------------------------------------------------------------------------------
+
+4. **Gaurav Patil**
+   - Q1:  What are the differences between Python lists and NumPy arrays?
+     - 🏢 Asked in: 
+     - 🔗 Reference: https://www.geeksforgeeks.org/numpy-interview-questions/ 
+     - ✅ Answer: 
+
+Python lists can store heterogeneous data types and are flexible but
+slower for numerical computations. NumPy arrays are homogeneous, memoryefficient, and support vectorized operations, making them faster for numerical
+     --------------------------------------------------------------------------------------
+
+   - Q2: How do you convert a Pandas DataFrame to a NumPy array?
+     - 🏢 Asked in: 
+     - 🔗 Reference: https://www.interviewbit.com/numpy-interview-questions/ 
+     - ✅ Answer: 
+
+import pandas as pd
+import numpy as np
+df = pd.DataFrame({'A': [1, 2], 'B': [3, 4]})
+numpy_array = df.to_numpy()
+     ---------------------------------------------------------------------------------------
+
+5. **Manasi Patil**
+   - Q1: What advantages do NumPy arrays offer over (nested) Python lists?
+     - 🏢 Asked in: 
+     - 🔗 Reference: https://t.me/placementdrive_pld  
+     - ✅ Answer: 
+
+1. Speed (Performance)
+NumPy arrays are much faster than Python lists, especially for large datasets.
+2. Memory Efficiency
+NumPy arrays take less memory compared to lists.
+3. Convenient for Mathematical Operations. 
+     -------------------------------------------------------------------------------------
+
+   - Q2: What are Python Libraries?
+     - 🏢 Asked in: 
+     - 🔗 Reference: https://t.me/placementdrive_pld 
+     - ✅ Answer: 
+Python libraries are a collection of Python packages. Some of the majorly used python libraries are Numpy, Pandas, Matplotlib, Scikit-learn and many more. 
+
+
+
+
