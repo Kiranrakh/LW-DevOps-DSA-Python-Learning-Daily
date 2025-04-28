@@ -1,0 +1,35 @@
+==================================================================================
+             DevOps & Kubernetes Interview Questions
+==================================================================================
+
+Basic Questions 
+--------------------------------------------------
+1. Tell me about yourself.
+2. Explain any project you have worked on.
+3. What challenges did you face during your project and how did you solve them?
+
+Kubernetes Questions
+--------------------------------------------------
+4. What is the difference between NodePort and LoadBalancer services?
+5. Explain how networking works in Kubernetes.
+6. What is a StatefulSet? Why do we use it?
+7. What is a DaemonSet? When should we use it?
+8. What are different types of Kubernetes Services?
+9. What is a namespace in Kubernetes and why do we use it?
+10. What security measures have you implemented in Kubernetes?
+11. What is a NetworkPolicy in Kubernetes?
+
+DevOps General Questions
+--------------------------------------------------
+12. What is CI/CD? Explain any pipeline you built.
+13. What is Infrastructure as Code? Which tools have you used?
+14. Explain the concept of GitOps.
+15. How does Terraform work?
+16. What is Jenkins? How do you create a Jenkins pipeline?
+
+AWS/Cloud Related Questions
+--------------------------------------------------
+17. What are Security Groups and IAM roles in AWS?
+18. Explain Load Balancer in AWS.
+19. What is the difference between Deployment and StatefulSet?
+-------------------------------------------------------------

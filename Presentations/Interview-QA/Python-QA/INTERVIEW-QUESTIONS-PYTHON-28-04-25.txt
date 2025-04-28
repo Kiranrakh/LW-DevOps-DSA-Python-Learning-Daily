@@ -1,0 +1,81 @@
+===================================================================================================
+                                   ✅ Python Interview Question ✅
+===================================================================================================
+
+📅 Date: 28-04-2025
+📝 Presented By: Manasi Patil
+
+👥 Team Members & Questions:
+
+
+
+1. **Kiran Rakh**
+   - Q1: How do you check if a number is within a specific range in Python?
+     - 🏢 Asked in: Capgemini, TCS NQT
+     - 🔗 Reference: https://www.placementpreparation.io/blog/python-interview-questions-for-freshers/
+     - ✅ Answer: 
+
+#You can use the if statement combined with comparison operators
+number = 25
+if 10 <= number <= 50:
+    print("Number is within the range.")
+else:
+    print("Number is outside the range.")
+-------------------------------------------------------------------------
+   - Q2: What is the ternary operator in Python, and how is it used?
+     - 🏢 Asked in: Wipro, Mindtree
+     - 🔗 Reference: https://codequotient.com/blog/python-interview-questions-freshers/
+     - ✅ Answer: 
+
+#The ternary operator in Python allows for a concise way to write conditional statements.
+age = 18
+status = "Adult" if age >= 18 else "Minor"
+print(status)
+--------------------------------------------------------------------------
+2. **Sachin Singh Patel**
+   - Q1: 
+     - 🏢 Asked in: 
+     - 🔗 Reference: 
+     - ✅ Answer: 
+
+   - Q2: 
+     - 🏢 Asked in: 
+     - 🔗 Reference: 
+     - ✅ Answer: 
+
+3. **Bhushan Yadav**
+   - Q1: 
+     - 🏢 Asked in: 
+     - 🔗 Reference: 
+     - ✅ Answer: 
+
+   - Q2: 
+     - 🏢 Asked in: 
+     - 🔗 Reference: 
+     - ✅ Answer: 
+
+4. **Gaurav Patil**
+   - Q1: 
+     - 🏢 Asked in: 
+     - 🔗 Reference: 
+     - ✅ Answer: 
+
+   - Q2: 
+     - 🏢 Asked in: 
+     - 🔗 Reference: 
+     - ✅ Answer: 
+
+5. **Manasi Patil**
+   - Q1: 
+     - 🏢 Asked in: 
+     - 🔗 Reference: 
+     - ✅ Answer: 
+
+   - Q2: 
+     - 🏢 Asked in: 
+     - 🔗 Reference: 
+     - ✅ Answer: 
+
+
+
+
