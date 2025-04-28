@@ -1,0 +1,140 @@
+AWS API GATEWAY INTEGRATION WORKFLOW
+======================================
+		
+		   (Client)
+		      |
+		      |  (1) HTTP Request (POST, GET)
+		      v
+		+----------------+
+		|  API Gateway   |
+		| (REST API)     |
+		+----------------+
+		       |
+		       | (2) Triggers Lambda (using IAM Role)
+		       v
+		+----------------+
+		|   Lambda       |
+		| (Backend Logic)|
+		+----------------+
+		       |
+		       | (3) Read/Write
+		       v
+		+----------------+
+		|     S3         |
+		| (Storage Bucket)|
+		+----------------+
+-------------------------------------------------------------------
+*******************************************************************
+
+Objective:
+-----------
+Set up a REST API using AWS API Gateway that integrates with AWS Lambda, and Lambda interacts with an S3 Bucket.
+Use an IAM Role to allow API Gateway to trigger Lambda securely.
+
+Components:
+------------
+1. **AWS API Gateway**
+   - Exposes REST API endpoints to the outside world.
+
+2. **AWS Lambda**
+   - Backend function to process requests coming from API Gateway.
+   - Interacts with AWS S3 (read/write operations).
+
+3. **AWS S3**
+   - Stores or retrieves objects based on API requests.
+
+4. **IAM Role (for API Gateway)**
+   - Grants API Gateway permission to invoke Lambda functions.
+
+5. **IAM Role ARN**
+   - Unique Amazon Resource Name (ARN) associated with the created IAM Role.
+
+Architecture Flow:
+--------------------
+1. Client sends a request to the **API Gateway REST API**.
+2. **API Gateway** triggers **Lambda Function** (using IAM Role permission).
+3. **Lambda Function** processes the request and interacts with **S3**.
+4. Response is returned back to the client.
+
+Detailed Steps:
+----------------
+1. **Create an S3 Bucket**
+   - This will store data that Lambda reads/writes.
+
+2. **Create a Lambda Function**
+   - Function should have permissions to access S3.
+   - Example:
+     ```python
+     import boto3
+     import json
+
+     def lambda_handler(event, context):
+         s3 = boto3.client('s3')
+         response = s3.list_buckets()
+         return {
+             'statusCode': 200,
+             'body': json.dumps(response['Buckets'])
+         }
+     ```
+
+3. **Create an IAM Role for Lambda**
+   - Attach policy:
+     * `AmazonS3FullAccess`
+   - Trust relationship: Allow Lambda service.
+
+4. **Create an IAM Role for API Gateway**
+   - Create a new role for API Gateway.
+   - Attach **basic permissions** (example: invoke Lambda).
+   - Trust Relationship:
+     ```json
+     {
+       "Version": "2012-10-17",
+       "Statement": [
+         {
+           "Effect": "Allow",
+           "Principal": {
+             "Service": "apigateway.amazonaws.com"
+           },
+           "Action": "sts:AssumeRole"
+         }
+       ]
+     }
+     ```
+
+5. **Note the IAM Role ARN**
+   - Example:
+     ```
+     arn:aws:iam::123456789012:role/APIGatewayInvokeLambdaRole
+     ```
+
+6. **Create an API Gateway REST API**
+   - Create a new REST API.
+   - Create a new Resource and POST Method.
+
+7. **Integration Setup (API Gateway → Lambda)**
+   - Choose **Lambda Function** as Integration Type.
+   - Set **Lambda Function name**.
+   - Use **IAM Role ARN** for permissions if using AWS_IAM authorization.
+
+8. **Deploy the API**
+   - Create a Deployment Stage (e.g., `dev`, `prod`).
+
+9. **Testing**
+   - Send a POST request to your API endpoint.
+   - Lambda function will trigger and perform actions on S3.
+   - API Gateway returns the response.
+
+Security and Best Practices:
+------------------------------
+✅ Use fine-grained IAM policies (least privilege principle).  
+✅ Use API Gateway Throttling and Authorization if needed.  
+✅ Enable CloudWatch Logging for API Gateway and Lambda.  
+✅ Protect S3 Bucket using Bucket Policies if public access is not needed.
+
+Monitoring:
+------------
+- Enable **CloudWatch Logs** for Lambda and API Gateway.
+- Set up **Alarms** on Lambda errors, API Gateway throttling, etc.
+
+
+

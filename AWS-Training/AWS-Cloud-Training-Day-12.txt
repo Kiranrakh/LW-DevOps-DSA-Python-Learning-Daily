@@ -1,0 +1,150 @@
+📚 AWS Transcribe Event-Driven Architecture (Visual Format)
+
+🔥 High-Level Architecture Diagram
+
+
++-----------+          (1) Upload           +----------+
+|           |  -------------------------->  |          |
+|   User    |                                |   S3     |
+|           |  (Audio File)                  | Bucket   |
++-----------+                                +----------+
+                                                 |
+                                                 | (2) Event Trigger
+                                                 v
+                                          +---------------+
+                                          |    Lambda      |
+                                          | (Start Transcribe) |
+                                          +---------------+
+                                                 |
+                                                 | (3) Start Job
+                                                 v
+                                          +---------------+
+                                          | AWS Transcribe |
+                                          +---------------+
+                                                 |
+                                                 | (4) Job Completion
+                                                 v
+                                          +--------------------+
+                                          | EventBridge (CloudWatch Events) |
+                                          +--------------------+
+                                                 |
+                                                 | (5) Trigger
+                                                 v
+                                          +---------------+
+                                          |    Lambda      |
+                                          | (Post Processing) |
+                                          +---------------+
+-------------------------------------------------------------------------
+Objective:
+-----------
+Implement an event-driven architecture where audio files uploaded to S3 are automatically transcribed using AWS Transcribe, triggered by AWS Lambda, and monitored using AWS CloudWatch.
+
+Components:
+------------
+1. AWS S3
+   - Stores input audio files.
+
+2. AWS Transcribe
+   - Service to convert speech in audio files into text.
+
+3. AWS Lambda
+   - Triggered by S3 events to start a transcription job.
+
+4. AWS CloudWatch
+   - Monitors logs and events related to Lambda functions and transcription status.
+
+5. AWS EventBridge (CloudWatch Events)
+   - Listens to AWS Transcribe job status events to trigger post-processing or notifications.
+
+Architecture Flow:
+--------------------
+1. User uploads an audio file (e.g., `.mp3`, `.wav`) to a specific S3 bucket.
+2. S3 event triggers a Lambda function.
+3. Lambda starts a new AWS Transcribe job.
+4. Transcribe processes the file asynchronously.
+5. AWS CloudWatch Events listen for the transcription job completion.
+6. (Optional) Another Lambda can be triggered upon job completion for further processing (e.g., moving the transcription result to another S3 bucket).
+
+Detailed Steps:
+----------------
+1. **Create an S3 Bucket**
+   - Enable event notifications for 'Object Created' events.
+   - Target: Lambda Function.
+
+2. **Create IAM Roles and Policies**
+   - Lambda Execution Role:
+     * Permissions: S3 read, Transcribe start job, CloudWatch Logs write.
+   - Transcribe Service Role (if needed):
+     * Permissions: Access S3 input/output locations.
+
+3. **Create Lambda Function (Start Transcribe Job)**
+   - Trigger: S3 Object Created event.
+   - Action: Use AWS SDK to call `start_transcription_job`.
+   - Code Sample (Python):
+     ```
+     import boto3
+     import os
+
+     def lambda_handler(event, context):
+         s3_bucket = event['Records'][0]['s3']['bucket']['name']
+         s3_key = event['Records'][0]['s3']['object']['key']
+         
+         print(s3_key)
+         )
+
+         return {
+             'statusCode': 200,
+             'body': f'Transcription started for {s3_key}'
+         }
+
+OR
+     import boto3
+     import os
+
+     def lambda_handler(event, context):
+         s3_bucket = event['Records'][0]['s3']['bucket']['name']
+         s3_key = event['Records'][0]['s3']['object']['key']
+         job_name = s3_key.split('.')[0] + "-transcription"
+
+         transcribe = boto3.client('transcribe')
+         transcribe.start_transcription_job(
+             TranscriptionJobName=job_name,
+             Media={'MediaFileUri': f's3://{s3_bucket}/{s3_key}'},
+             MediaFormat=s3_key.split('.')[-1],
+             LanguageCode='en-US',
+             OutputBucketName=os.environ['OUTPUT_BUCKET']
+         )
+
+         return {
+             'statusCode': 200,
+             'body': f'Transcription started for {s3_key}'
+         }
+     ```
+
+4. **Create CloudWatch Log Group**
+   - For monitoring the Lambda execution and debugging.
+
+5. **Create EventBridge Rule (CloudWatch Events)**
+   - Event Source: AWS Transcribe
+   - Detail Type: Transcribe Job State Change
+   - Target: (Optional) another Lambda function to process the completed transcription.
+
+
+Monitoring:
+------------
+- Use CloudWatch Logs to monitor Lambda function executions.
+- Create CloudWatch Alarms if needed (for failed transcription jobs).
+
+Best Practices:
+----------------
+- Use environment variables for bucket names and configuration.
+- Enable S3 bucket versioning.
+- Implement error handling and retries in Lambda functions.
+- Secure buckets and roles with least privilege policies.
+
+References:
+------------
+- AWS Transcribe Documentation: https://docs.aws.amazon.com/transcribe/
+- AWS Lambda Documentation: https://docs.aws.amazon.com/lambda/
+- AWS CloudWatch Events Documentation: https://docs.aws.amazon.com/eventbridge/
+

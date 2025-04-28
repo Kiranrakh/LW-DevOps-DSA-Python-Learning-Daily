@@ -1,0 +1,104 @@
+
+AWS S3 EVENT-DRIVEN TRANSCRIBE WORKFLOW
+========================================
+
++----------------+        S3 Event Trigger        +-----------------+
+|  Input S3 Bucket | -----------------------------> |  Lambda Function |
++----------------+                                  +-----------------+
+                                                           |
+                                                  Start Transcribe Job
+                                                           |
+                                                  +-----------------+
+                                                  | Transcribe Service |
+                                                  +-----------------+
+                                                           |
+                                              Save Output to Output Bucket
+                                                           |
+                                                  +-----------------+
+                                                  | Output S3 Bucket |
+                                                  +-----------------+
+
+------------------------------------------------------------------------
+Objective:
+-----------
+Set up an event-driven workflow where an audio file uploaded to AWS S3 automatically triggers a Lambda function, which then starts a transcription job using AWS Transcribe and stores the result in an Output S3 bucket.
+
+Components:
+------------
+1. AWS S3 (Input Bucket)
+   - Stores the uploaded audio files.
+
+2. S3 Event Trigger
+   - On 'Object Created' events, triggers a Lambda function.
+
+3. AWS Lambda Function
+   - Starts a transcription job using AWS Transcribe.
+
+4. AWS Transcribe Service
+   - Converts speech (audio) into text and outputs the result into another S3 bucket.
+
+5. AWS S3 (Output Bucket)
+   - Stores the transcription result file (.json).
+
+6. IAM Policies
+   - **AmazonS3FullAccess**: Full permissions to read/write from/to S3.
+   - **AmazonTranscribeFullAccess**: Full permissions to manage Transcribe jobs.
+
+7. Output Data Location
+   - Specified Output S3 bucket and key where the Transcription result is stored.
+
+Architecture Flow:
+--------------------
+1. User uploads an audio file (e.g., `.mp3`, `.wav`) to the Input S3 Bucket.
+2. S3 Event Trigger automatically invokes a Lambda function.
+3. Lambda uses the AWS SDK (Boto3) to start a transcription job in AWS Transcribe.
+4. AWS Transcribe processes the file asynchronously.
+5. On completion, Transcribe saves the output JSON file in the Output S3 Bucket.
+
+Detailed Steps:
+----------------
+1. **Create an Input S3 Bucket**
+   - Uploads will trigger a Lambda function via event notification.
+
+2. **Create an Output S3 Bucket**
+   - Configure this bucket to receive transcription result files.
+
+3. **Create an IAM Role for Lambda**
+   - Attach these managed policies:
+     * AmazonS3FullAccess
+     * AmazonTranscribeFullAccess
+   - Allow Lambda to access S3 and Transcribe services.
+
+4. **Create a Lambda Function**
+   - Trigger: S3 Object Created Event (for audio file upload).
+   - Action: Start a transcription job.
+
+5. **Lambda Code Sample (Python)**
+   ```python
+   import boto3
+   import os
+
+   def lambda_handler(event, context):
+       s3_bucket = event['Records'][0]['s3']['bucket']['name']
+       s3_key = event['Records'][0]['s3']['object']['key']
+       job_name = s3_key.replace('/', '-').split('.')[0] + "-transcription"
+
+       transcribe = boto3.client('transcribe')
+       transcribe.start_transcription_job(
+           TranscriptionJobName=job_name,
+           Media={'MediaFileUri': f's3://{s3_bucket}/{s3_key}'},
+           MediaFormat=s3_key.split('.')[-1],
+           LanguageCode='en-US',
+           OutputBucketName=os.environ['OUTPUT_BUCKET']
+       )
+
+       return {
+           'statusCode': 200,
+           'body': f'Transcription started for {s3_key}'
+       }
+
+
+
+
+
+
