@@ -55,27 +55,36 @@ print(status)
      - ✅ Answer: 
 
 4. **Gaurav Patil**
-   - Q1: 
+   - Q1: Write a Python program using a ternary operator to determine if a number is even or odd.
      - 🏢 Asked in: 
-     - 🔗 Reference: 
+     - 🔗 Reference: https://data-flair.training/blogs/python-ternary-operator/
      - ✅ Answer: 
-
-   - Q2: 
+num = int(input("Enter a number: "))
+result = "Even" if num % 2 == 0 else "Odd"
+print(f"The number is {result}.")
+---------------------------------------------------------------------------------
+   - Q2: Explain the role of the listen() method in the SpeechRecognition library.
      - 🏢 Asked in: 
-     - 🔗 Reference: 
+     - 🔗 Reference: https://www.geeksforgeeks.org/speech-recognition-in-python-using-google-speech-api/
      - ✅ Answer: 
-
+n the SpeechRecognition library, the listen() method captures audio from the source (like a microphone) and stores it as an AudioData object, 
+which can then be processed by recognizer methods to convert speech to text.
+--------------------------------------------------
 5. **Manasi Patil**
-   - Q1: 
+   - Q1: What is ternary operator ? Why we use "ternary"? 
      - 🏢 Asked in: 
-     - 🔗 Reference: 
+     - 🔗 Reference:  https://prepinsta.com/interview-preparation/company-wise-interview-questions/ 	
      - ✅ Answer: 
 
-   - Q2: 
-     - 🏢 Asked in: 
-     - 🔗 Reference: 
-     - ✅ Answer: 
+A ternary operator is a way to evaluate a condition and return a value based on whether the condition is True or False, all in a single line.a condition
 
+-------------------------------------------------------------------------------------------
+   - Q2: What is the Python “with” statement designed for?
+     - 🏢 Asked in: 
+     - 🔗 Reference: https://prepinsta.com/interview-preparation/company-wise-interview-questions/
+     - ✅ Answer: 
+The with statement is used for exception handling to make code cleaner and simpler. It is generally used for the management of common resources like creating, editing, and saving a file. 
+-------------------------------------------------------------------------------------
 
 
 
