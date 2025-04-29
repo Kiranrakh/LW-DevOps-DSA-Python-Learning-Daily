@@ -1,35 +1,70 @@
 ==================================================================================
-             DevOps & Kubernetes Interview Questions
+             DevOps & Kubernetes Interview Questions with Answers
 ==================================================================================
 
-Basic Questions 
+Basic Questions (Self and Project)
 --------------------------------------------------
 1. Tell me about yourself.
+- I am a DevOps enthusiast skilled in AWS, Docker, Kubernetes, and CI/CD, currently seeking full-time opportunities.
+
 2. Explain any project you have worked on.
+- I deployed a three-tier application using Terraform, Docker, Kubernetes, and Jenkins on AWS.
+
 3. What challenges did you face during your project and how did you solve them?
+- Faced container networking issues; resolved by implementing correct CNI plugins and services.
 
 Kubernetes Questions
 --------------------------------------------------
 4. What is the difference between NodePort and LoadBalancer services?
+- NodePort exposes services on node IP and a static port; LoadBalancer provisions an external IP via cloud providers.
+
 5. Explain how networking works in Kubernetes.
+- Each Pod gets its own IP; communication is managed by Services and network plugins (CNI) without NAT.
+
 6. What is a StatefulSet? Why do we use it?
+- Manages stateful applications by maintaining a unique identity and persistent storage for each Pod.
+
 7. What is a DaemonSet? When should we use it?
+- Ensures a copy of a Pod runs on all (or selected) nodes; used for node monitoring, logging, etc.
+
 8. What are different types of Kubernetes Services?
+- ClusterIP, NodePort, LoadBalancer, and ExternalName.
+
 9. What is a namespace in Kubernetes and why do we use it?
+- Namespace partitions cluster resources for better management, isolation, and multi-team environments.
+
 10. What security measures have you implemented in Kubernetes?
+- Used RBAC, Secrets Management, NetworkPolicies, Pod Security Standards, and TLS encryption.
+
 11. What is a NetworkPolicy in Kubernetes?
+- Defines rules for ingress and egress traffic between Pods to enhance network security.
 
 DevOps General Questions
 --------------------------------------------------
 12. What is CI/CD? Explain any pipeline you built.
+- CI/CD automates integration, testing, and deployment. I built a Jenkins pipeline that built Docker images, pushed them to ECR, and deployed to EKS.
+
 13. What is Infrastructure as Code? Which tools have you used?
+- Managing infrastructure through code scripts. I used Terraform to provision AWS resources.
+
 14. Explain the concept of GitOps.
+- GitOps uses Git repositories as the source of truth to automate deployment through pull requests.
+
 15. How does Terraform work?
+- Terraform uses HCL (HashiCorp Configuration Language) to define and provision infrastructure in a declarative manner.
+
 16. What is Jenkins? How do you create a Jenkins pipeline?
+- Jenkins is a CI/CD tool. Pipelines are created using a Jenkinsfile which defines stages like build, test, and deploy.
 
 AWS/Cloud Related Questions
 --------------------------------------------------
 17. What are Security Groups and IAM roles in AWS?
+- Security Groups are virtual firewalls for instances; IAM roles grant temporary access permissions to AWS services.
+
 18. Explain Load Balancer in AWS.
+- Distributes incoming application traffic across multiple targets (like EC2 instances) to ensure high availability and fault tolerance.
+
+Bonus Kubernetes Question
+--------------------------------------------------
 19. What is the difference between Deployment and StatefulSet?
--------------------------------------------------------------
+- Deployment manages stateless applications where Pods are identical. StatefulSet manages stateful apps where each Pod maintains a unique identity and persistent storage.
