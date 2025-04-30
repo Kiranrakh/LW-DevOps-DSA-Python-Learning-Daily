@@ -1,0 +1,192 @@
+===========================
+DevOps Interview Q&A Guide
+===========================
+
+Author: Kiran Rakh
+Role: Solution Engineer Trainee Position.
+
+--------------------------------------------------
+1. Self Rating (Out of 5)
+--------------------------------------------------
+Cloud: 4.5/5
+Kubernetes: 4/5
+Linux: 4.5/5
+
+--------------------------------------------------
+2. Types of Load Balancers
+--------------------------------------------------
+There are 3 main types of AWS load balancers:
+- Application Load Balancer (ALB): Works at Layer 7 (HTTP/HTTPS)
+- Network Load Balancer (NLB): Works at Layer 4 (TCP/UDP)
+- Gateway Load Balancer (GWLB): For third-party appliances (firewalls, etc.)
+
+--------------------------------------------------
+3. Application vs Network Load Balancer
+--------------------------------------------------
+
+ALB (Layer 7):
+- Routes traffic based on content like URL paths or hostnames.
+- Suitable for web applications.
+
+NLB (Layer 4):
+- Routes traffic based on IP address and port.
+- Ideal for high-performance TCP/UDP apps.
+
+[ALB Routing Diagram]
+        +--------------------+
+Request-> ALB (Layer 7)      |
+        +--------------------+
+             |       |
+        /api         /auth
+         |            |
+     Target1       Target2
+
+[NLB Routing Diagram]
+        +--------------------+
+Request-> NLB (Layer 4)      |
+        +--------------------+
+               |
+          Port 80/443
+               |
+     +---------+---------+
+     |                   |
+   EC2 A              EC2 B
+
+--------------------------------------------------
+4. Application Routing Logic (ALB)
+--------------------------------------------------
+- Uses listener rules to route requests by:
+  - Hostname (e.g., app.example.com)
+  - Path (e.g., /api, /login)
+
+[Logic Steps]
+1. Client request hits ALB.
+2. ALB evaluates listener rules.
+3. Request is forwarded to target group.
+
+--------------------------------------------------
+5. Differentiating Factors Between Applications
+--------------------------------------------------
+- Host-based routing: Different domain names.
+- Path-based routing: Different URI paths.
+- Environment: Dev, QA, Prod
+- Port and Protocol differences
+
+--------------------------------------------------
+6 (Extended). Application Routing Logic with NLB
+--------------------------------------------------
+- NLB doesn't understand application layer, only IP/Port.
+
+[Logic]
+1. Request hits NLB on a port (e.g., TCP 443)
+2. NLB forwards to target group without inspecting content
+
+[NLB Diagram]
+          +-------------------------+
+Request ->| Network Load Balancer  |
+          +-------------------------+
+              |   Port 80 (TCP)
+              |
+     +--------+--------+
+     |                 |
++----------+     +----------+
+|  EC2 #1  |     |  EC2 #2  |
+|  (App1)  |     |  (App2)  |
++----------+     +----------+
+
+--------------------------------------------------
+7. Default Storage for EC2
+--------------------------------------------------
+- Root volume from Amazon EBS (Elastic Block Store)
+- Default: 8 GiB gp2 or gp3 SSD
+- Can add extra EBS volumes during launch
+
+--------------------------------------------------
+8. Can Security Groups Be Applied at VPC Level?
+--------------------------------------------------
+- No. Security Groups are applied at:
+  - EC2 instances
+  - ENIs (Elastic Network Interfaces)
+
+- For VPC-wide rules: Use NACLs (Network ACLs)
+
+--------------------------------------------------
+9. Internet Access for Private Subnet
+--------------------------------------------------
+
+Steps:
+1. Create a NAT Gateway in Public Subnet
+2. Associate Elastic IP
+3. Update Route Table of Private Subnet:
+   - 0.0.0.0/0 → NAT Gateway
+
+[Diagram]
+Private Subnet -> NAT Gateway -> Internet Gateway -> Internet
+
+--------------------------------------------------
+10. What Does NAT Gateway Do?
+--------------------------------------------------
+- Provides outbound internet access for private subnet
+- No inbound access allowed
+- Scales automatically
+
+--------------------------------------------------
+11. Creating Logical Volume in Linux
+--------------------------------------------------
+
+[Steps]
+1. Create physical volume: `pvcreate /dev/sdb`
+2. Create volume group: `vgcreate my_vg /dev/sdb`
+3. Create logical volume: `lvcreate -L 5G -n my_lv my_vg`
+4. Format: `mkfs.ext4 /dev/my_vg/my_lv`
+5. Mount: `mount /dev/my_vg/my_lv /mnt/mydata`
+
+[Diagram]
++------------+       +--------------+
+| /dev/sdb   | --->  | Volume Group |
++------------+       +--------------+
+                          |
+                      +--------+
+                      | my_lv  |
+                      +--------+
+
+--------------------------------------------------
+12. Default Path for DNS Resolution
+--------------------------------------------------
+- DNS configuration file in Linux:
+  `/etc/resolv.conf`
+
+--------------------------------------------------
+13. Killing a Process
+--------------------------------------------------
+1. Find PID: `ps aux | grep <process>`
+2. Kill it:
+   - `kill <PID>` (graceful)
+   - `kill -9 <PID>` (force)
+
+--------------------------------------------------
+14. Kubernetes Services
+--------------------------------------------------
+
+- **ClusterIP**: Internal-only access
+- **NodePort**: Exposes service on <NodeIP>:<Port>
+- **LoadBalancer**: Exposes via cloud provider LB
+- **ExternalName**: Maps to external DNS name
+
+[Diagram]
+Client -> LoadBalancer -> NodePort -> ClusterIP -> Pod
+
+--------------------------------------------------
+15. Taints vs Tolerations
+--------------------------------------------------
+
+- **Taints**: Applied on nodes to repel pods.
+  Example: `key=value:NoSchedule`
+
+- **Tolerations**: Added to pods to tolerate node taints.
+
+[Example]
+Node: Taint = dedicated=infra:NoSchedule  
+Pod: Toleration = dedicated=infra
+
+Only pods with matching toleration will be scheduled on tainted nodes.

@@ -1,0 +1,138 @@
+✅ Project: Secure AWS Infra to Run Docker App from Docker Hub
+🧱 Architecture Overview
+less
+Copy
+Edit
+[ User ]
+   |
+ [ HTTPS ]
+   ↓
+[ ALB (Public Subnet) ]
+   ↓
+[ EC2 in Private Subnet ]
+   ↑
+[ Docker image from Docker Hub ]
+EC2 pulls image from Docker Hub via NAT Gateway.
+
+No public IP on EC2.
+
+ALB forwards HTTPS traffic to EC2.
+
+📌 STEP-BY-STEP GUIDE
+1. Create a VPC
+bash
+Copy
+Edit
+VPC CIDR: 10.0.0.0/16
+2. Create Subnets
+Public Subnet: 10.0.1.0/24
+
+Private Subnet: 10.0.2.0/24
+
+Enable Auto-Assign Public IP only for Public Subnet
+
+3. Internet Gateway + Route Table (for Public Subnet)
+Create and attach an Internet Gateway to the VPC.
+
+Route Table:
+
+0.0.0.0/0 → Internet Gateway
+
+Associate with Public Subnet
+
+4. NAT Gateway (for Private EC2)
+In Public Subnet:
+
+Allocate and associate an Elastic IP
+
+Launch NAT Gateway
+
+Route Table for Private Subnet:
+
+0.0.0.0/0 → NAT Gateway
+
+5. Launch Bastion Host (in Public Subnet)
+Amazon Linux 2
+
+Assign public IP
+
+Open port 22 (SSH) from your IP
+
+Save the Key Pair (e.g., bastion.pem)
+
+6. Launch EC2 (in Private Subnet)
+Amazon Linux 2
+
+NO public IP
+
+Security Group:
+
+Inbound: allow port 5000 (or 80) from ALB Security Group only
+
+Save the Key Pair (e.g., private.pem)
+
+7. Create Application Load Balancer (ALB)
+Scheme: internet-facing
+
+Subnets: public subnets (across AZs)
+
+Security Group:
+
+Inbound: allow port 443 from anywhere
+
+Listener:
+
+HTTPS → Target Group (port 5000)
+
+Target Group:
+
+Register your private EC2
+
+Health check path: /
+
+8. SSH into EC2 via Bastion Host
+From local:
+
+bash
+Copy
+Edit
+ssh -i bastion.pem ec2-user@<Bastion-Public-IP>
+From Bastion to Private EC2:
+
+bash
+Copy
+Edit
+ssh -i private.pem ec2-user@<Private-EC2-Private-IP>
+9. Install Docker on Private EC2
+bash
+Copy
+Edit
+sudo yum update -y
+sudo yum install docker -y
+sudo systemctl start docker
+sudo systemctl enable docker
+sudo usermod -aG docker ec2-user
+exit  # Then reconnect via SSH again
+10. Pull and Run Docker Image from Docker Hub
+Example image: yourdockerhub/myapp:latest
+
+bash
+Copy
+Edit
+docker pull yourdockerhub/myapp:latest
+
+# Run the container (assuming app runs on port 5000)
+docker run -d -p 5000:5000 --name myapp yourdockerhub/myapp:latest
+11. Verify ALB Access
+Open browser → https://<ALB-DNS-Name>
+
+You should see your app running.
+
+✅ Security Best Practices
+
+Component	Best Practice
+EC2	No public IP, access only via Bastion
+Docker Image	Pulled over NAT gateway from Docker Hub
+ALB	Handles all public traffic, enforces HTTPS
+SG	EC2 allows only ALB; ALB allows only 443
+SSH	Restricted by IP and key

@@ -1,0 +1,182 @@
+====================================================
+  Web Server on AWS Lambda & Amazon SSM Integration
+====================================================
+
+*************************************
+  Practical: EC2 + SSM Integration
+*************************************
+
+                 +----------------------------+
+                 |   Launch EC2 Instances     |
+                 |   web-os-01 & web-os-02    |
+                 +----------------------------+
+                             |
+                             v
+               +-----------------------------+
+               |    Create IAM Role          |
+               |  AmazonSSMFullAccess        |
+               |  Name: role-name-ec2-ssm    |
+               +-----------------------------+
+                             |
+                             v
+         +-----------------------------------------+
+         | Attach IAM Role to EC2 Instances        |
+         | EC2 > Actions > Security > Modify Role  |
+         +-----------------------------------------+
+                             |
+                             v
+         +-----------------------------------------+
+         | Register EC2 with SSM                   |
+         | 1. rpm -q -a | grep ssm                 |
+         | 2. systemctl start amazon-ssm-agent     |
+         +-----------------------------------------+
+                             |
+                             v
+         +-----------------------------------------+
+         | Go to AWS Systems Manager > Run Command |
+         +-----------------------------------------+
+                             |
+                             v
+         +-------------------------------------------------+
+         | Command Document: AWS-RunShellScript            |
+         |                                                 |
+         | Commands:                                       |
+         |   yum install httpd -y                          |
+         |   yum install nginx -y                          |
+         |   systemctl enable nginx                        |
+         |   systemctl start httpd                         |
+         +-------------------------------------------------+
+                             |
+                             v
+         +-----------------------------------------+
+         | Choose Targets: web-os-01 & web-os-02   |
+         | Run the Command                         |
+         +-----------------------------------------+
+
+
+--------------------------------------------------------
+--------------------------------------------------
+1. Web Server on AWS Lambda (Concept Overview)
+--------------------------------------------------
+AWS Lambda is not designed to host traditional web servers (like Apache or Nginx), but you can still build serverless web applications using:
+- AWS Lambda + Amazon API Gateway
+- Lambda functions returning HTML, JSON, or other content
+
+[Architecture Flow]
+Client --> API Gateway --> Lambda Function --> Response (HTML/JSON)
+
+✅ Benefits:
+- No server management
+- Auto-scaling
+- Pay-per-request billing model
+
+--------------------------------------------------
+2. Amazon SSM Agent Program
+--------------------------------------------------
+Amazon SSM Agent is a lightweight software that:
+- Runs on EC2, on-prem, or edge devices
+- Enables communication between AWS Systems Manager and your instance
+
+✨ Key Features:
+- Session Manager: Remote shell access (no SSH required)
+- Patch Manager
+- Run Command for remote scripting
+- Automation documents (SSM Docs)
+
+💻 Installation (Amazon Linux):
+```bash
+sudo yum install -y amazon-ssm-agent
+sudo systemctl enable amazon-ssm-agent
+sudo systemctl start amazon-ssm-agent
+```
+
+--------------------------------------------------
+3. Security Group Configuration
+--------------------------------------------------
+For SSM:
+✅ No inbound rule required
+✅ Outbound rule: allow HTTPS (443) to AWS endpoints
+
+For Web Access:
+- Inbound: HTTP (port 80) → 0.0.0.0/0
+- Inbound (optional): SSH (port 22) for debugging
+
+🛡 Example SG:
+- Inbound:
+  - Port 80 → 0.0.0.0/0
+  - Port 22 → Admin IP only (optional)
+- Outbound:
+  - Port 443 → 0.0.0.0/0
+
+--------------------------------------------------
+4. IAM Role - SSM Access
+--------------------------------------------------
+To allow EC2/Lambda to communicate with Systems Manager:
+
+✅ IAM Role Permissions:
+- Attach the following AWS-managed policy:
+  - `AmazonSSMManagedInstanceCore`
+
+🔧 Steps:
+1. Open IAM Console > Roles
+2. Create role for EC2
+3. Attach `AmazonSSMManagedInstanceCore`
+4. Attach role to your instance or Lambda function
+
+--------------------------------------------------
+5. Use Cases of Amazon SSM Agent
+--------------------------------------------------
+🧩 Common Use Cases:
+- Session Manager → SSH-less shell access
+- Run Command → Execute scripts remotely
+- Patch Manager → OS patching automation
+- Automation → Workflow executions (start/stop services)
+- Inventory → Collect system metadata
+
+[SSM Access Flow]
+Console User --> SSM Dashboard --> EC2 Instance (via SSM Agent)
+
+✅ Advantage: No need for public IP or SSH key
+
+--------------------------------------------------
+6. Practical Hands-on with Vimal Daga Sir
+--------------------------------------------------
+
+>> Launch 2 EC2 instances:
+- web-os-01
+- web-os-02
+
+>> Create IAM Role for EC2 SSM Access:
+- IAM > Create Role > EC2
+- Attach Policy: `AmazonSSMFullAccess`
+- Role Name: `role-name-ec2-ssm`
+
+>> Attach IAM Role to EC2:
+- Go to EC2 console
+- Actions > Security > Modify IAM Role
+- Select: `role-name-ec2-ssm` > Apply
+
+>> Register Instance with SSM:
+SSH or SSM Shell into instance and run:
+```bash
+rpm -q -a | grep ssm
+sudo systemctl start amazon-ssm-agent
+```
+
+>> Use AWS Systems Manager (SSM) > Run Command:
+- Select Command Document: `AWS-RunShellScript`
+- Provide Commands:
+```bash
+yum install httpd -y
+yum install nginx -y
+systemctl enable nginx
+systemctl start httpd
+```
+
+>> Integrate EC2 Instances with SSM:
+- Target Selection: Choose manual
+- Select both EC2 instances
+- Click Run
+
+--------------------------------------------------
+
