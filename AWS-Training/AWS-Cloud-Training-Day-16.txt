@@ -1,0 +1,185 @@
+=========================================================
+AWS COGNITO USER POOL CONFIGURATION WITH OPTIONAL MFA
+=========================================================
+
+Author: Kiran Rakh
+Project: Secure Authentication with AWS Cognito
+Last Updated: May 1, 2025
+
+---------------------------------------------------------
+SECTION 1: USER POOL CREATION
+---------------------------------------------------------
+
+> STEP 1: Create a User Pool (via AWS Console)
+1. Open AWS Console → Cognito → "Create user pool".
+2. Choose "Manual configuration".
+3. Name the user pool: e.g., SecureUserPool
+
+> STEP 2: Set Password Policy
+- Minimum length: 8
+- Require numbers: Yes
+- Require symbols: Yes
+- Require uppercase: Yes
+- Require lowercase: Yes
+
+(You can choose to enable or disable specific complexity requirements)
+
+---------------------------------------------------------
+SECTION 2: MULTI-FACTOR AUTHENTICATION (2FA)
+---------------------------------------------------------
+
+> STEP 1: Set MFA & Verification
+- Navigate to "MFA and verifications"
+- Select: Multi-Factor Authentication (MFA): **Optional**
+- MFA types:
+  - TOTP (Time-based One-time Password) [recommended]
+  - SMS (requires AWS SNS setup)
+
+> CLI COMMAND (MFA Configuration)
+aws cognito-idp set-user-pool-mfa-config \\
+  --user-pool-id <USER_POOL_ID> \\
+  --sms-mfa-configuration Enabled=false \\
+  --software-token-mfa-configuration Enabled=true \\
+  --mfa-configuration "OPTIONAL"
+
+> STEP 2: Verification Settings
+- Enable Email or Phone Number verification (recommended: Email)
+
+---------------------------------------------------------
+SECTION 3: HOSTED UI CUSTOMIZATION
+---------------------------------------------------------
+
+> STEP 1: Enable Hosted UI
+1. Go to App Clients → Create App Client (no client secret if using web apps).
+2. Go to “App Integration” → “Domain name” → Create a custom Cognito domain.
+
+> STEP 2: Customize UI
+1. Go to “UI customization”.
+2. Choose the app client.
+3. Upload logo (PNG/JPEG) max 100KB.
+4. Customize CSS (optional):
+
+CSS Example:
+body {
+  background-color: #f4f4f4;
+}
+#logo {
+  width: 200px;
+}
+
+---------------------------------------------------------
+SECTION 5: TESTING & VERIFICATION
+---------------------------------------------------------
+
+> Sign up & Sign in with Hosted UI:
+- Access Hosted UI link: https://your-custom-domain.auth.<region>.amazoncognito.com/login
+- Test:
+  - Sign up with email
+  - Confirm code
+  - Log in
+  - Setup MFA (TOTP via Google Authenticator)
+
+---------------------------------------------------------
+TIPS:
+---------------------------------------------------------
+- MFA optional allows users to skip setup initially but enable it later.
+- Use CloudWatch logs for debugging Cognito issues.
+- Always backup app client secret/config securely.
+
+*********************************************************
+=========================================================
+Hands-on Practical with Vimal Sir – AWS Cognito User Pool
+=========================================================
+*********************************************************
+
+---------------------------------------------------------
+STEP 1: Create Cognito User Pool
+---------------------------------------------------------
+
+> AWS Console → Cognito → Create User Pool
+
+- Authentication Provider: Cognito User Pool (for login page)
+
+---------------------------------------------------------
+STEP 2: Configure Sign-in Options
+---------------------------------------------------------
+
+- Enable the following sign-in methods:
+  ✅ Username  
+  ✅ Email  
+  ✅ Phone Number  
+
+Click "Next"
+
+---------------------------------------------------------
+STEP 3: Configure Security Requirements
+---------------------------------------------------------
+
+- Choose: Cognito Default
+- Set MFA (Multi-Factor Authentication):
+  ➤ Mode: **Optional**
+- Account Recovery:
+  ➤ Enable: **Email**
+
+Click "Next"
+
+---------------------------------------------------------
+STEP 4: Configure Sign-up Experience
+---------------------------------------------------------
+
+- Enable Email-based sign-up
+- Required Attributes:
+  ✅ Email (select this)
+- Optionally, create custom attributes (if needed)
+
+Click "Next"
+
+---------------------------------------------------------
+STEP 5: Configure Message Delivery
+---------------------------------------------------------
+
+- Email Provider: **Cognito**
+- Add your email address for verification and messages
+
+Click "Next"
+
+---------------------------------------------------------
+STEP 6: Final Setup and App Integration
+---------------------------------------------------------
+
+- Name the User Pool: `devproject-userpool`
+- Enable Hosted Authentication
+- Create Cognito Domain:
+  ➤ Example: https://devproject.auth.<region>.amazoncognito.com
+
+- Initial App Client:
+  ➤ App Type: Public Client
+  ➤ Add Callback URL: https://<EC2-Public-IP>/
+  ➤ Add Sign-out URL (optional): https://<EC2-Public-IP>/logout
+
+Click "Next" → Create Pool
+
+---------------------------------------------------------
+STEP 7: Launch EC2 Instance (for Web App)
+---------------------------------------------------------
+
+- Create EC2 instance with Public IP
+- Install and deploy your app (Flask, Node.js, etc.)
+
+---------------------------------------------------------
+STEP 8: Access Hosted UI
+---------------------------------------------------------
+
+> Go to: Cognito → User Pools → [your pool]  
+> App Integration → View Hosted UI  
+
+- You will see a Cognito login/signup page
+- After login, it redirects to the callback URL (EC2 app)
+
+=========================================================
+END OF PRACTICAL SESSION DOCUMENT
+=========================================================
+
+
+
+
