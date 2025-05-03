@@ -1,0 +1,113 @@
+====================================================
+         AWS EVENTBRIDGE - SNS ARCHITECTURE FLOW
+====================================================
+
+         [ EC2 Instance ]
+                |
+                |  (Terminate Action)
+                V
+      +-------------------+
+      |  Event Generated  |
+      |  Source: EC2      |
+      +-------------------+
+                |
+                V
+        +----------------------+
+        |   EventBridge Bus    |
+        |  (Custom or Default) |
+        +----------------------+
+                |
+                | Rule matches:
+                |  - Source: EC2
+                |  - Event: Terminate
+                V
+      +---------------------------+
+      | Target (SNS, Lambda, API)|
+      +---------------------------+
+         |       |         |
+         V       V         V
+       SNS    Lambda     API Call
+    (Notify) (Process)   (Trigger external systems)
+
+====================================================
+KEY COMPONENTS
+====================================================
+- Source: EC2 instance termination event
+- EventBridge: Captures event, applies filtering rules
+- Targets:
+   - SNS: Send alert/notification
+   - Lambda: Execute custom logic
+   - API: Call external systems/services
+
+NOTE:
+- Rules are applied within EventBridge to determine which events are forwarded to which targets.
+- SNS can send alerts via Email, SMS, or to other AWS services.
+- This is an event-driven architecture pattern for reactive automation.
+
+
+
+===========================================
+ AMAZON EVENTBRIDGE & SNS DOCUMENTATION
+===========================================
+
+
+
+1. What is Amazon EventBridge?
+-------------------------------------------
+- Amazon EventBridge is a **serverless event bus** service that enables applications to communicate through events.
+- It helps build event-driven architectures by integrating AWS services, custom apps, and SaaS providers.
+- Events are routed from event sources to event targets based on defined rules.
+
+2. Key Features of Amazon EventBridge
+-------------------------------------------
+- **Event Routing**: Uses rules to filter and route events to targets like Lambda, SNS, SQS, Step Functions, etc.
+- **Schema Registry**: Automatically discovers and stores event schemas for validation and code generation.
+- **Event Replay**: Allows replaying past events from the event bus to debug or recover systems.
+- **Multiple Event Buses**: Supports default, custom, and partner event buses.
+- **Native Integration**: Deeply integrated with over 200 AWS services.
+- **Custom Events**: Supports custom events from applications or microservices.
+
+3. Event Replay
+-------------------------------------------
+- **Purpose**: Reprocess or debug events by replaying them to a target.
+- **Use Cases**: Disaster recovery, catching missed events, testing logic changes.
+- **How it works**:
+  - Archive events from the event bus.
+  - Replay archived events to specific targets.
+
+4. Schema Registry
+-------------------------------------------
+- **Stores schemas** of events in real time as they are sent to EventBridge.
+- Developers can **generate code bindings** for Java, Python, TypeScript.
+- **Schema discovery**: When enabled, automatically identifies structure of incoming events.
+- **Benefits**:
+  - Standardizes communication between services.
+  - Simplifies event validation and development.
+
+5. Amazon Simple Notification Service (SNS)
+-------------------------------------------
+- A **fully managed pub/sub messaging service**.
+- Sends messages to multiple subscribers (e.g., Lambda, Email, SMS, HTTP endpoints).
+- **Common Use**:
+  - Send alerts, application messages, or trigger workflows.
+- **Integration with EventBridge**:
+  - SNS can be used as a target for EventBridge rules.
+  - EventBridge can capture events from many sources and forward to SNS for further fan-out.
+
+6. EventBridge vs SNS
+-------------------------------------------
+| Feature               | EventBridge                     | SNS                             |
+|----------------------|----------------------------------|----------------------------------|
+| Event filtering      | Advanced JSON pattern matching  | Basic message filtering         |
+| Event storage        | Supports archiving + replay     | No event persistence            |
+| Targets              | 20+ AWS targets                  | Limited (email, SMS, Lambda...) |
+| Schema registry      | Yes                              | No                               |
+| Use Case             | Event routing, microservices     | Simple pub/sub, notifications    |
+
+===========================================
+ NOTES:
+===========================================
+- Use EventBridge when building loosely coupled, scalable event-driven systems.
+- SNS is ideal for quick fan-out and notifications.
+- Combine both for powerful event-to-message pipelines (EventBridge → SNS → Email/SMS).
+

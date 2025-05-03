@@ -1,0 +1,122 @@
+===========================================
+ NETWORKING BASICS DOCUMENTATION
+===========================================
+                 INTERNET
+                    |
+          +-------------------+
+          |  Internet Gateway |
+          +-------------------+
+                    |
+             [ Public Subnet ]
+                    |
+     +--------------------------------+
+     |                                |
++------------+              +-----------------+
+|  EC2 (Web) |              |  EC2 (Bastion)  |
+|  Public IP |              |  Public IP      |
+|  ENI       |              |  ENI            |
++------------+              +-----------------+
+     |                                |
+     +--------------------------------+
+                    |
+          Routed via Virtual Router
+                    |
+            +---------------------+
+            |    Route Table      |
+            +---------------------+
+                    |
+                [ VPC Router ]
+                    |
+            ----------------------
+           |                      |
+     [ Private Subnet ]   [ Private Subnet ]
+           |                      |
+     +-------------+       +----------------+
+     | EC2 (App)   |       | EC2 (Database) |
+     | Private IP  |       | Private IP     |
+     | ENI         |       | ENI            |
+     +-------------+       +----------------+
+           |                      |
+    (Internal traffic only,      |
+     via VPC or NAT if needed)   |
+                                 |
+                        +--------------------+
+                        |     Isolated       |
+                        |     System (DB)    |
+                        |  No internet access|
+                        +--------------------+
+
+-----------------------------
+Explanation:
+-----------------------------
+- Public Subnet has access to Internet Gateway.
+- Private Subnet instances can access the internet via NAT (not shown here) or stay isolated.
+- ENIs act as virtual NICs for EC2 instances.
+- All communication is within the VPC.
+- Internet traffic enters via IGW → routed through the public subnet.
+- Switches are abstracted in AWS; traffic is routed virtually.
+
+=====================================================
+
+1. Local Area Network (LAN)
+------------------------------
+- A LAN is a network of interconnected devices within a limited area such as a home, office, or building.
+- It enables sharing of resources like files, printers, and internet.
+- Example: Your home Wi-Fi connecting your laptop, phone, and printer.
+
+2. Netmask
+------------------------------
+- A netmask (subnet mask) defines the network and host portions of an IP address.
+- Example: 255.255.255.0 means the first 3 octets are network, and the last is host.
+- Used in subnetting to split IP ranges.
+
+3. Switch
+------------------------------
+- A network switch connects devices in a LAN and uses MAC addresses to forward data to the correct destination.
+- Operates at Layer 2 (Data Link Layer) of the OSI model.
+- Switches are more efficient than hubs due to intelligent traffic routing.
+
+4. Router
+------------------------------
+- A router connects different networks (like LAN to the internet).
+- It uses IP addresses to forward data to the correct network.
+- Operates at Layer 3 (Network Layer) of the OSI model.
+
+5. Isolated System
+------------------------------
+- A system that is not connected to any external or public network.
+- Used for testing, high-security environments, or internal processes only.
+- Also known as air-gapped systems.
+
+6. VPC (Virtual Private Cloud)
+------------------------------
+- A virtual network within AWS (or other cloud) that provides isolated space to launch resources.
+- You can define subnets, route tables, gateways, and security rules.
+- Example: Creating a VPC with public and private subnets for a web application.
+
+7. Elastic Network Interface (ENI)
+------------------------------
+- A virtual network interface that you can attach to an EC2 instance in AWS.
+- It includes IP address, MAC address, and security group info.
+- Can be used for fault-tolerant designs (moving ENI to another instance).
+
+8. Internet Gateway (IGW)
+------------------------------
+- A horizontally scaled, redundant AWS component that allows communication between your VPC and the internet.
+- Required for outbound internet traffic from instances in a public subnet.
+
+9. Private and Public IP
+------------------------------
+- Private IP: Used for internal communication within a VPC or LAN. Not routable over the internet.
+  Example: 192.168.0.1, 10.0.0.1
+- Public IP: Assigned by your ISP or cloud provider, used to access the internet.
+  Example: 15.207.12.5
+
+==============================
+ NOTES:
+==============================
+- Subnetting and proper IP planning are crucial for network design.
+- In AWS, combining VPC, Subnets, ENI, IGW, and Route Tables defines your cloud network infrastructure.
+- Security Groups and NACLs help control access to/from instances.
+
+-----------------------------------------------------
