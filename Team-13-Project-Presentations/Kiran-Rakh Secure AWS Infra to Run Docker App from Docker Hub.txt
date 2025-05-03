@@ -1,8 +1,6 @@
 ✅ Project: Secure AWS Infra to Run Docker App from Docker Hub
 🧱 Architecture Overview
-less
-Copy
-Edit
+
 [ User ]
    |
  [ HTTPS ]
@@ -20,9 +18,7 @@ ALB forwards HTTPS traffic to EC2.
 
 📌 STEP-BY-STEP GUIDE
 1. Create a VPC
-bash
-Copy
-Edit
+
 VPC CIDR: 10.0.0.0/16
 2. Create Subnets
 Public Subnet: 10.0.1.0/24
@@ -93,20 +89,14 @@ Health check path: /
 8. SSH into EC2 via Bastion Host
 From local:
 
-bash
-Copy
-Edit
+
 ssh -i bastion.pem ec2-user@<Bastion-Public-IP>
 From Bastion to Private EC2:
 
-bash
-Copy
-Edit
+
 ssh -i private.pem ec2-user@<Private-EC2-Private-IP>
 9. Install Docker on Private EC2
-bash
-Copy
-Edit
+
 sudo yum update -y
 sudo yum install docker -y
 sudo systemctl start docker
@@ -116,9 +106,7 @@ exit  # Then reconnect via SSH again
 10. Pull and Run Docker Image from Docker Hub
 Example image: yourdockerhub/myapp:latest
 
-bash
-Copy
-Edit
+
 docker pull yourdockerhub/myapp:latest
 
 # Run the container (assuming app runs on port 5000)
