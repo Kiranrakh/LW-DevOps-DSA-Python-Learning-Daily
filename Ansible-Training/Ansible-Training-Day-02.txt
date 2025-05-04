@@ -1,0 +1,106 @@
+====================================================================
+DevOps Essentials: Tools | Configuration | AWS | Control Node Setup
+====================================================================
+
+--------------------------------------------------------------------
+1. DEVOPS TOOLS OVERVIEW
+--------------------------------------------------------------------
+| Tool Name       | Purpose                          | Type       |
+|-----------------|----------------------------------|------------|
+| Ansible         | Configuration Management         | Scripting  |
+| Docker          | Containerization                 | Scripting  |
+| Podman          | OCI-Compliant Container Engine   | Scripting  |
+| Jenkins         | CI/CD Automation                 | Intelligence |
+| Terraform       | Infrastructure as Code (IaC)     | Scripting  |
+| Git             | Version Control                  | Scripting  |
+| AWS CLI         | Cloud Management via CLI         | Scripting  |
+| Kubernetes      | Container Orchestration          | Intelligence |
+
+--------------------------------------------------------------------
+2. CONFIGURATION PROGRAM TYPES
+--------------------------------------------------------------------
+| Type         | Description                                          |
+|--------------|------------------------------------------------------|
+| Scripting    | Human-written scripts (Bash, YAML, Python, etc.)     |
+| Intelligence | Automation tools with decision logic, UI, triggers   |
+
+--------------------------------------------------------------------
+3. USE CASE EXAMPLES
+--------------------------------------------------------------------
+✔ Ansible → Automate software installation & updates on multiple servers.  
+✔ Docker → Package apps with all dependencies in isolated containers.  
+✔ Jenkins → Automate build, test & deploy cycles for code updates.  
+✔ Terraform → Provision AWS infrastructure using code.
+
+--------------------------------------------------------------------
+4. INSTALLATION ON RHEL 9 (EXAMPLE: Ansible, Podman, Git)
+--------------------------------------------------------------------
+• Update system:
+    $ sudo dnf update -y
+
+• Install Git:
+    $ sudo dnf install git -y
+
+• Install Ansible:
+    $ sudo dnf install epel-release -y
+    $ sudo dnf install ansible -y
+
+• Install Podman:
+    $ sudo dnf install podman -y
+
+• Install Python3 if not present:
+    $ sudo dnf install python3 -y
+
+--------------------------------------------------------------------
+5. CONFIGURING HOST FILE (/etc/hosts)
+--------------------------------------------------------------------
+• On the Control Node (Manager):
+    $ sudo nano /etc/hosts
+
+• Add private IP mappings:
+    172.31.16.10  manager
+    172.31.16.20  worker-a
+    172.31.16.30  worker-b
+
+• Purpose: Helps resolve hostnames without DNS.
+
+--------------------------------------------------------------------
+6. RESOURCES USED
+--------------------------------------------------------------------
+✔ EC2 Instances (RHEL 9, Ubuntu)
+✔ Ansible Installed on Control Node
+✔ SSH Keys for password-less access
+✔ Private IP mapping via /etc/hosts
+✔ Security Group allowing Port 22 (SSH)
+
+--------------------------------------------------------------------
+7. CONTROL NODE (MANAGER) ROLE
+--------------------------------------------------------------------
+• Acts as Ansible control host  
+• Contains project folders, inventory, playbooks  
+• Executes commands remotely using SSH to targets  
+• May include Podman/Docker for EE-based runs
+
+Directory Example:
+------------------
+/home/ec2-user/
+ ├── ansible/
+ │    ├── inventory
+ │    ├── playbooks/
+ │    │     └── web.yml
+ │    └── roles/
+ └── key.pem
+
+--------------------------------------------------------------------
+8. AWS INSTANCE LAUNCH (STEPS)
+--------------------------------------------------------------------
+1. Go to EC2 Dashboard → Launch Instance
+2. Choose OS: Amazon Linux 2 / Ubuntu 22.04 / RHEL 9
+3. Instance Type: t2.micro (Free Tier eligible)
+4. Add to existing or new Security Group:
+   - Inbound: Allow SSH (TCP 22)
+5. Create or use existing Key Pair (.pem file)
+6. Launch instances:
+   - Manager Node (Ansible control)
+   - One or more Target Nodes
+

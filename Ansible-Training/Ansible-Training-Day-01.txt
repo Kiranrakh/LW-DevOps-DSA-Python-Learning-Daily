@@ -1,0 +1,246 @@
+=========================================================
+        Project Model: Navigator + Podman + Projects
+=========================================================
+                          +----------------------+
+                          |     Manager Node     |
+                          |   (Control / Master) |
+                          |----------------------|
+                          | - OS: EC2 Linux      |
+                          | - SSH Enabled        |
+                          | - Ansible Installed  |
+                          | - Podman/Navigator   |
+                          | - Projects Directory |
+                          +----------+-----------+
+                                     |
+       +-----------------------------+-----------------------------+
+       |                             |                             |
+       |                             |                             |
++------+-------+            +--------+--------+           +--------+--------+
+|   Target A   |            |   Target B      |           |   Target C      |
+| (EC2 Worker) |            | (EC2 Worker)    |           | (EC2 Worker)    |
+|--------------|            |----------------|           |----------------|
+| - SSHD       |            | - SSHD         |           | - SSHD         |
+| - Docker     |            | - Docker       |           | - Docker       |
++--------------+            +----------------+           +----------------+
+
+Notes:
+- All Target Nodes are configured in /etc/hosts on the Manager node.
+- Manager connects to each Target via SSH using private IPs and Ansible.
+- Projects in Manager are deployed remotely on targets using playbooks.
+
+Key Elements in the Setup:
+--------------------------
+✔ Control Node (Manager): Main configuration system
+✔ Target Nodes (A, B, C): Connected via Ansible SSH
+✔ Host File: Maps internal/private IPs to hostnames
+✔ SSH: Used for remote secure login
+✔ Ansible: Used to manage remote nodes (run playbooks)
+✔ Project Directory: Contains Ansible roles, playbooks
+
+------------------------------------------------------------
+2. AWS Instance Launch (Control + Targets)
+------------------------------------------------------------
+• Launch 4 EC2 Instances (Amazon Linux / Ubuntu):
+   1. Manager (Control Node)
+   2. Target Node A
+   3. Target Node B
+   4. Target Node C
+
+• Allow Port 22 (SSH) in Security Group.
+• Attach same Key Pair for all instances.
+
+------------------------------------------------------------
+3. Remote Login Using SSH
+------------------------------------------------------------
+- Command:
+  $ ssh -i "key.pem" ec2-user@<instance-public-ip>
+
+- Set permissions on key:
+  $ chmod 400 key.pem
+
+- Test SSH for all 4 nodes from your system.
+
+------------------------------------------------------------
+4. /etc/hosts Configuration (Control Node)
+------------------------------------------------------------
+- Edit /etc/hosts:
+  $ sudo nano /etc/hosts
+
+- Add:
+  172.31.X.X  manager
+  172.31.X.Y  A
+  172.31.X.Z  B
+  172.31.X.W  C
+
+* Use private IPs of respective EC2 instances.
+
+------------------------------------------------------------
+5. Ansible Setup (Control Node)
+------------------------------------------------------------
+- Install Python & Ansible:
+  $ sudo yum install python3 -y
+  $ pip3 install --user ansible
+  $ export PATH=$PATH:~/.local/bin
+
+- Create Inventory File:
+  $ mkdir ~/ansible
+  $ cd ~/ansible
+  $ nano hosts
+
+  Content:
+  [targets]
+  A ansible_host=172.31.X.Y ansible_user=ec2-user ansible_ssh_private_key_file=~/key.pem
+  B ansible_host=172.31.X.Z ansible_user=ec2-user ansible_ssh_private_key_file=~/key.pem
+  C ansible_host=172.31.X.W ansible_user=ec2-user ansible_ssh_private_key_file=~/key.pem
+
+- Test Connection:
+  $ ansible -i hosts all -m ping
+
+------------------------------------------------------------
+6. SSHD Configuration (Target Nodes A, B, C)
+------------------------------------------------------------
+- Edit sshd_config:
+  $ sudo nano /etc/ssh/sshd_config
+
+- Ensure:
+  PasswordAuthentication no
+  PermitRootLogin no
+  PubkeyAuthentication yes
+
+- Restart SSH:
+  $ sudo systemctl restart sshd
+
+------------------------------------------------------------
+7. Project Model: Navigator + Podman + Projects
+------------------------------------------------------------
+As per your diagram:
+
+• Manager Node contains:
+  - Navigator (like Ansible inventory)
+  - Podman (or Docker alternative)
+  - Projects folder (holds playbooks, app logic)
+
+• It controls and pushes configurations to:
+  - Node A
+  - Node B
+  - Node C
+
+**************************************************************************************
+------------------------------------------------------------
+1. AWS EC2 INSTANCE LAUNCH
+------------------------------------------------------------
+• Log in to AWS Console.
+• Go to EC2 → Launch Instance.
+• Choose OS: Amazon Linux 2 or Ubuntu 22.04.
+• Instance Type: t2.micro (Free Tier).
+• Network: Default VPC or your custom VPC.
+• Assign Public IP: Enabled.
+• Key Pair: Create or select existing (.pem file).
+• Security Group: Allow TCP port 22 for SSH.
+• Launch two instances:
+   - Control Node (Manager)
+   - Worker Node
+
+------------------------------------------------------------
+2. REMOTE LOGIN USING SSH
+------------------------------------------------------------
+• On your local terminal:
+    $ chmod 400 my-key.pem
+    $ ssh -i "my-key.pem" ec2-user@<public-ip>
+• Repeat for both instances (control & worker).
+
+------------------------------------------------------------
+3. HOST FILE CONFIGURATION (ON CONTROL NODE)
+------------------------------------------------------------
+• Edit hosts file:
+    $ sudo nano /etc/hosts
+
+• Add:
+    <control-private-ip>  control
+    <worker-private-ip>   worker
+
+------------------------------------------------------------
+4. CONTROL / MANAGER NODE SETUP
+------------------------------------------------------------
+• Update system:
+    $ sudo yum update -y   (Amazon Linux)
+    $ sudo apt update -y   (Ubuntu)
+
+• Install Git & Python:
+    $ sudo yum install python3 git -y
+    $ sudo apt install python3 git -y
+
+------------------------------------------------------------
+5. ANSIBLE INSTALLATION & HOST LIST CONFIGURATION
+------------------------------------------------------------
+• Install Ansible (Control Node):
+    $ pip3 install --user ansible
+    $ export PATH=$PATH:~/.local/bin
+
+• Create inventory:
+    $ mkdir ansible && cd ansible
+    $ nano hosts
+
+• Add to hosts file:
+    [web]
+    worker ansible_host=<worker-private-ip> ansible_user=ec2-user ansible_ssh_private_key_file=/home/ec2-user/my-key.pem
+
+• Test:
+    $ ansible all -i hosts -m ping
+
+------------------------------------------------------------
+6. SSHD CONFIGURATION (WORKER NODE)
+------------------------------------------------------------
+• Open SSH config:
+    $ sudo nano /etc/ssh/sshd_config
+
+• Check/Modify:
+    PasswordAuthentication no
+    PubkeyAuthentication yes
+
+• Restart service:
+    $ sudo systemctl restart sshd
+
+------------------------------------------------------------
+7. MODEL CREATION (EXAMPLE PROJECT)
+------------------------------------------------------------
+• Objective:
+   - Deploy a Flask App with MySQL backend.
+   - Use Docker for containerization.
+   - Automate with Ansible.
+
+• Steps:
+    $ git clone https://github.com/kiranrakh/flask-mysql-k8s.git
+    $ cd flask-app
+    $ python3 app.py (or build Docker image)
+
+• Use Ansible for:
+   - Docker installation
+   - Flask app deployment
+   - MySQL container setup
+
+*********************************************************************************
+# Launch Ansible Navigator in TUI mode to browse container images
+>> ansible-navigator images
+
+# Press 'ESC' key twice to exit the TUI interface
+>> esc esc
+
+# List all container images available on the system via Podman
+>> podman images
+
+# Run an Ansible playbook locally (traditional method)
+>> ansible-playbook web.yml
+
+# Run playbook inside an execution environment using Podman and Ansible Navigator
+>> ansible-navigator run \
+     --inventory inventory \                          # Specify the inventory file
+     --execution-environment true \                   # Enable execution environment mode
+     --container-engine podman \                      # Use Podman as the container engine
+     --execution-environment-image creator-ee:v0.9.1 \# Use custom EE image (prebuilt)
+     --pull-policy never \                            # Don't pull image from registry
+     web.yml \                                        # The playbook to run
+     --mode stdout                                     # Output in plain text (not TUI)
+
+# Check running containers after executing the playbook (e.g., Flask app or MySQL may be running)
+>> podman ps
