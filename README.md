@@ -7,7 +7,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/LinuxWorld-Tech%20Intern-blue?style=for-the-badge&logo=linux" />
   <img src="https://img.shields.io/github/last-commit/Kiranrakh/LW-DevOps-Learning-Daily?style=for-the-badge&color=green" />
-  <img src="https://img.shields.io/badge/Made%20With-Markdown-1f425f.svg?style=for-the-badge&logo=markdown" />
+  
 </p>
 
 ---
