@@ -2,9 +2,9 @@
 Configuration Management with Ansible | Apache HTTPD | Password Auth | Idempotent
 ===============================================================================
 
-======================== Hands-on with Vimal Daga Sir ========================
+=========================== Hands-on with Vimal Daga Sir =======================
 
-📌 Project Setup: Configure Apache Web Server Using Ansible
+              📌 Project Setup: Configure Apache Web Server Using Ansible
 ================================================================================
                          ANSIBLE APACHE DEPLOYMENT - ARCHITECTURE
 ================================================================================
