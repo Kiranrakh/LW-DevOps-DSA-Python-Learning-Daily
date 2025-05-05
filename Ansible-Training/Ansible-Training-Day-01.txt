@@ -21,7 +21,7 @@
 |--------------|            |----------------|           |----------------|
 | - SSHD       |            | - SSHD         |           | - SSHD         |
 | - Docker     |            | - Docker       |           | - Docker       |
-+--------------+            +----------------+           +----------------+
++--------------+            +--- -------------+           +----------------+
 
 Notes:
 - All Target Nodes are configured in /etc/hosts on the Manager node.

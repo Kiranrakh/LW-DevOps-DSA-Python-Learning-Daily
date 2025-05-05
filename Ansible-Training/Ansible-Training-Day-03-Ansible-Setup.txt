@@ -1,0 +1,226 @@
+===============================================================================
+Configuration Management with Ansible | Apache HTTPD | Password Auth | Idempotent
+===============================================================================
+
+======================== Hands-on with Vimal Daga Sir ========================
+
+📌 Project Setup: Configure Apache Web Server Using Ansible
+================================================================================
+                         ANSIBLE APACHE DEPLOYMENT - ARCHITECTURE
+================================================================================
+
+                                      ┌────────────────────┐
+                                      │   Your Local PC         │
+                                      │ (Git Bash, SSH Key)     │
+                                      └────────┬───────────┘
+                                                 │
+                                                 ▼
+                                ┌───────────────────────────────┐
+                                │ 	 Controller Node (A)            │
+                                │  	- Ansible Installed             │
+                                │  	- kiran.html file               │
+                                │  	- Inventory File                │
+                                └────────┬──────────────┬───────┘
+                                           │                  │
+                                SSH & HTTP │                  │ SSH & HTTP
+                                           ▼                  ▼
+                   ┌────────────────────────┐  	┌────────────────────────┐
+                   │    Target Node (B)    	  │ 	│    Target Node (C)           │
+                   │ - Apache (httpd)      	  │ 	│ - Apache (httpd)             │
+                   │ - /var/www/html/rk.html	  │  	│ - /var/www/html/rakh.html    │
+                   └────────────────────────┘  	└────────────────────────┘
+
+================================================================================
+Legend:
+- SSH: Controller (A) uses SSH to manage Target Nodes (B & C)
+- HTTP: Web pages served by Apache on B and C
+- Ansible: Used from Controller to install packages, deploy files, and start services
+================================================================================
+
+🖥️ AWS Instances:
+------------------
+1. Controller Node (A)       → Master Node (Ansible Installed)
+2. Target Node (B)           → Worker Node
+3. Target Node (C)           → Worker Node
+
+⚙️ Common Setup:
+-----------------
+- All instances use the same key pair
+- Security Group allows: SSH (port 22) and HTTP (port 80)
+
+=============================================================================
+
+🔐 Step 1: Configure Controller Node (A)
+----------------------------------------
+$ ssh -i key.pem ec2-user@<Public-IP-A>                  # Connect to Controller Node using SSH
+$ sudo su -                                              # Switch to root user
+$ yum install ansible-core -y                            # Install Ansible core package
+$ cat > kiran.html                                       # Create an HTML file named 'kiran.html'
+Welcome to DevOps via Ansible                            # Sample content for the HTML file
+
+=============================================================================
+
+🔐 Step 2: Configure Target Node (B)
+-------------------------------------
+$ ssh -i key.pem ec2-user@<Public-IP-B>                  # Connect to Target Node B
+$ sudo su -                                              # Switch to root user
+$ nano /etc/ssh/sshd_config                              # Edit SSH configuration file
+→ PermitRootLogin yes                                    # Uncomment this to allow root login
+→ PasswordAuthentication yes                             # Uncomment this to enable password login
+$ systemctl restart sshd                                 # Restart SSH service
+$ passwd root                                            # Set a new root password
+$ rpm -q httpd                                           # Check if Apache is installed
+$ cd /var/www/html                                       # Go to Apache web root directory
+$ touch rk.html                                          # Create an empty HTML file for test
+$ systemctl status httpd                                 # Check the status of Apache service
+
+=============================================================================
+
+🔐 Step 3: Configure Target Node (C)
+-------------------------------------
+$ ssh -i key.pem ec2-user@<Public-IP-C>                  # Connect to Target Node C
+$ sudo su -                                              # Switch to root user
+$ nano /etc/ssh/sshd_config                              # Edit SSH config
+→ PermitRootLogin yes                                    # Enable root login
+→ PasswordAuthentication yes                             # Enable password authentication
+$ systemctl restart sshd                                 # Restart SSH service
+$ passwd root                                            # Set root password
+$ rpm -q httpd                                           # Check if Apache is installed
+$ cd /var/www/html                                       # Navigate to Apache directory
+$ touch rakh.html                                        # Create HTML file
+$ systemctl status httpd                                 # Verify Apache status
+
+=============================================================================
+
+📂 Step 4: Setup Ansible Inventory on Controller Node (A)
+-----------------------------------------------------------
+$ nano /etc/ansible/hosts                                # Open the inventory file
+10.0.0.2 ansible_user=root ansible_password=redhat@123   # Add IP of Target Node B
+10.0.0.3 ansible_user=root ansible_password=redhat@123   # Add IP of Target Node C
+$ ansible all --list-hosts                               # List all hosts
+$ ansible all -m command -a date                         # Run 'date' command on all nodes
+$ ansible all -m command -a whoami                       # Check executing user on all nodes
+
+=============================================================================
+
+📦 Step 5: Install Apache (httpd) on Target Nodes
+--------------------------------------------------
+$ ansible 10.0.0.3 -m package -a "name=httpd state=present"       # Install Apache on node C
+$ ansible all -m package -a "name=httpd state=present"            # Install Apache on all nodes
+$ ssh root@10.0.0.2                                               # Optional: Test password login to node B
+$ ssh root@10.0.0.3                                               # Optional: Test password login to node C
+$ rpm -q httpd                                                    # Verify httpd is installed
+
+=============================================================================
+
+🌐 Step 6: Deploy HTML Pages to Target Nodes
+---------------------------------------------
+$ ansible all -m copy -a "src=/root/kiran.html dest=/var/www/html/rk.html"    # Copy page to rk.html on all targets
+$ ansible 10.0.0.2 -m copy -a "src=/root/kiran.html dest=/var/www/html/rakh.html"  # Custom file copy on Node B
+
+=============================================================================
+
+🚀 Step 7: Start Apache Service
+-------------------------------
+$ systemctl status httpd                                         # Manually check status
+$ ansible all -m service -a "name=httpd state=started"           # Start Apache on all managed nodes
+
+=============================================================================
+                 ✅ END OF Project practical
+=============================================================================
+ 
+Usecase: Automated Web Server Configuration Using Ansible
+
+-------------------------------------------------------------------------------
+1. CONFIGURATION MANAGEMENT
+-------------------------------------------------------------------------------
+• Configuration Management is the process of automating system setup, updates, and maintenance using tools like Ansible.
+• It ensures consistency and reliability across environments.
+• Common tools: Ansible, Puppet, Chef, SaltStack.
+
+-------------------------------------------------------------------------------
+2. CONTROLLER NODE & TARGET NODE
+-------------------------------------------------------------------------------
+✔ **Controller Node** (Ansible Host):
+   - Installed with Ansible
+   - Executes playbooks via SSH
+   - Maintains inventory, roles, playbooks
+
+✔ **Target Node** (Managed Hosts):
+   - Receives configurations from controller
+   - Requires Python & SSH access (default port 22)
+
+Example:
+----------
+Control Node → SSH → Target Node(s)
+Ansible runs: `ansible-playbook apache.yml`
+
+-------------------------------------------------------------------------------
+3. PASSWORD AUTHENTICATION (INVENTORY CONFIG)
+-------------------------------------------------------------------------------
+• If SSH key authentication is not set up, password authentication can be used:
+
+Inventory Example:
+------------------
+[webservers]
+192.168.1.10 ansible_user=ec2-user ansible_password=YourPassword ansible_connection=ssh
+
+OR set common password in `ansible.cfg` or prompt securely using:
+
+*************************************************************************
+========ansible-playbook apache.yml --ask-pass============================
+
+
+Note: For security reasons, passwordless SSH using key pairs is preferred.
+
+-------------------------------------------------------------------------------
+4. CONFIGURE APACHE HTTPD WEBSERVER (ansible-playbook)
+-------------------------------------------------------------------------------
+
+Playbook: `apache.yml`
+
+```yaml
+---
+- name: Install and Start Apache HTTPD
+  hosts: webservers
+  become: yes
+
+  tasks:
+    - name: Install httpd package
+      yum:
+        name: httpd
+        state: present
+
+    - name: Start and enable httpd service
+      service:
+        name: httpd
+        state: started
+        enabled: true
+
+    - name: Create index.html
+      copy:
+        dest: /var/www/html/index.html
+        content: "<h1>Welcome to DevOps via Ansible</h1>"
+
+Run with:
+>> ansible-playbook apache.yml --ask-pass
+
+-----------------------------------------------------------------------------------
+IDEMPOTENT BEHAVIOR
+
+✔ Ansible is idempotent — running the same playbook multiple times won’t reapply changes unnecessarily.
+
+Examples:
+
+If httpd is already installed, it won’t reinstall.
+
+If index.html already exists with the same content, it won’t rewrite the file.
+
+This ensures:
+✅ Predictability
+✅ Safety in automation
+✅ Efficient deployment
+
+
+-----------------------------------------------------------------------------------
+ 
