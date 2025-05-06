@@ -1,0 +1,225 @@
+## Project Goal  
+**Deploy a Flask + MySQL Web App** using **Docker** and **Kubernetes** via **Minikube** on a single **AWS EC2 Ubuntu instance**.
+
+---
+
+## Tools Involved  
+- AWS EC2  
+- Docker  
+- Minikube (Kubernetes)  
+- kubectl  
+- Flask (Python backend)  
+- MySQL (Database)  
+- Kubernetes YAMLs (Deployment, Service, PVC)
+
+---
+
+## FULL PROJECT STEPS
+
+---
+
+###  Step 1: Launch EC2 Instance on AWS
+
+- **AMI**: Ubuntu 22.04 LTS  
+- **Instance Type**: t2.medium (2 vCPU, 4GB RAM)  
+- **Ports to open**:
+  - 22 (SSH)
+  - 30000–32767 (NodePort)
+  - 80 (optional, for HTTP)
+
+---
+
+###  Step 2: Install Docker
+
+```bash
+sudo apt update
+sudo apt install -y docker.io
+sudo systemctl start docker
+sudo systemctl enable docker
+sudo usermod -aG docker $USER
+newgrp docker
+```
+
+---
+
+### Step 3: Install kubectl and Minikube
+
+```bash
+# Install kubectl
+curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+chmod +x kubectl
+sudo mv kubectl /usr/local/bin/
+
+# Install Minikube
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
+```
+
+---
+
+###  Step 4: Start Minikube with Docker driver
+
+```bash
+minikube start --driver=docker
+```
+
+Check node:
+```bash
+kubectl get nodes
+```
+
+---
+
+###  Step 5: Write Your Flask App (app.py)
+
+```python
+from flask import Flask, request
+import mysql.connector
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return "Welcome to ToDo API"
+
+@app.route('/add', methods=['POST'])
+def add():
+    task = request.json['task']
+    db = mysql.connector.connect(
+        host="mysql",
+        user="root",
+        password="rootpass",
+        database="todo"
+    )
+    cursor = db.cursor()
+    cursor.execute("INSERT INTO tasks (task) VALUES (%s)", (task,))
+    db.commit()
+    return {"message": "Task added"}
+```
+
+---
+
+###  Step 6: Create Dockerfile for Flask App
+
+```dockerfile
+FROM python:3.9-slim
+WORKDIR /app
+COPY . .
+RUN pip install flask mysql-connector-python
+CMD ["python", "app.py"]
+```
+
+---
+
+###  Step 7: Build and Push Docker Image
+
+Build and push to Docker Hub:
+
+```bash
+docker build -t manasipatil691/flask-todo .
+
+login First
+docker login
+docker tag flask-todo manasipatil691/flask-todo:latest
+
+docker push manasipatil691/flask-todo:latest
+```
+
+(Replace with your Docker Hub username)
+
+---
+
+###  Step 8: Kubernetes YAMLs
+
+**1. mysql-deployment.yaml**
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+spec:
+  selector:
+    matchLabels:
+      app: mysql
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:5.7
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: rootpass
+        - name: MYSQL_DATABASE
+          value: todo
+        ports:
+        - containerPort: 3306
+        volumeMounts:
+        - name: mysql-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-storage
+        persistentVolumeClaim:
+          claimName: mysql-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+spec:
+  selector:
+    app: mysql
+  ports:
+  - port: 3306
+```
+
+---
+
+**2. flask-deployment.yaml**
+```yaml
+
+```
+
+---
+
+### Step 9: Deploy to Kubernetes
+
+```bash
+kubectl apply -f mysql-deployment.yaml
+kubectl apply -f flask-deployment.yaml
+```
+
+---
+
+### Step 10: Access the App
+
+In your browser:
+```
+http://<EC2 Public IP>:30001
+```
+
+You should see `Welcome to ToDo API`.
+
+Use `curl` or Postman to POST a task:
+```bash
+curl -X POST http://<EC2-IP>:30001/add -H "Content-Type: application/json" -d '{"task": "Buy milk"}'
+```
+
+---
+
+
+
