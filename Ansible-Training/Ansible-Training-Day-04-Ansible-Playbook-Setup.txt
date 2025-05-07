@@ -1,0 +1,130 @@
+================================================================================
+                Ansible Hands-On Practical: Apache Web Server Setup
+================================================================================
+
+👨‍💻 Controller Node: Local Machine (Ansible Installed)
+🖥️  Target Nodes   : AWS EC2 Instances (TG-A, TG-B - Red Hat based)
+
+--------------------------------------------------------------------------------
+🔧 STEP 1: AWS EC2 Target Node Setup
+--------------------------------------------------------------------------------
+✅ Launch 2 EC2 instances with:
+   - OS          : Red Hat Linux
+   - Key Pair    : <your-key.pem>
+   - SG Rules    : Allow ports 22 (SSH), 80 (HTTP), 443 (HTTPS)
+
+--------------------------------------------------------------------------------
+🔧 STEP 2: Install Ansible on Controller Node (Your Local Machine)
+--------------------------------------------------------------------------------
+Run the following:
+    $ sudo yum install ansible-core -y
+
+--------------------------------------------------------------------------------
+🔧 STEP 3: Configure SSH Access on Target Nodes
+--------------------------------------------------------------------------------
+▶ Connect to TG-A and TG-B:
+    $ ssh -i <key.pem> ec2-user@<public-ip>
+
+▶ Become root:
+    $ sudo su - root
+
+▶ Edit SSH config:
+    # nano /etc/ssh/sshd_config
+      → PermitRootLogin yes
+      → PasswordAuthentication yes
+
+▶ Restart SSH service:
+    # systemctl restart sshd
+
+▶ Set root password:
+    # passwd root
+
+--------------------------------------------------------------------------------
+🔧 STEP 4: Configure Ansible Inventory on Controller Node
+--------------------------------------------------------------------------------
+▶ Edit inventory file:
+    $ sudo nano /etc/ansible/hosts
+
+▶ Add:
+    <public-ip-TG-A> ansible_user=root ansible_password=redhat@123
+    <public-ip-TG-B> ansible_user=root ansible_password=redhat@123
+
+▶ Test Connection:
+    $ ansible all -m ping
+    $ ansible all -m command -a "id"
+    $ ansible all -m command -a "whoami"
+
+--------------------------------------------------------------------------------
+📝 STEP 5: Create Web Page (HTML)
+--------------------------------------------------------------------------------
+Create file on controller:
+    $ cat > /root/kiran.html
+    Welcome to DevOps via Ansible
+
+--------------------------------------------------------------------------------
+📘 STEP 6: Create Apache Playbook (apache.yml)
+--------------------------------------------------------------------------------
+Filename: apache.yml
+
+- hosts: all
+  tasks:
+    - name: Install httpd
+      package:
+        name: httpd
+        state: present
+
+    - name: Install PHP
+      package:
+        name: php
+        state: present
+
+    - name: Copy HTML file
+      copy:
+        src: /root/kiran.html
+        dest: /var/www/html/rk.html
+
+    - name: Start and enable httpd
+      service:
+        name: httpd
+        state: started
+        enabled: true
+
+--------------------------------------------------------------------------------
+🚀 STEP 7: Run the Playbook
+--------------------------------------------------------------------------------
+▶ Syntax Check:
+    $ ansible-playbook --syntax-check apache.yml
+
+▶ Run:
+    $ ansible-playbook apache.yml
+
+▶ Verify:
+    - Open browser → http://<target-node-ip>/rk.html
+
+--------------------------------------------------------------------------------
+📚 Ansible Module Reference
+--------------------------------------------------------------------------------
+▶ List modules:
+    $ ansible-doc -l
+
+▶ Module info:
+    $ ansible-doc <module_name>
+
+▶ Help:
+    $ ansible-playbook -h
+
+--------------------------------------------------------------------------------
+🔁 Key Concepts Recap
+--------------------------------------------------------------------------------
+🔹 Controller Node   → The system running Ansible (your machine)
+🔹 Target Node       → Remote systems managed by Ansible (EC2s)
+🔹 Ad-Hoc Commands   → One-liners for quick tasks (e.g., ansible all -m ping)
+🔹 Playbook          → YAML automation script
+🔹 YAML Rules        → Indentation matters, use .yml extension
+🔹 vi/nano Editors   → For writing/editing playbooks
+🔹 Packages          → Installed using 'package' module
+🔹 Services          → Managed using 'service' module
+
+================================================================================
+💡 End of Practical — You’ve now automated Apache deployment with Ansible!
+================================================================================
