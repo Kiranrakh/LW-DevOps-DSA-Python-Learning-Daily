@@ -1,0 +1,154 @@
+=========================================
+  Ansible Automation: AWS + Docker + K8s
+=========================================
+
+OBJECTIVE:
+----------
+Automate the following using Ansible:
+1. Launch an EC2 instance on AWS (Install OS)
+2. Install Docker on the instance
+3. Install Kubernetes tools (kubelet, kubeadm, kubectl)
+
+=========================================
+PREREQUISITES:
+--------------
+- Ansible installed on the controller node (your local machine or a separate EC2)
+- AWS credentials configured (`aws configure`)
+- Required Python packages: boto3, botocore
+- A valid AWS key pair and subnet/VPC setup
+- Security group allowing SSH (port 22)
+
+=========================================
+STEP 1: Launch EC2 Instance (Install OS)
+-----------------------------------------
+Create a playbook: launch_ec2.yml
+
+Example Content:
+----------------
+- name: Launch EC2 instance in AWS
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars:
+    key_name: my-key
+    instance_type: t2.micro
+    image: ami-0c02fb55956c7d316
+    region: ap-south-1
+    security_group: my-sg
+    subnet_id: subnet-xxxxxxxx
+  tasks:
+    - name: Launch EC2
+      amazon.aws.ec2_instance:
+        name: devops-instance
+        key_name: "{{ key_name }}"
+        instance_type: "{{ instance_type }}"
+        image_id: "{{ image }}"
+        wait: true
+        region: "{{ region }}"
+        vpc_subnet_id: "{{ subnet_id }}"
+        security_group: "{{ security_group }}"
+        count: 1
+        assign_public_ip: yes
+      register: ec2
+
+    - name: Show instance public IP
+      debug:
+        msg: "Instance public IP: {{ ec2.instances[0].public_ip_address }}"
+
+=========================================
+STEP 2: Configure Inventory File
+---------------------------------
+After launching the instance, update the IP in inventory.ini:
+
+[aws]
+ec2-instance ansible_host=<INSTANCE_PUBLIC_IP> ansible_user=ec2-user ansible_ssh_private_key_file=~/.ssh/my-key.pem
+
+=========================================
+STEP 3: Install Docker on EC2
+------------------------------
+Create a playbook: install_docker.yml
+
+Example Content:
+----------------
+- name: Install Docker on EC2
+  hosts: aws
+  become: yes
+  tasks:
+    - name: Install required packages
+      yum:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - yum-utils
+        - device-mapper-persistent-data
+        - lvm2
+
+    - name: Add Docker repo
+      get_url:
+        url: https://download.docker.com/linux/centos/docker-ce.repo
+        dest: /etc/yum.repos.d/docker-ce.repo
+
+    - name: Install Docker
+      yum:
+        name: docker-ce
+        state: present
+
+    - name: Start Docker
+      service:
+        name: docker
+        state: started
+        enabled: true
+
+=========================================
+STEP 4: Install Kubernetes Tools
+---------------------------------
+Create a playbook: install_k8s.yml
+
+Example Content:
+----------------
+- name: Install Kubernetes tools
+  hosts: aws
+  become: yes
+  tasks:
+    - name: Add Kubernetes repo
+      copy:
+        dest: /etc/yum.repos.d/kubernetes.repo
+        content: |
+          [kubernetes]
+          name=Kubernetes
+          baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+          enabled=1
+          gpgcheck=1
+          repo_gpgcheck=1
+          gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+
+    - name: Install Kubernetes packages
+      yum:
+        name:
+          - kubelet
+          - kubeadm
+          - kubectl
+        state: present
+
+    - name: Enable kubelet
+      systemd:
+        name: kubelet
+        enabled: yes
+
+=========================================
+STEP 5: Execute Playbooks in Sequence
+--------------------------------------
+1. Launch EC2:
+   ansible-playbook launch_ec2.yml
+
+2. Update inventory.ini with new EC2 IP
+
+3. Install Docker:
+   ansible-playbook -i inventory.ini install_docker.yml
+
+4. Install Kubernetes:
+   ansible-playbook -i inventory.ini install_k8s.yml
+
+=========================================
+                 End 
+=========================================

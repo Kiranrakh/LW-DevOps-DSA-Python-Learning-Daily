@@ -1,0 +1,157 @@
+================================================================================
+                 Ansible Practical Guide: Concepts and Usage Reference
+================================================================================
+
+📌  Objective:
+Automate Web Server (httpd) setup using Ansible with variables, debug, facts, and verbosity.
+
+--------------------------------------------------------------------------------
+🔧  Environment Setup
+--------------------------------------------------------------------------------
+
+🖥️  Controller Node  : Local Machine (Ansible installed, Git Bash used for commands)
+🖥️  Managed Nodes    : AWS EC2 Red Hat instances (also called Target Nodes)
+
+▶ Tools Used:
+   - Git Bash           → Command execution on Windows
+   - Vim / Nano         → Edit playbooks and configuration files
+   - Ansible            → Automation engine
+
+--------------------------------------------------------------------------------
+📂  Inventory and SSH
+--------------------------------------------------------------------------------
+
+▶ Ensure SSH access to managed nodes (Target Nodes):
+   $ ssh root@<target-ip>       # from Git Bash
+
+▶ Ansible inventory (/etc/ansible/hosts):
+   <target-ip> ansible_user=root ansible_password=redhat@123
+
+▶ Test connection:
+   $ ansible all -m ping
+
+--------------------------------------------------------------------------------
+📘  ✅ Ansible Playbook: Conditional Web Server Setup
+--------------------------------------------------------------------------------
+
+▶ Example playbook to install Apache (httpd) and print message:
+
+Filename: main.yml
+
+- hosts: all
+  vars_files:
+    - "var.yml"
+
+  tasks:
+
+    - name: Install Web Package (Custom)
+      package:
+        name: "{{ webPackage }}"
+        state: present
+      register: packageRegister
+      ignore_errors: true
+
+    - name: Debug: Show if Package Failed
+      debug:
+        var: packageRegister['failed']
+
+    - name: Retry Package Install with Default (httpd)
+      package:
+        name: "httpd"
+        state: present
+      when: packageRegister['failed']
+
+    - name: Deploy Web Content
+      copy:
+        content: "i m LW web"
+        dest: "{{ docRoot }}/index.html"
+
+
+--------------------------------------------------------------------------------
+📘  ✅ var.yml — External Variables File
+--------------------------------------------------------------------------------
+
+webPackage: httpd
+webService: httpd
+isStart: started
+docRoot: /var/www/html
+
+
+--------------------------------------------------------------------------------------
+▶ Run the Playbook
+▶ Basic run:
+$ ansible-playbook basic.yml
+
+▶ Run with verbosity:
+$ ansible-playbook basic.yml -v # verbose
+$ ansible-playbook basic.yml -vvv # more detail
+
+▶ Run with --extra-vars (on-the-fly variables):
+$ ansible-playbook basic.yml --extra-vars "web_package=httpd welcome_msg='Deployed!'"
+
+---------------------------------------------------------------------------------------------
+🧠 Key Concepts
+🔹 Target Node / Managed Node
+
+The remote server Ansible operates on (e.g., EC2 instance)
+
+🔹 Git Bash
+
+Terminal emulator to run Linux commands from Windows
+
+🔹 Vim/Nano Editor
+
+Text editors to create/edit YAML playbooks
+
+🔹 Ansible Playbook
+
+YAML file defining tasks
+
+Use .yml extension
+
+🔹 Ansible Debug Module
+
+Used to print variables or messages
+
+Example:
+
+debug:
+msg: "This is a debug message"
+
+🔹 Gathering Facts
+
+Enables Ansible to collect system info (OS, IP, RAM, etc.)
+
+Can be toggled with gather_facts: true/false
+
+🔹 vars
+
+Define reusable variables
+
+Can be declared in playbook or passed via CLI
+
+🔹 Variable Example:
+vars:
+my_var: "DevOps is awesome"
+
+🔹 String
+
+Data type used for text values (e.g., "hello", "{{ my_var }}")
+
+🔹 httpd
+
+Apache web server package (RHEL-based systems)
+
+🔹 Web Server
+
+Used to serve websites (Apache, Nginx, etc.)
+
+🔹 Verbosity
+
+Add -v, -vv, -vvv to increase output detail
+
+🔹 --extra-vars
+
+Pass values dynamically while running playbook
+
+Example: --extra-vars "my_var=value"

@@ -1,0 +1,154 @@
+===============================
+      ANSIBLE Day-06
+===============================
+
+1. ansible-doc COMMAND
+-----------------------
+- Usage: `ansible-doc <module_name>`
+- Description: Displays documentation for a specific Ansible module.
+- Example: `ansible-doc copy` shows detailed usage, options, and examples of the 'copy' module.
+
+2. COMMAND MODULE
+-------------------
+- Module Name: `command`
+- Executes commands on target nodes without going through the shell.
+- Syntax:
+  - name: Run a simple command
+    ansible.builtin.command: uptime
+
+3. FILE MODULE
+----------------
+- Used for managing file properties like ownership, permissions, state.
+- Common states: `touch`, `absent`, `directory`
+- Syntax:
+  - name: Ensure a file is present
+    ansible.builtin.file:
+      path: /tmp/demo.txt
+      state: touch
+
+  - name: Delete a directory
+    ansible.builtin.file:
+      path: /tmp/testdir
+      state: absent
+
+4. CREATING / DELETING DIRECTORIES
+------------------------------------
+- Use the `file` module with state `directory` or `absent`
+- Syntax:
+  - name: Create a directory
+    ansible.builtin.file:
+      path: /opt/mydir
+      state: directory
+      mode: '0755'
+
+  - name: Delete a directory
+    ansible.builtin.file:
+      path: /opt/mydir
+      state: absent
+
+5. TARGET NODE
+---------------
+- The machine where Ansible tasks run.
+- Defined in inventory file.
+- Example inventory:
+  [web]
+  server1 ansible_host=192.168.1.10 ansible_user=ec2-user
+
+6. COPY MODULE
+---------------
+- Used to copy files from control node to target node.
+- Syntax:
+  - name: Copy file to remote server
+    ansible.builtin.copy:
+      src: /home/user/index.html
+      dest: /var/www/html/index.html
+
+7. PLAYLIST (PLAYBOOK)
+------------------------
+- A YAML file containing tasks and roles to automate configurations.
+- Example playbook:
+  - name: Install Apache
+    hosts: web
+    tasks:
+      - name: Install httpd
+        yum:
+          name: httpd
+          state: present
+
+8. SEQUENCING (/n /t)
+-----------------------
+- YAML uses indentation (not /n /t) to sequence tasks.
+- Tasks are executed in order from top to bottom in a playbook.
+
+9. OS FOOTPRINT
+----------------
+- The load Ansible creates on a system is minimal.
+- Agentless architecture — only SSH and Python are required on target nodes.
+
+10. CONTROLLER NODE
+---------------------
+- The machine where Ansible is installed and playbooks are run.
+- Sends commands to remote machines (target nodes) via SSH.
+
+11. FACTS
+----------
+- System information gathered automatically by Ansible.
+- Gathered at the start of playbooks if `gather_facts: true`.
+- Access using `ansible_facts` variable.
+
+12. USER DEFINED VARIABLE
+---------------------------
+- Defined using `vars` or `vars_files`
+- Example:
+  vars:
+    web_port: 8080
+
+  tasks:
+    - name: Print port
+      debug:
+        msg: "Port is {{ web_port }}"
+
+13. DEBUG MODULE
+------------------
+- Used to print variables or custom messages.
+- Syntax:
+  - name: Show message
+    ansible.builtin.debug:
+      msg: "This is a debug message"
+
+14. ANSIBLE GATHERING
+-----------------------
+- Refers to gathering system facts (RAM, OS, IP) at playbook start.
+- Controlled using `gather_facts: true/false`
+
+15. SYNTAX TO PRINT VARIABLES
+------------------------------
+- Use Jinja2 double curly braces:
+  - name: Print OS
+    debug:
+      msg: "Operating system is {{ ansible_facts['os_family'] }}"
+
+16.  Ansible Playbook: Install Web Server Based on OS
+----------------------------------------
+--- Name: install_webserver.yml
+
+- hosts: all
+  gather_facts: true
+  tasks:
+    - name: Web install in RedHat systems
+      package:
+        name: httpd
+        state: present
+      when: (ansible_facts.os_family == "RedHat" or ansible_facts.os_family == "CentOS") 
+            and ansible_facts.memfree_mb >= 100
+
+    - name: Web installing in Ubuntu
+      package:
+        name: apache2
+        state: present
+      when: ansible_facts.os_family == "Debian" or ansible_facts.os_family == "Ubuntu"
+
+
+===============================
+   End of Ansible Day-06
+===============================
