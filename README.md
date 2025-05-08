@@ -1,8 +1,8 @@
-<h1 align="center">🚀 DevOps Journey With LinuxWorld</h1>
+<h1 align="center">🚀 DevOps Journey with LinuxWorld</h1>
 
 <p align="center">
-  <strong>LinuxWorld DevOps Internship</strong><br/>
-  <em>Mentored by the visionary <strong>Vimal Daga Sir</strong></em>
+  <strong>Internship at <a href="https://www.linuxworldindia.org/">LinuxWorld Informatics Pvt Ltd, Jaipur</a></strong><br>
+  <em>Mentorship under the visionary <strong>Vimal Daga Sir</strong></em>
 </p>
 
 <p align="center">
@@ -12,112 +12,105 @@
 
 ---
 
+## 🌟 About This Repository
+
+Welcome to my **Daily DevOps Learning Journey**!  
+This repository is a live documentation of hands-on practice and real-world DevOps implementation during my internship at **LinuxWorld**, guided by **Vimal Daga Sir**.
+
+> 💬 **Key Focus Areas**: DevOps Tools • Cloud Platforms • Automation • GitOps • DevSecOps • CI/CD Pipelines • Kubernetes Ecosystem
+
+---
+
+## 🛠️ Tech Stack
+
 <p align="center">
-  Welcome to my <strong>Daily DevOps Learning Journey</strong> at <strong>LinuxWorld Informatics Pvt Ltd, Jaipur</strong> 🚀<br/>
-  Guided by <strong>Vimal Daga Sir</strong>, I’m exploring real-world DevOps tools, cloud platforms, and automation practices.
+  <img src="https://skillicons.dev/icons?i=aws,docker,kubernetes,jenkins,github,terraform,ansible,bash,linux,prometheus,grafana" />
 </p>
 
 ---
 
-## 🧠 Tech Stack & Tools Covered
+## 📚 Modules Covered
 
-<p align="center">
-🔧 Jenkins • Docker • Kubernetes  
-☁️ AWS • Terraform • Ansible  
-📈 Prometheus • Grafana  
-🔐 DevSecOps Tools • Vault • Trivy • SonarQube  
-💻 Linux • GitHub • CI/CD Pipelines  
-📦 Argo CD • Helm • Bash Scripting  
-</p>
-
----
-
-## 🗂️ Modules Covered
-
-### 🏁 Getting Started with DevOps
-- DevOps mindset, culture, and real-world scenarios  
-- SDLC, Agile & Scrum methodology  
+### 🏁 DevOps Fundamentals
+- DevOps Culture, Mindset & Lifecycle
+- SDLC, Agile & Scrum in DevOps Context
 
 ### 🔗 Git & GitHub
-- Git version control, branching, rebasing  
-- GitHub PRs, forks, actions & integrations  
-- GitHub profile building  
+- Branching, Rebasing, Pull Requests
+- GitHub Actions, Webhooks & Automation
+- Building a GitHub DevOps Portfolio
 
 ### 🐳 Docker & ☸️ Kubernetes
-- Docker image creation, multi-container apps via Docker Compose  
-- Kubernetes essentials: Pods, Services, Deployments  
-- Advanced K8s: ConfigMaps, Secrets, RBAC, Helm  
+- Dockerizing Applications with Best Practices
+- Multi-Container Setup using Docker Compose
+- Core K8s Concepts: Pods, Services, Deployments
+- Advanced: ConfigMaps, Secrets, RBAC, Helm
 
-### ⚙️ Jenkins - CI/CD Pipelines
-- Declarative & scripted pipelines  
-- Jenkins + GitHub + DockerHub integration  
-- Multibranch pipelines with secure credentials  
+### ⚙️ Jenkins - CI/CD
+- Declarative & Scripted Pipelines
+- GitHub + Jenkins + DockerHub Integrations
+- Jenkins on Kubernetes, Multi-branch Setup
 
-### 📊 Monitoring & Logging
-- Prometheus for metrics  
-- Grafana for visualization  
-- Node/Blackbox exporters, K8s metrics  
+### 📈 Monitoring & Observability
+- Prometheus for Metrics Collection
+- Grafana for Dashboard Visualization
+- Node Exporter, Blackbox Exporter
 
 ### 🧱 Infrastructure as Code (IaC)
-- Ansible for config automation (playbooks, roles)  
-- Terraform for AWS provisioning (VPC, EC2, IAM, EKS)  
-- Modular IaC structures  
+- 🔧 Ansible for Automation (Playbooks & Roles)
+- 🌍 Terraform for AWS Infra: EC2, EKS, IAM
+- Modular IaC: Network, Compute, Security
 
-### ☁️ Cloud Providers
-- AWS deep dive: EC2, S3, VPC, ELB, IAM  
-- CloudWatch, Route53, Lambda  
-- Basics of Azure & GCP  
+### ☁️ Cloud Services
+- AWS (EC2, S3, Lambda, VPC, IAM, Route53)
+- AWS Monitoring with CloudWatch
+- Azure & GCP Introduction
 
-### 🐧 Linux & Bash Scripting
-- Linux CLI, systemd, permissions, packages  
-- Bash automation, cron jobs  
+### 🔐 DevSecOps
+- Secrets Management: Vault, K8s Secrets
+- Trivy & SonarQube for Vulnerability Scanning
+- RBAC, IAM Policies, SAST & DAST
 
 ### 🔁 GitOps with Argo CD
-- Git as source of truth for Kubernetes  
-- Auto-sync using Argo CD  
-- GitOps pipelines with Helm & Jenkins  
+- Git as Source of Truth for K8s
+- Argo CD + Helm for Declarative Sync
+- GitOps Pipeline with Jenkins Integration
 
-### 🔐 DevSecOps & Security Best Practices
-- K8s Secrets, Vault for secrets mgmt  
-- Trivy, SonarQube scanning  
-- RBAC, IAM, SAST/DAST practices  
+### 🐧 Linux & Bash
+- Linux CLI, Permissions, System Services
+- Bash Scripts for Automation, Cron Jobs
 
 ---
 
 ## 🏆 Capstone Projects
 
-- ✅ CI/CD pipeline for Dockerized frontend on K8s  
-- ✅ GitOps pipeline with Argo CD + Helm  
-- ✅ Monitoring stack: Prometheus + Grafana  
-- ✅ Secure AWS Infra setup via Terraform & Ansible  
+| Project | Description |
+|--------|-------------|
+| ✅ CI/CD Pipeline on Kubernetes | Dockerized frontend app with Jenkins CI/CD on K8s |
+| ✅ GitOps with Argo CD + Helm | Auto-sync deployments from GitHub to K8s |
+| ✅ Monitoring Stack | Prometheus + Grafana for live alerts |
+| ✅ Terraform + Ansible | Secure AWS infrastructure automation |
 
 ---
 
-## 🚀 Highlight Projects
+## 🚀 Featured Projects
 
-### 🔸 Deploying a Static HTML Website on K8s using Docker & Nginx
-A containerized static site with Nginx on Kubernetes – demonstrating service exposure and automation.
+### 🔸 Deploy Static HTML on K8s using Docker & Nginx
+> A lightweight static site containerized with Nginx and deployed on Kubernetes using services & deployments.
 
 ### 🔸 Full Static Nginx Website
-Multi-page HTML/CSS/JS website hosted via Docker + Nginx.
+> A multi-page responsive static site (HTML, CSS, JS) running on Dockerized Nginx.
 
 ### 🔸 Dockerized Web Scraper with MySQL
-Python-based scraper containerized with Docker, storing data in MySQL – shows container networking & persistent storage.
+> Python-based scraper containerized with Docker, storing parsed data into a MySQL container.
 
 ---
 
 ## 🙋‍♂️ About Me
 
 <p align="center">
-  I'm <strong>Kiran Rakh</strong> – a DevOps Intern at <strong>LinuxWorld Informatics Pvt Ltd</strong>, mentored by the legendary <strong>Vimal Daga Sir</strong>.<br/>
-  🚀 Passionate about cloud, automation, and solving real-world challenges with DevOps.
-</p>
-
----
-
-## 📡 Connect With Me
-
-<p align="center">
+  <strong>Kiran Rakh</strong><br/>
+  DevOps Intern | Cloud & Automation Enthusiast<br/>
   <a href="https://www.linkedin.com/in/kiran-rakh-b644b6248/">
     <img src="https://img.shields.io/badge/LinkedIn-Kiran%20Rakh-blue?style=for-the-badge&logo=linkedin" />
   </a>
@@ -131,6 +124,12 @@ Python-based scraper containerized with Docker, storing data in MySQL – shows 
 ## 🙏 Special Thanks
 
 <p align="center">
-  💡 <strong>Vimal Daga Sir</strong> — Your mentorship is a true blessing 💫<br/>
-  🏢 <strong>LinuxWorld</strong> — For empowering students with real-world DevOps skills
+  🌟 <strong>Vimal Daga Sir</strong> — for your inspiring mentorship and vision<br/>
+  🏢 <strong>LinuxWorld</strong> — for enabling hands-on, real-world DevOps learning
 </p>
+
+---
+
+## 📌 Keep Watching This Repo!
+This repository will continue to grow with more advanced use cases, projects, and learnings 💡  
+Stay tuned and feel free to connect or collaborate! 🤝
