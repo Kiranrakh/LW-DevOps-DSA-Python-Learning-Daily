@@ -65,7 +65,7 @@
 
 ---
 
-## 🚀 <p align="center"><strong>Highlight Projects</strong></p>
+##  <p align="center"><strong>🚀 Highlight Projects</strong></p>
 
 * **🔸 Deploying-a-Static-HTML-Website-on-Kubernetes-using-Docker-Nginx**<br />
   Docker + Nginx + K8s deployment with automation.
@@ -78,7 +78,7 @@
 
 ---
 
-## 🎯 <p align="center"><strong>Learning Outcomes</strong></p>
+##  <p align="center"><strong>🎯 Learning Outcomes</strong></p>
 
 * ✅ Mastered DevOps lifecycle tools and cloud-native practices
 * ✅ Built secure, scalable pipelines using CI/CD and GitOps
@@ -96,7 +96,7 @@
 
 ---
 
-## 🙋‍♂️ <p align="center"><strong>About Me</strong></p>
+##  <p align="center"><strong>🙋‍♂️ About Me</strong></p>
 
 <p align="center">
   I'm <strong>Kiran Rakh</strong>, currently working as a <strong>DevOps Intern</strong> at <strong>LinuxWorld Informatics Pvt Ltd</strong>, under the guidance of <strong>Vimal Daga Sir</strong>.
@@ -108,7 +108,7 @@
 
 ---
 
-## 📡 <p align="center"><strong>Connect With Me</strong></p>
+##  <p align="center"><strong>📡 Connect With Me</strong></p>
 
 <p align="center">
   <a href="https://www.linkedin.com/in/kiran-rakh-b644b6248/">
