@@ -32,7 +32,7 @@
 
 ---
 
-## 🧭 <p align="center"><strong>Modules Covered</strong></p>
+##  <p align="center"><strong>🧭 Modules Covered</strong></p>
 
 <div align="center">
 
@@ -52,7 +52,7 @@
 </div>
 
 
-## 🛠️ <p align="center"><strong>Tech Stack</strong></p>
+##  <p align="center"><strong>🛠️ Tech Stack</strong></p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"/>
@@ -121,7 +121,7 @@
 
 ---
 
-## 🙏 <p align="center"><strong>Special Thanks</strong></p>
+##  <p align="center"><strong>🙏 Special Thanks</strong></p>
 
 <p align="center">
   🧠 <strong>Vimal Daga Sir</strong> — for your unmatched mentorship and vision<br />
