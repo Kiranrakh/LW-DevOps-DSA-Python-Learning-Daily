@@ -70,7 +70,7 @@
 * **🔸 Deploying-a-Static-HTML-Website-on-Kubernetes-using-Docker-Nginx**<br />
   Docker + Nginx + K8s deployment with automation.
 
-* **🔸 full-static-nginx-website**<br />
+* **🔸 Full-Static-Nginx-Website**<br />
   Multi-page frontend using HTML/CSS/JS in Docker Nginx container.
 
 * **🔸 Dockerized-Web-Scraper-with-MySQL**<br />
