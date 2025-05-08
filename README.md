@@ -4,6 +4,15 @@
   <strong>LinuxWorld DevOps Internship</strong> | Guided by <strong>Vimal Daga Sir</strong>
 </p>
 
+---
+<p align="center">
+  <img src="https://img.shields.io/github/commit-activity/y/Kiranrakh/DevOps-Journey-With-LinuxWorld?style=for-the-badge&color=orange&label=Total%20Commits" />
+  <img src="https://img.shields.io/github/last-commit/Kiranrakh/DevOps-Journey-With-LinuxWorld?style=for-the-badge&color=green&label=Last%20Commit" />
+  <img src="https://img.shields.io/github/repo-size/Kiranrakh/DevOps-Journey-With-LinuxWorld?style=for-the-badge&color=blue&label=Repo%20Size" />
+  <img src="https://img.shields.io/github/issues/Kiranrakh/DevOps-Journey-With-LinuxWorld?style=for-the-badge&color=critical&label=Open%20Issues" />
+  <img src="https://img.shields.io/github/license/Kiranrakh/DevOps-Journey-With-LinuxWorld?style=for-the-badge&color=lightgrey" />
+</p>
+---
 <p align="center">
   <img src="https://img.shields.io/badge/LinuxWorld-Tech%20Intern-blue?style=for-the-badge&logo=linux" />
   <img src="https://img.shields.io/github/last-commit/Kiranrakh/LW-DevOps-Learning-Daily?style=for-the-badge&color=green" />
