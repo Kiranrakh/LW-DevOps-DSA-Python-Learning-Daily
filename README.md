@@ -32,8 +32,10 @@
 
 ## 🧭 <p align="center"><strong>Modules Covered</strong></p>
 
+<div align="center">
+
 | Module                        | Key Topics                             |
-| ----------------------------- | -------------------------------------- |
+|------------------------------|----------------------------------------|
 | 🏁 **Getting Started**        | DevOps culture, SDLC, Agile/Scrum      |
 | 🔗 **Git & GitHub**           | Branching, PRs, Actions, Profile setup |
 | 🐳 **Docker & ☸ Kubernetes**  | Docker Compose, Pods, Helm, RBAC       |
@@ -45,7 +47,8 @@
 | 🔁 **GitOps with Argo CD**    | Git → Cluster Sync, Helm Integration   |
 | 🔐 **DevSecOps**              | Scanning tools, RBAC, Vault            |
 
----
+</div>
+
 
 ## 🛠️ <p align="center"><strong>Tech Stack</strong></p>
 
