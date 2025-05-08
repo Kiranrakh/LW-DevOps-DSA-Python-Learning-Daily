@@ -11,21 +11,29 @@
 </p>
 
 ---
-
 <p align="center">
-  Welcome to my <strong>Daily DevOps Learning Journey</strong> under the mentorship of <strong>Vimal Daga Sir</strong> at <strong>LinuxWorld Informatics Pvt Ltd, Jaipur</strong>.<br />
-  📌 This repository documents my hands-on experience exploring real-world DevOps practices including:
+  <img src="https://img.shields.io/badge/DevOps%20Journey-Exploring%20with%20LinuxWorld-blue?style=for-the-badge&logo=dev.to" alt="DevOps Journey Badge" />
 </p>
 
 <p align="center">
-  🔧 Jenkins, Docker, Kubernetes<br />
-  ☁️ AWS Cloud, Terraform, Ansible<br />
-  📈 Prometheus & Grafana<br />
-  🐧 Linux, GitHub, CI/CD pipelines<br />
+  Welcome to my **Daily DevOps Learning Journey** under the mentorship of <strong>Vimal Daga Sir</strong> at <strong>LinuxWorld Informatics Pvt Ltd, Jaipur</strong>!<br />
+  🚀 This repository is a live document of my hands-on experience in mastering cutting-edge DevOps practices and tools to build robust, scalable, and automated solutions.
 </p>
 
 <p align="center">
-  🚀 <em>Follow along as I grow into a future-ready DevOps Engineer!</em>
+  🔧 **Technologies Explored**:<br />
+  📦 **Jenkins**, **Docker**, **Kubernetes**<br />
+  ☁️ **AWS Cloud**, **Terraform**, **Ansible**<br />
+  📊 **Prometheus**, **Grafana** for monitoring & logging<br />
+  🐧 **Linux**, **GitHub**, and CI/CD pipelines automation<br />
+</p>
+
+<p align="center">
+  💡 *Follow along as I evolve from a DevOps enthusiast to a future-ready DevOps Engineer, making the most of industry-leading tools and best practices!*
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Stay%20Tuned-%E2%9C%94%EF%B8%8F-green?style=for-the-badge&logo=github" alt="Stay Tuned Badge" />
 </p>
 
 ---
@@ -59,17 +67,6 @@
   <img src="https://img.shields.io/badge/Terraform-623CE4?style=for-the-badge&logo=terraform&logoColor=white"/>
   <img src="https://img.shields.io/badge/Ansible-EE0000?style=for-the-badge&logo=ansible&logoColor=white"/>
   <img src="https://img.shields.io/badge/Jenkins-D24939?style=for-the-badge&logo=jenkins&logoColor=white"/>
-</p>
-
----
-
-## 🏆 <p align="center"><strong>Capstone Projects</strong></p>
-
-<p align="center">
-  🔹 CI/CD pipeline for Dockerized frontend on Kubernetes<br />
-  🔹 GitOps using Argo CD, Helm, GitHub Sync<br />
-  🔹 Monitoring stack (Prometheus + Grafana)<br />
-  🔹 Secure infrastructure setup using Terraform + Ansible
 </p>
 
 ---
