@@ -20,13 +20,7 @@
   🚀 This repository is a live document of my hands-on experience in mastering cutting-edge DevOps practices and tools to build robust, scalable, and automated solutions.
 </p>
 
-<p align="center">
-  🔧 **Technologies Explored**:<br />
-  📦 **Jenkins**, **Docker**, **Kubernetes**<br />
-  ☁️ **AWS Cloud**, **Terraform**, **Ansible**<br />
-  📊 **Prometheus**, **Grafana** for monitoring & logging<br />
-  🐧 **Linux**, **GitHub**, and CI/CD pipelines automation<br />
-</p>
+---
 
 <p align="center">
   💡 *Follow along as I evolve from a DevOps enthusiast to a future-ready DevOps Engineer, making the most of industry-leading tools and best practices!*
