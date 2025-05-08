@@ -1,135 +1,139 @@
-<h1 align="center">🚀 DevOps Journey with LinuxWorld</h1>
+<h1 align="center">🚀 DevOps-Journey-With-LinuxWorld</h1>
 
 <p align="center">
-  <strong>Internship at <a href="https://www.linuxworldindia.org/">LinuxWorld Informatics Pvt Ltd, Jaipur</a></strong><br>
-  <em>Mentorship under the visionary <strong>Vimal Daga Sir</strong></em>
+  <strong>LinuxWorld DevOps Internship</strong> | Guided by <strong>Vimal Daga Sir</strong>
 </p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/LinuxWorld-Tech%20Intern-blue?style=for-the-badge&logo=linux" />
   <img src="https://img.shields.io/github/last-commit/Kiranrakh/LW-DevOps-Learning-Daily?style=for-the-badge&color=green" />
+  <img src="https://img.shields.io/github/stars/Kiranrakh/LW-DevOps-Learning-Daily?style=for-the-badge" />
 </p>
 
 ---
 
-## 🌟 About This Repository
-
-Welcome to my **Daily DevOps Learning Journey**!  
-This repository is a live documentation of hands-on practice and real-world DevOps implementation during my internship at **LinuxWorld**, guided by **Vimal Daga Sir**.
-
-> 💬 **Key Focus Areas**: DevOps Tools • Cloud Platforms • Automation • GitOps • DevSecOps • CI/CD Pipelines • Kubernetes Ecosystem
-
----
-
-## 🛠️ Tech Stack
+<p align="center">
+  Welcome to my <strong>Daily DevOps Learning Journey</strong> under the mentorship of <strong>Vimal Daga Sir</strong> at <strong>LinuxWorld Informatics Pvt Ltd, Jaipur</strong>.<br />
+  📌 This repository documents my hands-on experience exploring real-world DevOps practices including:
+</p>
 
 <p align="center">
-  <img src="https://skillicons.dev/icons?i=aws,docker,kubernetes,jenkins,github,terraform,ansible,bash,linux,prometheus,grafana" />
+  🔧 Jenkins, Docker, Kubernetes<br />
+  ☁️ AWS Cloud, Terraform, Ansible<br />
+  📈 Prometheus & Grafana<br />
+  🐧 Linux, GitHub, CI/CD pipelines<br />
+</p>
+
+<p align="center">
+  🚀 <em>Follow along as I grow into a future-ready DevOps Engineer!</em>
 </p>
 
 ---
 
-## 📚 Modules Covered
+## 🧭 <p align="center"><strong>Modules Covered</strong></p>
 
-### 🏁 DevOps Fundamentals
-- DevOps Culture, Mindset & Lifecycle
-- SDLC, Agile & Scrum in DevOps Context
-
-### 🔗 Git & GitHub
-- Branching, Rebasing, Pull Requests
-- GitHub Actions, Webhooks & Automation
-- Building a GitHub DevOps Portfolio
-
-### 🐳 Docker & ☸️ Kubernetes
-- Dockerizing Applications with Best Practices
-- Multi-Container Setup using Docker Compose
-- Core K8s Concepts: Pods, Services, Deployments
-- Advanced: ConfigMaps, Secrets, RBAC, Helm
-
-### ⚙️ Jenkins - CI/CD
-- Declarative & Scripted Pipelines
-- GitHub + Jenkins + DockerHub Integrations
-- Jenkins on Kubernetes, Multi-branch Setup
-
-### 📈 Monitoring & Observability
-- Prometheus for Metrics Collection
-- Grafana for Dashboard Visualization
-- Node Exporter, Blackbox Exporter
-
-### 🧱 Infrastructure as Code (IaC)
-- 🔧 Ansible for Automation (Playbooks & Roles)
-- 🌍 Terraform for AWS Infra: EC2, EKS, IAM
-- Modular IaC: Network, Compute, Security
-
-### ☁️ Cloud Services
-- AWS (EC2, S3, Lambda, VPC, IAM, Route53)
-- AWS Monitoring with CloudWatch
-- Azure & GCP Introduction
-
-### 🔐 DevSecOps
-- Secrets Management: Vault, K8s Secrets
-- Trivy & SonarQube for Vulnerability Scanning
-- RBAC, IAM Policies, SAST & DAST
-
-### 🔁 GitOps with Argo CD
-- Git as Source of Truth for K8s
-- Argo CD + Helm for Declarative Sync
-- GitOps Pipeline with Jenkins Integration
-
-### 🐧 Linux & Bash
-- Linux CLI, Permissions, System Services
-- Bash Scripts for Automation, Cron Jobs
+| Module                        | Key Topics                             |
+| ----------------------------- | -------------------------------------- |
+| 🏁 **Getting Started**        | DevOps culture, SDLC, Agile/Scrum      |
+| 🔗 **Git & GitHub**           | Branching, PRs, Actions, Profile setup |
+| 🐳 **Docker & ☸ Kubernetes**  | Docker Compose, Pods, Helm, RBAC       |
+| ⚙️ **Jenkins CI/CD**          | Declarative + Scripted pipelines       |
+| 📊 **Monitoring & Logging**   | Prometheus, Grafana, Exporters         |
+| 🧱 **Infrastructure as Code** | Ansible Playbooks, Terraform AWS Setup |
+| ☁️ **Cloud Providers**        | AWS Core Services, GCP, Azure Intro    |
+| 🐧 **Linux & Bash**           | Scripting, Cron Jobs, Permissions      |
+| 🔁 **GitOps with Argo CD**    | Git → Cluster Sync, Helm Integration   |
+| 🔐 **DevSecOps**              | Scanning tools, RBAC, Vault            |
 
 ---
 
-## 🏆 Capstone Projects
-
-| Project | Description |
-|--------|-------------|
-| ✅ CI/CD Pipeline on Kubernetes | Dockerized frontend app with Jenkins CI/CD on K8s |
-| ✅ GitOps with Argo CD + Helm | Auto-sync deployments from GitHub to K8s |
-| ✅ Monitoring Stack | Prometheus + Grafana for live alerts |
-| ✅ Terraform + Ansible | Secure AWS infrastructure automation |
-
----
-
-## 🚀 Featured Projects
-
-### 🔸 Deploy Static HTML on K8s using Docker & Nginx
-> A lightweight static site containerized with Nginx and deployed on Kubernetes using services & deployments.
-
-### 🔸 Full Static Nginx Website
-> A multi-page responsive static site (HTML, CSS, JS) running on Dockerized Nginx.
-
-### 🔸 Dockerized Web Scraper with MySQL
-> Python-based scraper containerized with Docker, storing parsed data into a MySQL container.
-
----
-
-## 🙋‍♂️ About Me
+## 🛠️ <p align="center"><strong>Tech Stack</strong></p>
 
 <p align="center">
-  <strong>Kiran Rakh</strong><br/>
-  DevOps Intern | Cloud & Automation Enthusiast<br/>
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white"/>
+  <img src="https://img.shields.io/badge/AWS-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Terraform-623CE4?style=for-the-badge&logo=terraform&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Ansible-EE0000?style=for-the-badge&logo=ansible&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Jenkins-D24939?style=for-the-badge&logo=jenkins&logoColor=white"/>
+</p>
+
+---
+
+## 🏆 <p align="center"><strong>Capstone Projects</strong></p>
+
+<p align="center">
+  🔹 CI/CD pipeline for Dockerized frontend on Kubernetes<br />
+  🔹 GitOps using Argo CD, Helm, GitHub Sync<br />
+  🔹 Monitoring stack (Prometheus + Grafana)<br />
+  🔹 Secure infrastructure setup using Terraform + Ansible
+</p>
+
+---
+
+## 🚀 <p align="center"><strong>Highlight Projects</strong></p>
+
+* **🔸 Deploying-a-Static-HTML-Website-on-Kubernetes-using-Docker-Nginx**<br />
+  Docker + Nginx + K8s deployment with automation.
+
+* **🔸 full-static-nginx-website**<br />
+  Multi-page frontend using HTML/CSS/JS in Docker Nginx container.
+
+* **🔸 Dockerized-Web-Scraper-with-MySQL**<br />
+  Python scraper + Docker + MySQL persistence.
+
+---
+
+## 🎯 <p align="center"><strong>Learning Outcomes</strong></p>
+
+* ✅ Mastered DevOps lifecycle tools and cloud-native practices
+* ✅ Built secure, scalable pipelines using CI/CD and GitOps
+* ✅ Automated infrastructure and deployments with IaC
+* ✅ Monitored real-time metrics and logs in production-style clusters
+
+---
+
+## 📈 GitHub Stats
+
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=Kiranrakh&show_icons=true&theme=tokyonight&count_private=true" height="165" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Kiranrakh&layout=compact&theme=tokyonight" height="165" />
+</p>
+
+---
+
+## 🙋‍♂️ <p align="center"><strong>About Me</strong></p>
+
+<p align="center">
+  I'm <strong>Kiran Rakh</strong>, currently working as a <strong>DevOps Intern</strong> at <strong>LinuxWorld Informatics Pvt Ltd</strong>, under the guidance of <strong>Vimal Daga Sir</strong>.
+</p>
+
+<p align="center">
+  📌 Passionate about automation, cloud, and building reliable DevOps workflows.
+</p>
+
+---
+
+## 📡 <p align="center"><strong>Connect With Me</strong></p>
+
+<p align="center">
   <a href="https://www.linkedin.com/in/kiran-rakh-b644b6248/">
-    <img src="https://img.shields.io/badge/LinkedIn-Kiran%20Rakh-blue?style=for-the-badge&logo=linkedin" />
+    <img src="https://img.shields.io/badge/LinkedIn-Kiran%20Rakh-blue?style=for-the-badge&logo=linkedin"/>
   </a>
   <a href="https://github.com/Kiranrakh">
-    <img src="https://img.shields.io/badge/GitHub-Kiranrakh-black?style=for-the-badge&logo=github" />
+    <img src="https://img.shields.io/badge/GitHub-Kiranrakh-black?style=for-the-badge&logo=github"/>
   </a>
 </p>
 
 ---
 
-## 🙏 Special Thanks
+## 🙏 <p align="center"><strong>Special Thanks</strong></p>
 
 <p align="center">
-  🌟 <strong>Vimal Daga Sir</strong> — for your inspiring mentorship and vision<br/>
-  🏢 <strong>LinuxWorld</strong> — for enabling hands-on, real-world DevOps learning
+  🧠 <strong>Vimal Daga Sir</strong> — for your unmatched mentorship and vision<br />
+  🏢 <strong>LinuxWorld</strong> — for providing a powerful learning ecosystem
 </p>
 
----
-
-## 📌 Keep Watching This Repo!
-This repository will continue to grow with more advanced use cases, projects, and learnings 💡  
-Stay tuned and feel free to connect or collaborate! 🤝
+<p align="center">
+  💡 This repo will continue to grow as I learn and apply new tools, projects, and best practices.
+</p>
