@@ -1,0 +1,243 @@
+====================================================
+     Ansible Day- 07 - Ansible | AWS | Docker | K8s
+====================================================
+
+────────────────────────────────────────────────────
+🔧 1. Ansible Essentials
+────────────────────────────────────────────────────
+• Check Ansible Version:
+    $ ansible --version
+
+• List All Modules (short description):
+    $ ansible-doc -l
+
+• View Documentation for a Specific Module:
+    $ ansible-doc <module_name>
+
+• Check Installed Files of ansible-core (RHEL/CentOS):
+    $ rpm -q -l ansible-core
+
+────────────────────────────────────────────────────
+📦 2. Ansible Galaxy
+────────────────────────────────────────────────────
+• Galaxy = Community hub for Ansible roles & collections
+
+• Install a Collection from Galaxy:
+    $ ansible-galaxy collection install <namespace>.<collection>
+
+• Example:
+    $ ansible-galaxy collection install community.aws
+
+• Collection Format: 
+    - Namespace: community
+    - Collection: aws
+    - Full Module: community.aws.ec2_instance
+
+────────────────────────────────────────────────────
+🧾 3. FQCN / FQMN / CN (Module Naming)
+────────────────────────────────────────────────────
+• CN = Collection Name
+• FQMN = Fully Qualified Module Name
+• FQCN = Fully Qualified Collection Name
+
+• Format:
+    <namespace>.<collection>.<module>
+    e.g., community.aws.ec2_instance
+
+────────────────────────────────────────────────────
+📁 4. YAML / YML Files (Ansible Playbooks)
+────────────────────────────────────────────────────
+• YAML is used to define Ansible Playbooks.
+• Syntax rules:
+    - Use consistent indentation
+    - Start file with ---
+    - Key-value pairs using `:` 
+
+• Example:
+    ---
+    - name: Install Apache
+      hosts: web
+      become: yes
+      tasks:
+        - name: Install httpd
+          yum:
+            name: httpd
+            state: present
+
+────────────────────────────────────────────────────
+🔐 5. AWS Cloud Integration with Ansible
+────────────────────────────────────────────────────
+• Use boto3 (Python SDK) for AWS resource control.
+
+• Install boto3:
+    $ pip install boto3
+
+• Configure AWS CLI (sets credentials):
+    $ aws configure
+
+• Required Credentials:
+    - AWS_ACCESS_KEY_ID
+    - AWS_SECRET_ACCESS_KEY
+    - Default region (e.g., us-west-2)
+
+────────────────────────────────────────────────────
+🐳 6. Docker with Ansible
+────────────────────────────────────────────────────
+• Manage Docker containers with `community.docker` collection.
+
+• Example Task:
+    - name: Run nginx container
+      community.docker.docker_container:
+        name: nginx
+        image: nginx
+        state: started
+        ports:
+          - "80:80"
+
+────────────────────────────────────────────────────
+☸️ 7. Kubernetes with Ansible
+────────────────────────────────────────────────────
+• Use `kubernetes.core` collection.
+• Manage Pods, Deployments, Services, etc.
+
+• Example:
+    - name: Create namespace
+      kubernetes.core.k8s:
+        api_version: v1
+        kind: Namespace
+        name: my-namespace
+        state: present
+
+────────────────────────────────────────────────────
+📌 8. Useful Python Modules for DevOps
+────────────────────────────────────────────────────
+• boto3 – AWS SDK
+• requests – REST API
+• json – JSON parsing
+• os / sys – System interaction
+
+────────────────────────────────────────────────────
+📄 9. Sample Playbook for EC2 Launch (YAML)
+────────────────────────────────────────────────────
+```yaml
+- name: Launch EC2 Instance on AWS
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Create EC2
+      amazon.aws.ec2_instance:
+        name: test-server
+        key_name: mykey
+        instance_type: t2.micro
+        image_id: ami-0abcdef1234567890
+        region: us-west-1
+        wait: yes
+
+===============================================
+ DevOps Project Notes - AWS | Ansible | GitHub
+===============================================
+
+🧪 Project Steps:
+---------------------
+1. Launch OS in AWS (EC2 instance)
+2. TN - Public IP
+    → TN = Target Node (publicly accessible)
+3. IP : Inventory = CN
+    → CN = Collection Name or short host alias in inventory
+4. Configure Web Server
+    → Install Apache/Nginx using Ansible
+5. Code: GitHub → Download → Deploy
+    → Clone from GitHub & Deploy using Ansible
+
+-----------------------------------------------
+📃 Full Explanation
+-----------------------------------------------
+
+Step 1: Launch OS in AWS
+-------------------------
+- Login to AWS Console.
+- Navigate to EC2 > Launch Instance.
+- Choose Amazon Linux 2 / Ubuntu.
+- Use t2.micro instance (Free Tier).
+- Add SSH (22) and HTTP (80) to security group.
+- Assign a key pair (for SSH access).
+- Note the public IP after launching.
+
+Step 2: TN - Public IP
+------------------------
+- TN = Target Node (EC2 instance).
+- Public IP is used for SSH and Ansible inventory.
+
+Step 3: Inventory = CN
+------------------------
+Create a file `hosts`:
+[web]
+13.233.45.67 ansible_user=ec2-user ansible_ssh_private_key_file=~/key.pem
+
+- "web" = CN = Collection name (group name for Ansible).
+
+Step 4: Configure Web Server
+-----------------------------
+Create `webserver.yml`:
+- name: Configure Web Server
+  hosts: web
+  become: yes
+  tasks:
+    - name: Install Apache
+      yum:
+        name: httpd
+        state: present
+
+    - name: Start and enable httpd
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+
+Run:
+ansible-playbook -i hosts webserver.yml
+
+Step 5: GitHub Code Deployment
+-------------------------------
+Update playbook to include GitHub deployment:
+- name: Deploy Code from GitHub
+  hosts: web
+  become: yes
+  tasks:
+    - name: Install Git
+      yum:
+        name: git
+        state: present
+
+    - name: Clone website repo
+      git:
+        repo: 'https://github.com/your-username/your-repo.git'
+        dest: /var/www/html
+
+Run again:
+ansible-playbook -i hosts webserver.yml
+
+-----------------------------------------------
+🔄 Final Output:
+-----------------------------------------------
+- EC2 instance running Apache Web Server
+- Website code pulled from GitHub and deployed
+
+-----------------------------------------------
+🔍 Concepts Used
+-----------------------------------------------
+| Tool/Term       | Description |
+|----------------|-------------|
+| Ansible         | Automation tool for provisioning and deployment |
+| AWS EC2         | Cloud VM used as web server |
+| YAML            | File format for Ansible Playbooks |
+| Inventory file  | Contains list of target hosts |
+| GitHub          | Repository for web code |
+| boto3 (optional)| Python SDK for AWS |
+| Apache/HTTPD    | Web server software |
+| FQCN            | Fully Qualified Collection Name in Ansible |
+
+===============================================
+📌 Document Prepared by: Kiran Rakh
+===============================================
+
