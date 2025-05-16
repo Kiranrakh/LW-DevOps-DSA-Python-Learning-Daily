@@ -1,0 +1,183 @@
+--------------------------------------------------------------------
+                   Ansible Apache Web Server Setup
+                       Detailed Documentation
+--------------------------------------------------------------------
+
+                            +---------------------+
+                            |    User Machine      |
+                            |  (Runs Ansible CLI)  |
+                            +----------+----------+
+                                       |
+                                       v
+                            +---------------------+
+                            |   Inventory File     |
+                            |  (mydb.txt listing)  |
+                            +----------+----------+
+                                       |
+                                       v
+                            +---------------------+
+                            |  Ansible Control     |
+                            |      Node            |
+                            | +-----------------+ |
+                            | | Playbook        |<------------------+
+                            | |  (web.yml)      |                   |
+                            | +-----------------+ |                   |
+                            | | Jinja2 Template | |                   |
+                            | +-----------------+ |                   |
+                            | | Handlers        | |                   |
+                            | +-----------------+ |                   |
+                            +----------+----------+                   |
+                                       |                              |
+                                       v                              |
+                            +---------------------+                  |
+                            |  Target Servers      |                  |
+                            | (124.24.4.3, 2.2.2.2)|                 |
+                            | +-----------------+ |                   |
+                            | | Install Apache   | |                   |
+                            | | Configure Apache | |                   |
+                            | | Restart if needed| |                   |
+                            | +-----------------+ |                   |
+                            | +-----------------+ |                   |
+                            | | Start & Enable   | |                   |
+                            | | Apache Service   | |                   |
+                            | +-----------------+ |                   |
+                            +----------+----------+                   |
+                                       |                              |
+                                       v                              |
+                            +---------------------+                  |
+                            |      SELinux        | <----------------+
+                            |  Configure Ports    |
+                            +---------------------+
+
+====================================================================
+1. Ansible Configuration Setup
+--------------------------------------------------------------------
+Edit the Ansible configuration file:
+
+    vim /etc/ansible/ansible.cfg
+
+Set custom inventory path and disable SSH key checking:
+
+    [defaults]
+    inventory = /mydb.txt
+    host_key_checking = False
+
+Purpose:
+  - Use a custom inventory file.
+  - Disable SSH key verification to avoid manual prompts.
+
+====================================================================
+2. Inventory File Creation
+--------------------------------------------------------------------
+Create the custom inventory file:
+
+    [webservers]
+    124.24.4.3
+    2.2.2.2
+
+Purpose:
+  - Group servers under 'webservers'.
+  - List IP addresses of target machines.
+
+====================================================================
+3. List Hosts from Inventory
+--------------------------------------------------------------------
+Verify Ansible can see the hosts:
+
+    ansible all --list-hosts
+
+Expected Output:
+
+    hosts (2):
+      124.24.4.3
+      2.2.2.2
+
+====================================================================
+4. Install Apache Using Ansible Playbook
+--------------------------------------------------------------------
+Create the playbook `web.yml` to install Apache:
+
+    - name: Install Apache on webservers
+      hosts: all
+      become: yes
+      tasks:
+        - name: Install httpd
+          yum:
+            name: httpd
+            state: present
+
+Run the playbook:
+
+    ansible-playbook web.yml
+
+====================================================================
+5. Use Jinja2 Template for Apache Configuration
+--------------------------------------------------------------------
+Create a template file (`httpd.conf.j2`):
+
+    DocumentRoot {{ docRoot }}
+
+Use it in the playbook:
+
+    - name: Configure Apache using template
+      template:
+        src: httpd.conf.j2
+        dest: /etc/httpd/conf/httpd.conf
+      notify: Restart Apache
+
+Purpose:
+  - Jinja2 enables dynamic variable substitution.
+  - The `notify` directive triggers a handler on change.
+
+====================================================================
+6. Handlers in Ansible
+--------------------------------------------------------------------
+Define a handler to restart Apache:
+
+    handlers:
+      - name: Restart Apache
+        service:
+          name: httpd
+          state: restarted
+
+Purpose:
+  - Restart Apache only when configuration changes.
+
+====================================================================
+7. SELinux Port Configuration
+--------------------------------------------------------------------
+Allow Apache to listen on a custom port (e.g., 8080):
+
+    semanage port -a -t http_port_t -p tcp 8080
+
+List current ports:
+
+    semanage port -l | grep http_port_t
+
+Purpose:
+  - Ensure SELinux permits Apache on the new port.
+
+====================================================================
+8. Start and Enable Apache
+--------------------------------------------------------------------
+Ensure Apache service is running and enabled at boot:
+
+    - name: Ensure Apache is started
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+
+====================================================================
+Summary
+--------------------------------------------------------------------
+This setup automates Apache installation and configuration across
+multiple servers with Ansible.
+
+- Jinja2 templates provide flexible, dynamic configs.
+- Handlers optimize service restarts.
+- SELinux port adjustments allow custom ports.
+
+This approach ensures consistency, scalability, and easier management.
+
+====================================================================
