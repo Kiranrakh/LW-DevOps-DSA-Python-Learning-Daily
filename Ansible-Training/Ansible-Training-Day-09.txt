@@ -1,0 +1,318 @@
+🧾 Auto Configure Web Server with Ansible (httpd)
+=================================================
+
+Steps Breakdown
+---------------
+
+STEP 1: Install the httpd package
+---------------------------------
+Command:
+>> yum install httpd
+
+Ansible Equivalent:
+- name: install httpd software
+  package:
+    name: httpd
+    state: present
+
+
+STEP 2: Create Document Root Directory
+--------------------------------------
+Command:
+>> mkdir /var/www/RKiran
+
+Ansible Equivalent:
+- name: create document root
+  file:
+    path: {{ docRoot }}
+    state: directory
+
+
+STEP 3: Copy or Create Web Page to the New Path
+-----------------------------------------------
+Put your custom HTML file (e.g., kiran.html) into /var/www/RKiran
+
+Ansible Equivalent:
+- name: web app deploying
+  copy:
+    src: kiran.html
+    dest: {{ docRoot }}
+
+
+STEP 4: Configure Apache with Custom File
+-----------------------------------------
+Manual Method:
+>> cd /etc/httpd/conf.d  
+>> nano kiran.conf
+
+Content of kiran.conf (Jinja2 Template):
+'''
+Listen {{ webPort }}  
+<VirtualHost *:{{ webPort }}>
+    DocumentRoot {{ docRoot }}
+</VirtualHost>
+'''
+
+Changes to be made:
+- Default DocumentRoot: /var/www/html → /var/www/RKiran
+- Default Port: 80 → 81
+
+Ansible Equivalent:
+- name: web server conf changes
+  template:
+    src: kiran.conf
+    dest: /etc/httpd/conf.d/kiran.conf
+
+
+STEP 5: Start Web Service
+-------------------------
+Command:
+>> systemctl start httpd  
+>> netstat -tnlp  
+>> http://localhost:81
+
+Ansible Equivalent:
+- name: web service Start
+  service:
+    name: httpd
+    state: restarted
+
+
+⚙️ Security Enforcement (Optional for Testing)
+----------------------------------------------
+>> getenforce  
+>> setenforce 0
+
+For permanent fix, configure SELinux and firewall properly.
+
+
+Ansible Playbook: web.yml
+--------------------------
+
+- hosts: localhost
+  become: true
+  vars:
+    docRoot: /var/www/RKiran
+    webPort: 81
+
+  tasks:
+    - name: install httpd software
+      package:
+        name: httpd
+        state: present
+
+    - name: create document root
+      file:
+        path: "{{ docRoot }}"
+        state: directory
+
+    - name: web server conf changes
+      template:
+        src: kiran.conf
+        dest: /etc/httpd/conf.d/kiran.conf
+
+    - name: web app deploying
+      copy:
+        src: kiran.html
+        dest: "{{ docRoot }}"
+
+    - name: web service Start
+      service:
+        name: httpd
+        state: restarted
+
+
+Run the playbook:
+------------------
+>> ansible-playbook web.yml
+
+---------------------/*****************\\-----------------------
+
+FILES REQUIRED:
+---------------
+1. kiran.conf – Jinja2 template file
+   ----------------------------------
+   Listen {{ webPort }}
+   <VirtualHost *:{{ webPort }}>
+       DocumentRoot {{ docRoot }}
+   </VirtualHost>
+
+2. kiran.html – Web page to be hosted
+   ----------------------------------
+   <html>
+     <body>
+       <h1>Welcome to RKiran Web Server</h1>
+     </body>
+   </html>
+
+==============================
+Apache Webserver with Ansible
+============================== 
+
+-------------------------------------------------------
+1. Role/Template/Jinja/Handler Overview in Ansible
+-------------------------------------------------------
+
+- **Role**: A structured way to group Ansible tasks, variables, handlers, and templates.
+- **Template**: Jinja2 templated configuration file used to dynamically generate configuration files.
+- **Jinja2**: Templating engine used in Ansible to render variables in files (like index.html, httpd.conf).
+- **Handler**: Special task triggered by a notify command to perform actions like restarting services.
+
+------------------------------------
+2. Apache Webserver Setup Example
+------------------------------------
+
+Directory Structure (Role Based):
+
+```
+apache_web/
+├── apache-role/
+│   ├── tasks/
+│   │   └── main.yml
+│   ├── templates/
+│   │   └── index.html.j2
+│   ├── handlers/
+│   │   └── main.yml
+│   └── vars/
+│       └── main.yml
+└── site.yml
+```
+
+------------------------
+3. Example: site.yml
+------------------------
+
+```yaml
+- hosts: web
+  become: true
+  roles:
+    - apache-role
+```
+
+-----------------------------
+4. tasks/main.yml (Tasks)
+-----------------------------
+
+```yaml
+- name: Install Apache
+  yum:
+    name: httpd
+    state: present
+
+- name: Copy index.html using Jinja2 Template
+  template:
+    src: index.html.j2
+    dest: /var/www/html/index.html
+
+- name: Ensure Apache is started
+  service:
+    name: httpd
+    state: started
+    enabled: true
+  notify: restart apache
+```
+
+--------------------------------------
+5. templates/index.html.j2 (Template)
+--------------------------------------
+
+```html
+<html>
+  <head><title>{{ web_title }}</title></head>
+  <body>
+    <h1>Welcome to {{ server_name }}</h1>
+  </body>
+</html>
+```
+
+-----------------------------
+6. vars/main.yml (Variables)
+-----------------------------
+
+```yaml
+web_title: My Apache Server
+server_name: Kiran's Web Node
+```
+
+-------------------------------
+7. handlers/main.yml (Handler)
+-------------------------------
+
+```yaml
+- name: restart apache
+  service:
+    name: httpd
+    state: restarted
+```
+
+-------------------------------
+8. semanage port -l (SELinux)
+-------------------------------
+
+Use this to list/manage SELinux port contexts:
+
+```bash
+semanage port -l | grep http_port_t
+```
+
+To allow Apache on a custom port (e.g., 8081):
+
+```bash
+semanage port -a -t http_port_t -p tcp 8081
+```
+
+----------------------
+9. webport (Custom Port)
+----------------------
+
+Edit the Apache config file (httpd.conf or ports.conf):
+
+```
+Listen 8081
+```
+
+Ensure firewall allows the port:
+
+```bash
+firewall-cmd --add-port=8081/tcp --permanent
+firewall-cmd --reload
+```
+
+------------------------------
+10. Copy vs Template Module
+------------------------------
+
+- **copy**: Copies a file as-is.
+- **template**: Renders variables using Jinja2.
+
+Example:
+
+```yaml
+# Copy
+- name: Copy static file
+  copy:
+    src: index.html
+    dest: /var/www/html/index.html
+
+# Template
+- name: Deploy templated file
+  template:
+    src: index.html.j2
+    dest: /var/www/html/index.html
+```
+
+-----------------------------------
+11. Web Service Start & Notify
+-----------------------------------
+
+Handlers are used with `notify` to ensure services are restarted only when needed:
+
+```yaml
+notify: restart apache
+```
+
+This will trigger the `restart apache` handler if any task that uses notify changes.
+
+=====================
+End of Documentation
+=====================
