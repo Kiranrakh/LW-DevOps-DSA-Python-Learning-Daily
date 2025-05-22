@@ -1,0 +1,211 @@
+=================================================================================
+Ansible Role-based EC2 SSH Access with Key-based Authentication - Documentation
+=================================================================================
+
+This documentation explains how to configure key-based authentication using SSH on an EC2 instance, manage permissions, use Ansible roles, tasks, handlers, and related concepts to automate server setup securely.
+
+──────────────────────────────────────────────────────────────
+1. Key-based Authentication & Key Pair
+──────────────────────────────────────────────────────────────
+- **Key Pair**: A public-private key pair used for secure SSH authentication to EC2 instances.
+- **Public Key**: Placed on the EC2 instance (`~/.ssh/authorized_keys`).
+- **Private Key**: Stored securely on the client machine (`.pem` file).
+
+Example:
+```
+
+\$ ssh -i /path/to/myserver.pem ec2-user@<EC2-IP>
+
+```
+
+────────────────────────────────────────────
+2. SSH Protocol and ec2-user
+────────────────────────────────────────────
+- **Protocol**: SSH (Secure Shell) enables encrypted communication between systems.
+- **ec2-user**: Default user for Amazon Linux EC2 instances.
+
+────────────────────────────────────────────
+3. File Permission for Key
+────────────────────────────────────────────
+- The key file (`myserver.pem`) should have strict permissions:
+```
+
+\$ chmod o-r /etc/myserver.pem
+
+```
+Or better:
+```
+
+\$ chmod 400 /etc/myserver.pem
+
+````
+Explanation:
+- `o-r`: Removes read permission for others.
+- Prevents unauthorized access.
+
+────────────────────────────────────────────
+4. Ansible Inventory File Setup
+────────────────────────────────────────────
+File: `/etc/ansible/hosts`
+
+```ini
+[webservers]
+13.233.89.227 ansible_host=13.233.89.227 ansible_user=ec2-user ansible_ssh_private_key_file=/etc/myserver.pem ansible_connection=ssh
+````
+
+────────────────────────────────────────────
+5\. Admin-Level Commands in Ansible
+────────────────────────────────────────────
+To run privileged tasks (e.g., installing packages), use:
+
+```yaml
+become: true
+```
+
+Example:
+
+```yaml
+- name: Install Apache
+  yum:
+    name: httpd
+    state: present
+  become: true
+```
+
+────────────────────────────────────────────
+6\. SELinux Security
+────────────────────────────────────────────
+
+* **SELinux (Security-Enhanced Linux)**: A kernel-level security module.
+* Ansible can manage SELinux settings:
+
+```yaml
+- name: Set SELinux to permissive
+  selinux:
+    policy: targeted
+    state: permissive
+```
+
+────────────────────────────────────────────
+7\. Ansible Role Structure
+────────────────────────────────────────────
+Create a role:
+
+```
+$ ansible-galaxy role init myrole
+```
+
+Generated Structure:
+
+```
+myrole/
+├── defaults/
+│   └── main.yml
+├── handlers/
+│   └── main.yml
+├── tasks/
+│   └── main.yml
+├── templates/
+├── files/
+├── vars/
+│   └── main.yml
+└── meta/
+    └── main.yml
+```
+
+────────────────────────────────────────────
+8\. vars and tasks in Roles
+────────────────────────────────────────────
+
+* `vars/main.yml`: Defines variables.
+* `tasks/main.yml`: Contains the list of tasks to execute.
+
+Example (vars/main.yml):
+
+```yaml
+package_name: httpd
+```
+
+Example (tasks/main.yml):
+
+```yaml
+- name: Install package
+  yum:
+    name: "{{ package_name }}"
+    state: present
+```
+
+────────────────────────────────────────────
+9\. Handlers
+────────────────────────────────────────────
+
+* Triggered by tasks when changes occur.
+* Defined in `handlers/main.yml`.
+
+Example (handlers/main.yml):
+
+```yaml
+- name: restart apache
+  service:
+    name: httpd
+    state: restarted
+```
+
+Triggering the handler:
+
+```yaml
+- name: Modify config file
+  template:
+    src: apache.conf.j2
+    dest: /etc/httpd/conf/httpd.conf
+  notify: restart apache
+```
+
+────────────────────────────────────────────
+10\. Copying PEM File with Ansible (cp command)
+────────────────────────────────────────────
+
+```yaml
+- name: Copy PEM file
+  copy:
+    src: myserver.pem
+    dest: /etc/myserver.pem
+    owner: root
+    group: root
+    mode: '0400'
+```
+
+────────────────────────────────────────────
+11\. roles\_path (Custom Role Directory)
+────────────────────────────────────────────
+Define custom role paths in `ansible.cfg`:
+
+```ini
+[defaults]
+roles_path = ./roles:/etc/ansible/roles
+```
+
+────────────────────────────────────────────
+12\. Putting It All Together - Example Playbook
+────────────────────────────────────────────
+
+```yaml
+- name: Configure webserver
+  hosts: webservers
+  become: true
+  roles:
+    - myrole
+```
+
+────────────────────────────────────────────
+13\. Best Practices
+────────────────────────────────────────────
+
+* Use roles for modular and reusable code.
+* Use `ansible_ssh_private_key_file` in the inventory, not `ansible_password`.
+* Keep `.pem` files secure and permission-restricted.
+* Organize variables, tasks, handlers into role directories.
+
+```
+
+

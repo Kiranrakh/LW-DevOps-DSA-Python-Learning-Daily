@@ -1,0 +1,177 @@
+# 🚀 Jenkins & Ansible NGINX Deployment on EC2 (Amazon Linux)
+
+A complete DevOps setup to install Jenkins and deploy NGINX on an AWS EC2 instance using **Ansible**.
+
+---
+
+## ✅ Prerequisites
+
+Make sure the following are ready:
+
+* ✅ AWS EC2 instance (Amazon Linux 2)
+* ✅ Inbound security group rules open for:
+
+  * `22` – SSH (for terminal access)
+  * `80` – HTTP (for NGINX)
+  * `8080` – Jenkins (web interface)
+* ✅ PEM key pair (e.g., `jenkins.pem`) for SSH access
+
+---
+
+## 🔐 Step 1: SSH into the EC2 Instance
+
+```bash
+ssh -i "jenkins.pem" ec2-user@13.61.26.155  # Connect securely to EC2 using the PEM key
+
+OR 
+
+ssh -vvv -i jenkins.pem ec2-user@ec2-13-61-26-155.eu-north-1.compute.amazonaws.com
+
+```
+
+---
+
+## 📦 Step 2: Install Ansible & Python 3
+
+```bash
+
+sudo yum update -y                                   # Update system packages
+sudo yum install -y epel-release                     # Enable EPEL repo for extra packages
+sudo yum install -y python3                          # Install Python 3
+sudo python3 -m ensurepip --upgrade                  # Upgrade pip installer
+sudo pip3 install ansible                            # Install Ansible via pip
+ansible --version                                    # Verify Ansible installation
+
+```
+
+---
+
+## ☕ Step 3: Install Java (for Jenkins)
+
+```bash
+
+sudo yum install -y java-17-amazon-corretto          # Install Java 17 (Amazon Corretto)
+java -version                                        # Check Java version
+
+```
+
+---
+
+## ⚙️ Step 4: Install and Start Jenkins
+
+```bash
+
+sudo yum install -y wget                             # Install wget to download files
+sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo  # Add Jenkins repo
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key                    # Import Jenkins GPG key
+sudo yum install -y jenkins                          # Install Jenkins
+sudo systemctl enable jenkins                        # Enable Jenkins on system boot
+sudo systemctl start jenkins                         # Start Jenkins service
+sudo systemctl status jenkins                        # Check Jenkins status
+
+```
+
+---
+
+## 🔑 Step 5: Unlock Jenkins
+
+```bash
+
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword  # Retrieve initial admin password for Jenkins
+
+```
+
+### Login via Browser
+
+> Visit: `http://13.61.26.155:8080`
+> Paste the above password to unlock Jenkins.
+
+---
+
+---
+
+## 🔐 Step 6: Save PEM File & Secure It
+
+```bash
+
+nano /home/ec2-user/Jenkins.pem                     # Paste the content of your PEM file here
+chmod 400 /home/ec2-user/Jenkins.pem                # Secure the PEM file
+
+```
+
+---
+
+## 📡 Step 7: Configure Ansible Inventory
+
+```bash
+
+sudo vi /etc/ansible/hosts                          # Open Ansible inventory file
+
+```
+
+➡️ Add the following under `[web]`:
+
+```
+
+13.61.26.155 ansible_user=ec2-user ansible_ssh_private_key_file=/home/ec2-user/Jenkins.pem  # Target host entry
+
+```
+
+---
+
+## 📜 Step 8: Create Ansible Playbook – `nginx.yml`
+
+```yaml
+# nginx.yml
+---
+- name: Install and start NGINX on EC2
+  hosts: web
+  become: true
+  tasks:
+    - name: Install NGINX
+      yum:
+        name: nginx
+        state: present      # Ensure NGINX is installed
+
+    - name: Start NGINX service
+      service:
+        name: nginx
+        state: started      # Ensure NGINX is running
+        enabled: true       # Ensure NGINX starts on boot
+```
+
+> 💾 Save the file as `nginx.yml`.
+
+---
+
+## ▶️ Step 9: Run the Playbook
+
+```bash
+
+ansible-playbook nginx.yml                          # Run the playbook to install & start NGINX
+
+```
+
+---
+
+## ✅ Verify NGINX
+
+1. Visit: `http://13.61.26.155`
+2. You should see the **NGINX welcome page** 🎉
+
+> ⚠️ Ensure EC2 Security Group allows **port 80** (HTTP)
+
+---
+
+## 📊 Summary Table
+
+| Component           | Status |
+| ------------------- | ------ |
+| SSH Access          | ✅      |
+| Ansible Installed   | ✅      |
+| Jenkins Running     | ✅      |
+| PEM Secured         | ✅      |
+| NGINX via Ansible   | ✅      |
+| Web Access Verified | ✅      |
+
+---
