@@ -1,0 +1,113 @@
+Jenkins Master-Slave Architecture – Explained
+=============================================
+
+Objective:
+----------
+To understand the architecture, setup, and use cases of Jenkins Master-Slave (now called Controller-Agent) configuration.
+
+What is Master-Slave Architecture?
+----------------------------------
+- Jenkins uses a distributed build architecture.
+- The main Jenkins server is called the **Master** (or Controller).
+- Additional machines configured to run jobs are called **Slaves** (or Agents).
+- Master schedules jobs, dispatches builds to agents, monitors results, and presents build results.
+
+-----------------------------------------------------
+Jenkins Master-Slave (Controller-Agent) Architecture:
+-----------------------------------------------------
+                         +--------------------+
+                         |   Jenkins Master   |
+                         |  (Controller Node) |
+                         +--------------------+
+                          |        |        |
+        Dispatch Jobs     |        |        | Monitor Status
+        & Collect Logs    |        |        |
+                          v        v        v
+                  +-------------+  +-------------+  +-------------+
+                  |   Agent 1   |  |   Agent 2   |  |   Agent 3   |
+                  | (Linux VM)  |  | (Windows VM)|  | (Mac VM)    |
+                  +-------------+  +-------------+  +-------------+
+                       |                |                |
+              Executes Jobs      Executes Jobs     Executes Jobs
+
+Notes:
+- The **Master** schedules jobs and assigns them to the **Agents**.
+- Each **Agent** can run specific types of builds based on labels (e.g., OS, environment).
+- Communication can be over **SSH** or **JNLP**.
+- Builds can run in parallel across agents to optimize CI/CD pipelines.
+
+
+Components:
+-----------
+1. Master (Controller):
+   - Hosts Jenkins UI
+   - Manages build configurations
+   - Schedules jobs
+   - Can run builds (optional)
+
+2. Slave (Agent):
+   - Connected to master
+   - Executes jobs assigned by master
+   - Useful to distribute load across multiple machines
+
+Benefits:
+---------
+- Parallel execution of jobs
+- Isolation for different environments
+- Better resource utilization
+- Scalable CI/CD setup
+
+How to Set Up Master-Slave in Jenkins:
+--------------------------------------
+
+Step 1: Prepare Slave Machine
+-----------------------------
+- Ensure Java is installed on the agent machine
+- Agent machine must be accessible from the master (via SSH or JNLP)
+
+Step 2: Add Node in Jenkins
+---------------------------
+1. Go to Jenkins Dashboard > Manage Jenkins > Manage Nodes and Clouds.
+2. Click "New Node".
+3. Enter a node name, select "Permanent Agent", and click OK.
+
+Step 3: Configure Agent Node
+----------------------------
+1. Add details like:
+   - # of Executors: Number of concurrent jobs
+   - Remote root directory: e.g., /home/jenkins
+   - Labels: Useful for targeting specific agents
+   - Usage: Use this node as much as possible
+   - Launch method: SSH or JNLP
+   
+2. For SSH:
+   - Provide host, credentials, and SSH port
+
+3. For JNLP:
+   - Download agent.jar on the slave
+   - Connect using: 
+     java -jar agent.jar -jnlpUrl <URL> -secret <SECRET>
+
+Step 4: Save and Launch Agent
+-----------------------------
+- Click “Save” and launch the agent.
+- If connection is successful, the agent will show as online.
+
+Step 5: Assign Jobs to Agent
+----------------------------
+1. In job configuration:
+   - Check "Restrict where this project can be run"
+   - Add the label of the agent node
+
+Use Cases:
+----------
+- Running jobs in specific OS (Linux, Windows)
+- Isolating heavy builds
+- Improving CI/CD speed with parallel execution
+- Secure separation of environments
+
+Tips:
+-----
+- Keep Jenkins master lightly loaded
+- Use labels to manage jobs efficiently
+- Monitor agent performance and connectivity

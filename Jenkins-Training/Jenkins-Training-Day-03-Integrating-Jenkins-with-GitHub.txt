@@ -1,0 +1,83 @@
+Integrating Jenkins with GitHub – Step-by-Step Guide
+====================================================
+
+Objective:
+----------
+To integrate Jenkins with GitHub so that code pushes or pull requests can trigger Jenkins builds automatically.
+
+Prerequisites:
+--------------
+- Jenkins is installed and running (locally or on a server like AWS EC2).
+- GitHub account with an existing repository.
+- Jenkins has the following plugins installed:
+  * GitHub Plugin
+  * Git Plugin
+  * GitHub Integration Plugin
+  * GitHub Branch Source Plugin
+
+Step 1: Configure Jenkins GitHub Plugin
+---------------------------------------
+1. Go to Jenkins Dashboard > Manage Jenkins > Manage Plugins.
+2. Under "Available", search and install:
+   - GitHub Plugin
+   - Git Plugin
+   - GitHub Integration Plugin
+   - GitHub Branch Source Plugin
+3. Restart Jenkins after installation.
+
+Step 2: Configure GitHub Credentials in Jenkins
+-----------------------------------------------
+1. Go to Jenkins Dashboard > Manage Jenkins > Credentials > (global) > Add Credentials.
+2. Choose:
+   - Kind: Username with password (or Personal Access Token)
+   - Username: GitHub username
+   - Password: GitHub personal access token
+   - ID/Description: e.g., github-credentials
+
+Step 3: Generate GitHub Personal Access Token
+---------------------------------------------
+1. Go to GitHub > Settings > Developer Settings > Personal Access Tokens.
+2. Click on "Generate new token".
+3. Select scopes:
+   - repo
+   - admin:repo_hook
+4. Generate and copy the token (store it securely).
+
+Step 4: Create Jenkins Job (Freestyle Project)
+----------------------------------------------
+1. Go to Jenkins Dashboard > New Item.
+2. Enter a job name, select "Freestyle project", and click OK.
+3. Under "Source Code Management", select "Git":
+   - Repository URL: https://github.com/your-username/your-repo.git
+   - Credentials: Select the GitHub credentials added earlier.
+4. Under "Build Triggers", check:
+   - GitHub hook trigger for GITScm polling
+
+Step 5: Add GitHub Webhook
+--------------------------
+1. Go to your GitHub repository > Settings > Webhooks > Add webhook.
+2. Set:
+   - Payload URL: http://<your-jenkins-server>/github-webhook/
+   - Content type: application/json
+   - Events: Just the push event (or "Send me everything")
+   - Click "Add webhook"
+
+Step 6: Add Build Steps
+-----------------------
+1. Go to the Jenkins job > Configure > Build section.
+2. Click "Add build step" > "Execute shell".
+3. Add your build script or commands:
+   echo "Building project from GitHub..."
+
+Step 7: Test the Integration
+----------------------------
+1. Push code to your GitHub repository.
+2. GitHub triggers the webhook.
+3. Jenkins will automatically start a build.
+4. Check logs and build history in Jenkins.
+
+Troubleshooting:
+----------------
+- Ensure Jenkins is publicly accessible (use ngrok for local testing).
+- Check webhook delivery status in GitHub > Webhooks > Recent Deliveries.
+- Review Jenkins logs if builds are not triggered.

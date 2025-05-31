@@ -1,0 +1,61 @@
+Integrating Jenkins with GitHub – Poll SCM Trigger Setup
+=========================================================
+
+Objective:
+----------
+To configure Jenkins to poll a GitHub repository at regular intervals and trigger a build when changes are detected.
+
+Prerequisites:
+--------------
+- Jenkins is installed and running.
+- A GitHub repository is available.
+- Jenkins has the following plugins installed:
+  * Git Plugin
+
+Step 1: Create or Open Jenkins Job
+----------------------------------
+1. Go to Jenkins Dashboard.
+2. Click on "New Item" or select an existing Freestyle project.
+3. Enter a name and select "Freestyle project", then click "OK".
+
+Step 2: Configure Source Code Management
+----------------------------------------
+1. Under "Source Code Management", select "Git".
+2. Enter your GitHub repository URL:
+   Example: https://github.com/your-username/your-repo.git
+3. Add GitHub credentials if necessary.
+
+Step 3: Configure Build Trigger – Poll SCM
+------------------------------------------
+1. Scroll to the "Build Triggers" section.
+2. Check the box for "Poll SCM".
+3. In the "Schedule" field, enter a cron syntax to define the polling frequency.
+   Example: 
+     H/5 * * * *    → Polls every 5 minutes
+
+Cron Format:
+------------
+MINUTE HOUR DOM MONTH DOW
+- H: Distributes the load across time
+- *: Every time unit
+- Examples:
+  - H/15 * * * * : Polls every 15 minutes
+  - H 4 * * 1-5  : Polls at 4 AM on weekdays
+
+Step 4: Add Build Step
+----------------------
+1. In the "Build" section, click "Add build step" > "Execute shell".
+2. Add your build commands or scripts, e.g.:
+   echo "Code pulled from GitHub, building project..."
+
+Step 5: Save and Test
+---------------------
+1. Click "Save" to apply the configuration.
+2. Make a change in the GitHub repository and push it.
+3. Wait for the next polling interval and verify if the build triggers.
+
+Notes:
+------
+- "Poll SCM" checks for changes but does not create webhooks.
+- Suitable for internal Jenkins setups without public access.
+- Use cautiously to avoid overloading Jenkins with frequent polling.
