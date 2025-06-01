@@ -1,0 +1,127 @@
+# Jenkins Master-Slave Architecture – Guide & Setup
+
+## Introduction:
+
+Jenkins uses a Master-Slave (Controller-Agent) architecture to support distributed builds across multiple machines. This setup allows Jenkins to scale and execute jobs on different environments or machines (agents/slaves).
+
+## Components:
+
+1. **Master (Controller)**:
+
+   * Manages the Jenkins UI and configuration.
+   * Schedules builds.
+   * Dispatches builds to slaves (agents).
+   * Monitors agent status and collects build results.
+   * Can execute jobs, but recommended to offload builds to agents.
+
+2. **Slave (Agent/Worker)**:
+
+   * A remote machine or container set up to execute builds.
+   * Can run on Linux, Windows, or any system with Java installed.
+   * Communicates with the master via SSH, JNLP, or inbound TCP.
+
+## Diagram (Text-based):
+
+```
+   +---------------------+
+   |   Jenkins Master    |
+   |---------------------|
+   | - Web UI            |
+   | - Job Scheduling    |
+   | - Plugin Management |
+   +---------------------+
+       |         |        
+ SSH   |         |   JNLP
+       v         v
++--------------+  +--------------+
+| Agent 1      |  | Agent 2      |
+| (Linux Node) |  | (Windows VM) |
++--------------+  +--------------+
+```
+
+## Why Use Slave Nodes:
+
+* Offload resource-intensive jobs.
+* Run builds on specific OS or environments.
+* Parallelize builds across nodes.
+* Improve CI/CD pipeline performance.
+
+## Setup: Master-Slave using SSH
+
+**On Master Jenkins (Controller):**
+
+## Step 1: Install “SSH Build Agents” Plugin
+
+1. Jenkins Dashboard → Manage Jenkins → Manage Plugins.
+2. Under “Available” tab, search for:
+
+   * `SSH Build Agents Plugin`
+3. Install it and restart Jenkins if required.
+
+## Step 2: Add SSH Key to Slave Node
+
+1. On the master Jenkins machine, generate SSH key:
+   ssh-keygen -t rsa
+
+2. Copy public key to slave (Linux):
+   ssh-copy-id user\@slave\_ip
+
+## Step 3: Add Slave Node in Jenkins
+
+1. Go to: Manage Jenkins → Manage Nodes and Clouds → New Node
+2. Enter name (e.g., “Linux-Agent”) → Select “Permanent Agent”
+3. Configure:
+
+   * Remote root directory: `/home/jenkins-agent`
+   * Labels: linux
+   * Usage: Use this node as much as possible
+   * Launch method: "Launch agents via SSH"
+   * Host: IP address or hostname
+   * Credentials: Add SSH credentials
+4. Save and launch agent
+
+## Step 4: Test Node Connection
+
+* Click “Launch Agent” or “Test Connection”.
+* Node should show status: **Connected**
+
+## Slave Configuration Options:
+
+* Number of executors: # of jobs this agent can run concurrently.
+* Labels: Used to assign jobs to specific nodes (e.g., “java”, “linux”).
+* Environment variables can be passed.
+
+## Windows Slave Node Setup:
+
+1. Use JNLP instead of SSH.
+2. On Windows slave:
+
+   * Install Java
+   * Download agent.jar from Jenkins master:
+     http\://<jenkins-master>:8080/computer/<agent-name>/slave-agent.jnlp
+3. Run with:
+   java -jar agent.jar -jnlpUrl <url> -secret <secret-key>
+
+## Best Practices:
+
+* Avoid running builds on the master.
+* Use labels to control job assignment to specific environments.
+* Use agents for isolation, security, and scalability.
+* Monitor node health using Jenkins' built-in monitoring tools.
+
+## Troubleshooting Tips:
+
+* Ensure firewall allows Jenkins ports (default 22 for SSH, 50000 for JNLP).
+* Verify Java is installed on agents.
+* Check SSH access from master to agent.
+* Ensure correct directory permissions on agent nodes.
+
+## Use Cases:
+
+* Assign Python builds to Linux agents, and .NET builds to Windows agents.
+* Run UI automation tests on separate test nodes.
+* Load balance builds across multiple agents.
+
+## Conclusion:
+
+With Jenkins' master-agent architecture, teams can scale CI/CD pipelines efficiently across diverse environments, improving flexibility and performance.
