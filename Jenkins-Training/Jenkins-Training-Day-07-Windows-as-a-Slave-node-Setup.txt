@@ -1,0 +1,156 @@
+####################################################################
+#                JENKINS WINDOWS SLAVE NODE COMPLETE SETUP         #
+####################################################################
+
+📌 OBJECTIVE:
+-------------
+🔹 Connect a Windows machine as a Jenkins Agent (Permanent Node).
+🔹 Enable distributed builds using JNLP with WebSocket.
+🔹 Automate and isolate Windows-based jobs.
+
+📋 PREREQUISITES:
+-----------------
+✅ Jenkins Master (Controller) running
+✅ AWS EC2 Windows instance (used as Jenkins Agent)
+✅ RDP access to Windows Agent
+✅ Java installed on Agent
+✅ Internet access on both systems
+
+🌐 DOWNLOAD LINKS:
+------------------
+🔸 Jenkins: https://www.jenkins.io/download/
+🔸 Java JDK: https://adoptium.net/en-GB/temurin/releases/
+
+============================================================
+🔑 STEP 1: LOGIN TO WINDOWS AGENT USING RDP
+============================================================
+
+✅ Go to AWS Console → EC2 → Instances  
+✅ Select your Windows instance → Click "Connect"
+
+➡️ Select “RDP Client” Tab  
+- **Username**: Administrator  
+- **Password**: Click “Get Password”  
+  - Upload your `.pem` key file  
+  - Decrypt to get the password
+
+➡️ Use the details to login with **Remote Desktop Connection (RDC)** from your local Windows system.
+
+============================================================
+📂 STEP 2: PREPARE WINDOWS AGENT ENVIRONMENT
+============================================================
+
+1️⃣ Inside RDP session on Windows Agent:
+
+- Create a directory for Jenkins work (e.g.):
+```
+
+C:\JenkinsWP
+
+```
+
+- This will be the **Remote Root Directory** used in Jenkins node config.
+
+============================================================
+🧱 STEP 3: ADD NODE IN JENKINS MASTER
+============================================================
+
+🔸 Go to Jenkins Dashboard → Manage Jenkins → Manage Nodes and Clouds → New Node
+
+🔧 Configure:
+
+- Name: `windows-agent`
+- Type: **Permanent Agent**
+- Click OK
+
+➡️ Fill in node configuration:
+
+- **# of Executors**: `3`
+- **Remote Root Directory**: `C:\JenkinsWP`
+- **Labels**: `windows`
+- **Usage**: Use this node as much as possible
+- **Launch Method**: **Launch agent by connecting it to the controller**
+- **Internal Data Directory**: Use WebSocket → ✅ Enable WebSocket
+
+➡️ Save the node.
+
+============================================================
+☕ STEP 4: INSTALL JAVA ON WINDOWS AGENT
+============================================================
+
+1️⃣ Download Java JDK for Windows:
+🔗 https://adoptium.net/en-GB/temurin/releases/
+
+2️⃣ Install it normally.
+
+3️⃣ Set Environment Variables:
+
+- `JAVA_HOME` → C:\Program Files\Eclipse Adoptium\jdk-XX
+- Add `%JAVA_HOME%\bin` to the system PATH
+
+4️⃣ Open Command Prompt → Verify:
+```
+
+java -version
+
+```
+
+============================================================
+📥 STEP 5: DOWNLOAD AND RUN AGENT.JAR ON WINDOWS
+============================================================
+
+✅ From Jenkins Master UI:
+
+- Go to: `http://<jenkins-master-ip>:8080/computer/windows-agent/`
+- Click: `agent.jar` → Download it
+- Copy to `C:\JenkinsWP` folder
+
+➡️ In Windows Agent CMD prompt:
+```
+
+cd C:\JenkinsWP
+java -jar agent.jar -webSocket
+
+````
+
+
+\============================================================
+✅ STEP 6: VERIFY CONNECTION
+===========================
+
+Go to: Jenkins Dashboard → Nodes → `windows-agent`
+Status should be: **Connected (Online)** ✅
+
+Try building a sample job using label `windows`.
+
+============================================================
+🧪 TEST JOB ON WINDOWS AGENT:
+============================================================
+
+1. Create a freestyle Jenkins job
+2. Configure → General → Restrict where this project can be run → Label = `windows`
+3. Add a simple build step:
+   > echo Hello from Windows Agent!
+4. Save → Build Now → Confirm it runs on the correct agent
+
+\============================================================
+🛠️ TROUBLESHOOTING TIPS
+========================
+
+⚠️ WebSocket not connecting? Check:
+
+* Jenkins URL accessible from agent
+* agent.jar is up to date
+* Java is correctly installed
+* No firewall blocking port 8080 (Jenkins) or 50000 (JNLP)
+* Correct directory permissions
+
+\============================================================
+🎯 CONCLUSION
+=============
+
+🎯 Windows EC2 instance is now connected as Jenkins Agent.
+🎯 WebSocket and Java are configured properly.
+🎯 Can execute Windows-specific or isolated Jenkins jobs efficiently.
+
+

@@ -1,0 +1,158 @@
+===============================
+Docker-Based Master-Slave Architecture with Jenkins on AWS
+===============================
+
+This document explains how to set up a Master-Slave CI/CD architecture using Jenkins and Docker on Amazon EC2 instances.
+
+-------------------------------
+System Architecture Overview
+-------------------------------
+
+            +---------------------+
+            |  Jenkins Master EC2 |
+            |---------------------|
+            | Jenkins + Docker    |
+            | Exposed Port: 8080  |
+            +---------------------+
+                     |
+                     | TCP 4243 (Docker API)
+                     v
+            +---------------------+
+            | Docker Host (Slave) |
+            |---------------------|
+            | Docker Daemon       |
+            | Exposed on Port 4243|
+            +---------------------+
+                     |
+                     v
+            +---------------------+
+            |  Docker Container   |
+            |---------------------|
+            | Maven/JDK Agent     |
+            | Executes build jobs |
+            +---------------------+
+
+-------------------------------
+Part 1: Launch Docker Host EC2 (Slave)
+-------------------------------
+
+1. Launch a new EC2 instance (Amazon Linux 2 or Ubuntu).
+2. SSH into the instance:
+   $ ssh -i "your-key.pem" ec2-user@<Docker-Host-IP>
+   $ sudo su
+
+3. Install Docker:
+   $ yum install docker -y
+   $ systemctl start docker
+   $ systemctl enable docker
+
+4. (Optional) Test Docker:
+   $ docker pull ubuntu:14.04
+   $ docker run -it --name os1 ubuntu:14.04
+   $ docker ps
+
+-------------------------------
+Part 2: Expose Docker Remote API on Port 4243
+-------------------------------
+
+1. Edit Docker systemd service file:
+   $ vim /usr/lib/systemd/system/docker.service
+
+2. Modify ExecStart line:
+   From:
+   ExecStart=/usr/bin/dockerd -H fd://
+   To:
+   ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:4243 -H fd://
+
+3. Apply the changes:
+   $ systemctl daemon-reload
+   $ systemctl restart docker
+
+4. Verify Docker status:
+   $ systemctl status docker
+
+-------------------------------
+Part 3: AWS Security Group Setup
+-------------------------------
+
+1. Go to EC2 > Security Groups.
+2. Edit Inbound Rules of Docker Host:
+   - Type: Custom TCP
+   - Port Range: 4243
+   - Source: <Jenkins-IP>/32
+
+3. (Optional for testing) Allow all traffic from Jenkins IP (Not recommended for production).
+
+-------------------------------
+Part 4: Jenkins Server Configuration
+-------------------------------
+
+1. Go to Jenkins UI > Manage Jenkins > Configure System.
+2. Scroll to 'Cloud' section > Add new Docker cloud.
+
+Docker Cloud Configuration:
+- Docker Host URI: tcp://<Docker-Host-IP>:4243
+- Enable and expose DOCKER_HOST
+
+Docker Agent Template:
+- Labels: docker-build-maven
+- Docker Image: maven:3.8.6-openjdk-17
+- Remote FS Root: /home/jenkins
+- Pull Strategy: Pull all images every time
+- Usage: Only build jobs with label
+
+Connector Method (SSH):
+- Method: Connect with SSH
+- Add SSH credentials for Docker Host
+- Host Key Verification: No verification strategy
+
+Save the configuration.
+
+-------------------------------
+Part 5: Create Jenkins Build Job
+-------------------------------
+
+1. Create a new Jenkins Freestyle Project.
+2. Configure:
+   - Restrict to label: docker-build-maven
+   - Git: Provide Java project repo URL
+   - Build: Use Maven - 'clean package'
+   - Post-build: Archive artifacts - target/*.jar
+
+3. Save and build the job.
+
+-------------------------------
+Troubleshooting Tips
+-------------------------------
+
+1. Docker not connecting on port 4243:
+   - Verify ExecStart line in docker.service is correct.
+   - Run: netstat -tulnp | grep 4243
+   - Check Security Group rules.
+
+2. Jenkins cannot find docker container:
+   - Ensure correct label is used in the job.
+   - Jenkins and Docker host must be able to reach each other.
+
+3. Docker image fails to pull:
+   - Make sure EC2 has internet access.
+   - Try pulling image manually on Docker host.
+
+4. Job stuck in queue:
+   - Label mismatch or docker cloud misconfiguration.
+   - Check Jenkins logs: /var/log/jenkins/jenkins.log
+
+-------------------------------
+Summary
+-------------------------------
+
+Component       | Purpose
+----------------|------------------------------------------
+Docker Host EC2 | Acts as Jenkins slave using Docker agent
+Port 4243       | Allows remote access to Docker daemon
+Jenkins Config  | Connects Jenkins to Docker via Remote API
+Docker Agent    | Executes jobs inside Docker container
+
+-------------------------------
+End of Documentation
+-------------------------------
