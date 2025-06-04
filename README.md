@@ -102,7 +102,7 @@
 
 ---
 <h2 align="center">🚀 Featured Projects</h2> <p align="center"> <a href="https://github.com/Kiranrakh/Flask-MySQL-App-on-Kubernetes-Minikube-EC2-.git"><strong>📌 Flask + MySQL Web App on Kubernetes</strong></a><br/> Deploy a Flask + MySQL Web App using Docker and Kubernetes via Minikube on a single AWS EC2 Ubuntu instance. </p> <p align="center"> <a href="https://github.com/Kiranrakh/Terraform-Ia-to-Deploy-Medusa-Backend-on-AWS-ECS-Fargate.git"><strong>📌 Medusa Backend with Terraform + ECS</strong></a><br/> Deploy the Medusa headless commerce backend on AWS ECS Fargate with CI/CD using GitHub Actions. </p> <p align="center"> <a href="https://github.com/Kiranrakh/full-static-nginx-website.git"><strong>📌 Full Static NGINX Website</strong></a><br/> A multi-page static site (HTML/CSS/JS) hosted via Dockerized Nginx. </p> <p align="center"> <a href="https://github.com/Kiranrakh/Deploying-a-Static-HTML-Website-on-Kubernetes-using-Docker-Nginx.git"><strong>📌 Static Website on Kubernetes</strong></a><br/> Deploy a static HTML site on Kubernetes using Docker + Nginx with rolling updates. </p> <p align="center"> <a href="https://github.com/Kiranrakh/Dockerized-FastAPI-Application.git"><strong>📌 FastAPI + Jenkins + Monitoring</strong></a><br/> Dockerized FastAPI app integrated with Jenkins CI/CD, monitored using Prometheus + Grafana. </p>
----
+
 
 <h2 align="center">🙋‍♂️ About Me</h2>
 
@@ -120,7 +120,7 @@
 
 
 
----
+
 ---
 
 <h2 align="center">📈 GitHub Stats</h2>
@@ -132,23 +132,7 @@
 
 ---
 
-<h2 align="center">🙋‍♂️ About Me</h2>
 
-<p align="center">
-  I'm <strong>Kiran Rakh</strong> — a passionate DevOps Intern from Pune,<br/>
-  Learning from the best at <strong>LinuxWorld Informatics Pvt Ltd</strong> 🚀
-</p>
-
-
-
-
-```yaml
-Name: Kiran Rakh
-Role: DevOps Intern @ LinuxWorld Informatics Pvt Ltd
-Location: Pune, India
-Tech Interests: AWS, Docker, K8s, Terraform, CI/CD, GitOps
-
-````
 
 ---
 
