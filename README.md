@@ -3,7 +3,7 @@
   <img src="https://github.com/Kiranrakh/LW-DevOps-Learning-Daily/assets/banner.png" alt="DevOps Journey with LinuxWorld Banner" width="100%" />
 </p>
 
-<h1 align="center">🚀 DevOps Journey with LinuxWorld</h1>
+<h1 align="center">🚀 DevOps Journey with LinuxWorld 🙋‍♂️</h1>
 
 <p align="center">
   <strong>LinuxWorld DevOps Internship</strong> | Guided by <strong>Vimal Daga Sir</strong>
@@ -89,7 +89,7 @@ Name: Kiran Rakh
 Role: DevOps Intern @ LinuxWorld Informatics Pvt Ltd
 Location: Pune, India
 Tech Interests: AWS, Docker, K8s, Terraform, CI/CD, GitOps
-Fun Fact: I automate before I caffeinate ☕
+
 ````
 
 ---
@@ -124,8 +124,3 @@ Fun Fact: I automate before I caffeinate ☕
 
 ```
 
----
-
-✅ **You can copy-paste this directly as your `README.md`.**  
-Would you like me to help you upload a banner or create one too?
-```
