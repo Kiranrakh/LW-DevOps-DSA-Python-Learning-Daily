@@ -69,23 +69,23 @@
 
 ##  <p align="center"><strong>🚀 Highlight Projects</strong></p>
 
-* **🔸 Deploying-a-Static-HTML-Website-on-Kubernetes-using-Docker-Nginx**<br />
+🔸 Deploying-a-Static-HTML-Website-on-Kubernetes-using-Docker-Nginx**<br />
   Docker + Nginx + K8s deployment with automation.
 
-* **🔸 Full-Static-Nginx-Website**<br />
+ Full-Static-Nginx-Website**<br />
   Multi-page frontend using HTML/CSS/JS in Docker Nginx container.
 
-* **🔸 Dockerized-Web-Scraper-with-MySQL**<br />
+ Dockerized-Web-Scraper-with-MySQL**<br />
   Python scraper + Docker + MySQL persistence.
 
 ---
 
 ##  <p align="center"><strong>🎯 Learning Outcomes</strong></p>
 
-* ✅ Mastered DevOps lifecycle tools and cloud-native practices
-* ✅ Built secure, scalable pipelines using CI/CD and GitOps
-* ✅ Automated infrastructure and deployments with IaC
-* ✅ Monitored real-time metrics and logs in production-style clusters
+✅ Mastered DevOps lifecycle tools and cloud-native practices
+✅ Built secure, scalable pipelines using CI/CD and GitOps
+✅ Automated infrastructure and deployments with IaC
+✅ Monitored real-time metrics and logs in production-style clusters
 
 ---
 
