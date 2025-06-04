@@ -6,6 +6,10 @@
 </p>
 
 <p align="center">
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=22&duration=3000&pause=1000&center=true&width=435&lines=DevOps+Intern+at+LinuxWorld;Cloud+Native+Learner;Open+Source+Explorer;CI%2FCD+Pipeline+Builder"/>
+</p>
+
+<p align="center">
   <img src="https://img.shields.io/badge/LinuxWorld-Tech%20Intern-blue?style=for-the-badge&logo=linux" />
   <img src="https://img.shields.io/github/last-commit/Kiranrakh/LW-DevOps-Learning-Daily?style=for-the-badge&color=green" />
   <img src="https://img.shields.io/github/stars/Kiranrakh/LW-DevOps-Learning-Daily?style=for-the-badge" />
@@ -24,21 +28,64 @@
 <h2 align="center">📚 Modules Covered</h2>
 
 <p align="center">
-
-| 📘 Module                    | 🔧 Key Topics                                 |
-|----------------------------|----------------------------------------------|
-| 🏁 Getting Started          | DevOps Culture, Agile, SDLC                  |
-| 🔗 Git & GitHub             | Branching, PRs, Actions                      |
-| 🐳 Docker & ☸ Kubernetes    | Dockerfiles, Compose, Helm, RBAC            |
-| ⚙️ Jenkins CI/CD            | Declarative Pipelines, Webhooks             |
-| 📊 Monitoring & Logging     | Prometheus, Grafana, Node Exporter          |
-| 🧱 IaC with Ansible/Terraform| EC2 setup, Provisioning, Infrastructure     |
-| ☁️ Cloud Computing          | AWS Core, GCP Basics, IAM, SNS, Lambda      |
-| 🐧 Linux & Bash             | Scripting, Cron Jobs, System Tools          |
-| 🔁 GitOps with Argo CD      | Git Sync, Helm Chart Deployment             |
-| 🔐 DevSecOps                | Vault, Security Scanning, Role Management   |
-
+  Below are the key modules I've covered during my DevOps internship at <strong>LinuxWorld Informatics Pvt Ltd</strong>,
+  gaining hands-on experience with real-world tools, cloud-native stacks, and automation practices.
 </p>
+
+<br/>
+
+<div align="center">
+
+<table>
+  <thead>
+    <tr>
+      <th>📘 Module</th>
+      <th>🔧 Key Topics</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>🏁 Getting Started</td>
+      <td>DevOps Culture, Agile, SDLC</td>
+    </tr>
+    <tr>
+      <td>🔗 Git & GitHub</td>
+      <td>Branching, PRs, Actions</td>
+    </tr>
+    <tr>
+      <td>🐳 Docker & ☸ Kubernetes</td>
+      <td>Dockerfiles, Compose, Helm, RBAC</td>
+    </tr>
+    <tr>
+      <td>⚙️ Jenkins CI/CD</td>
+      <td>Declarative Pipelines, Webhooks</td>
+    </tr>
+    <tr>
+      <td>📊 Monitoring & Logging</td>
+      <td>Prometheus, Grafana, Node Exporter</td>
+    </tr>
+    <tr>
+      <td>🧱 IaC with Ansible/Terraform</td>
+      <td>EC2 setup, Provisioning, Infrastructure</td>
+    </tr>
+    <tr>
+      <td>☁️ Cloud Computing</td>
+      <td>AWS Core, GCP Basics, IAM, SNS, Lambda</td>
+    </tr>
+    <tr>
+      <td>🐧 Linux & Bash</td>
+      <td>Scripting, Cron Jobs, System Tools</td>
+    </tr>
+    <tr>
+      <td>🔁 GitOps with Argo CD</td>
+      <td>Git Sync, Helm Chart Deployment</td>
+    </tr>
+    <tr>
+      <td>🔐 DevSecOps</td>
+      <td>Vault, Security Scanning, Role Management</td>
+    </tr>
+  </tbody>
+</table>
 
 ---
 
@@ -69,10 +116,6 @@
 </p>
 
 
-
-<p align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=22&duration=3000&pause=1000&center=true&width=435&lines=DevOps+Intern+at+LinuxWorld;Cloud+Native+Learner;Open+Source+Explorer;CI%2FCD+Pipeline+Builder"/>
-</p>
 
 
 ---
