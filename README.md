@@ -121,35 +121,6 @@
 
 
 ---
-<h2 align="center">🚀 Highlight Projects</h2>
-
-<p align="center">
-
-🔹 <a href="https://github.com/Kiranrakh/LW-DevOps-Learning-Daily/tree/main/Deploying-a-Static-HTML-Website-on-Kubernetes-using-Docker-Nginx">
-  <strong>Static HTML Site on Kubernetes</strong></a><br/>
-➡ Docker + Nginx + K8s deployment with automation
-
-
-🔹 <a href="https://github.com/Kiranrakh/LW-DevOps-Learning-Daily/tree/main/Full-Static-Nginx-Website">
-  <strong>Full Static Website in NGINX</strong></a><br/>
-➡ Multi-page HTML/CSS site inside Docker NGINX container
-
-
-🔹 <a href="https://github.com/Kiranrakh/LW-DevOps-Learning-Daily/tree/main/Dockerized-Web-Scraper-with-MySQL">
-  <strong>Python Web Scraper + MySQL</strong></a><br/>
-➡ Dockerized scraper with MySQL persistence
-
-
-🔹 <a href="https://github.com/Kiranrakh/LW-DevOps-Learning-Daily/tree/main/Jenkins-Ansible-Nginx-Deploy">
-  <strong>CI/CD with Jenkins + Ansible</strong></a><br/>
-➡ Jenkins triggers Ansible to deploy NGINX on EC2
-
-
-🔹 <a href="https://github.com/Kiranrakh/flask-mysql-k8s">
-  <strong>Flask App + MySQL on Kubernetes (with AWS)</strong></a><br/>
-➡ Full-stack app using MySQL StatefulSet + SNS Notifications
-
-</p>
 ---
 
 <h2 align="center">📈 GitHub Stats</h2>
