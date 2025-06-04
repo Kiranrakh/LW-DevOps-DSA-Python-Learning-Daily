@@ -1,12 +1,8 @@
-<!-- Banner -->
-<p align="center">
-  <img src="https://github.com/Kiranrakh/LW-DevOps-Learning-Daily/assets/banner.png" alt="DevOps Journey with LinuxWorld Banner" width="100%" />
-</p>
-
 <h1 align="center">🚀 DevOps Journey with LinuxWorld 🙋‍♂️</h1>
 
 <p align="center">
-  <strong>LinuxWorld DevOps Internship</strong> | Guided by <strong>Vimal Daga Sir</strong>
+  <strong>🌐 LinuxWorld DevOps Internship</strong><br/>
+  Mentored by <strong>Vimal Daga Sir</strong> at <strong>LinuxWorld Informatics Pvt Ltd, Jaipur</strong>
 </p>
 
 <p align="center">
@@ -19,70 +15,124 @@
 
 <p align="center">
   Welcome to my <strong>Daily DevOps Learning Journey</strong> under the mentorship of <strong>Vimal Daga Sir</strong> at <strong>LinuxWorld Informatics Pvt Ltd, Jaipur</strong>!<br>
-  This repository is my documentation of building real-world, production-grade DevOps skills — all hands-on.
+  ✨ This repository showcases my hands-on DevOps learning journey — from beginner to production-ready DevOps Engineer. <br/>
+  Follow along as I explore Docker, Kubernetes, Jenkins, AWS, GitOps & much more.
 </p>
 
 ---
 
-## 🧭 Modules Covered
+<h2 align="center">📚 Modules Covered</h2>
 
-| Module                        | Key Topics                             |
-|------------------------------|----------------------------------------|
-| 🏁 Getting Started            | DevOps Culture, SDLC, Agile/Scrum      |
-| 🔗 Git & GitHub               | Branching, PRs, GitHub Actions         |
-| 🐳 Docker & ☸ Kubernetes      | Docker Compose, Helm, Pods, RBAC       |
-| ⚙️ Jenkins CI/CD              | Pipelines, Webhooks, Deployments       |
-| 📊 Monitoring & Logging       | Prometheus, Grafana, Node Exporter     |
-| 🧱 IaC & Configuration Mgmt   | Ansible, Terraform, AWS Infrastructure |
-| ☁️ Cloud Fundamentals         | AWS, GCP, Azure Overview               |
-| 🐧 Linux & Bash               | Scripting, Cron Jobs, Permissions      |
-| 🔁 GitOps with Argo CD        | Git → Cluster Sync, Helm Integrations  |
-| 🔐 DevSecOps                  | Scanning, Secrets, Vault, RBAC         |
+<p align="center">
+
+| 📘 Module                    | 🔧 Key Topics                                 |
+|----------------------------|----------------------------------------------|
+| 🏁 Getting Started          | DevOps Culture, Agile, SDLC                  |
+| 🔗 Git & GitHub             | Branching, PRs, Actions                      |
+| 🐳 Docker & ☸ Kubernetes    | Dockerfiles, Compose, Helm, RBAC            |
+| ⚙️ Jenkins CI/CD            | Declarative Pipelines, Webhooks             |
+| 📊 Monitoring & Logging     | Prometheus, Grafana, Node Exporter          |
+| 🧱 IaC with Ansible/Terraform| EC2 setup, Provisioning, Infrastructure     |
+| ☁️ Cloud Computing          | AWS Core, GCP Basics, IAM, SNS, Lambda      |
+| 🐧 Linux & Bash             | Scripting, Cron Jobs, System Tools          |
+| 🔁 GitOps with Argo CD      | Git Sync, Helm Chart Deployment             |
+| 🔐 DevSecOps                | Vault, Security Scanning, Role Management   |
+
+</p>
 
 ---
 
-## 🛠️ Tech Stack
+<h2 align="center">🛠️ Tech Stack</h2>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"/>
   <img src="https://img.shields.io/badge/Kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white"/>
-  <img src="https://img.shields.io/badge/AWS-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Jenkins-D24939?style=for-the-badge&logo=jenkins&logoColor=white"/>
   <img src="https://img.shields.io/badge/Terraform-623CE4?style=for-the-badge&logo=terraform&logoColor=white"/>
   <img src="https://img.shields.io/badge/Ansible-EE0000?style=for-the-badge&logo=ansible&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Jenkins-D24939?style=for-the-badge&logo=jenkins&logoColor=white"/>
+  <img src="https://img.shields.io/badge/AWS-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white"/>
 </p>
 
 ---
 
-## 🚀 Highlight Projects
+<h2 align="center">🙋‍♂️ About Me</h2>
 
-📦 [**Deploying Static HTML Website on Kubernetes with Docker & Nginx**](https://github.com/Kiranrakh/Deploying-a-Static-HTML-Website-on-Kubernetes-using-Docker-Nginx.git)  
-→ Dockerize an HTML site & deploy it using Kubernetes
+<p align="center">
+  I'm <strong>Kiran Rakh</strong> — a passionate <strong>DevOps Intern</strong> from <strong>Pune, India</strong> 🌍<br/>
+  Currently learning and building under the guidance of <strong>Vimal Daga Sir</strong><br/>
+  at <strong>LinuxWorld Informatics Pvt Ltd</strong> 🚀
+</p>
 
-🌐 [**Full Static NGINX Website**](https://github.com/Kiranrakh/full-static-nginx-website.git)  
-→ Static website with multiple pages using Docker + NGINX
+<p align="center">
+  <strong>🔭 Current Focus:</strong> Docker | Kubernetes | GitOps | Cloud | CI/CD<br/>
+  <strong>🧠 Goal:</strong> To build scalable, secure & automated cloud-native systems
+</p>
 
-🛢️ [**Dockerized Web Scraper with MySQL**](https://github.com/Kiranrakh/Dockerized-Web-Scraper-with-MySQL-.git)  
-→ Python-based scraper storing results in a MySQL DB container
+<p align="center">
+  <img src="https://img.shields.io/badge/Motivated%20To-Build%20Production-Ready%20Stacks-0099ff?style=for-the-badge&logo=dev.to"/>
+</p>
 
-🔧 [**Jenkins + Ansible NGINX Deployment**](https://github.com/Kiranrakh/LW-DevOps-Learning-Daily/tree/main/Jenkins-Ansible-Nginx-Deploy)  
-→ CI/CD: Jenkins triggers Ansible to deploy NGINX on EC2
+<p align="center">
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=22&duration=3000&pause=1000&center=true&width=435&lines=DevOps+Intern+at+LinuxWorld;Cloud+Native+Learner;Open+Source+Explorer;CI%2FCD+Pipeline+Builder"/>
+</p>
 
-🌩️ [**Flask App + MySQL on Kubernetes with AWS Integration**](https://github.com/Kiranrakh/flask-mysql-k8s)  
-→ Flask web app with MySQL StatefulSet, AWS SNS, Lambda integration
+<h4 align="center">📄 YAML Profile</h4>
+
+<p align="center">
+  
+</p>
+
+<p align="center">
+  
+</p>
+
+<p align="center">
+  
+</p>
+
+<div align="center">
+
+```yaml
+name: Kiran Rakh
+role: DevOps Intern @ LinuxWorld Informatics Pvt Ltd
+location: Pune, India
+tech_stack:
+  - AWS
+  - Docker
+  - Kubernetes
+  - Terraform
+  - Jenkins
+  - GitHub Actions
+  - GitOps (Argo CD)
+goals:
+  - Build scalable DevOps pipelines
+  - Automate infrastructure using IaC
+  - Contribute to open-source DevOps tools
+
 
 ---
 
-## 📈 GitHub Stats
+<h2 align="center">📈 GitHub Stats</h2>
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=Kiranrakh&show_icons=true&theme=tokyonight" height="165" />
+  <img src="https://github-readme-stats.vercel.app/api?username=Kiranrakh&show_icons=true&theme=tokyonight&count_private=true" height="165" />
   <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Kiranrakh&layout=compact&theme=tokyonight" height="165" />
 </p>
 
 ---
 
-## 🙋‍♂️ About Me
+<h2 align="center">🙋‍♂️ About Me</h2>
+
+<p align="center">
+  I'm <strong>Kiran Rakh</strong> — a passionate DevOps Intern from Pune,<br/>
+  Learning from the best at <strong>LinuxWorld Informatics Pvt Ltd</strong> 🚀
+</p>
+
+<p align="center">
+  <strong>🔭 Current Focus:</strong> Docker | K8s | GitOps | Cloud | CI/CD<br/>
+  <strong>🧠 Goal:</strong> Build scalable, secure & automated cloud-native systems
+</p>
+
 
 ```yaml
 Name: Kiran Rakh
@@ -94,7 +144,7 @@ Tech Interests: AWS, Docker, K8s, Terraform, CI/CD, GitOps
 
 ---
 
-## 📡 Connect With Me
+<h2 align="center">📡 Connect With Me</h2>
 
 <p align="center">
   <a href="https://www.linkedin.com/in/kiran-rakh-b644b6248/">
@@ -107,7 +157,7 @@ Tech Interests: AWS, Docker, K8s, Terraform, CI/CD, GitOps
 
 ---
 
-## 🙏 Special Thanks
+<h2 align="center">🙏 Special Thanks</h2>
 
 <p align="center">
   🧠 <strong>Vimal Daga Sir</strong> — for your invaluable guidance and mentorship<br />
@@ -117,10 +167,11 @@ Tech Interests: AWS, Docker, K8s, Terraform, CI/CD, GitOps
 ---
 
 <p align="center">
-  🚀 This repository is continuously updated with new hands-on labs, real-world projects, and DevOps challenges. Stay tuned!
+  ⚡ This repository grows as I learn — more modules, mini-projects, and challenges coming soon. Stay tuned!
 </p>
 
----
-
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=120&section=footer"/>
+</p>
 ```
 
