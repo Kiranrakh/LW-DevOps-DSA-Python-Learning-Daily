@@ -1,4 +1,9 @@
-<h1 align="center">🚀 DevOps-Journey-With-LinuxWorld</h1>
+<!-- Banner -->
+<p align="center">
+  <img src="https://github.com/Kiranrakh/LW-DevOps-Learning-Daily/assets/banner.png" alt="DevOps Journey with LinuxWorld Banner" width="100%" />
+</p>
+
+<h1 align="center">🚀 DevOps Journey with LinuxWorld</h1>
 
 <p align="center">
   <strong>LinuxWorld DevOps Internship</strong> | Guided by <strong>Vimal Daga Sir</strong>
@@ -13,38 +18,30 @@
 ---
 
 <p align="center">
-  <img src="https://img.shields.io/badge/DevOps%20Journey-Exploring%20with%20LinuxWorld-blue?style=for-the-badge&logo=dev.to" alt="DevOps Journey Badge" />
-</p>
-
-<p align="center">
-  Welcome to my <strong>Daily DevOps Learning Journey</strong> under the mentorship of <strong>Vimal Daga Sir</strong> at <strong>LinuxWorld Informatics Pvt Ltd, Jaipur</strong>!<br />
-  🚀 This repository is a live document of my hands-on experience mastering DevOps practices and tools to build scalable, automated solutions.
+  Welcome to my <strong>Daily DevOps Learning Journey</strong> under the mentorship of <strong>Vimal Daga Sir</strong> at <strong>LinuxWorld Informatics Pvt Ltd, Jaipur</strong>!<br>
+  This repository is my documentation of building real-world, production-grade DevOps skills — all hands-on.
 </p>
 
 ---
 
-## <p align="center"><strong>🧭 Modules Covered</strong></p>
-
-<div align="center">
+## 🧭 Modules Covered
 
 | Module                        | Key Topics                             |
-|------------------------------|--------------------------------------|
-| 🏁 **Getting Started**        | DevOps culture, SDLC, Agile/Scrum    |
-| 🔗 **Git & GitHub**           | Branching, PRs, Actions, Profile Setup |
-| 🐳 **Docker & ☸ Kubernetes**  | Docker Compose, Pods, Helm, RBAC     |
-| ⚙️ **Jenkins CI/CD**          | Declarative + Scripted Pipelines     |
-| 📊 **Monitoring & Logging**   | Prometheus, Grafana, Exporters       |
-| 🧱 **Infrastructure as Code** | Ansible Playbooks, Terraform AWS Setup |
-| ☁️ **Cloud Providers**        | AWS Core Services, GCP, Azure Intro  |
-| 🐧 **Linux & Bash**           | Scripting, Cron Jobs, Permissions    |
-| 🔁 **GitOps with Argo CD**    | Git → Cluster Sync, Helm Integration |
-| 🔐 **DevSecOps**              | Scanning tools, RBAC, Vault          |
-
-</div>
+|------------------------------|----------------------------------------|
+| 🏁 Getting Started            | DevOps Culture, SDLC, Agile/Scrum      |
+| 🔗 Git & GitHub               | Branching, PRs, GitHub Actions         |
+| 🐳 Docker & ☸ Kubernetes      | Docker Compose, Helm, Pods, RBAC       |
+| ⚙️ Jenkins CI/CD              | Pipelines, Webhooks, Deployments       |
+| 📊 Monitoring & Logging       | Prometheus, Grafana, Node Exporter     |
+| 🧱 IaC & Configuration Mgmt   | Ansible, Terraform, AWS Infrastructure |
+| ☁️ Cloud Fundamentals         | AWS, GCP, Azure Overview               |
+| 🐧 Linux & Bash               | Scripting, Cron Jobs, Permissions      |
+| 🔁 GitOps with Argo CD        | Git → Cluster Sync, Helm Integrations  |
+| 🔐 DevSecOps                  | Scanning, Secrets, Vault, RBAC         |
 
 ---
 
-## <p align="center"><strong>🛠️ Tech Stack</strong></p>
+## 🛠️ Tech Stack
 
 <p align="center">
   <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"/>
@@ -57,80 +54,78 @@
 
 ---
 
-## <p align="center"><strong>🚀 Highlight Projects</strong></p>
+## 🚀 Highlight Projects
 
-<p align="center">
-  <a href="https://github.com/Kiranrakh/LW-DevOps-Learning-Daily/tree/main/Deploying-a-Static-HTML-Website-on-Kubernetes-using-Docker-Nginx" style="text-decoration:none;">
-    🔸 Deploying a Static HTML Website on Kubernetes using Docker + Nginx
-  </a><br/>
-  Docker + Nginx + K8s deployment with automation.
-</p>
+📦 [**Deploying Static HTML Website on Kubernetes with Docker & Nginx**](https://github.com/Kiranrakh/Deploying-a-Static-HTML-Website-on-Kubernetes-using-Docker-Nginx.git)  
+→ Dockerize an HTML site & deploy it using Kubernetes
 
-<p align="center">
-  <a href="https://github.com/Kiranrakh/LW-DevOps-Learning-Daily/tree/main/Full-Static-Nginx-Website" style="text-decoration:none;">
-    🔸 Full Static Nginx Website
-  </a><br/>
-  Multi-page frontend using HTML/CSS/JS in Docker Nginx container.
-</p>
+🌐 [**Full Static NGINX Website**](https://github.com/Kiranrakh/full-static-nginx-website.git)  
+→ Static website with multiple pages using Docker + NGINX
 
-<p align="center">
-  <a href="https://github.com/Kiranrakh/LW-DevOps-Learning-Daily/tree/main/Dockerized-Web-Scraper-with-MySQL" style="text-decoration:none;">
-    🔸 Dockerized Web Scraper with MySQL
-  </a><br/>
-  Python scraper + Docker + MySQL persistence.
-</p>
+🛢️ [**Dockerized Web Scraper with MySQL**](https://github.com/Kiranrakh/Dockerized-Web-Scraper-with-MySQL-.git)  
+→ Python-based scraper storing results in a MySQL DB container
+
+🔧 [**Jenkins + Ansible NGINX Deployment**](https://github.com/Kiranrakh/LW-DevOps-Learning-Daily/tree/main/Jenkins-Ansible-Nginx-Deploy)  
+→ CI/CD: Jenkins triggers Ansible to deploy NGINX on EC2
+
+🌩️ [**Flask App + MySQL on Kubernetes with AWS Integration**](https://github.com/Kiranrakh/flask-mysql-k8s)  
+→ Flask web app with MySQL StatefulSet, AWS SNS, Lambda integration
 
 ---
 
-## <p align="center"><strong>🎯 Learning Outcomes</strong></p>
+## 📈 GitHub Stats
 
 <p align="center">
-  ✅ Mastered DevOps lifecycle tools and cloud-native practices<br/>
-  ✅ Built secure, scalable pipelines using CI/CD and GitOps<br/>
-  ✅ Automated infrastructure and deployments with Infrastructure as Code<br/>
-  ✅ Monitored real-time metrics and logs in production-style clusters
-</p>
-
----
-
-## <p align="center"><strong>📈 GitHub Stats</strong></p>
-
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=Kiranrakh&show_icons=true&theme=tokyonight&count_private=true" height="165" />
+  <img src="https://github-readme-stats.vercel.app/api?username=Kiranrakh&show_icons=true&theme=tokyonight" height="165" />
   <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Kiranrakh&layout=compact&theme=tokyonight" height="165" />
 </p>
 
 ---
 
-## <p align="center"><strong>🙋‍♂️ About Me</strong></p>
+## 🙋‍♂️ About Me
+
+```yaml
+Name: Kiran Rakh
+Role: DevOps Intern @ LinuxWorld Informatics Pvt Ltd
+Location: Pune, India
+Tech Interests: AWS, Docker, K8s, Terraform, CI/CD, GitOps
+Fun Fact: I automate before I caffeinate ☕
+````
+
+---
+
+## 📡 Connect With Me
 
 <p align="center">
-  I'm <strong>Kiran Rakh</strong>, a <strong>DevOps Intern</strong> at <strong>LinuxWorld Informatics Pvt Ltd</strong>, under the mentorship of <strong>Vimal Daga Sir</strong>.<br/>
-  📌 Passionate about automation, cloud, and building reliable DevOps workflows.
+  <a href="https://www.linkedin.com/in/kiran-rakh-b644b6248/">
+    <img src="https://img.shields.io/badge/LinkedIn-Kiran%20Rakh-blue?style=for-the-badge&logo=linkedin"/>
+  </a>
+  <a href="https://github.com/Kiranrakh">
+    <img src="https://img.shields.io/badge/GitHub-Kiranrakh-black?style=for-the-badge&logo=github"/>
+  </a>
 </p>
 
 ---
 
-## <p align="center"><strong>📡 Connect With Me</strong></p>
+## 🙏 Special Thanks
 
 <p align="center">
-  <a href="https://www.linkedin.com/in/kiran-rakh-b644b6248/" target="_blank">
-    <img src="https://img.shields.io/badge/LinkedIn-Kiran%20Rakh-blue?style=for-the-badge&logo=linkedin" />
-  </a>
-  <a href="https://github.com/Kiranrakh" target="_blank">
-    <img src="https://img.shields.io/badge/GitHub-Kiranrakh-black?style=for-the-badge&logo=github" />
-  </a>
+  🧠 <strong>Vimal Daga Sir</strong> — for your invaluable guidance and mentorship<br />
+  🏢 <strong>LinuxWorld Informatics Pvt Ltd</strong> — for the incredible DevOps learning platform
 </p>
 
 ---
 
-## <p align="center"><strong>🙏 Special Thanks</strong></p>
-
 <p align="center">
-  🧠 <strong>Vimal Daga Sir</strong> — for your unmatched mentorship and vision<br/>
-  🏢 <strong>LinuxWorld</strong> — for providing a powerful learning ecosystem
+  🚀 This repository is continuously updated with new hands-on labs, real-world projects, and DevOps challenges. Stay tuned!
 </p>
 
-<p align="center">
-  💡 This repo will continue to grow as I learn and apply new tools, projects, and best practices.
-</p>
+---
+
+```
+
+---
+
+✅ **You can copy-paste this directly as your `README.md`.**  
+Would you like me to help you upload a banner or create one too?
+```
