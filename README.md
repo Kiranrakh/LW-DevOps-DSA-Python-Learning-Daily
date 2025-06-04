@@ -68,48 +68,47 @@
   <strong>🧠 Goal:</strong> To build scalable, secure & automated cloud-native systems
 </p>
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Motivated%20To-Build%20Production-Ready%20Stacks-0099ff?style=for-the-badge&logo=dev.to"/>
-</p>
+
 
 <p align="center">
   <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=22&duration=3000&pause=1000&center=true&width=435&lines=DevOps+Intern+at+LinuxWorld;Cloud+Native+Learner;Open+Source+Explorer;CI%2FCD+Pipeline+Builder"/>
 </p>
 
-<h4 align="center">📄 YAML Profile</h4>
+
+---
+<h2 align="center">🚀 Highlight Projects</h2>
 
 <p align="center">
-  
+
+🔹 <a href="https://github.com/Kiranrakh/LW-DevOps-Learning-Daily/tree/main/Deploying-a-Static-HTML-Website-on-Kubernetes-using-Docker-Nginx">
+  <strong>Static HTML Site on Kubernetes</strong></a><br/>
+➡ Docker + Nginx + K8s deployment with automation
+
+<br/><br/>
+
+🔹 <a href="https://github.com/Kiranrakh/LW-DevOps-Learning-Daily/tree/main/Full-Static-Nginx-Website">
+  <strong>Full Static Website in NGINX</strong></a><br/>
+➡ Multi-page HTML/CSS site inside Docker NGINX container
+
+<br/><br/>
+
+🔹 <a href="https://github.com/Kiranrakh/LW-DevOps-Learning-Daily/tree/main/Dockerized-Web-Scraper-with-MySQL">
+  <strong>Python Web Scraper + MySQL</strong></a><br/>
+➡ Dockerized scraper with MySQL persistence
+
+<br/><br/>
+
+🔹 <a href="https://github.com/Kiranrakh/LW-DevOps-Learning-Daily/tree/main/Jenkins-Ansible-Nginx-Deploy">
+  <strong>CI/CD with Jenkins + Ansible</strong></a><br/>
+➡ Jenkins triggers Ansible to deploy NGINX on EC2
+
+<br/><br/>
+
+🔹 <a href="https://github.com/Kiranrakh/flask-mysql-k8s">
+  <strong>Flask App + MySQL on Kubernetes (with AWS)</strong></a><br/>
+➡ Full-stack app using MySQL StatefulSet + SNS Notifications
+
 </p>
-
-<p align="center">
-  
-</p>
-
-<p align="center">
-  
-</p>
-
-<div align="center">
-
-```yaml
-name: Kiran Rakh
-role: DevOps Intern @ LinuxWorld Informatics Pvt Ltd
-location: Pune, India
-tech_stack:
-  - AWS
-  - Docker
-  - Kubernetes
-  - Terraform
-  - Jenkins
-  - GitHub Actions
-  - GitOps (Argo CD)
-goals:
-  - Build scalable DevOps pipelines
-  - Automate infrastructure using IaC
-  - Contribute to open-source DevOps tools
-
-
 ---
 
 <h2 align="center">📈 GitHub Stats</h2>
