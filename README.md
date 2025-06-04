@@ -16,14 +16,20 @@
 
 ---
 
+<div align="center">
+
 ## 📖 Overview
 
-**Welcome to my Daily DevOps Learning Journey**, guided by the incredible mentorship of **Vimal Daga Sir** at **LinuxWorld Informatics Pvt Ltd, Jaipur**.  
+Welcome to my **Daily DevOps Learning Journey**, guided by the incredible mentorship of **Vimal Daga Sir** at **LinuxWorld Informatics Pvt Ltd, Jaipur**.  
 🚀 This repository documents my hands-on learning with tools and techniques that power real-world DevOps environments—covering automation, containerization, CI/CD, infrastructure as code, cloud, GitOps, monitoring, and more.
 
-> 💡 *Follow along as I evolve from a DevOps enthusiast to a future-ready DevOps Engineer!*
+💡 *Follow along as I evolve from a DevOps enthusiast to a future-ready DevOps Engineer!*
+
+</div>
 
 ---
+
+<div align="center">
 
 ## 🧭 Modules Covered
 
@@ -40,20 +46,26 @@
 | 🔁 GitOps with Argo CD        | Git Sync to Cluster, Helm Integration  |
 | 🔐 DevSecOps                  | Security Scanning, RBAC, Vault         |
 
+</div>
+
 ---
+
+<div align="center">
 
 ## 🛠️ Tech Stack
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white"/>
-  <img src="https://img.shields.io/badge/AWS-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Terraform-623CE4?style=for-the-badge&logo=terraform&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Ansible-EE0000?style=for-the-badge&logo=ansible&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Jenkins-D24939?style=for-the-badge&logo=jenkins&logoColor=white"/>
-</p>
+<img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"/>
+<img src="https://img.shields.io/badge/Kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white"/>
+<img src="https://img.shields.io/badge/AWS-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white"/>
+<img src="https://img.shields.io/badge/Terraform-623CE4?style=for-the-badge&logo=terraform&logoColor=white"/>
+<img src="https://img.shields.io/badge/Ansible-EE0000?style=for-the-badge&logo=ansible&logoColor=white"/>
+<img src="https://img.shields.io/badge/Jenkins-D24939?style=for-the-badge&logo=jenkins&logoColor=white"/>
+
+</div>
 
 ---
+
+<div align="center">
 
 ## 🚀 Highlight Projects
 
@@ -63,62 +75,74 @@
 | 🔸 [**Full Static Nginx Website**](#) | Multi-page frontend in HTML/CSS/JS running in Docker container. |
 | 🔸 [**Dockerized Web Scraper with MySQL**](#) | Python web scraper containerized with persistent MySQL storage. |
 
-> 🖼️ *Add screenshots or GIFs for visual appeal!*
+🖼️ *Add screenshots or GIFs for visual appeal!*
+
+</div>
 
 ---
+
+<div align="center">
 
 ## 🎯 Learning Outcomes
 
-- ✅ Mastered DevOps lifecycle tools and cloud-native practices  
-- ✅ Built secure, scalable CI/CD pipelines with Jenkins & GitOps  
-- ✅ Automated infrastructure provisioning with Ansible & Terraform  
-- ✅ Monitored real-time metrics using Prometheus & Grafana  
-- ✅ Gained experience working on production-style Kubernetes clusters
+✅ Mastered DevOps lifecycle tools and cloud-native practices  
+✅ Built secure, scalable CI/CD pipelines with Jenkins & GitOps  
+✅ Automated infrastructure provisioning with Ansible & Terraform  
+✅ Monitored real-time metrics using Prometheus & Grafana  
+✅ Gained experience working on production-style Kubernetes clusters
+
+</div>
 
 ---
+
+<div align="center">
 
 ## 📈 GitHub Stats
 
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=Kiranrakh&show_icons=true&theme=tokyonight&count_private=true" height="165" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Kiranrakh&layout=compact&theme=tokyonight" height="165" />
-</p>
+<img src="https://github-readme-stats.vercel.app/api?username=Kiranrakh&show_icons=true&theme=tokyonight&count_private=true" height="165" />
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Kiranrakh&layout=compact&theme=tokyonight" height="165" />
+
+</div>
 
 ---
+
+<div align="center">
 
 ## 🙋‍♂️ About Me
 
-<p align="center">
-  I'm <strong>Kiran Rakh</strong>, a passionate <strong>DevOps Intern</strong> at <strong>LinuxWorld Informatics Pvt Ltd</strong>, under the esteemed guidance of <strong>Vimal Daga Sir</strong>.
-</p>
+I'm <strong>Kiran Rakh</strong>, a passionate <strong>DevOps Intern</strong> at <strong>LinuxWorld Informatics Pvt Ltd</strong>, under the esteemed guidance of <strong>Vimal Daga Sir</strong>.
 
-<p align="center">
-  🚀 I thrive on building automated, scalable, and cloud-native DevOps solutions.<br/>
-  🧠 Constant learner | 💻 Tech explorer | 🤝 Team collaborator
-</p>
+🚀 I thrive on building automated, scalable, and cloud-native DevOps solutions.  
+🧠 Constant learner | 💻 Tech explorer | 🤝 Team collaborator
+
+</div>
 
 ---
+
+<div align="center">
 
 ## 📡 Connect With Me
 
-<p align="center">
-  <a href="https://www.linkedin.com/in/kiran-rakh-b644b6248/">
-    <img src="https://img.shields.io/badge/LinkedIn-Kiran%20Rakh-blue?style=for-the-badge&logo=linkedin"/>
-  </a>
-  <a href="https://github.com/Kiranrakh">
-    <img src="https://img.shields.io/badge/GitHub-Kiranrakh-black?style=for-the-badge&logo=github"/>
-  </a>
-</p>
+<a href="https://www.linkedin.com/in/kiran-rakh-b644b6248/">
+  <img src="https://img.shields.io/badge/LinkedIn-Kiran%20Rakh-blue?style=for-the-badge&logo=linkedin"/>
+</a>
+<a href="https://github.com/Kiranrakh">
+  <img src="https://img.shields.io/badge/GitHub-Kiranrakh-black?style=for-the-badge&logo=github"/>
+</a>
+
+</div>
 
 ---
 
+<div align="center">
+
 ## 🙏 Special Thanks
 
-<p align="center">
-  🧠 <strong>Vimal Daga Sir</strong> — for your vision, mentorship, and technical excellence. <br/>
-  🏢 <strong>LinuxWorld Informatics Pvt Ltd</strong> — for a hands-on, real-world learning environment.
-</p>
+🧠 <strong>Vimal Daga Sir</strong> — for your vision, mentorship, and technical excellence  
+🏢 <strong>LinuxWorld Informatics Pvt Ltd</strong> — for a hands-on, real-world learning environment  
 
-> 💡 *This repository is continuously evolving as I explore and apply new tools, technologies, and DevOps best practices.*
+💡 *This repository will continue to evolve as I explore and apply more tools, technologies, and DevOps best practices.*
+
+</div>
 
 ---
