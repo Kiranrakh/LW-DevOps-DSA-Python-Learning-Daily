@@ -1,0 +1,130 @@
+===============================
+Jenkins Pipeline as Code with Docker Agents (Master-Slave)
+===============================
+
+This guide explains how to implement Jenkins Pipeline as Code using `Jenkinsfile`, Docker agents, and a Master-Slave architecture on AWS.
+
+-------------------------------
+System Overview
+-------------------------------
+
+            +---------------------+
+            |  Jenkins Master EC2 |
+            |---------------------|
+            | Jenkins + GitHub    |
+            | Docker Plugin Setup |
+            +---------------------+
+                     |
+                     | Pipeline Triggers (Git)
+                     v
+            +---------------------+
+            | Docker Host (Slave) |
+            |---------------------|
+            | Docker Daemon (4243)|
+            +---------------------+
+                     |
+                     v
+            +---------------------+
+            |  Docker Container   |
+            |---------------------|
+            | Maven/JDK Agent     |
+            | Executes pipeline   |
+            +---------------------+
+
+-------------------------------
+Pre-Requisites
+-------------------------------
+
+- Jenkins installed and accessible.
+- Docker installed on Jenkins slave (with API exposed via port 4243).
+- Docker host added as a cloud in Jenkins config.
+- GitHub repository with `Jenkinsfile`.
+
+-------------------------------
+Part 1: Sample `Jenkinsfile`
+-------------------------------
+
+Place this file in the root of your GitHub Java project:
+
+```
+
+pipeline {
+agent {
+docker {
+image 'maven:3.8.6-openjdk-17'
+label 'docker-build-maven'
+}
+}
+environment {
+PROJECT\_NAME = 'my-java-app'
+}
+stages {
+stage('Checkout') {
+steps {
+git '[https://github.com/your-username/your-java-repo.git](https://github.com/your-username/your-java-repo.git)'
+}
+}
+stage('Build') {
+steps {
+sh 'mvn clean package'
+}
+}
+stage('Test') {
+steps {
+sh 'mvn test'
+}
+}
+stage('Archive') {
+steps {
+archiveArtifacts artifacts: 'target/\*.jar', fingerprint: true
+}
+}
+}
+post {
+always {
+echo 'Pipeline execution complete.'
+}
+}
+}
+
+```
+
+-------------------------------
+Part 2: Jenkins Configuration
+-------------------------------
+
+1. **Docker Cloud**
+   - Go to *Manage Jenkins > Configure System > Cloud*
+   - Docker Host URI: `tcp://<Docker-Host-IP>:4243`
+   - Enable and configure Docker Agent Template
+     - Label: `docker-build-maven`
+     - Docker Image: `maven:3.8.6-openjdk-17`
+     - Remote FS: `/home/jenkins`
+     - Usage: Only build jobs with label
+
+2. **Global Tools Configuration**
+   - Ensure JDK and Maven are configured under *Global Tool Configuration* if required for other stages.
+
+-------------------------------
+Part 3: Creating a Pipeline Job
+-------------------------------
+
+1. Go to Jenkins > New Item > Pipeline
+2. Enter project name
+3. Choose "Pipeline" and click OK
+4. In Pipeline section:
+   - Definition: Pipeline script from SCM
+   - SCM: Git
+   - Repository URL: `https://github.com/your-username/your-java-repo.git`
+   - Script Path: `Jenkinsfile` (default)
+5. Save and click *Build Now*
+
+-------------------------------
+Troubleshooting Tips
+-------------------------------
+
+- **Label mismatch:** Make sure the `label` in Jenkinsfile matches the Docker agent template label.
+- **Permission denied:** Check Docker daemon access from Jenkins.
+- **Build hangs:** Check if container starts on Docker host (`docker ps`).
+- **Image pull errors:** Ensure Docker host has internet or image is already present.
+
