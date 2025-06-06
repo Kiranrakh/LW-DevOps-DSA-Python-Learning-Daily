@@ -1,11 +1,14 @@
-<h1 align="center">🚀 DevOps-Journey-With-LinuxWorld</h1>
+<h1 align="center">🚀 DevOps Journey with LinuxWorld 🙋‍♂️</h1>
 
 <p align="center">
-  <strong>LinuxWorld DevOps Internship</strong> | Guided by <strong>Vimal Daga Sir</strong>
+  <strong>🌐 LinuxWorld DevOps Internship</strong><br/>
+  Mentored by <strong>Vimal Daga Sir</strong> at <strong>LinuxWorld Informatics Pvt Ltd, Jaipur</strong>
 </p>
 
+<p align="center">
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=22&duration=3000&pause=1000&center=true&width=435&lines=DevOps+Intern+at+LinuxWorld;Cloud+Native+Learner;Open+Source+Explorer;CI%2FCD+Pipeline+Builder"/>
+</p>
 
----
 <p align="center">
   <img src="https://img.shields.io/badge/LinuxWorld-Tech%20Intern-blue?style=for-the-badge&logo=linux" />
   <img src="https://img.shields.io/github/last-commit/Kiranrakh/LW-DevOps-Learning-Daily?style=for-the-badge&color=green" />
@@ -13,104 +16,130 @@
 </p>
 
 ---
-<p align="center">
-  <img src="https://img.shields.io/badge/DevOps%20Journey-Exploring%20with%20LinuxWorld-blue?style=for-the-badge&logo=dev.to" alt="DevOps Journey Badge" />
-</p>
 
 <p align="center">
-  Welcome to my **Daily DevOps Learning Journey** under the mentorship of <strong>Vimal Daga Sir</strong> at <strong>LinuxWorld Informatics Pvt Ltd, Jaipur</strong>!<br />
-  🚀 This repository is a live document of my hands-on experience in mastering cutting-edge DevOps practices and tools to build robust, scalable, and automated solutions.
-</p>
-
----
-
-<p align="center">
-  💡 *Follow along as I evolve from a DevOps enthusiast to a future-ready DevOps Engineer, making the most of industry-leading tools and best practices!*
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Stay%20Tuned-%E2%9C%94%EF%B8%8F-green?style=for-the-badge&logo=github" alt="Stay Tuned Badge" />
+  Welcome to my <strong>Daily DevOps Learning Journey</strong> under the mentorship of <strong>Vimal Daga Sir</strong> at <strong>LinuxWorld Informatics Pvt Ltd, Jaipur</strong>!<br>
+  ✨ This repository showcases my hands-on DevOps learning journey — from beginner to production-ready DevOps Engineer. <br/>
+  Follow along as I explore Docker, Kubernetes, Jenkins, AWS, GitOps & much more.
 </p>
 
 ---
 
-##  <p align="center"><strong>🧭 Modules Covered</strong></p>
+<h2 align="center">📚 Modules Covered</h2>
+
+<p align="center">
+  Below are the key modules I've covered during my DevOps internship at <strong>LinuxWorld Informatics Pvt Ltd</strong>,
+  gaining hands-on experience with real-world tools, cloud-native stacks, and automation practices.
+</p>
+
+<br/>
 
 <div align="center">
 
-| Module                        | Key Topics                             |
-|------------------------------|----------------------------------------|
-| 🏁 **Getting Started**        | DevOps culture, SDLC, Agile/Scrum      |
-| 🔗 **Git & GitHub**           | Branching, PRs, Actions, Profile setup |
-| 🐳 **Docker & ☸ Kubernetes**  | Docker Compose, Pods, Helm, RBAC       |
-| ⚙️ **Jenkins CI/CD**          | Declarative + Scripted pipelines       |
-| 📊 **Monitoring & Logging**   | Prometheus, Grafana, Exporters         |
-| 🧱 **Infrastructure as Code** | Ansible Playbooks, Terraform AWS Setup |
-| ☁️ **Cloud Providers**        | AWS Core Services, GCP, Azure Intro    |
-| 🐧 **Linux & Bash**           | Scripting, Cron Jobs, Permissions      |
-| 🔁 **GitOps with Argo CD**    | Git → Cluster Sync, Helm Integration   |
-| 🔐 **DevSecOps**              | Scanning tools, RBAC, Vault            |
+<table>
+  <thead>
+    <tr>
+      <th>📘 Module</th>
+      <th>🔧 Key Topics</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>🏁 Getting Started</td>
+      <td>DevOps Culture, Agile, SDLC</td>
+    </tr>
+    <tr>
+      <td>🔗 Git & GitHub</td>
+      <td>Branching, PRs, Actions</td>
+    </tr>
+    <tr>
+      <td>🐳 Docker & ☸ Kubernetes</td>
+      <td>Dockerfiles, Compose, Helm, RBAC</td>
+    </tr>
+    <tr>
+      <td>⚙️ Jenkins CI/CD</td>
+      <td>Declarative Pipelines, Webhooks</td>
+    </tr>
+    <tr>
+      <td>📊 Monitoring & Logging</td>
+      <td>Prometheus, Grafana, Node Exporter</td>
+    </tr>
+    <tr>
+      <td>🧱 IaC with Ansible/Terraform</td>
+      <td>EC2 setup, Provisioning, Infrastructure</td>
+    </tr>
+    <tr>
+      <td>☁️ Cloud Computing</td>
+      <td>AWS Core, GCP Basics, IAM, SNS, Lambda</td>
+    </tr>
+    <tr>
+      <td>🐧 Linux & Bash</td>
+      <td>Scripting, Cron Jobs, System Tools</td>
+    </tr>
+    <tr>
+      <td>🔁 GitOps with Argo CD</td>
+      <td>Git Sync, Helm Chart Deployment</td>
+    </tr>
+    <tr>
+      <td>🔐 DevSecOps</td>
+      <td>Vault, Security Scanning, Role Management</td>
+    </tr>
+  </tbody>
+</table>
 
-</div>
+---
 
-
-##  <p align="center"><strong>🛠️ Tech Stack</strong></p>
+<h2 align="center">🛠️ Tech Stack</h2>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"/>
   <img src="https://img.shields.io/badge/Kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white"/>
-  <img src="https://img.shields.io/badge/AWS-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Jenkins-D24939?style=for-the-badge&logo=jenkins&logoColor=white"/>
   <img src="https://img.shields.io/badge/Terraform-623CE4?style=for-the-badge&logo=terraform&logoColor=white"/>
   <img src="https://img.shields.io/badge/Ansible-EE0000?style=for-the-badge&logo=ansible&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Jenkins-D24939?style=for-the-badge&logo=jenkins&logoColor=white"/>
+  <img src="https://img.shields.io/badge/AWS-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white"/>
 </p>
 
 ---
+<h2 align="center">🚀 Featured Projects</h2> <p align="center"> <a href="https://github.com/Kiranrakh/Flask-MySQL-App-on-Kubernetes-Minikube-EC2-.git"><strong>📌 Flask + MySQL Web App on Kubernetes</strong></a><br/> Deploy a Flask + MySQL Web App using Docker and Kubernetes via Minikube on a single AWS EC2 Ubuntu instance. </p> <p align="center"> <a href="https://github.com/Kiranrakh/Terraform-Ia-to-Deploy-Medusa-Backend-on-AWS-ECS-Fargate.git"><strong>📌 Medusa Backend with Terraform + ECS</strong></a><br/> Deploy the Medusa headless commerce backend on AWS ECS Fargate with CI/CD using GitHub Actions. </p> <p align="center"> <a href="https://github.com/Kiranrakh/full-static-nginx-website.git"><strong>📌 Full Static NGINX Website</strong></a><br/> A multi-page static site (HTML/CSS/JS) hosted via Dockerized Nginx. </p> <p align="center"> <a href="https://github.com/Kiranrakh/Deploying-a-Static-HTML-Website-on-Kubernetes-using-Docker-Nginx.git"><strong>📌 Static Website on Kubernetes</strong></a><br/> Deploy a static HTML site on Kubernetes using Docker + Nginx with rolling updates. </p> <p align="center"> <a href="https://github.com/Kiranrakh/Dockerized-FastAPI-Application.git"><strong>📌 FastAPI + Jenkins + Monitoring</strong></a><br/> Dockerized FastAPI app integrated with Jenkins CI/CD, monitored using Prometheus + Grafana. </p>
 
-##  <p align="center"><strong>🚀 Highlight Projects</strong></p>
 
-* **🔸 Deploying-a-Static-HTML-Website-on-Kubernetes-using-Docker-Nginx**<br />
-  Docker + Nginx + K8s deployment with automation.
-
-* **🔸 Full-Static-Nginx-Website**<br />
-  Multi-page frontend using HTML/CSS/JS in Docker Nginx container.
-
-* **🔸 Dockerized-Web-Scraper-with-MySQL**<br />
-  Python scraper + Docker + MySQL persistence.
 
 ---
 
-##  <p align="center"><strong>🎯 Learning Outcomes</strong></p>
+<h2 align="center">🙋‍♂️ About Me</h2>
 
-* ✅ Mastered DevOps lifecycle tools and cloud-native practices
-* ✅ Built secure, scalable pipelines using CI/CD and GitOps
-* ✅ Automated infrastructure and deployments with IaC
-* ✅ Monitored real-time metrics and logs in production-style clusters
+<p align="center">
+  I'm <strong>Kiran Rakh</strong> — a passionate <strong>DevOps Intern</strong> from <strong>Pune, India</strong> 🌍<br/>
+  Currently learning and building under the guidance of <strong>Vimal Daga Sir</strong><br/>
+  at <strong>LinuxWorld Informatics Pvt Ltd</strong> 🚀
+</p>
+
+<p align="center">
+  <strong>🔭 Current Focus:</strong> Docker | Kubernetes | GitOps | Cloud | CI/CD<br/>
+  <strong>🧠 Goal:</strong> To build scalable, secure & automated cloud-native systems
+</p>
+
+
+
+
 
 ---
 
-## 📈 GitHub Stats
+<h2 align="center">📈 GitHub Stats</h2>
 
 <p align="center">
   <img src="https://github-readme-stats.vercel.app/api?username=Kiranrakh&show_icons=true&theme=tokyonight&count_private=true" height="165" />
   <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Kiranrakh&layout=compact&theme=tokyonight" height="165" />
 </p>
 
----
 
-##  <p align="center"><strong>🙋‍♂️ About Me</strong></p>
 
-<p align="center">
-  I'm <strong>Kiran Rakh</strong>, currently working as a <strong>DevOps Intern</strong> at <strong>LinuxWorld Informatics Pvt Ltd</strong>, under the guidance of <strong>Vimal Daga Sir</strong>.
-</p>
 
-<p align="center">
-  📌 Passionate about automation, cloud, and building reliable DevOps workflows.
-</p>
 
 ---
 
-##  <p align="center"><strong>📡 Connect With Me</strong></p>
+<h2 align="center">📡 Connect With Me</h2>
 
 <p align="center">
   <a href="https://www.linkedin.com/in/kiran-rakh-b644b6248/">
@@ -123,13 +152,21 @@
 
 ---
 
-##  <p align="center"><strong>🙏 Special Thanks</strong></p>
+<h2 align="center">🙏 Special Thanks</h2>
 
 <p align="center">
-  🧠 <strong>Vimal Daga Sir</strong> — for your unmatched mentorship and vision<br />
-  🏢 <strong>LinuxWorld</strong> — for providing a powerful learning ecosystem
+  🧠 <strong>Vimal Daga Sir</strong> — for your invaluable guidance and mentorship<br />
+  🏢 <strong>LinuxWorld Informatics Pvt Ltd</strong> — for the incredible DevOps learning platform
+</p>
+
+---
+
+<p align="center">
+  ⚡ This repository grows as I learn — more modules, mini-projects, and challenges coming soon. Stay tuned!
 </p>
 
 <p align="center">
-  💡 This repo will continue to grow as I learn and apply new tools, projects, and best practices.
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=120&section=footer"/>
 </p>
+
+
