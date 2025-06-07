@@ -1,6 +1,6 @@
-===============================
-Jenkins Pipeline as Code with Docker Agents (Master-Slave)
-===============================
+================================================================
+   Jenkins Pipeline as Code with Docker Agents (Master-Slave)
+================================================================
 
 This guide explains how to implement Jenkins Pipeline as Code using `Jenkinsfile`, Docker agents, and a Master-Slave architecture on AWS.
 
