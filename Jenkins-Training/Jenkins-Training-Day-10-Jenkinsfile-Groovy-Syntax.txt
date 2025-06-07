@@ -1,0 +1,111 @@
+=======================================================
+            Jenkinsfile Groovy Syntax Guide
+=======================================================
+
+This guide covers how to write Jenkins pipelines using Groovy-based `Jenkinsfile` syntax for both Declarative and Scripted pipelines.
+
+-------------------------------
+What is Jenkinsfile?
+-------------------------------
+
+A `Jenkinsfile` is a text file that defines a Jenkins pipeline and is checked into source control. Jenkins reads this file to automate build, test, and deploy steps.
+
+-------------------------------
+1. Declarative Pipeline (Recommended)
+-------------------------------
+
+Syntax Example:
+----------------
+pipeline {
+    agent any
+    environment {
+        VERSION = '1.0.0'
+    }
+    options {
+        skipStagesAfterUnstable()
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/your-repo/your-project.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'mvn clean install'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+        stage('Archive Artifacts') {
+            steps {
+                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+            }
+        }
+    }
+    post {
+        success {
+            echo 'Build succeeded!'
+        }
+        failure {
+            echo 'Build failed.'
+        }
+    }
+}
+
+-------------------------------
+2. Scripted Pipeline
+-------------------------------
+
+Syntax Example:
+----------------
+node {
+    stage('Checkout') {
+        git 'https://github.com/your-repo/your-project.git'
+    }
+    stage('Build') {
+        sh 'mvn clean install'
+    }
+    stage('Test') {
+        sh 'mvn test'
+    }
+    stage('Archive') {
+        archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+    }
+}
+
+-------------------------------
+Key Concepts
+-------------------------------
+
+- `pipeline {}`: Entry point of declarative syntax
+- `node {}`: Entry point of scripted syntax
+- `agent`: Defines where the pipeline runs (e.g., any, docker)
+- `environment`: Set environment variables
+- `stages`: A sequence of build steps grouped into stages
+- `steps`: The actual commands that run (sh, echo, git, etc.)
+- `post`: Actions to take depending on build result
+
+-------------------------------
+Common Built-in Steps
+-------------------------------
+
+- `sh 'command'`: Execute shell command
+- `echo 'text'`: Print text to console
+- `git 'url'`: Clone repository
+- `archiveArtifacts`: Save build artifacts
+- `input`: Wait for manual input
+- `retry(count) {}`: Retry block on failure
+
+-------------------------------
+Best Practices
+-------------------------------
+
+- Always use `Declarative` syntax unless advanced control is needed.
+- Use `stages` for modularity.
+- Always handle `post` conditions.
+- Validate Jenkinsfile using Blue Ocean editor or linter plugin.
+- Use parameters for dynamic pipelines.
