@@ -1,0 +1,442 @@
+
+CI/CD PIPELINE DOCUMENTATION FOR JAVA AND PHP APPLICATIONS
+==========================================================
+
+PHASE 1: DEVELOPMENT TO DEPLOYMENT OVERVIEW
+-------------------------------------------
+
+JAVA APPLICATION (.war) → App Server (Tomcat/JBoss)
+PHP APPLICATION (.php) + HTML/JS → Web Server (Apache/Httpd)
+
+JAVA FLOW:
+----------
+
+1. Developer writes Java code and packages it into a WAR file.
+2. Code is pushed to GitHub (SCM).
+3. Jenkins (on Master EC2) pulls code via Webhook or Polling.
+4. Jenkins Pipeline Stages:
+   - Stage 1: Compile (Maven/Gradle)
+   - Stage 2: Unit Test (JUnit)
+   - Stage 3: Package WAR
+5. Create Dockerfile:
+```
+
+FROM tomcat:9-jdk11
+COPY app.war /usr/local/tomcat/webapps/
+
+```
+6. Build Docker image
+7. Push Docker image to DockerHub or ECR
+8. Deploy to EC2 using `docker run -p 8080:8080`
+9. Access app: http://<EC2-IP>:8080/app
+
+PHP FLOW:
+---------
+
+1. Developer writes PHP/HTML/JS app.
+2. Code pushed to GitHub.
+3. Jenkins pipeline:
+- Checkout code
+- Archive or copy files
+4. Create Dockerfile:
+```
+
+FROM httpd:2.4
+COPY . /usr/local/apache2/htdocs/
+
+```
+5. Build Docker image
+6. Push image to DockerHub or ECR
+7. Deploy with Docker on EC2
+8. Access: http://<EC2-IP>/
+
+CI/CD PIPELINE DIAGRAM (TEXT STYLE)
+------------------------------------
+
++--------------------+
+|    Developer       |
+|  (Java/PHP Code)   |
++--------------------+
+       |
+       v
++--------------------+
+|     GitHub (SCM)   |
++--------------------+
+       |
+   Webhook / Poll
+       |
+       v
++--------------------+
+|      Jenkins       |  <-- Pipeline:
+|                    |  --> Stage 1: Checkout
+|                    |  --> Stage 2: Compile / Archive
+|                    |  --> Stage 3: Test (JUnit/PHPUnit)
+|                    |  --> Stage 4: Package / Dockerfile
++--------------------+
+       |
+       v
++--------------------------+
+| Build Docker Image       |
++--------------------------+
+       |
+       v
++---------------------------+
+| Push to DockerHub/ECR     |
++---------------------------+
+       |
+       v
++-----------------------------+
+| Deploy on EC2 (Dev Env)     |
+| docker run -p 8080:8080     |
++-----------------------------+
+
+QAT STAGE - AUTO TESTING
+-------------------------
+
+1. Launch EC2 for QAT.
+2. Install Docker.
+3. Install “SSH Agent” plugin in Jenkins.
+4. Edit Jenkins Pipeline and add:
+
+```
+
+stage('QAT Deploy') {
+steps {
+sshagent (credentials: \['qat-ssh-key']) {
+sh "ssh -o StrictHostChecking=no ec2-user@<QAT-IP> sudo docker rm -f app || true"
+sh "ssh ec2-user@<QAT-IP> docker run -d -p 8080:8080 myimage"
+}
+}
+}
+
+```
+
+5. Add test stage:
+```
+
+stage('QAT Test') {
+steps {
+sh 'curl --silent http\://<QAT-IP>:8080/ | grep "expected-text"'
+}
+}
+
+```
+
+PROD STAGE - MANUAL APPROVAL + DEPLOY
+--------------------------------------
+
+1. Launch EC2 for Prod.
+2. Install Docker.
+3. Add manual input stage in Jenkins:
+```
+
+stage('Approval') {
+steps {
+input "Deploy to Prod?"
+}
+}
+
+```
+
+4. Add deploy stage:
+```
+
+stage('Deploy Prod') {
+steps {
+sshagent (credentials: \['prod-ssh-key']) {
+sh "ssh -o StrictHostChecking=no ec2-user@<PROD-IP> sudo docker rm -f app || true"
+sh "ssh ec2-user@<PROD-IP> docker run -d -p 8080:8080 myimage"
+}
+}
+}
+
+```
+
+5. Add Prod test stage:
+```
+
+stage('Prod Test') {
+steps {
+sh 'curl --silent http\://<PROD-IP>:8080/ | grep "expected-text"'
+}
+}
+
+```
+
+MASTER-SLAVE INFRASTRUCTURE (AWS EC2)
+-------------------------------------
+
+You need 4 EC2 instances:
+
+1. Jenkins Master (Jenkins Installed)
+2. Dev Env (Build WAR or PHP app, Docker installed)
+3. QAT Env (Docker installed)
+4. Prod Env (Docker installed)
+
+Pipeline triggers:
+- Jenkins Master triggers build on Dev
+- Jenkins deploys to QAT and tests
+- Jenkins asks approval for Prod deploy
+- On approval, deploys to Prod
+
+WORKFLOW SUMMARY
+----------------
+
+1. Developer pushes code.
+2. Jenkins detects push → CI runs.
+3. Docker image created.
+4. Deploy to Dev.
+5. Jenkins deploys to QAT → Tests.
+6. Manual approval required.
+7. Deploy to Prod.
+8. App is LIVE!
+
+JENKINS PLUGINS REQUIRED
+------------------------
+
+- GitHub
+- Pipeline
+- SSH Agent
+- Docker
+- Blue Ocean (optional)
+
+ENVIRONMENT VARIABLES / SECRETS
+-------------------------------
+
+- GitHub credentials
+- DockerHub credentials
+- SSH key pairs for QAT and PROD
+- Application secrets (via Jenkins credentials)
+
+NOTES:
+------
+
+- Ensure ports are open in EC2 SG.
+- Validate using curl or browser.
+- Secure SSH and credentials.
+
+CI is now DONE ✅
+QAT ✅
+Approval ✅
+PROD ✅
+
+FULL CI/CD WORKING PIPELINE ✅
+
+********************************* Summary for me understand **********************************
+html , php , js   ----------> use Httpd / appache webserver to host the application
+
+java , .war -----------> use  Appserver  like Jboss, tomcat
+
+
++--------------------+
+|    Developer       |
+|  (Java Code, WAR)  |
++--------------------+
+          |
+          v
++--------------------+
+|     GitHub (SCM)   |
++--------------------+
+          |
+      Webhook / Poll
+          |
+          v
++--------------------+
+|      Jenkins       |  <-- Pipeline: Checkout
+|                    |  --> Stage 1: Compile
+|                    |  --> Stage 2: Unit Test
+|                    |  --> Stage 3: Package WAR
++--------------------+
+          |
+          v
++------------------------------+
+|   Create Dockerfile          |
+|  FROM tomcat:9-jdk11         |
+|  COPY app.war /webapps       |
++------------------------------+
+          |
+          v
++--------------------+
+|  Docker Build Image|
++--------------------+
+          |
+          v
++-------------------------+
+| Push to DockerHub/ECR  |
++-------------------------+
+          |
+          v
++-----------------------------+
+| Deploy on EC2 or any host  |
+| Docker Run -p 8080:8080    |
++-----------------------------+
+          |
+          v
+  http://<IP>:8080/app
+------------------------------------------------------------
+1. Developer writes Java code and pushes to GitHub (SCM).
+
+2. Jenkins pulls the code via webhook or polling.
+
+3. Jenkins pipeline stages:
+   - Stage 1: Compile code (Maven/Gradle)
+   - Stage 2: Run unit tests (JUnit)
+   - Stage 3: Package as WAR file
+
+4. Create Docker image:
+   FROM tomcat:9-jdk11
+   COPY app.war /usr/local/tomcat/webapps/
+
+5. Build Docker image
+
+6. Push Docker image to DockerHub or Amazon ECR
+
+7. Deploy Docker container on EC2 or any Linux server
+
+8. Access app at: http://<server-ip>:8080/app
+
+---------------------------------------------------------------
+             +------------------+
+             | Developer Pushes |
+             +--------+---------+
+                      |
+                      v
+         +------------+-------------+
+         |  Jenkins CI/CD Pipeline |
+         +------------+-------------+
+                      |
+                      v
+             +--------+--------+
+             |  Docker Image   |
+             +--------+--------+
+                      |
+                      v
+          +-----------+------------+
+          | Test Environment (QAT) |
+          +------------------------+
+                      |
+     Automated Tests or Manual QA Approval
+                      |
+                      v
+               +------+------+
+               |   Release   |
+               +------+------+
+                      |
+        +-------------+--------------+
+        | Deploy to Production (Prod)|
+        |   - Manual Approval (Mgr)  |
+        |   - OR Auto CD             |
+        +-------------+--------------+
+                      |
+                      v
+               App Live (URL)
+-----------------------------------------------------------------
+Jenkins Master-Slave Architecture (CI/CD for Java/PHP)
+ 
+                        +--------------------+
+                         |     Developer      |
+                         +---------+----------+
+                                   |
+                                   v
+                        +----------+-----------+
+                        |    Jenkins Master    |
+                        +----------+-----------+
+                                   |
+                    -------------------------------
+                    |                             |
+        +-----------+-----------+     +-----------+-----------+
+        |  Slave Node (Dev Env) |     |  Slave Node (Prod Env)|
+        +-----------+-----------+     +-----------+-----------+
+                    |                             |
+                    |                             |
+      +-------------v-------------+     +---------v----------+
+      |  OS + Code Repo + Tools   |     |  OS + App Deployed |
+      |  (Git, Maven, Docker)     |     |  Prod Env (Apache) |
+      +---------------------------+     +--------------------+
+                    |
+                    v
+           Build WAR / PHP Code
+           Run Unit Tests (JUnit/PHPUnit)
+           Create Docker Image
+           Push to Docker Registry
+                    |
+                    v 
+       -----------------------------
+       |     QA Env (optional)     |
+       |   Test via Automation     |
+       |  (Skipped in some flows)  |
+       -----------------------------
+                    |
+                    v
+       Deploy Docker Image to Prod
+
+💡 Notes:
+Jenkins Master triggers pipelines and distributes jobs.
+
+Dev Env prepares builds and images.
+
+QA Env is optional or skipped depending on flow.
+
+Final deployment happens to Production (Prod Env).
+--------------------------------------------------------------
+
+required 4 os from aws ec2 
+1- jenkins-master, 1- Dev-env, 1- QAT, 1- Pod
+
+create a job add pipline with enverment variable and secrets 
+
+Now  CI part is done!!
+
+***********************************************************
+
+nest step is QAT env
+
+launch ec2 for QAT
+also install docker
+install Plugin in Jenkins - SSG Agent
+ 
+open same pipline go to pipline syntax add ssh- ajent
+set the username and key-pair
+copy block of correct code
+and add a new stage in pipeline 
+
+ add sh "ssh -o StrictHostChecking=no ec2-user@IP sudo docker rm -f <containername>"
+     sh "ssh ec2-user@IP command to run Container with port binding "
+
+new stage to test application
+
+sh 'curl --silent https://IP-QAT-EC2:8080/Path/ | key-word
+ 
+
+******************************************************************
+
+next step Pod-env
+
+launch ec2 for pod-env
+install docker on it 
+
+set the username and key-pair
+copy block of correct code
+and add a new stage in pipeline 
+
+ add sh "ssh -o StrictHostChecking=no ec2-user@IP sudo docker rm -f <containername>"
+     sh "ssh ec2-user@IP command to run Container with port binding "
+
+new stage to test application
+
+sh 'curl --silent https://IP-Pod-EC2:8080/Path/ | key-word
+
+---------------------------------------------------------------------------
+ add stage for input foe approval 
+
+
+
+
+
+
+ 
+
+
+
+
+
